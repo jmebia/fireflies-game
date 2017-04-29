@@ -1,14 +1,15 @@
-package main.java;
+package com.crackerjacks.game.core;
 
+import com.crackerjacks.game.core.states.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import com.crackerjacks.game.core.states.GameStateManager;
 
 /**
  * Created by jm on 4/23/17.
@@ -24,6 +25,8 @@ public class Game extends Application {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
 
+    private GameStateManager stateManager;
+
     @Override
     public void init() throws Exception {
         super.init();
@@ -34,6 +37,10 @@ public class Game extends Application {
         canvas = new Canvas(1000, 1000);
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
+
+        // game state init
+        stateManager = new GameStateManager();
+        stateManager.stateList.add(new MainMenu(scene, graphicsContext));
 
     }
 
@@ -51,10 +58,10 @@ public class Game extends Application {
             @Override
             public void handle(long now) {
                 // update
-
+                stateManager.update();
 
                 // draw
-
+                stateManager.draw();
             }
 
         }.start();
