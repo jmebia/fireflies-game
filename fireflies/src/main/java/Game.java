@@ -3,6 +3,7 @@ package main.java;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,7 +29,7 @@ public class Game extends Application {
         super.init();
 
         root = new Group();
-        scene = new Scene(root, 768, 512);
+        scene = new Scene(root, 800, 600);
         scene.setFill(Color.BLACK);
         canvas = new Canvas(1000, 1000);
         root.getChildren().addAll(canvas);
@@ -40,7 +41,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ordeal of the Fireflies"); // title displayed on game window
+        primaryStage.setTitle("Ordeal of the Fireflies");
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
@@ -49,7 +50,11 @@ public class Game extends Application {
 
             @Override
             public void handle(long now) {
-                // update game here
+                // update
+
+
+                // draw
+
             }
 
         }.start();
