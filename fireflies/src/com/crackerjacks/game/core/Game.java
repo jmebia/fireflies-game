@@ -1,6 +1,6 @@
 package com.crackerjacks.game.core;
 
-import com.crackerjacks.game.core.states.MainMenu;
+import com.crackerjacks.game.core.states.MainGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -40,7 +40,7 @@ public class Game extends Application {
 
         // game state init
         stateManager = new GameStateManager();
-        stateManager.stateList.add(new MainMenu(scene, graphicsContext));
+        stateManager.stateList.add(new MainGame(scene, graphicsContext));
 
     }
 

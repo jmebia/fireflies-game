@@ -7,6 +7,8 @@ public class GameCharacter {
 
     /** Variables */
 
+    private String name;
+
     // leveling
     private int level;
     private double experience;
@@ -16,6 +18,10 @@ public class GameCharacter {
     private double defense;
     private double health;
     private double damage;
+
+    // 2D position
+    private double X;
+    private double Y;
 
     /** Constructor */
 
@@ -81,5 +87,29 @@ public class GameCharacter {
 
     public void setDamage(double damage) {
         this.damage = damage;
+    }
+
+    public double getX() {
+        return X;
+    }
+
+    public void setX(double x) {
+        X = x;
+    }
+
+    public double getY() {
+        return Y;
+    }
+
+    public void setY(double y) {
+        Y = y;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
