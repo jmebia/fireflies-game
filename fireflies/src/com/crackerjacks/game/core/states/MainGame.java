@@ -34,7 +34,7 @@ public class MainGame extends GameState {
     }
 
     @Override
-    void onEnter() {
+    void onEnter() throws IndexOutOfBoundsException {
 
         // create generator for dungeons passing our tilemap as the base
         generator = new DungeonGenerator();
