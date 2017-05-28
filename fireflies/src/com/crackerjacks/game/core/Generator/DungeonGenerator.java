@@ -116,13 +116,13 @@ public class DungeonGenerator {
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            dungeon[i][x1] = 2;
+                            dungeon[i][x2] = 2;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            dungeon[i][x1] = 2;
+                            dungeon[i][x2] = 2;
                         }
                     }
 
