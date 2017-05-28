@@ -18,6 +18,8 @@ public class MainGame extends GameState {
     final private int tileHeight = 32;
     final private int tileWidth = 32;
 
+    final private int roomCount = 4;
+
     // player character
     private GameCharacter player = new GameCharacter();
     private DungeonGenerator generator;
@@ -42,7 +44,7 @@ public class MainGame extends GameState {
         // initialize tile map
         tileMap = new int[16][16];
         // generate dungeon
-        tileMap = generator.generate(tileMap, 3);
+        tileMap = generator.generate(tileMap, roomCount);
 
         // print array map
         for (int i = 0; i < tileMap.length; i++) { // y
@@ -104,7 +106,7 @@ public class MainGame extends GameState {
 
             // generate new dungeon rooms
             if(code.equals("ENTER")) {
-                tileMap = generator.generate(tileMap, 3);
+                tileMap = generator.generate(tileMap, roomCount);
                 System.out.println("New Dungeon Generated");
             }
 
@@ -124,15 +126,17 @@ public class MainGame extends GameState {
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillRect(0, 0, 800, 600);
 
-        // draw traversable terrain from tile map for obstacles
-        graphicsContext.setFill(Color.WHITE);
-
         for(int i = 0; i < tileMap.length; i++) { // iterate through the rows
             for(int j = 0; j < tileMap.length; j++) { // iterate through the columns
 
-                if (tileMap[i][j] == 0) { // if point is traversable
+                if (tileMap[i][j] == 1) { // if point is traversable and a room
+                    graphicsContext.setFill(Color.WHITE);
                     graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
+                }
 
+                if (tileMap[i][j] == 2) { // if point is traversable and a corridor
+                    graphicsContext.setFill(Color.YELLOW);
+                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
                 }
 
             }

@@ -17,7 +17,7 @@ public class DungeonGenerator {
 
     int[][] dungeon;
 
-    public int[][] generate(int[][] arrayMap, int roomNumber) {
+    public int[][] generate(int[][] arrayMap, int roomCount) {
         dungeon = arrayMap;
 
         // populate array withh all zeros
@@ -27,8 +27,8 @@ public class DungeonGenerator {
             }
         }
 
-        generateRooms(roomNumber);
-        generateCorridors(roomNumber);
+        generateRooms(roomCount);
+        generateCorridors(roomCount);
 
         return dungeon;
     }
@@ -50,9 +50,9 @@ public class DungeonGenerator {
 
                 // check all corner points of the room to prevent collision with other rooms
                 if (dungeon[positionY][positionX] == 0 &&
-                        dungeon[positionY+5][positionX+5] == 0 &&
-                            dungeon[positionY][positionX+5] == 0 &&
-                                dungeon[positionY+5][positionX] == 0 ) {
+                        dungeon[positionY + roomSize][positionX + roomSize] == 0 &&
+                            dungeon[positionY][positionX+roomSize] == 0 &&
+                                dungeon[positionY+roomSize][positionX] == 0 ) {
                     roomPointX = positionX;
                     roomPointY = positionY;
                     break;
@@ -110,19 +110,28 @@ public class DungeonGenerator {
                 // trace corridor first in the X axis
                 if (x1 - x2 > 0) { // if not negative
                     for (int i = x2; i <= x1; i++) {
-                        dungeon[y1][i] = 2;
+                        if (dungeon[y1][i] == 2)
+                            dungeon[y1][i] = 1;
+                        else if (dungeon[y1][i] == 0)
+                            dungeon[y1][i] = 2;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            dungeon[i][x2] = 2;
+                            if (dungeon[i][x2] == 2)
+                                dungeon[i][x2] = 1;
+                            else if (dungeon[i][x2] == 0)
+                                dungeon[i][x2] = 2;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            dungeon[i][x2] = 2;
+                            if (dungeon[i][x2] == 2)
+                                dungeon[i][x2] = 1;
+                            else if (dungeon[i][x2] == 0)
+                                dungeon[i][x2] = 2;
                         }
                     }
 
@@ -130,19 +139,28 @@ public class DungeonGenerator {
                 // if negative
                 else {
                     for (int i = x1; i <= x2; i++) {
-                        dungeon[y1][i] = 2;
+                        if (dungeon[y1][i] == 2)
+                            dungeon[y1][i] = 1;
+                        else if (dungeon[y1][i] == 0)
+                            dungeon[y1][i] = 2;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            dungeon[i][x2] = 2;
+                            if (dungeon[i][x2] == 2)
+                                dungeon[i][x2] = 1;
+                            else if (dungeon[i][x2] == 0)
+                                dungeon[i][x2] = 2;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            dungeon[i][x2] = 2;
+                            if (dungeon[i][x2] == 2)
+                                dungeon[i][x2] = 1;
+                            else if (dungeon[i][x2] == 0)
+                                dungeon[i][x2] = 2;
                         }
                     }
 
