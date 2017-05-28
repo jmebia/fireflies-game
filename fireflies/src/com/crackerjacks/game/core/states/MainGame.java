@@ -14,6 +14,9 @@ import java.util.Arrays;
 public class MainGame extends GameState {
 
     private int[][] tileMap;
+    private int[][] fogMap;
+
+    final private int mapSize = 32;
 
     final private int tileHeight = 16;
     final private int tileWidth = 16;
@@ -43,19 +46,10 @@ public class MainGame extends GameState {
         generator = new DungeonGenerator();
 
         // initialize tile map
-        tileMap = new int[32][32];
+        tileMap = new int[mapSize][mapSize];
         // generate dungeon
         System.out.println("Generating Dungeon");
         tileMap = generator.generate(tileMap, roomCount, roomSize);
-
-
-        // print array map
-        for (int i = 0; i < tileMap.length; i++) { // y
-            for (int j = 0; j < tileMap.length; j++) { // x
-                System.out.print(tileMap[i][j]);
-            }
-            System.out.println();
-        }
 
         // text placement
         textX = tileMap.length * tileWidth + 64;
@@ -75,7 +69,7 @@ public class MainGame extends GameState {
             if(code.equals("UP")) {
                 int tempY = (int) player.getY() - 1;
 
-                if (tileMap[tempY][(int)player.getX()] != 0) {
+                if (tileMap[tempY][(int)player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
@@ -84,7 +78,7 @@ public class MainGame extends GameState {
             if(code.equals("DOWN")) {
                 int tempY = (int) player.getY() + 1;
 
-                if (tileMap[tempY][(int)player.getX()] != 0) {
+                if (tileMap[tempY][(int)player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
@@ -93,7 +87,7 @@ public class MainGame extends GameState {
             if(code.equals("LEFT")) {
                 int tempX = (int) player.getX() - 1;
 
-                if (tileMap[(int) player.getY()][tempX] != 0) {
+                if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
             }
@@ -102,7 +96,7 @@ public class MainGame extends GameState {
             if(code.equals("RIGHT")) {
                 int tempX = (int) player.getX() + 1;
 
-                if (tileMap[(int) player.getY()][tempX] != 0) {
+                if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
             }
@@ -137,8 +131,13 @@ public class MainGame extends GameState {
                     graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
                 }
 
-                if (tileMap[i][j] == 2) { // if point is traversable and a corridor
+                else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
                     graphicsContext.setFill(Color.YELLOW);
+                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
+                }
+
+                else if (tileMap[i][j] == -1) { // if point is not traversable and a wall
+                    graphicsContext.setFill(Color.DARKGRAY);
                     graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
                 }
 
