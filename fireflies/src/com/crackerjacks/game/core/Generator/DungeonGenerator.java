@@ -13,29 +13,28 @@ public class DungeonGenerator {
      0 = non-traversable
      1 = room / traversable
      2 = corridor / traversable
+     3 = room center
     */
 
     int[][] dungeon;
 
-    public int[][] generate(int[][] arrayMap, int roomCount) {
+    public int[][] generate(int[][] arrayMap, int roomCount, int roomSize) {
         dungeon = arrayMap;
 
-        // populate array withh all zeros
+        // populate array with all zeros
         for (int i = 0; i < arrayMap.length; i++) {
             for (int j = 0; j < arrayMap.length; j++) {
                 arrayMap[j][i] = 0;
             }
         }
 
-        generateRooms(roomCount);
+        generateRooms(roomCount, roomSize);
         generateCorridors(roomCount);
 
         return dungeon;
     }
 
-    private void generateRooms(int rooms) {
-
-        int roomSize = 5;
+    private void generateRooms(int rooms, int roomSize) {
 
         // generate dungeon rooms
         // rooms refers to the number of rooms that will be generated in the dungeon
@@ -66,7 +65,7 @@ public class DungeonGenerator {
                 for (int l = roomPointY; l < roomPointY + roomSize; l++) {
 
                     if (k == roomPointX + roomSize / 2 && l == roomPointY + roomSize / 2)
-                        dungeon[l][k] = 2; // plot center of the room
+                        dungeon[l][k] = 3; // plot center of the room
                     else
                         dungeon[l][k] = 1;
                 }
@@ -84,7 +83,7 @@ public class DungeonGenerator {
         // find all room centers which are denoted by the integer 2
         for (int i = 0; i < dungeon.length; i++) { // y
             for (int j = 0; j < dungeon.length; j++) { // x
-                if (dungeon[i][j] == 2) {
+                if (dungeon[i][j] == 3) {
                     System.out.println("Center found at ("+j+","+i+")");
                     // store center coordinates
                     points.add(new Point(j, i));
@@ -110,27 +109,21 @@ public class DungeonGenerator {
                 // trace corridor first in the X axis
                 if (x1 - x2 > 0) { // if not negative
                     for (int i = x2; i <= x1; i++) {
-                        if (dungeon[y1][i] == 2)
-                            dungeon[y1][i] = 1;
-                        else if (dungeon[y1][i] == 0)
+                        if (dungeon[y1][i] == 0)
                             dungeon[y1][i] = 2;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == 2)
-                                dungeon[i][x2] = 1;
-                            else if (dungeon[i][x2] == 0)
+                            if (dungeon[i][x2] == 0)
                                 dungeon[i][x2] = 2;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == 2)
-                                dungeon[i][x2] = 1;
-                            else if (dungeon[i][x2] == 0)
+                            if (dungeon[i][x2] == 0)
                                 dungeon[i][x2] = 2;
                         }
                     }
@@ -139,27 +132,21 @@ public class DungeonGenerator {
                 // if negative
                 else {
                     for (int i = x1; i <= x2; i++) {
-                        if (dungeon[y1][i] == 2)
-                            dungeon[y1][i] = 1;
-                        else if (dungeon[y1][i] == 0)
+                        if (dungeon[y1][i] == 0)
                             dungeon[y1][i] = 2;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == 2)
-                                dungeon[i][x2] = 1;
-                            else if (dungeon[i][x2] == 0)
+                            if (dungeon[i][x2] == 0)
                                 dungeon[i][x2] = 2;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == 2)
-                                dungeon[i][x2] = 1;
-                            else if (dungeon[i][x2] == 0)
+                            if (dungeon[i][x2] == 0)
                                 dungeon[i][x2] = 2;
                         }
                     }

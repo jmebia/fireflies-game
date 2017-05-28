@@ -15,10 +15,11 @@ public class MainGame extends GameState {
 
     private int[][] tileMap;
 
-    final private int tileHeight = 32;
-    final private int tileWidth = 32;
+    final private int tileHeight = 16;
+    final private int tileWidth = 16;
 
-    final private int roomCount = 4;
+    final private int roomCount = 6;
+    final private int roomSize = 7;
 
     // player character
     private GameCharacter player = new GameCharacter();
@@ -42,9 +43,11 @@ public class MainGame extends GameState {
         generator = new DungeonGenerator();
 
         // initialize tile map
-        tileMap = new int[16][16];
+        tileMap = new int[32][32];
         // generate dungeon
-        tileMap = generator.generate(tileMap, roomCount);
+        System.out.println("Generating Dungeon");
+        tileMap = generator.generate(tileMap, roomCount, roomSize);
+
 
         // print array map
         for (int i = 0; i < tileMap.length; i++) { // y
@@ -106,7 +109,7 @@ public class MainGame extends GameState {
 
             // generate new dungeon rooms
             if(code.equals("ENTER")) {
-                tileMap = generator.generate(tileMap, roomCount);
+                tileMap = generator.generate(tileMap, roomCount, roomSize);
                 System.out.println("New Dungeon Generated");
             }
 
@@ -129,7 +132,7 @@ public class MainGame extends GameState {
         for(int i = 0; i < tileMap.length; i++) { // iterate through the rows
             for(int j = 0; j < tileMap.length; j++) { // iterate through the columns
 
-                if (tileMap[i][j] == 1) { // if point is traversable and a room
+                if (tileMap[i][j] == 1 || tileMap[i][j] == 3) { // if point is traversable and a room
                     graphicsContext.setFill(Color.WHITE);
                     graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
                 }
