@@ -17,6 +17,14 @@ public class DungeonGenerator {
      -1 = wall
     */
 
+    // non-traversable tiles
+    final private int VOID = 0;
+
+    // traversable tiles
+    final private int ROOM = 1;
+    final private int CORRIDOR = 2;
+    final private int CENTER = 3;
+
     int[][] dungeon;
 
     public int[][] generate(int[][] arrayMap, int roomCount, int roomSize) {
@@ -49,10 +57,10 @@ public class DungeonGenerator {
                 int positionY = new Random().nextInt(dungeon.length - roomSize);
 
                 // check all corner points of the room to prevent collision with other rooms
-                if (dungeon[positionY][positionX] == 0 &&
-                        dungeon[positionY + roomSize][positionX + roomSize] == 0 &&
-                            dungeon[positionY][positionX+roomSize] == 0 &&
-                                dungeon[positionY+roomSize][positionX] == 0 ) {
+                if (dungeon[positionY][positionX] == VOID &&
+                        dungeon[positionY + roomSize][positionX + roomSize] == VOID &&
+                            dungeon[positionY][positionX+roomSize] == VOID &&
+                                dungeon[positionY+roomSize][positionX] == VOID ) {
                     roomPointX = positionX;
                     roomPointY = positionY;
                     break;
@@ -66,12 +74,9 @@ public class DungeonGenerator {
                 for (int l = roomPointY; l < roomPointY + roomSize; l++) {
 
                     if (k == roomPointX + roomSize / 2 && l == roomPointY + roomSize / 2)
-                        dungeon[l][k] = 3; // plot center of the room
-                    else if (k == roomPointX + roomSize -1 || k == roomPointX
-                            || l == roomPointY || l == roomPointY + roomSize - 1)
-                        dungeon[l][k] = -1; // build walls
+                        dungeon[l][k] = CENTER; // plot center of the room
                     else
-                        dungeon[l][k] = 1;
+                        dungeon[l][k] = ROOM;
                 }
             }
 
@@ -87,7 +92,7 @@ public class DungeonGenerator {
         // find all room centers which are denoted by the integer 2
         for (int i = 0; i < dungeon.length; i++) { // y
             for (int j = 0; j < dungeon.length; j++) { // x
-                if (dungeon[i][j] == 3) {
+                if (dungeon[i][j] == CENTER) {
                     System.out.println("Center found at ("+j+","+i+")");
                     // store center coordinates
                     points.add(new Point(j, i));
@@ -113,28 +118,22 @@ public class DungeonGenerator {
                 // trace corridor first in the X axis
                 if (x1 - x2 > 0) { // if not negative
                     for (int i = x2; i <= x1; i++) {
-                        if (dungeon[y1][i] == 0)
-                            dungeon[y1][i] = 2;
-                        else if (dungeon[y1][i] == -1)
-                            dungeon[y1][i] = 1;
+                        if (dungeon[y1][i] == VOID)
+                            dungeon[y1][i] = CORRIDOR;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == 0)
-                                dungeon[i][x2] = 2;
-                            else if (dungeon[i][x2] == -1)
-                                dungeon[i][x2] = 1;
+                            if (dungeon[i][x2] == VOID)
+                                dungeon[i][x2] = CORRIDOR;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == 0)
-                                dungeon[i][x2] = 2;
-                            else if (dungeon[i][x2] == -1)
-                                dungeon[i][x2] = 1;
+                            if (dungeon[i][x2] == VOID)
+                                dungeon[i][x2] = CORRIDOR;
                         }
                     }
 
@@ -142,28 +141,22 @@ public class DungeonGenerator {
                 // if negative
                 else {
                     for (int i = x1; i <= x2; i++) {
-                        if (dungeon[y1][i] == 0)
-                            dungeon[y1][i] = 2;
-                        else if (dungeon[y1][i] == -1)
-                            dungeon[y1][i] = 1;
+                        if (dungeon[y1][i] == VOID)
+                            dungeon[y1][i] = CORRIDOR;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == 0)
-                                dungeon[i][x2] = 2;
-                            else if (dungeon[i][x2] == -1)
-                                dungeon[i][x2] = 1;
+                            if (dungeon[i][x2] == VOID)
+                                dungeon[i][x2] = CORRIDOR;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == 0)
-                                dungeon[i][x2] = 2;
-                            else if (dungeon[i][x2] == -1)
-                                dungeon[i][x2] = 1;
+                            if (dungeon[i][x2] == VOID)
+                                dungeon[i][x2] = CORRIDOR;
                         }
                     }
 
@@ -171,5 +164,6 @@ public class DungeonGenerator {
             }
         }
     }
+
 
 }
