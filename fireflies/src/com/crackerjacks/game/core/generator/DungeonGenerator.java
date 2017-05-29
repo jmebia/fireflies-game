@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core.Generator;
+package com.crackerjacks.game.core.generator;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -164,6 +164,5 @@ public class DungeonGenerator {
             }
         }
     }
-
 
 }

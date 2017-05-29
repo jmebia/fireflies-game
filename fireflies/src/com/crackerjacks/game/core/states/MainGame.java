@@ -1,12 +1,10 @@
 package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.GameCharacter;
-import com.crackerjacks.game.core.Generator.DungeonGenerator;
+import com.crackerjacks.game.core.generator.DungeonGenerator;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
-import java.util.Arrays;
 
 /**
  * Created by jm on 5/23/17.
@@ -21,7 +19,7 @@ public class MainGame extends GameState {
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
-    final private int roomCount = 6;
+    final private int roomCount = 5;
     final private int roomSize = 7;
 
     // player character
