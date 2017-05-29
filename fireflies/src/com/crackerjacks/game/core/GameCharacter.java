@@ -14,10 +14,10 @@ public class GameCharacter {
     private double experience;
 
     // attributes
-    private double attack;
-    private double defense;
-    private double health;
-    private double damage;
+    private int attack;
+    private int defense;
+    private int health;
+    private int damage;
 
     // 2D position
     private double X;
@@ -36,7 +36,7 @@ public class GameCharacter {
 
         // the base damage of a character is always equal to the ceiling of
         // the 10 percent of her current level
-        this.damage = Math.ceil( (double)level * .1 );
+        this.damage = (int) Math.ceil( level * .1 );
     }
 
     /** Getters and Setters */
@@ -57,11 +57,11 @@ public class GameCharacter {
         this.experience = experience;
     }
 
-    public double getAttack() {
+    public int getAttack() {
         return attack;
     }
 
-    public void setAttack(double attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
@@ -69,23 +69,23 @@ public class GameCharacter {
         return defense;
     }
 
-    public void setDefense(double defense) {
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public void setHealth(double health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
-    public double getDamage() {
+    public int getDamage() {
         return damage;
     }
 
-    public void setDamage(double damage) {
+    public void setDamage(int damage) {
         this.damage = damage;
     }
 

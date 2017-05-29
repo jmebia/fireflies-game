@@ -1,21 +1,17 @@
 package com.crackerjacks.game.core.generator;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.Random;
 
 /**
  * Created by jm on 5/26/17.
+ *
+ * A class that generates dungeon tile maps on a 2-dimensional array
+ *
  */
 public class DungeonGenerator {
-
-    /**
-     0 = non-traversable
-     1 = room / traversable
-     2 = corridor / traversable
-     3 = room center
-     -1 = wall
-    */
 
     // non-traversable tiles
     final private int VOID = 0;
@@ -25,10 +21,11 @@ public class DungeonGenerator {
     final private int CORRIDOR = 2;
     final private int CENTER = 3;
 
-    int[][] dungeon;
+    private int[][] dungeonMap;
+    private Point playerPosition = new Point();
 
-    public int[][] generate(int[][] arrayMap, int roomCount, int roomSize) {
-        dungeon = arrayMap;
+    public void generateDungeon(int[][] arrayMap, int roomCount, int roomSize) {
+        dungeonMap = arrayMap;
 
         // populate array with all zeros
         for (int i = 0; i < arrayMap.length; i++) {
@@ -40,32 +37,39 @@ public class DungeonGenerator {
         generateRooms(roomCount, roomSize);
         generateCorridors(roomCount);
 
-        return dungeon;
     }
 
     private void generateRooms(int rooms, int roomSize) {
 
-        // generate dungeon rooms
-        // rooms refers to the number of rooms that will be generated in the dungeon
+        boolean playerPlaced = false;
+
+        // generateDungeon dungeonMap rooms
+        // rooms refers to the number of rooms that will be generated in the dungeonMap
         for (int i = rooms; i > 0; i--) {
 
             int roomPointX;
             int roomPointY;
 
             while (true) {
-                int positionX = new Random().nextInt(dungeon.length - roomSize);
-                int positionY = new Random().nextInt(dungeon.length - roomSize);
+                int positionX = new Random().nextInt(dungeonMap.length - roomSize);
+                int positionY = new Random().nextInt(dungeonMap.length - roomSize);
 
                 // check all corner points of the room to prevent collision with other rooms
-                if (dungeon[positionY][positionX] == VOID &&
-                        dungeon[positionY + roomSize][positionX + roomSize] == VOID &&
-                            dungeon[positionY][positionX+roomSize] == VOID &&
-                                dungeon[positionY+roomSize][positionX] == VOID ) {
+                if (dungeonMap[positionY][positionX] == VOID &&
+                        dungeonMap[positionY + roomSize][positionX + roomSize] == VOID &&
+                            dungeonMap[positionY][positionX+roomSize] == VOID &&
+                                dungeonMap[positionY+roomSize][positionX] == VOID ) {
                     roomPointX = positionX;
                     roomPointY = positionY;
+
+                    if (playerPlaced == false) {
+                        placePlayer(positionX + 2, positionY + 2, positionX + roomSize - 2, positionY + roomSize - 2);
+                        playerPlaced = true;
+                    }
+
                     break;
                 } else {
-                    // continue creating dungeon rooms
+                    // continue creating dungeonMap rooms
                     continue;
                 }
             }
@@ -74,9 +78,9 @@ public class DungeonGenerator {
                 for (int l = roomPointY; l < roomPointY + roomSize; l++) {
 
                     if (k == roomPointX + roomSize / 2 && l == roomPointY + roomSize / 2)
-                        dungeon[l][k] = CENTER; // plot center of the room
+                        dungeonMap[l][k] = CENTER; // plot center of the room
                     else
-                        dungeon[l][k] = ROOM;
+                        dungeonMap[l][k] = ROOM;
                 }
             }
 
@@ -86,13 +90,13 @@ public class DungeonGenerator {
     private void generateCorridors(int rooms) {
 
         System.out.println("Generating rooms");
-        // this list will contain all center points of the dungeon rooms
+        // this list will contain all center points of the dungeonMap rooms
         LinkedList<Point> points = new LinkedList<>();
 
         // find all room centers which are denoted by the integer 2
-        for (int i = 0; i < dungeon.length; i++) { // y
-            for (int j = 0; j < dungeon.length; j++) { // x
-                if (dungeon[i][j] == CENTER) {
+        for (int i = 0; i < dungeonMap.length; i++) { // y
+            for (int j = 0; j < dungeonMap.length; j++) { // x
+                if (dungeonMap[i][j] == CENTER) {
                     System.out.println("Center found at ("+j+","+i+")");
                     // store center coordinates
                     points.add(new Point(j, i));
@@ -118,22 +122,22 @@ public class DungeonGenerator {
                 // trace corridor first in the X axis
                 if (x1 - x2 > 0) { // if not negative
                     for (int i = x2; i <= x1; i++) {
-                        if (dungeon[y1][i] == VOID)
-                            dungeon[y1][i] = CORRIDOR;
+                        if (dungeonMap[y1][i] == VOID)
+                            dungeonMap[y1][i] = CORRIDOR;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == VOID)
-                                dungeon[i][x2] = CORRIDOR;
+                            if (dungeonMap[i][x2] == VOID)
+                                dungeonMap[i][x2] = CORRIDOR;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == VOID)
-                                dungeon[i][x2] = CORRIDOR;
+                            if (dungeonMap[i][x2] == VOID)
+                                dungeonMap[i][x2] = CORRIDOR;
                         }
                     }
 
@@ -141,28 +145,45 @@ public class DungeonGenerator {
                 // if negative
                 else {
                     for (int i = x1; i <= x2; i++) {
-                        if (dungeon[y1][i] == VOID)
-                            dungeon[y1][i] = CORRIDOR;
+                        if (dungeonMap[y1][i] == VOID)
+                            dungeonMap[y1][i] = CORRIDOR;
                     }
 
                     // trace next corridors in the Y axis
                     if (y1 - y2 > 0) { // if not negative
                         for (int i = y2; i <= y1; i++) {
-                            if (dungeon[i][x2] == VOID)
-                                dungeon[i][x2] = CORRIDOR;
+                            if (dungeonMap[i][x2] == VOID)
+                                dungeonMap[i][x2] = CORRIDOR;
                         }
                     }
                     // if negative
                     else {
                         for (int i = y1; i <= y2; i++) {
-                            if (dungeon[i][x2] == VOID)
-                                dungeon[i][x2] = CORRIDOR;
+                            if (dungeonMap[i][x2] == VOID)
+                                dungeonMap[i][x2] = CORRIDOR;
                         }
                     }
 
                 }
             }
         }
+    }
+
+    private void placePlayer(int x1, int y1, int x2, int y2) {
+
+        int x = new Random().nextInt(x2 - x1) + x1;
+        int y = new Random().nextInt(y2 - y1) + y1;
+
+        playerPosition.setLocation(x, y);
+
+    }
+
+    public Point getPlayerPosition() {
+        return playerPosition;
+    }
+
+    public int[][] getDungeonMap() {
+        return dungeonMap;
     }
 
 }

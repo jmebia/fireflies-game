@@ -19,7 +19,7 @@ public class MainGame extends GameState {
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
-    final private int roomCount = 5;
+    final private int roomCount = 7;
     final private int roomSize = 7;
 
     // player character
@@ -45,9 +45,10 @@ public class MainGame extends GameState {
 
         // initialize tile map
         tileMap = new int[mapSize][mapSize];
-        // generate dungeon
+        // generateDungeon dungeon
         System.out.println("Generating Dungeon");
-        tileMap = generator.generate(tileMap, roomCount, roomSize);
+        generator.generateDungeon(tileMap, roomCount, roomSize);
+        tileMap = generator.getDungeonMap();
 
         // text placement
         textX = tileMap.length * tileWidth + 64;
@@ -55,8 +56,8 @@ public class MainGame extends GameState {
 
         // set player position
         player.setName("Kangkong");
-        player.setX(3);
-        player.setY(3);
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
 
         // initialize player controller
         scene.setOnKeyPressed(event -> {
@@ -99,10 +100,13 @@ public class MainGame extends GameState {
                 }
             }
 
-            // generate new dungeon rooms
+            // generateDungeon new dungeon rooms
             if(code.equals("ENTER")) {
-                tileMap = generator.generate(tileMap, roomCount, roomSize);
+                generator.generateDungeon(tileMap, roomCount, roomSize);
                 System.out.println("New Dungeon Generated");
+                tileMap = generator.getDungeonMap();
+                player.setX(generator.getPlayerPosition().getX());
+                player.setY(generator.getPlayerPosition().getY());
             }
 
         } );
@@ -152,7 +156,7 @@ public class MainGame extends GameState {
         graphicsContext.fillText("Damage: " + player.getDamage(), textX, textY + 64);
         graphicsContext.fillText("Player Position: (" + player.getX() + ", " + player.getY() + ")",
                 textX, textY + 128);
-        graphicsContext.fillText("Press 'ENTER' to generate new rooms",
+        graphicsContext.fillText("Press 'ENTER' to generateDungeon new rooms",
                 textX - 128, textY + 32 * 14);
     }
 
