@@ -47,6 +47,7 @@ public class GameCharacter {
 
     public void setLevel(int level) {
         this.level = level;
+        this.health = 10 + 10 * this.level;
     }
 
     public double getExperience() {

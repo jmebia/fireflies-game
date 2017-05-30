@@ -1,7 +1,7 @@
 package com.crackerjacks.game.core.generator;
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -23,9 +23,11 @@ public class DungeonGenerator {
 
     private int[][] dungeonMap;
     private Point playerPosition = new Point();
+    private int[][] enemyMap;
 
     public void generateDungeon(int[][] arrayMap, int roomCount, int roomSize) {
         dungeonMap = arrayMap;
+        enemyMap = new int[arrayMap.length][arrayMap.length];
 
         // populate array with all zeros
         for (int i = 0; i < arrayMap.length; i++) {
@@ -63,8 +65,10 @@ public class DungeonGenerator {
                     roomPointY = positionY;
 
                     if (playerPlaced == false) {
-                        placePlayer(positionX + 2, positionY + 2, positionX + roomSize - 2, positionY + roomSize - 2);
+                        placePlayer(positionX + 1, positionY + 1, positionX + roomSize - 1, positionY + roomSize - 1);
                         playerPlaced = true;
+                    } else {
+                        placeEnemies(positionX + 1, positionY + 1, positionX + roomSize - 1, positionY + roomSize - 1, 3);
                     }
 
                     break;
@@ -178,12 +182,32 @@ public class DungeonGenerator {
 
     }
 
+    private void placeEnemies (int x1, int y1, int x2, int y2, int enemyCount) {
+        for (int i = 0; i < enemyCount; i++) {
+            while(true) {
+                int x = new Random().nextInt(x2 - x1) + x1;
+                int y = new Random().nextInt(y2 - y1) + y1;
+
+                if (enemyMap[y][x] != 1) {
+                    enemyMap[y][x] = 1;
+                    break;
+                } else {
+                    continue;
+                }
+            }
+        }
+    }
+
     public Point getPlayerPosition() {
         return playerPosition;
     }
 
     public int[][] getDungeonMap() {
         return dungeonMap;
+    }
+
+    public int[][] getEnemyMap() {
+        return enemyMap;
     }
 
 }

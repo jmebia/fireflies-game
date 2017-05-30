@@ -6,13 +6,16 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  * Created by jm on 5/23/17.
  */
 public class MainGame extends GameState {
 
     private int[][] tileMap;
-    private int[][] fogMap;
 
     final private int mapSize = 32;
 
@@ -25,6 +28,9 @@ public class MainGame extends GameState {
     // player character
     private GameCharacter player = new GameCharacter();
     private DungeonGenerator generator;
+
+    // enemies
+    private ArrayList<GameCharacter> enemies = new ArrayList<>();
 
     // text placement
     int textX;
@@ -59,7 +65,22 @@ public class MainGame extends GameState {
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
 
-        // initialize player controller
+        // place enemies
+        int[][] enemyMap = generator.getEnemyMap();
+
+        for (int y = 0; y < enemyMap.length ; y++) {
+            for (int x = 0; x < enemyMap.length; x++) {
+                if (enemyMap[y][x] == 1) {
+                    GameCharacter e = new GameCharacter();
+                    e.setName("Enemy");
+                    e.setX(x);
+                    e.setY(y);
+                    enemies.add(e);
+                }
+            }
+        }
+
+        // player controller
         scene.setOnKeyPressed(event -> {
 
             String code = event.getCode().toString();
@@ -105,8 +126,26 @@ public class MainGame extends GameState {
                 generator.generateDungeon(tileMap, roomCount, roomSize);
                 System.out.println("New Dungeon Generated");
                 tileMap = generator.getDungeonMap();
+
+                // replace player
                 player.setX(generator.getPlayerPosition().getX());
                 player.setY(generator.getPlayerPosition().getY());
+
+                // replace enemies
+                int[][] enemyMap2 = generator.getEnemyMap();
+
+                enemies.clear();
+                for (int y = 0; y < enemyMap2.length ; y++) {
+                    for (int x = 0; x < enemyMap2.length; x++) {
+                        if (enemyMap2[y][x] == 1) {
+                            GameCharacter e = new GameCharacter();
+                            e.setName("Enemy");
+                            e.setX(x);
+                            e.setY(y);
+                            enemies.add(e);
+                        }
+                    }
+                }
             }
 
         } );
@@ -115,6 +154,7 @@ public class MainGame extends GameState {
 
     @Override
     void update() {
+
 
     }
 
@@ -147,8 +187,15 @@ public class MainGame extends GameState {
         }
 
         //draw characters in the map
+        // player character
         graphicsContext.setFill(Color.GREEN);
         graphicsContext.fillRect(player.getX()*tileHeight, player.getY()*tileWidth, tileHeight, tileWidth);
+
+        // enemies
+        graphicsContext.setFill(Color.PINK);
+        for (GameCharacter enem: enemies) {
+            graphicsContext.fillRect(enem.getX()*tileHeight, enem.getY()*tileWidth, tileHeight, tileWidth);
+        }
 
         graphicsContext.setFill(Color.ALICEBLUE);
         graphicsContext.fillText(player.getName(), textX, textY);
@@ -156,7 +203,7 @@ public class MainGame extends GameState {
         graphicsContext.fillText("Damage: " + player.getDamage(), textX, textY + 64);
         graphicsContext.fillText("Player Position: (" + player.getX() + ", " + player.getY() + ")",
                 textX, textY + 128);
-        graphicsContext.fillText("Press 'ENTER' to generateDungeon new rooms",
+        graphicsContext.fillText("Press 'ENTER' to generate a new dungeon",
                 textX - 128, textY + 32 * 14);
     }
 
