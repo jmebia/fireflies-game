@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import com.crackerjacks.game.core.states.GameStateManager;
@@ -49,6 +50,7 @@ public class Game extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Ordeal of the Fireflies");
+        primaryStage.getIcons().add(new Image("/com/crackerjacks/game/resources/icon.png"));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
