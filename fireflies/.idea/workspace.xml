@@ -133,8 +133,8 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/Generator/DungeonGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/GameCharacter.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/Game.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/generator/DungeonGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/generator/DungeonGenerator.java" />
       </list>
     </option>
   </component>
