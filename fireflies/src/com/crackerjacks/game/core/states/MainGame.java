@@ -22,7 +22,7 @@ public class MainGame extends GameState {
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
-    final private int roomCount = 7;
+    final private int roomCount = 5;
     final private int roomSize = 7;
 
     // player character

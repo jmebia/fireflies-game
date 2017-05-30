@@ -52,9 +52,12 @@ public class DungeonGenerator {
             int roomPointX;
             int roomPointY;
 
+            int minPosition = 1;
+            int maxPosition = dungeonMap.length - roomSize - minPosition;
+
             while (true) {
-                int positionX = new Random().nextInt(dungeonMap.length - roomSize);
-                int positionY = new Random().nextInt(dungeonMap.length - roomSize);
+                int positionX = new Random().nextInt(maxPosition - minPosition) + minPosition;
+                int positionY = new Random().nextInt(maxPosition - minPosition) + minPosition;
 
                 // check all corner points of the room to prevent collision with other rooms
                 if (dungeonMap[positionY][positionX] == VOID &&
