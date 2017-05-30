@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.states;
 
+import com.crackerjacks.game.core.Controller;
 import com.crackerjacks.game.core.GameCharacter;
 import com.crackerjacks.game.core.generator.DungeonGenerator;
 import javafx.scene.Scene;
@@ -8,6 +9,8 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 /**
@@ -31,6 +34,9 @@ public class MainGame extends GameState {
 
     // enemies
     private ArrayList<GameCharacter> enemies = new ArrayList<>();
+
+    // controller
+    Controller controller;
 
     // text placement
     int textX;
@@ -81,30 +87,38 @@ public class MainGame extends GameState {
         }
 
         // player controller
-        scene.setOnKeyPressed(event -> {
+        controller = new Controller(scene);
 
-            String code = event.getCode().toString();
+    }
 
+    @Override
+    void update() {
+
+        /** handle player input */
+
+        LinkedList input = controller.getInputs();
+
+        try {
             // move up
-            if(code.equals("UP")) {
+            if (input.getLast().equals("UP")) {
                 int tempY = (int) player.getY() - 1;
 
-                if (tileMap[tempY][(int)player.getX()] > 0) {
+                if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
 
             // move down
-            if(code.equals("DOWN")) {
+            else if (input.getLast().equals("DOWN")) {
                 int tempY = (int) player.getY() + 1;
 
-                if (tileMap[tempY][(int)player.getX()] > 0) {
+                if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
 
             // move left
-            if(code.equals("LEFT")) {
+            else if (input.getLast().equals("LEFT")) {
                 int tempX = (int) player.getX() - 1;
 
                 if (tileMap[(int) player.getY()][tempX] > 0) {
@@ -113,7 +127,7 @@ public class MainGame extends GameState {
             }
 
             // move right
-            if(code.equals("RIGHT")) {
+            else if (input.getLast().equals("RIGHT")) {
                 int tempX = (int) player.getX() + 1;
 
                 if (tileMap[(int) player.getY()][tempX] > 0) {
@@ -122,7 +136,7 @@ public class MainGame extends GameState {
             }
 
             // generateDungeon new dungeon rooms
-            if(code.equals("ENTER")) {
+            if (input.getLast().equals("ENTER")) {
                 generator.generateDungeon(tileMap, roomCount, roomSize);
                 System.out.println("New Dungeon Generated");
                 tileMap = generator.getDungeonMap();
@@ -135,7 +149,7 @@ public class MainGame extends GameState {
                 int[][] enemyMap2 = generator.getEnemyMap();
 
                 enemies.clear();
-                for (int y = 0; y < enemyMap2.length ; y++) {
+                for (int y = 0; y < enemyMap2.length; y++) {
                     for (int x = 0; x < enemyMap2.length; x++) {
                         if (enemyMap2[y][x] == 1) {
                             GameCharacter e = new GameCharacter();
@@ -148,12 +162,11 @@ public class MainGame extends GameState {
                 }
             }
 
-        } );
+            controller.clearInputs();
 
-    }
-
-    @Override
-    void update() {
+        } catch (NoSuchElementException e) {
+            System.out.println("No input");
+        }
 
 
     }
