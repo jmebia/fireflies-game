@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core;
+package com.crackerjacks.game.core.character;
 
 /**
  * Created by jm on 5/23/17.

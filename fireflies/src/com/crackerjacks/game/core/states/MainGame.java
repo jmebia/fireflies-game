@@ -1,17 +1,16 @@
 package com.crackerjacks.game.core.states;
 
-import com.crackerjacks.game.core.Controller;
-import com.crackerjacks.game.core.GameCharacter;
+import com.crackerjacks.game.core.character.Interaction;
+import com.crackerjacks.game.core.input.Controller;
+import com.crackerjacks.game.core.character.GameCharacter;
 import com.crackerjacks.game.core.generator.DungeonGenerator;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Stack;
 
 /**
  * Created by jm on 5/23/17.
@@ -92,18 +91,34 @@ public class MainGame extends GameState {
     }
 
     @Override
-    void update() {
+    void update(long time) {
 
         /** handle player input */
 
         LinkedList input = controller.getInputs();
 
         try {
+
+            GameCharacter enemy = null;
+
             // move up
             if (input.getLast().equals("UP")) {
                 int tempY = (int) player.getY() - 1;
 
-                if (tileMap[tempY][(int) player.getX()] > 0) {
+                //check if there is an enemy in the direction
+                for(GameCharacter e: enemies) {
+                    if (e.getX() == player.getX() && e.getY() == tempY) {
+                        enemy = e;
+                        break;
+                    }
+                }
+
+                if (enemy != null) {
+                    new Interaction().attackMove(player, enemy);
+                    if (enemy.getHealth() <= 0)
+                        enemies.remove(enemy);
+                }
+                else if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
@@ -112,7 +127,20 @@ public class MainGame extends GameState {
             else if (input.getLast().equals("DOWN")) {
                 int tempY = (int) player.getY() + 1;
 
-                if (tileMap[tempY][(int) player.getX()] > 0) {
+                //check if there is an enemy in the direction
+                for(GameCharacter e: enemies) {
+                    if (e.getX() == player.getX() && e.getY() == tempY) {
+                        enemy = e;
+                        break;
+                    }
+                }
+
+                if (enemy != null) {
+                    new Interaction().attackMove(player, enemy);
+                    if (enemy.getHealth() <= 0)
+                        enemies.remove(enemy);
+                }
+                else if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
             }
@@ -121,7 +149,20 @@ public class MainGame extends GameState {
             else if (input.getLast().equals("LEFT")) {
                 int tempX = (int) player.getX() - 1;
 
-                if (tileMap[(int) player.getY()][tempX] > 0) {
+                //check if there is an enemy in the direction
+                for(GameCharacter e: enemies) {
+                    if (e.getX() == tempX && e.getY() == player.getY()) {
+                        enemy = e;
+                        break;
+                    }
+                }
+
+                if (enemy != null) {
+                    new Interaction().attackMove(player, enemy);
+                    if (enemy.getHealth() <= 0)
+                        enemies.remove(enemy);
+                }
+                else if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
             }
@@ -130,7 +171,20 @@ public class MainGame extends GameState {
             else if (input.getLast().equals("RIGHT")) {
                 int tempX = (int) player.getX() + 1;
 
-                if (tileMap[(int) player.getY()][tempX] > 0) {
+                //check if there is an enemy in the direction
+                for(GameCharacter e: enemies) {
+                    if (e.getX() == tempX && e.getY() == player.getY()) {
+                        enemy = e;
+                        break;
+                    }
+                }
+
+                if (enemy != null) {
+                    new Interaction().attackMove(player, enemy);
+                    if (enemy.getHealth() <= 0)
+                        enemies.remove(enemy);
+                }
+                else if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
             }
@@ -165,7 +219,7 @@ public class MainGame extends GameState {
             controller.clearInputs();
 
         } catch (NoSuchElementException e) {
-            System.out.println("No input");
+            // handle
         }
 
 

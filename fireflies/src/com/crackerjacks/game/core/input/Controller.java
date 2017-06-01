@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core;
+package com.crackerjacks.game.core.input;
 
 import javafx.scene.Scene;
 

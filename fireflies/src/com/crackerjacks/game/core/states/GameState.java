@@ -15,7 +15,7 @@ abstract class GameState {
     PerspectiveCamera camera;
 
     abstract void onEnter();
-    abstract void update();
+    abstract void update(long time);
     abstract void draw();
     abstract void onExit();
 }

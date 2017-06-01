@@ -10,8 +10,8 @@ public class GameStateManager {
 
     public LinkedList<GameState> stateList = new LinkedList<>();
 
-    public void update() {
-        stateList.getFirst().update();
+    public void update(long time) {
+        stateList.getFirst().update(time);
     }
 
     public void draw() {
