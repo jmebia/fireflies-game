@@ -1,7 +1,6 @@
 package com.crackerjacks.game.core.generator;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -71,7 +70,7 @@ public class DungeonGenerator {
                         placePlayer(positionX + 1, positionY + 1, positionX + roomSize - 1, positionY + roomSize - 1);
                         playerPlaced = true;
                     } else {
-                        placeEnemies(positionX + 1, positionY + 1, positionX + roomSize - 1, positionY + roomSize - 1, 3);
+                        placeEnemies(positionX + 1, positionY + 1, positionX + roomSize - 1, positionY + roomSize - 1);
                     }
 
                     break;
@@ -185,8 +184,13 @@ public class DungeonGenerator {
 
     }
 
-    private void placeEnemies (int x1, int y1, int x2, int y2, int enemyCount) {
-        for (int i = 0; i < enemyCount; i++) {
+    private void placeEnemies (int x1, int y1, int x2, int y2) {
+
+        int[] enemy = {0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4};
+
+        int enemyCount = new Random().nextInt( enemy.length - 0) + 0;
+
+        for (int i = 0; i < enemy[enemyCount]; i++) {
             while(true) {
                 int x = new Random().nextInt(x2 - x1) + x1;
                 int y = new Random().nextInt(y2 - y1) + y1;

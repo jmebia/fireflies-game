@@ -24,7 +24,7 @@ public class MainGame extends GameState {
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
-    final private int roomCount = 5;
+    final private int roomCount = 6;
     final private int roomSize = 7;
 
     // player character
@@ -66,7 +66,7 @@ public class MainGame extends GameState {
         textY = 128;
 
         // set player position
-        player.setName("Kangkong");
+        player.setName("Jean Gadot");
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
 
