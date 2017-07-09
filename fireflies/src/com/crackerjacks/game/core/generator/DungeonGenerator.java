@@ -95,7 +95,6 @@ public class DungeonGenerator {
 
     private void generateCorridors(int rooms) {
 
-        System.out.println("Generating rooms");
         // this list will contain all center points of the dungeonMap rooms
         LinkedList<Point> points = new LinkedList<>();
 
