@@ -35,7 +35,7 @@ public class Game extends Application {
         root = new Group();
         scene = new Scene(root, 800, 600);
         scene.setFill(Color.BLACK);
-        canvas = new Canvas(1000, 1000);
+        canvas = new Canvas(3000, 3000);
         root.getChildren().addAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
 
