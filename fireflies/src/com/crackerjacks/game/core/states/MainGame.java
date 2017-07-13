@@ -1,9 +1,9 @@
 package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.character.Interaction;
+import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.Controller;
 import com.crackerjacks.game.core.character.GameCharacter;
-import com.crackerjacks.game.core.generator.DungeonGenerator;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -19,17 +19,17 @@ public class MainGame extends GameState {
 
     private int[][] tileMap;
 
-    final private int mapSize = 32;
+    final private int mapSize = 40;
+    final private int grids = 4;
 
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
-    final private int roomCount = 6;
-    final private int roomSize = 7;
+    final private int roomSize = 5;
 
     // player character
     private GameCharacter player = new GameCharacter();
-    private DungeonGenerator generator;
+    private Generator generator;
 
     // enemies
     private ArrayList<GameCharacter> enemies = new ArrayList<>();
@@ -52,14 +52,14 @@ public class MainGame extends GameState {
     void onEnter() throws IndexOutOfBoundsException {
 
         // create generator for dungeons passing our tilemap as the base
-        generator = new DungeonGenerator();
+        generator = new Generator(mapSize, grids, roomSize);
 
         // initialize tile map
         tileMap = new int[mapSize][mapSize];
         // generateDungeon dungeon
         System.out.println("Generating Dungeon");
-        generator.generateDungeon(tileMap, roomCount, roomSize);
-        tileMap = generator.getDungeonMap();
+        generator.generateDungeon();
+        tileMap = generator.getDungeon();
 
         // text placement
         textX = tileMap.length * tileWidth + 64;
@@ -67,12 +67,13 @@ public class MainGame extends GameState {
 
         // set player position
         player.setName("Jean Gadot");
-        player.setX(generator.getPlayerPosition().getX());
-        player.setY(generator.getPlayerPosition().getY());
+        // player.setX(generator.getPlayerPosition().getX());
+        // player.setY(generator.getPlayerPosition().getY());
 
         // place enemies
-        int[][] enemyMap = generator.getEnemyMap();
+        // int[][] enemyMap = generator.getEnemyMap();
 
+        /*
         for (int y = 0; y < enemyMap.length ; y++) {
             for (int x = 0; x < enemyMap.length; x++) {
                 if (enemyMap[y][x] == 1) {
@@ -83,7 +84,7 @@ public class MainGame extends GameState {
                     enemies.add(e);
                 }
             }
-        }
+        } */
 
         // player controller
         controller = new Controller(scene);
@@ -191,10 +192,11 @@ public class MainGame extends GameState {
 
             // generateDungeon new dungeon rooms
             if (input.getLast().equals("ENTER")) {
-                generator.generateDungeon(tileMap, roomCount, roomSize);
+                generator.generateDungeon();
                 System.out.println("New Dungeon Generated");
-                tileMap = generator.getDungeonMap();
+                tileMap = generator.getDungeon();
 
+                /*
                 // replace player
                 player.setX(generator.getPlayerPosition().getX());
                 player.setY(generator.getPlayerPosition().getY());
@@ -214,6 +216,7 @@ public class MainGame extends GameState {
                         }
                     }
                 }
+                */
             }
 
             controller.clearInputs();
@@ -236,20 +239,14 @@ public class MainGame extends GameState {
             for(int j = 0; j < tileMap.length; j++) { // iterate through the columns
 
                 if (tileMap[i][j] == 1 || tileMap[i][j] == 3) { // if point is traversable and a room
-                    graphicsContext.setFill(Color.WHITE);
-                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
-                }
-
-                else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
-                    graphicsContext.setFill(Color.YELLOW);
-                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
-                }
-
-                else if (tileMap[i][j] == -1) { // if point is not traversable and a wall
                     graphicsContext.setFill(Color.DARKGRAY);
                     graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
                 }
 
+                else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
+                    graphicsContext.setFill(Color.GRAY);
+                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
+                }
             }
         }
 
@@ -258,11 +255,13 @@ public class MainGame extends GameState {
         graphicsContext.setFill(Color.GREEN);
         graphicsContext.fillRect(player.getX()*tileHeight, player.getY()*tileWidth, tileHeight, tileWidth);
 
+        /*
         // enemies
         graphicsContext.setFill(Color.PINK);
         for (GameCharacter enem: enemies) {
             graphicsContext.fillRect(enem.getX()*tileHeight, enem.getY()*tileWidth, tileHeight, tileWidth);
         }
+        */
 
         graphicsContext.setFill(Color.ALICEBLUE);
         graphicsContext.fillText(player.getName(), textX, textY);
