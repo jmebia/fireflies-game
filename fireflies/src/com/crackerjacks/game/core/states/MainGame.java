@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.states;
 
+import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.Interaction;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.Controller;
@@ -36,7 +37,7 @@ public class MainGame extends GameState {
     private Generator generator;
 
     // enemies
-    private ArrayList<GameCharacter> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     // player controller
     Controller controller;
@@ -82,6 +83,9 @@ public class MainGame extends GameState {
 
         // player controller
         controller = new Controller(scene);
+
+        // place enemies
+        enemies.addAll(generator.getEnemies());
 
     }
 
@@ -189,6 +193,8 @@ public class MainGame extends GameState {
                 generator.generateDungeon();
                 System.out.println("New Dungeon Generated");
                 tileMap = generator.getDungeon();
+                enemies.clear();
+                enemies.addAll(generator.getEnemies());
             }
 
             // zoom camera in
@@ -237,8 +243,16 @@ public class MainGame extends GameState {
 
         /** draw characters in the map */
         // player character
-        graphicsContext.setFill(Color.GREEN);
-        graphicsContext.fillRect(player.getX()*tileHeight, player.getY()*tileWidth, tileHeight, tileWidth);
+        graphicsContext.setFill(Color.BLUE);
+        graphicsContext.fillRect(player.getX()*tileHeight, player.getY()*tileWidth,
+                tileHeight, tileWidth);
+
+        // draw enemies
+        for (GameCharacter enemy : enemies) {
+            graphicsContext.setFill(Color.GREEN);
+            graphicsContext.fillRect(enemy.getX()*tileHeight, enemy.getY()*tileWidth,
+                    tileHeight, tileWidth);
+        }
 
     }
 
