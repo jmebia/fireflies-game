@@ -1,5 +1,7 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
+import com.crackerjacks.game.core.character.Enemy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -10,6 +12,7 @@ import java.util.Random;
 public class Generator {
 
     private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
     private int[][] dungeon;
 
     private final int ROOM = 1;
@@ -36,6 +39,7 @@ public class Generator {
         initializeMap();
         createRooms();
         createCorridors();
+        createEnemies();
 
         plotRooms();
     }
@@ -169,6 +173,33 @@ public class Generator {
         }
     }
 
+    private void createEnemies() {
+
+        enemies.clear();
+
+        // create enemies for every room
+        for (Room room : rooms) {
+
+            // create 2 enemies per room
+            for (int i = 2; i > 0; i--) {
+
+                int eX = new Random().nextInt( (room.getWidth() + room.getX()) - room.getX() ) + room.getX();
+                int eY = new Random().nextInt( (room.getHeight() + room.getY()) - room.getY() ) + room.getY();
+
+                Enemy enemy = new Enemy();
+                enemy.setX(eX);
+                enemy.setY(eY);
+                enemy.setName("Enemy Virus");
+
+                enemies.add(enemy);
+                System.out.println("new enemy added...");
+
+            }
+
+        }
+
+    }
+
     private void plotRooms() {
 
         for (Room room : rooms) {
@@ -189,6 +220,10 @@ public class Generator {
 
     public int[][] getDungeon() {
         return dungeon;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 
 }
