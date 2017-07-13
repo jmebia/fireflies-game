@@ -50,6 +50,7 @@ public class MainGame extends GameState {
         this.scene = scene;
         this.graphicsContext = graphicsContext;
 
+        // set up camera
         camera.setTranslateZ(-1000);
         camera.setNearClip(0.1);
         camera.setFarClip(2000.0);
@@ -212,6 +213,7 @@ public class MainGame extends GameState {
             // handle
         }
 
+        // reposition camera depending on player position
         camera.setTranslateX(player.getX() * tileWidth);
         camera.setTranslateY(player.getY() * tileHeight);
 
