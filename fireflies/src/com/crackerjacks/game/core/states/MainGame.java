@@ -121,6 +121,8 @@ public class MainGame extends GameState {
                 else if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
+
+                updateEnemy();
             }
 
             // move down
@@ -143,6 +145,8 @@ public class MainGame extends GameState {
                 else if (tileMap[tempY][(int) player.getX()] > 0) {
                     player.setY(tempY);
                 }
+
+                updateEnemy();
             }
 
             // move left
@@ -165,6 +169,8 @@ public class MainGame extends GameState {
                 else if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
+
+                updateEnemy();
             }
 
             // move right
@@ -187,6 +193,8 @@ public class MainGame extends GameState {
                 else if (tileMap[(int) player.getY()][tempX] > 0) {
                     player.setX(tempX);
                 }
+
+                updateEnemy();
             }
 
             // generateDungeon new dungeon rooms
@@ -217,6 +225,14 @@ public class MainGame extends GameState {
         camera.setTranslateX(player.getX() * tileWidth);
         camera.setTranslateY(player.getY() * tileHeight);
 
+
+    }
+
+    public void updateEnemy() {
+        // update enemies
+        for (Enemy enemy: enemies) {
+            enemy.updateBehavior(player, enemies, tileMap);
+        }
 
     }
 
