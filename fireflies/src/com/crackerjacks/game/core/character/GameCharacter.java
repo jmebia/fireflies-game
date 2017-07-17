@@ -16,7 +16,8 @@ public class GameCharacter {
     // attributes
     private int attack;
     private int defense;
-    private int health;
+    private int maxHealth;
+    private int currentHealth;
     private int damage;
 
     // 2D position
@@ -32,7 +33,8 @@ public class GameCharacter {
 
         this.attack = 5;
         this.defense = 5;
-        this.health = 10;
+        this.maxHealth = 10;
+        this.currentHealth = maxHealth;
 
         // the base damage of a character is always equal to the ceiling of
         // the 10 percent of her current level
@@ -47,7 +49,7 @@ public class GameCharacter {
 
     public void setLevel(int level) {
         this.level = level;
-        this.health = 10 + 10 * this.level;
+        this.maxHealth = 10 + 10 * this.level;
     }
 
     public double getExperience() {
@@ -74,12 +76,21 @@ public class GameCharacter {
         this.defense = defense;
     }
 
-    public int getHealth() {
-        return health;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setMaxHealth(int health) {
+        this.maxHealth = health;
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int health) {
+        if (health <= maxHealth)
+            this.currentHealth = health;
     }
 
     public int getDamage() {
