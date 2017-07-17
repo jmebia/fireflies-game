@@ -18,7 +18,7 @@ public class Interaction {
 
         // if damage is less than 0 then the attack will be equal to 0 else it will be equal
         // to the total damage value
-        defender.setHealth(defender.getHealth() - (damage < 0? 0 : damage));
+        defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0? 0 : damage));
         System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
     }
 

@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 public class MainGame extends GameState {
 
     // 3D camera for the scene
-    PerspectiveCamera camera = new PerspectiveCamera(true);
+    private PerspectiveCamera camera = new PerspectiveCamera(true);
 
     // elements for the dungeon map
     private int[][] tileMap;
@@ -40,11 +40,11 @@ public class MainGame extends GameState {
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
     // player controller
-    Controller controller;
+    private Controller controller;
 
     // text placement
-    int textX;
-    int textY = 128;
+    private int textX;
+    private int textY = 128;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
@@ -54,7 +54,7 @@ public class MainGame extends GameState {
         camera.setTranslateZ(-1000);
         camera.setNearClip(0.1);
         camera.setFarClip(2000.0);
-        camera.setFieldOfView(35);
+        camera.setFieldOfView(20);
         scene.setCamera(camera);
 
         onEnter();
@@ -81,6 +81,7 @@ public class MainGame extends GameState {
         player.setName("Jean Gadot");
         player.setX(5);
         player.setY(5);
+        player.setDamage(5);
 
         // player controller
         controller = new Controller(scene);
@@ -115,7 +116,7 @@ public class MainGame extends GameState {
 
                 if (enemy != null) {
                     new Interaction().attackMove(player, enemy);
-                    if (enemy.getHealth() <= 0)
+                    if (enemy.getCurrentHealth() <= 0)
                         enemies.remove(enemy);
                 }
                 else if (tileMap[tempY][(int) player.getX()] > 0) {
@@ -139,7 +140,7 @@ public class MainGame extends GameState {
 
                 if (enemy != null) {
                     new Interaction().attackMove(player, enemy);
-                    if (enemy.getHealth() <= 0)
+                    if (enemy.getCurrentHealth() <= 0)
                         enemies.remove(enemy);
                 }
                 else if (tileMap[tempY][(int) player.getX()] > 0) {
@@ -163,7 +164,7 @@ public class MainGame extends GameState {
 
                 if (enemy != null) {
                     new Interaction().attackMove(player, enemy);
-                    if (enemy.getHealth() <= 0)
+                    if (enemy.getCurrentHealth() <= 0)
                         enemies.remove(enemy);
                 }
                 else if (tileMap[(int) player.getY()][tempX] > 0) {
@@ -187,7 +188,7 @@ public class MainGame extends GameState {
 
                 if (enemy != null) {
                     new Interaction().attackMove(player, enemy);
-                    if (enemy.getHealth() <= 0)
+                    if (enemy.getCurrentHealth() <= 0)
                         enemies.remove(enemy);
                 }
                 else if (tileMap[(int) player.getY()][tempX] > 0) {
@@ -222,8 +223,8 @@ public class MainGame extends GameState {
         }
 
         // reposition camera depending on player position
-        camera.setTranslateX(player.getX() * tileWidth);
-        camera.setTranslateY(player.getY() * tileHeight);
+        camera.setTranslateX(player.getX() * tileWidth + 500);
+        camera.setTranslateY(player.getY() * tileHeight + 500);
 
 
     }
@@ -238,6 +239,8 @@ public class MainGame extends GameState {
 
     @Override
     void draw() {
+        int startX = 500;
+        int startY = 500;
 
         // reset screen
         graphicsContext.setFill(Color.BLACK);
@@ -249,12 +252,12 @@ public class MainGame extends GameState {
 
                 if (tileMap[i][j] == 1 || tileMap[i][j] == 3) { // if point is traversable and a room
                     graphicsContext.setFill(Color.DARKGRAY);
-                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
+                    graphicsContext.fillRect(j*tileHeight+startY, i*tileWidth + startX, tileHeight, tileWidth);
                 }
 
                 else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
                     graphicsContext.setFill(Color.GRAY);
-                    graphicsContext.fillRect(j*tileHeight, i*tileWidth, tileHeight, tileWidth);
+                    graphicsContext.fillRect(j*tileHeight + startY, i*tileWidth + startX, tileHeight, tileWidth);
                 }
             }
         }
@@ -262,15 +265,28 @@ public class MainGame extends GameState {
         /** draw characters in the map */
         // player character
         graphicsContext.setFill(Color.BLUE);
-        graphicsContext.fillRect(player.getX()*tileHeight, player.getY()*tileWidth,
+        graphicsContext.fillRect(player.getX()*tileHeight+startY, player.getY()*tileWidth+startY,
                 tileHeight, tileWidth);
 
         // draw enemies
         for (GameCharacter enemy : enemies) {
             graphicsContext.setFill(Color.GREEN);
-            graphicsContext.fillRect(enemy.getX()*tileHeight, enemy.getY()*tileWidth,
+            graphicsContext.fillRect(enemy.getX()*tileHeight+startX, enemy.getY()*tileWidth+startY,
                     tileHeight, tileWidth);
         }
+
+        /** draw HUD */
+        graphicsContext.setFill(Color.DARKBLUE);
+        // draw hud background
+        graphicsContext.fillRect(camera.getTranslateX() - 240, camera.getTranslateY() - 180,
+                500, 50);
+
+        graphicsContext.setFill(Color.WHITE);
+        // health
+        graphicsContext.fillText("HP : " + player.getCurrentHealth(),
+                camera.getTranslateX() - 200,
+                camera.getTranslateY() - 140 );
+
 
     }
 
