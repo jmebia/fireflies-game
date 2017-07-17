@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 public class MainGame extends GameState {
 
     // 3D camera for the scene
-    PerspectiveCamera camera = new PerspectiveCamera(true);
+    private PerspectiveCamera camera = new PerspectiveCamera(true);
 
     // elements for the dungeon map
     private int[][] tileMap;
@@ -40,11 +40,11 @@ public class MainGame extends GameState {
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
     // player controller
-    Controller controller;
+    private Controller controller;
 
     // text placement
-    int textX;
-    int textY = 128;
+    private int textX;
+    private int textY = 128;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
