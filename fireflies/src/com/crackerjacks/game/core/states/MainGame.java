@@ -24,16 +24,16 @@ public class MainGame extends GameState {
 
     // elements for the dungeon map
     private int[][] tileMap;
-    final private int mapSize = 40;
+    final private int mapSize = 60;
     final private int grids = 4;
-    final private int roomSize = 5;
+    final private int roomSize = 7;
 
     // size of the dungeon when drawn on screen
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
     // player character
-    private GameCharacter player = new GameCharacter();
+    private GameCharacter player;
     private Generator generator;
 
     // enemies
@@ -78,9 +78,10 @@ public class MainGame extends GameState {
         textY = 128;
 
         // set player position
+        player = new GameCharacter();
         player.setName("Jean Gadot");
-        player.setX(5);
-        player.setY(5);
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
         player.setDamage(5);
 
         // player controller
@@ -94,7 +95,7 @@ public class MainGame extends GameState {
     @Override
     void update(long time) {
 
-        /** handle player input */
+        /* handle player input */
 
         LinkedList input = controller.getInputs();
 
@@ -200,11 +201,7 @@ public class MainGame extends GameState {
 
             // generateDungeon new dungeon rooms
             if (input.getLast().equals("ENTER")) {
-                generator.generateDungeon();
-                System.out.println("New Dungeon Generated");
-                tileMap = generator.getDungeon();
-                enemies.clear();
-                enemies.addAll(generator.getEnemies());
+                generateNew();
             }
 
             // zoom camera in
@@ -222,6 +219,10 @@ public class MainGame extends GameState {
             // handle
         }
 
+        if (player.getCurrentHealth() <= 0) {
+            generateNew();
+        }
+
         // reposition camera depending on player position
         camera.setTranslateX(player.getX() * tileWidth + 500);
         camera.setTranslateY(player.getY() * tileHeight + 500);
@@ -229,12 +230,25 @@ public class MainGame extends GameState {
 
     }
 
-    public void updateEnemy() {
+    private void updateEnemy() {
         // update enemies
         for (Enemy enemy: enemies) {
             enemy.updateBehavior(player, enemies, tileMap);
         }
 
+    }
+
+    private void generateNew() {
+        generator.generateDungeon();
+        System.out.println("New Dungeon Generated");
+        tileMap = generator.getDungeon();
+        enemies.clear();
+        enemies.addAll(generator.getEnemies());
+        player = new GameCharacter();
+        player.setName("Jean Gadot");
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
+        player.setDamage(5);
     }
 
     @Override
@@ -262,7 +276,7 @@ public class MainGame extends GameState {
             }
         }
 
-        /** draw characters in the map */
+        /* draw characters in the map */
         // player character
         graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillRect(player.getX()*tileHeight+startY, player.getY()*tileWidth+startY,
@@ -275,7 +289,7 @@ public class MainGame extends GameState {
                     tileHeight, tileWidth);
         }
 
-        /** draw HUD */
+        /* draw HUD */
         graphicsContext.setFill(Color.DARKBLUE);
         // draw hud background
         graphicsContext.fillRect(camera.getTranslateX() - 240, camera.getTranslateY() - 180,
