@@ -2,6 +2,7 @@ package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.Interaction;
+import com.crackerjacks.game.core.character.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.Controller;
 import com.crackerjacks.game.core.character.GameCharacter;
@@ -33,7 +34,7 @@ public class MainGame extends GameState {
     final private int tileWidth = 16;
 
     // player character
-    private GameCharacter player;
+    private Player player;
     private Generator generator;
 
     // enemies
@@ -41,10 +42,6 @@ public class MainGame extends GameState {
 
     // player controller
     private Controller controller;
-
-    // text placement
-    private int textX;
-    private int textY = 128;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
@@ -70,19 +67,8 @@ public class MainGame extends GameState {
         tileMap = new int[mapSize][mapSize];
         // generateDungeon dungeon
         System.out.println("Generating Dungeon");
-        generator.generateDungeon();
-        tileMap = generator.getDungeon();
 
-        // text placement
-        textX = tileMap.length * tileWidth + 64;
-        textY = 128;
-
-        // set player position
-        player = new GameCharacter();
-        player.setName("Jean Gadot");
-        player.setX(generator.getPlayerPosition().getX());
-        player.setY(generator.getPlayerPosition().getY());
-        player.setDamage(5);
+        generateNewDungeon();
 
         // player controller
         controller = new Controller(scene);
@@ -201,7 +187,7 @@ public class MainGame extends GameState {
 
             // generateDungeon new dungeon rooms
             if (input.getLast().equals("ENTER")) {
-                generateNew();
+                generateNewDungeon();
             }
 
             // zoom camera in
@@ -220,7 +206,7 @@ public class MainGame extends GameState {
         }
 
         if (player.getCurrentHealth() <= 0) {
-            generateNew();
+            generateNewDungeon();
         }
 
         // reposition camera depending on player position
@@ -233,18 +219,18 @@ public class MainGame extends GameState {
     private void updateEnemy() {
         // update enemies
         for (Enemy enemy: enemies) {
-            enemy.updateBehavior(player, enemies, tileMap);
+            enemy.update(player, enemies, tileMap);
         }
 
     }
 
-    private void generateNew() {
+    private void generateNewDungeon() {
         generator.generateDungeon();
         System.out.println("New Dungeon Generated");
         tileMap = generator.getDungeon();
         enemies.clear();
         enemies.addAll(generator.getEnemies());
-        player = new GameCharacter();
+        player = new Player();
         player.setName("Jean Gadot");
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
@@ -277,16 +263,12 @@ public class MainGame extends GameState {
         }
 
         /* draw characters in the map */
-        // player character
-        graphicsContext.setFill(Color.BLUE);
-        graphicsContext.fillRect(player.getX()*tileHeight+startY, player.getY()*tileWidth+startY,
-                tileHeight, tileWidth);
+        // draw player character
+        player.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
 
         // draw enemies
-        for (GameCharacter enemy : enemies) {
-            graphicsContext.setFill(Color.GREEN);
-            graphicsContext.fillRect(enemy.getX()*tileHeight+startX, enemy.getY()*tileWidth+startY,
-                    tileHeight, tileWidth);
+        for (Enemy enemy : enemies) {
+            enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
         }
 
         /* draw HUD */
