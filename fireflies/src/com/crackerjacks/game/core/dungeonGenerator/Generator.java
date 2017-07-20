@@ -42,8 +42,7 @@ public class Generator {
         initializeMap();
         createRooms();
         createCorridors();
-        placeEntities();
-
+        placeEntities(); // player, goal, loots, and enemies
         plotRooms();
     }
 

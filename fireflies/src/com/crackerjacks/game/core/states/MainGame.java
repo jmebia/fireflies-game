@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -39,6 +40,9 @@ public class MainGame extends GameState {
 
     // enemies
     private ArrayList<Enemy> enemies = new ArrayList<>();
+
+    // goal
+    Point goal;
 
     // player controller
     private Controller controller;
@@ -209,9 +213,15 @@ public class MainGame extends GameState {
             generateNewDungeon();
         }
 
+        // check if player is in goal, if yes then generate new dungeon
+        if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
+            generateNewDungeon();
+        }
+
         // reposition camera depending on player position
         camera.setTranslateX(player.getX() * tileWidth + 500);
         camera.setTranslateY(player.getY() * tileHeight + 500);
+
 
 
     }
@@ -235,6 +245,8 @@ public class MainGame extends GameState {
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
         player.setDamage(5);
+        goal = new Point();
+        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
     }
 
     @Override
@@ -270,6 +282,11 @@ public class MainGame extends GameState {
         for (Enemy enemy : enemies) {
             enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
         }
+
+        // draw goal
+        graphicsContext.setFill(Color.BROWN);
+        graphicsContext.fillRect(goal.getX() * tileHeight + startY, goal.getY() * tileWidth + startY,
+                tileHeight, tileWidth);
 
         /* draw HUD */
         graphicsContext.setFill(Color.DARKBLUE);
