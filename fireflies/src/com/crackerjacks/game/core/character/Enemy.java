@@ -11,6 +11,11 @@ import java.util.Random;
  */
 public class Enemy extends GameCharacter {
 
+    /*
+    Element element;
+    Behavior behavior; // AI
+     */
+
     public void update(GameCharacter player, ArrayList<Enemy> enemies, int[][] tilemap) {
 
         // handle dumb A.I. here

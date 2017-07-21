@@ -223,7 +223,6 @@ public class MainGame extends GameState {
         camera.setTranslateY(player.getY() * tileHeight + 500);
 
 
-
     }
 
     private void updateEnemy() {
