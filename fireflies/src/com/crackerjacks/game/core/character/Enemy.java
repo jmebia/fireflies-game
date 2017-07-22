@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.character;
 
+import com.crackerjacks.game.core.input.Interaction;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
