@@ -2,6 +2,7 @@ package com.crackerjacks.game.core.dungeonGenerator;
 
 import com.crackerjacks.game.core.character.Enemy;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -13,6 +14,8 @@ public class Generator {
 
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private Point playerPosition = new Point();
+    private Point goalPosition = new Point();
     private int[][] dungeon;
 
     private final int ROOM = 1;
@@ -39,8 +42,7 @@ public class Generator {
         initializeMap();
         createRooms();
         createCorridors();
-        createEnemies();
-
+        placeEntities(); // player, goal, loots, and enemies
         plotRooms();
     }
 
@@ -83,8 +85,8 @@ public class Generator {
                     System.out.println("Room added with size (" + width + ", " + height + ")");
 
                     // randomize x and y points
-                    int xPos = x + (x==0? 1 : ( x==mapSize? -1 : new Random().nextInt((gridSize - width))));
-                    int yPos = y + (y==0? 1 : ( y==mapSize? -1 : new Random().nextInt((gridSize - height))));
+                    int xPos = x + (x==0? 1 : ( x==mapSize - 1? -1 : new Random().nextInt((gridSize - width))));
+                    int yPos = y + (y==0? 1 : ( y==mapSize - 1? -1 : new Random().nextInt((gridSize - height))));
 
                     rooms.add(new Room(xPos, yPos, width, height, rooms.size() + 1));
 
@@ -173,29 +175,48 @@ public class Generator {
         }
     }
 
-    private void createEnemies() {
+    private void placeEntities() {
+
+        /*
+            place player in the first room
+            place enemies and other mission objectives in the other rooms
+            place the goal in the last room
+
+         */
+        Random random = new Random();
 
         enemies.clear();
 
-        // create enemies for every room
+        // create enemies for every r
         for (Room room : rooms) {
 
-            // create 2 enemies per room
-            for (int i = 2; i > 0; i--) {
+            if (room.getId() == 1) {
+                playerPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+            } else {
 
-                int eX = new Random().nextInt( (room.getWidth() + room.getX()) - room.getX() ) + room.getX();
-                int eY = new Random().nextInt( (room.getHeight() + room.getY()) - room.getY() ) + room.getY();
+                // create 2 enemies per r
+                for (int i = 2; i > 0; i--) {
 
-                Enemy enemy = new Enemy();
-                enemy.setX(eX);
-                enemy.setY(eY);
-                enemy.setName("Enemy Virus");
+                    int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
+                    int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
 
-                enemies.add(enemy);
-                System.out.println("new enemy added...");
+                    Enemy enemy = new Enemy();
+                    enemy.setX(eX);
+                    enemy.setY(eY);
+                    enemy.setName("Enemy Virus");
+
+                    enemies.add(enemy);
+                    System.out.println("new enemy added...");
+
+                }
 
             }
-
+            // add goal to the last room
+            if (room.getId() == rooms.size()) {
+                goalPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+            }
         }
 
     }
@@ -224,6 +245,14 @@ public class Generator {
 
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public Point getPlayerPosition() {
+        return playerPosition;
+    }
+
+    public Point getGoalPosition() {
+        return goalPosition;
     }
 
 }

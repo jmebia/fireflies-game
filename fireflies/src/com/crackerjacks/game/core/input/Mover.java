@@ -1,0 +1,275 @@
+package com.crackerjacks.game.core.input;
+
+import com.crackerjacks.game.core.character.Enemy;
+import com.crackerjacks.game.core.character.GameCharacter;
+import com.crackerjacks.game.core.character.Player;
+import javafx.scene.PerspectiveCamera;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+
+public class Mover {
+
+    private boolean attackMode = false;
+
+    private String attackSide = "right";
+
+    public void update(Controller controller, Player player, ArrayList<Enemy> enemies, int[][] tileMap, PerspectiveCamera camera) {
+        LinkedList input = controller.getInputs();
+
+        // movement mode
+        if (attackMode == false) {
+            try {
+
+                GameCharacter enemy = null;
+
+                // move up
+                if (input.getLast().equals("UP")) {
+                    int tempY = (int) player.getY() - 1;
+
+                    //check if there is an enemy in the direction
+                    for (GameCharacter e : enemies) {
+                        if (e.getX() == player.getX() && e.getY() == tempY) {
+                            enemy = e;
+                            break;
+                        }
+                    }
+
+                    if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
+                        player.setY(tempY);
+                    }
+
+                    updateEnemy(enemies, player, tileMap);
+                }
+
+                // move down
+                else if (input.getLast().equals("DOWN")) {
+                    int tempY = (int) player.getY() + 1;
+
+                    //check if there is an enemy in the direction
+                    for (GameCharacter e : enemies) {
+                        if (e.getX() == player.getX() && e.getY() == tempY) {
+                            enemy = e;
+                            break;
+                        }
+                    }
+
+                    if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
+                        player.setY(tempY);
+                    }
+
+                    updateEnemy(enemies, player, tileMap);
+                }
+
+                // move left
+                else if (input.getLast().equals("LEFT")) {
+                    int tempX = (int) player.getX() - 1;
+
+                    //check if there is an enemy in the direction
+                    for (GameCharacter e : enemies) {
+                        if (e.getX() == tempX && e.getY() == player.getY()) {
+                            enemy = e;
+                            break;
+                        }
+                    }
+
+                    if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
+                        player.setX(tempX);
+                    }
+
+                    updateEnemy(enemies, player, tileMap);
+                }
+
+                // move right
+                else if (input.getLast().equals("RIGHT")) {
+                    int tempX = (int) player.getX() + 1;
+
+                    //check if there is an enemy in the direction
+                    for (GameCharacter e : enemies) {
+                        if (e.getX() == tempX && e.getY() == player.getY()) {
+                            enemy = e;
+                            break;
+                        }
+                    }
+
+                    if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
+                        player.setX(tempX);
+                    }
+
+                    updateEnemy(enemies, player, tileMap);
+                }
+
+                // attack move
+                else if (input.getLast().equals("SPACE")) {
+                    attackMode = true;
+                    System.out.println("ATTACK MODE ON");
+                }
+
+                // generateDungeon new dungeon rooms
+                if (input.getLast().equals("ENTER")) {
+                    // generateNewDungeon();
+                }
+
+                /** FOR DEBUGGING PURPOSES, MIGHT BE TEMPORARY **/
+                // zoom camera in
+                if (input.getLast().equals("X")) {
+                    camera.setFieldOfView(camera.getFieldOfView() - 5);
+                }
+                // zoom camera out of dungeon
+                if (input.getLast().equals("Z")) {
+                    camera.setFieldOfView(camera.getFieldOfView() + 5);
+                }
+                /***-------------------------------------------**/
+
+                controller.clearInputs();
+
+            } catch (NoSuchElementException e) {
+                // handle
+            }
+        }
+
+        // attack mode
+        else {
+            try {
+                // set attack upwards
+                if (input.getLast().equals("UP")) {
+                    attackSide = "up";
+                    System.out.println("attacking up");
+                }
+
+                // set attack downwards
+                else if (input.getLast().equals("DOWN")) {
+                    attackSide = "down";
+                    System.out.println("attacking down");
+                }
+
+                // set attack to left side
+                else if (input.getLast().equals("LEFT")) {
+                    attackSide = "left";
+                    System.out.println("attacking left");
+                }
+
+                // set attack to right side
+                else if (input.getLast().equals("RIGHT")) {
+                    attackSide = "right";
+                    System.out.println("Attacking right");
+                }
+
+                // attack
+                else if (input.getLast().equals("SHIFT")) {
+                    Enemy enemy = null;
+
+                    if (attackSide == "left") {
+                        // check if there is an enemy for the player's attack to damage
+                        for(Enemy e : enemies) {
+                            if (player.getX() - 1 == e.getX() && player.getY() == e.getY()) {
+                                enemy = e;
+                                break;
+                            }
+                        }
+
+                        // check if enemy is empty or not
+                        if (enemy != null) {
+                            // damage enemy health by player
+                            new Interaction().attackMove(player, enemy);
+                            if (enemy.getCurrentHealth() <= 0)
+                                enemies.remove(enemy);
+                        }
+                    }
+
+                    else if (attackSide == "right") {
+                        // check if there is an enemy for the player's attack to damage
+                        for(Enemy e : enemies) {
+                            if (player.getX() + 1 == e.getX() && player.getY() == e.getY()) {
+                                enemy = e;
+                                break;
+                            }
+                        }
+
+                        // check if enemy is empty or not
+                        if (enemy != null) {
+                            // damage enemy health by player
+                            new Interaction().attackMove(player, enemy);
+                            if (enemy.getCurrentHealth() <= 0)
+                                enemies.remove(enemy);
+                        }
+                    }
+
+                    else if (attackSide == "up") {
+                        // check if there is an enemy for the player's attack to damage
+                        for(Enemy e : enemies) {
+                            if (player.getX() == e.getX() && player.getY() - 1  == e.getY()) {
+                                enemy = e;
+                                break;
+                            }
+                        }
+
+                        // check if enemy is empty or not
+                        if (enemy != null) {
+                            // damage enemy health by player
+                            new Interaction().attackMove(player, enemy);
+                            if (enemy.getCurrentHealth() <= 0)
+                                enemies.remove(enemy);
+                        }
+                    }
+
+                    else if (attackSide == "down") {
+                        // check if there is an enemy for the player's attack to damage
+                        for(Enemy e : enemies) {
+                            if (player.getX() == e.getX() && player.getY() + 1  == e.getY()) {
+                                enemy = e;
+                                break;
+                            }
+                        }
+
+                        // check if enemy is empty or not
+                        if (enemy != null) {
+                            // damage enemy health by player
+                            new Interaction().attackMove(player, enemy);
+                            if (enemy.getCurrentHealth() <= 0)
+                                enemies.remove(enemy);
+                        }
+                    }
+
+                    updateEnemy(enemies, player, tileMap);
+                    attackMode = false;
+                    System.out.println("ATTACK MODE OFF");
+                }
+
+                // go back to moving
+                else if (input.getLast().equals("SPACE")) {
+                    attackMode = false;
+                    System.out.println("ATTACK MODE OFF");
+                }
+
+                controller.clearInputs();
+
+
+            } catch (NoSuchElementException e) {
+                // handle
+            }
+        }
+    }
+
+    private void updateEnemy(ArrayList<Enemy> enemies, Player player, int[][] tileMap) {
+        // update enemies
+        for (Enemy enemy: enemies) {
+            enemy.update(player, enemies, tileMap);
+        }
+
+    }
+
+    public boolean getAttackMode() {
+        return attackMode;
+    }
+
+    public String getAttackSide() {
+        return attackSide;
+    }
+
+    public void setAttackMode(boolean b) {
+        attackMode = b;
+    }
+
+}
