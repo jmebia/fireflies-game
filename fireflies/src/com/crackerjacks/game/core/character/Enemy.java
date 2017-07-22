@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.character;
 
+import com.crackerjacks.game.core.input.Interaction;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -10,6 +11,11 @@ import java.util.Random;
  * Enemy class that contains the default GameCharacter elements and enemy specific behavior functions.
  */
 public class Enemy extends GameCharacter {
+
+    /*
+    Element element;
+    Behavior behavior; // AI
+     */
 
     public void update(GameCharacter player, ArrayList<Enemy> enemies, int[][] tilemap) {
 

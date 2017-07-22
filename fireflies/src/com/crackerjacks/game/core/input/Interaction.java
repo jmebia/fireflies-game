@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core.character;
+package com.crackerjacks.game.core.input;
 
 import com.crackerjacks.game.core.character.GameCharacter;
 

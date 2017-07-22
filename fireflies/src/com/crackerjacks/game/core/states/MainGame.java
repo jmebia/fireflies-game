@@ -1,20 +1,16 @@
 package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.Interaction;
 import com.crackerjacks.game.core.character.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.Controller;
-import com.crackerjacks.game.core.character.GameCharacter;
+import com.crackerjacks.game.core.input.Mover;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 /**
  * Created by jm on 5/23/17.
@@ -46,6 +42,7 @@ public class MainGame extends GameState {
 
     // player controller
     private Controller controller;
+    private Mover mover;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
@@ -76,6 +73,7 @@ public class MainGame extends GameState {
 
         // player controller
         controller = new Controller(scene);
+        mover = new Mover();
 
         // place enemies
         enemies.addAll(generator.getEnemies());
@@ -86,128 +84,8 @@ public class MainGame extends GameState {
     void update(long time) {
 
         /* handle player input */
+        mover.update(controller, player, enemies, tileMap, camera);
 
-        LinkedList input = controller.getInputs();
-
-        try {
-
-            GameCharacter enemy = null;
-
-            // move up
-            if (input.getLast().equals("UP")) {
-                int tempY = (int) player.getY() - 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == player.getX() && e.getY() == tempY) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[tempY][(int) player.getX()] > 0) {
-                    player.setY(tempY);
-                }
-
-                updateEnemy();
-            }
-
-            // move down
-            else if (input.getLast().equals("DOWN")) {
-                int tempY = (int) player.getY() + 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == player.getX() && e.getY() == tempY) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[tempY][(int) player.getX()] > 0) {
-                    player.setY(tempY);
-                }
-
-                updateEnemy();
-            }
-
-            // move left
-            else if (input.getLast().equals("LEFT")) {
-                int tempX = (int) player.getX() - 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == tempX && e.getY() == player.getY()) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[(int) player.getY()][tempX] > 0) {
-                    player.setX(tempX);
-                }
-
-                updateEnemy();
-            }
-
-            // move right
-            else if (input.getLast().equals("RIGHT")) {
-                int tempX = (int) player.getX() + 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == tempX && e.getY() == player.getY()) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[(int) player.getY()][tempX] > 0) {
-                    player.setX(tempX);
-                }
-
-                updateEnemy();
-            }
-
-            // generateDungeon new dungeon rooms
-            if (input.getLast().equals("ENTER")) {
-                generateNewDungeon();
-            }
-
-            // zoom camera in
-            if (input.getLast().equals("X")) {
-                camera.setFieldOfView(camera.getFieldOfView() - 5);
-            }
-            // zoom camera out of dungeon
-            if (input.getLast().equals("Z")) {
-                camera.setFieldOfView(camera.getFieldOfView() + 5);
-            }
-
-            controller.clearInputs();
-
-        } catch (NoSuchElementException e) {
-            // handle
-        }
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
@@ -222,15 +100,6 @@ public class MainGame extends GameState {
         camera.setTranslateX(player.getX() * tileWidth + 500);
         camera.setTranslateY(player.getY() * tileHeight + 500);
 
-
-
-    }
-
-    private void updateEnemy() {
-        // update enemies
-        for (Enemy enemy: enemies) {
-            enemy.update(player, enemies, tileMap);
-        }
 
     }
 
@@ -285,8 +154,26 @@ public class MainGame extends GameState {
 
         // draw goal
         graphicsContext.setFill(Color.BROWN);
-        graphicsContext.fillRect(goal.getX() * tileHeight + startY, goal.getY() * tileWidth + startY,
+        graphicsContext.fillRect(goal.getX() * tileWidth + startY, goal.getY() * tileHeight + startY,
                 tileHeight, tileWidth);
+
+        // draw attack side
+        if (mover.getAttackMode()) {
+            // transparent red
+            graphicsContext.setFill(new Color(1.0f, 0.0f, 0.0f, 0.5f));
+            if(mover.getAttackSide()== "left")
+                graphicsContext.fillRect((player.getX() - 1) * tileWidth + startX,
+                        player.getY() * tileHeight + startY, tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="right")
+                graphicsContext.fillRect((player.getX() + 1) * tileWidth + startX,
+                        player.getY() * tileHeight + startY, tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="up")
+                graphicsContext.fillRect(player.getX() * tileWidth + startX,
+                        (player.getY() - 1) * tileHeight + startY , tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="down")
+                graphicsContext.fillRect(player.getX() * tileWidth + startX,
+                        (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
+        }
 
         /* draw HUD */
         graphicsContext.setFill(Color.DARKBLUE);
