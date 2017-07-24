@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.input;
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.GameCharacter;
 import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
 import javafx.scene.PerspectiveCamera;
 
@@ -157,88 +158,21 @@ public class Mover {
                     System.out.println("Attacking right");
                 }
 
-                // attack
-                else if (input.getLast().equals("SHIFT")) {
-                    Enemy enemy = null;
-
-                    if (attackSide == "left") {
-                        // check if there is an enemy for the player's attack to damage
-                        for(Enemy e : enemies) {
-                            if (player.getX() - 1 == e.getX() && player.getY() == e.getY()) {
-                                enemy = e;
-                                break;
-                            }
-                        }
-
-                        // check if enemy is empty or not
-                        if (enemy != null) {
-                            // damage enemy health by player
-                            new Interaction().attackMove(player, enemy);
-                            if (enemy.getCurrentHealth() <= 0)
-                                enemies.remove(enemy);
-                        }
-                    }
-
-                    else if (attackSide == "right") {
-                        // check if there is an enemy for the player's attack to damage
-                        for(Enemy e : enemies) {
-                            if (player.getX() + 1 == e.getX() && player.getY() == e.getY()) {
-                                enemy = e;
-                                break;
-                            }
-                        }
-
-                        // check if enemy is empty or not
-                        if (enemy != null) {
-                            // damage enemy health by player
-                            new Interaction().attackMove(player, enemy);
-                            if (enemy.getCurrentHealth() <= 0)
-                                enemies.remove(enemy);
-                        }
-                    }
-
-                    else if (attackSide == "up") {
-                        // check if there is an enemy for the player's attack to damage
-                        for(Enemy e : enemies) {
-                            if (player.getX() == e.getX() && player.getY() - 1  == e.getY()) {
-                                enemy = e;
-                                break;
-                            }
-                        }
-
-                        // check if enemy is empty or not
-                        if (enemy != null) {
-                            // damage enemy health by player
-                            new Interaction().attackMove(player, enemy);
-                            if (enemy.getCurrentHealth() <= 0)
-                                enemies.remove(enemy);
-                        }
-                    }
-
-                    else if (attackSide == "down") {
-                        // check if there is an enemy for the player's attack to damage
-                        for(Enemy e : enemies) {
-                            if (player.getX() == e.getX() && player.getY() + 1  == e.getY()) {
-                                enemy = e;
-                                break;
-                            }
-                        }
-
-                        // check if enemy is empty or not
-                        if (enemy != null) {
-                            // damage enemy health by player
-                            new Interaction().attackMove(player, enemy);
-                            if (enemy.getCurrentHealth() <= 0)
-                                enemies.remove(enemy);
-                        }
-                    }
-
-                    updateEnemy(enemies, player, tileMap);
-                    attackMode = false;
-                    System.out.println("ATTACK MODE OFF");
+                // the following are attack inputs
+                // rock attack
+                else if (input.getLast().equals("Q")) {
+                    attacking(player, enemies, Element.rock.getId(), tileMap);
+                }
+                // paper attack
+                else if (input.getLast().equals("W")) {
+                    attacking(player, enemies, Element.paper.getId(), tileMap);
+                }
+                // scissors attack
+                else if (input.getLast().equals("E")) {
+                    attacking(player, enemies, Element.scissors.getId(), tileMap);
                 }
 
-                // go back to moving
+                // go back to moving; cancel attack mode
                 else if (input.getLast().equals("SPACE")) {
                     attackMode = false;
                     System.out.println("ATTACK MODE OFF");
@@ -259,6 +193,86 @@ public class Mover {
             enemy.update(player, enemies, tileMap);
         }
 
+    }
+
+    private void attacking(Player player, ArrayList<Enemy> enemies, String attackElementID, int[][] tileMap) {
+        Enemy enemy = null;
+
+        if (attackSide == "left") {
+            // check if there is an enemy for the player's attack to damage
+            for(Enemy e : enemies) {
+                if (player.getX() - 1 == e.getX() && player.getY() == e.getY()) {
+                    enemy = e;
+                    break;
+                }
+            }
+
+            // check if enemy is empty or not
+            if (enemy != null) {
+                // damage enemy health by player
+                new Interaction().attackMove(player, enemy, attackElementID);
+                if (enemy.getCurrentHealth() <= 0)
+                    enemies.remove(enemy);
+            }
+        }
+
+        else if (attackSide == "right") {
+            // check if there is an enemy for the player's attack to damage
+            for(Enemy e : enemies) {
+                if (player.getX() + 1 == e.getX() && player.getY() == e.getY()) {
+                    enemy = e;
+                    break;
+                }
+            }
+
+            // check if enemy is empty or not
+            if (enemy != null) {
+                // damage enemy health by player
+                new Interaction().attackMove(player, enemy, attackElementID);
+                if (enemy.getCurrentHealth() <= 0)
+                    enemies.remove(enemy);
+            }
+        }
+
+        else if (attackSide == "up") {
+            // check if there is an enemy for the player's attack to damage
+            for(Enemy e : enemies) {
+                if (player.getX() == e.getX() && player.getY() - 1  == e.getY()) {
+                    enemy = e;
+                    break;
+                }
+            }
+
+            // check if enemy is empty or not
+            if (enemy != null) {
+                // damage enemy health by player
+                new Interaction().attackMove(player, enemy, attackElementID);
+                if (enemy.getCurrentHealth() <= 0)
+                    enemies.remove(enemy);
+            }
+        }
+
+        else if (attackSide == "down") {
+            // check if there is an enemy for the player's attack to damage
+            for(Enemy e : enemies) {
+                if (player.getX() == e.getX() && player.getY() + 1  == e.getY()) {
+                    enemy = e;
+                    break;
+                }
+            }
+
+            // check if enemy is empty or not
+            if (enemy != null) {
+                // damage enemy health by player
+                new Interaction().attackMove(player, enemy, attackElementID);
+                if (enemy.getCurrentHealth() <= 0)
+                    enemies.remove(enemy);
+            }
+        }
+
+        updateEnemy(enemies, player, tileMap);
+        attackMode = false;
+        System.out.println("ATTACK MODE OFF");
     }
 
     public boolean getAttackMode() {

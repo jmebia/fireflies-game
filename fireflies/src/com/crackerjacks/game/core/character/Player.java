@@ -5,33 +5,35 @@ import javafx.scene.paint.Color;
 
 public class Player extends GameCharacter {
 
-    int levelRock;
-    int levelPaper;
-    int levelScissors;
+    boolean rock = true;
+    boolean paper = false;
+    boolean scissors = false;
 
     // getters and setters
-    public int getLevelRock() {
-        return levelRock;
+    public void activateRock() {
+        rock = true;
+        paper = false;
+        scissors = false;
+    }
+    public void activatePaper() {
+        rock = false;
+        paper = true;
+        scissors = false;
+    }
+    public void activateScissors() {
+        rock = false;
+        paper = false;
+        scissors = true;
     }
 
-    public void setLevelRock(int levelRock) {
-        this.levelRock = levelRock;
+    public boolean isRock() {
+        return rock;
     }
-
-    public int getLevelPaper() {
-        return levelPaper;
+    public boolean isPaper() {
+        return paper;
     }
-
-    public void setLevelPaper(int levelPaper) {
-        this.levelPaper = levelPaper;
-    }
-
-    public int getLevelScissors() {
-        return levelScissors;
-    }
-
-    public void setLevelScissors(int levelScissors) {
-        this.levelScissors = levelScissors;
+    public boolean isScissors() {
+        return scissors;
     }
 
     public void draw(GraphicsContext graphicsContext, int startX, int startY, int tileHeight, int tileWidth) {

@@ -26,7 +26,7 @@ public class Enemy extends GameCharacter {
     }
 
     // main methods
-    public void update(GameCharacter player, ArrayList<Enemy> enemies, int[][] tilemap) {
+    public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
 
         // handle dumb A.I. here
         double playerX = player.getX();
@@ -44,12 +44,10 @@ public class Enemy extends GameCharacter {
             // 0 = x , 1 = y
             if (axis == 0) {
                 double i = getX() + new Random().nextInt(3) - 1;
-                System.out.println("i = " + (i - getX()));
                 if (!checkCollisions(enemies, tilemap, i, getY()))
                     this.setX(i);
-            } else {
+            } else if (axis == 1) {
                 double i = getY() + new Random().nextInt(3) - 1;
-                System.out.println("i = " + (i - getY()));
                 if (!checkCollisions(enemies, tilemap, getX(), i))
                     this.setY(i);
             }
@@ -81,8 +79,6 @@ public class Enemy extends GameCharacter {
                 break;
             }
         }
-
-        System.out.println(tile[(int) posY][(int) posX] + " - " + res);
 
         return res;
     }
