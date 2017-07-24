@@ -296,4 +296,37 @@ public class Generator {
         return goalPosition;
     }
 
+    public int getRockEnemyCount() {
+        int count = 0;
+
+        for (Enemy e : enemies) {
+            if (e.getElement().getId().equals(Element.rock.getId()))
+                count++;
+        }
+
+        return count;
+    }
+
+    public int getPaperEnemyCount() {
+        int count = 0;
+
+        for (Enemy e : enemies) {
+            if (e.getElement().getId().equals(Element.paper.getId()))
+                count++;
+        }
+
+        return count;
+    }
+
+    public int getScissorsEnemyCount() {
+        int count = 0;
+
+        for (Enemy e : enemies) {
+            if (e.getElement().getId().equals(Element.scissors.getId()))
+                count++;
+        }
+
+        return count;
+    }
+
 }
