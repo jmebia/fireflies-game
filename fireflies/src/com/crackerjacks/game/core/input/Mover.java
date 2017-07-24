@@ -116,11 +116,13 @@ public class Mover {
                 /** FOR DEBUGGING PURPOSES, MIGHT BE TEMPORARY **/
                 // zoom camera in
                 if (input.getLast().equals("X")) {
-                    camera.setFieldOfView(camera.getFieldOfView() - 5);
+                    camera.setFieldOfView(camera.getFieldOfView() - 1);
+                    System.out.println("Camera FOV: " + camera.getFieldOfView());
                 }
                 // zoom camera out of dungeon
                 if (input.getLast().equals("Z")) {
-                    camera.setFieldOfView(camera.getFieldOfView() + 5);
+                    camera.setFieldOfView(camera.getFieldOfView() + 1);
+                    System.out.println("Camera FOV: " + camera.getFieldOfView());
                 }
                 /***-------------------------------------------**/
 

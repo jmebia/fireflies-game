@@ -7,10 +7,13 @@ import com.crackerjacks.game.core.input.Controller;
 import com.crackerjacks.game.core.input.Mover;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.ArrayList;
+
+import static com.crackerjacks.game.core.Game.root;
 
 /**
  * Created by jm on 5/23/17.
@@ -44,18 +47,29 @@ public class MainGame extends GameState {
     private Controller controller;
     private Mover mover;
 
+    // canvas for hud
+    javafx.scene.canvas.Canvas hud;
+    GraphicsContext gcHud;
+
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
         this.graphicsContext = graphicsContext;
+
+        // new canvas
+        hud = new Canvas(500, 300);
+        gcHud = hud.getGraphicsContext2D();
+        root.getChildren().addAll(hud);
+        hud.toFront();
 
         // set up camera
         camera.setTranslateZ(-1000);
         camera.setNearClip(0.1);
         camera.setFarClip(2000.0);
-        camera.setFieldOfView(20);
+        camera.setFieldOfView(21);
         scene.setCamera(camera);
 
         onEnter();
+
     }
 
     @Override
@@ -96,10 +110,13 @@ public class MainGame extends GameState {
             generateNewDungeon();
         }
 
-        // reposition camera depending on player position
+        // reposition camera depending on player
         camera.setTranslateX(player.getX() * tileWidth + 500);
         camera.setTranslateY(player.getY() * tileHeight + 500);
 
+        // reposition hud
+        hud.setTranslateX(camera.getTranslateX() - 250);
+        hud.setTranslateY(camera.getTranslateY() - 186);
 
     }
 
@@ -113,7 +130,7 @@ public class MainGame extends GameState {
         player.setName("Jean Gadot");
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
-        player.setDamage(5);
+        player.setDamage(2);
         goal = new Point();
         goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
     }
@@ -176,16 +193,13 @@ public class MainGame extends GameState {
         }
 
         /* draw HUD */
-        graphicsContext.setFill(Color.DARKBLUE);
+        gcHud.setFill(Color.DARKBLUE);
         // draw hud background
-        graphicsContext.fillRect(camera.getTranslateX() - 240, camera.getTranslateY() - 180,
-                500, 50);
-
-        graphicsContext.setFill(Color.WHITE);
+        gcHud.fillRect(0,0,500,70);
         // health
-        graphicsContext.fillText("HP : " + player.getCurrentHealth(),
-                camera.getTranslateX() - 200,
-                camera.getTranslateY() - 140 );
+        gcHud.setFill(Color.WHITE);
+        gcHud.fillText("Health : " + player.getCurrentHealth() + "/" + player.getMaxHealth(),
+                10, 20);
 
 
     }
