@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.input;
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.GameCharacter;
 import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.interactions.Interaction;
 import javafx.scene.PerspectiveCamera;
 
 import java.util.ArrayList;

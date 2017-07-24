@@ -1,6 +1,7 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
 import com.crackerjacks.game.core.character.Enemy;
+import com.crackerjacks.game.core.interactions.Element;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,12 +27,15 @@ public class Generator {
     private final int minRoomSize;
     private final int mapSize;
 
+    private boolean firstGeneration;
+
     /** CONSTRUCTOR **/
     public Generator(int mapSize, int gridCount, int minRoomSize) {
         this.gridRow = gridCount;
         this.mapSize = mapSize;
         this.minRoomSize = minRoomSize;
 
+        firstGeneration = true;
         dungeon = new int[mapSize + 4][mapSize + 4];
     }
 
@@ -43,7 +47,10 @@ public class Generator {
         createRooms();
         createCorridors();
         placeEntities(); // player, goal, loots, and enemies
+        addEnemyElements();
         plotRooms();
+
+        if (firstGeneration) firstGeneration = false;
     }
 
     private void initializeMap() {
@@ -219,6 +226,40 @@ public class Generator {
             }
         }
 
+    }
+
+    private void addEnemyElements() {
+
+        Random random = new Random();
+
+        // plot element for each enemy
+        // if this is the first generation of enemies, assign random element for each enemy
+        // else if this is not the first generation, use the genetic algorithm
+        if (firstGeneration) {
+            for (Enemy e: enemies) {
+                int i = random.nextInt(3);
+                if (i == 0) {
+                    e.setElement(Element.rock);
+                } else if (i == 1) {
+                    e.setElement(Element.paper);
+                } else {
+                    e.setElement(Element.scissors);
+                }
+            }
+        }
+        else {
+            // placeholder while genetic algorithm is still a work in progress
+            for (Enemy e: enemies) {
+                int i = random.nextInt(3);
+                if (i == 0) {
+                    e.setElement(Element.rock);
+                } else if (i == 1) {
+                    e.setElement(Element.paper);
+                } else {
+                    e.setElement(Element.scissors);
+                }
+            }
+        }
     }
 
     private void plotRooms() {

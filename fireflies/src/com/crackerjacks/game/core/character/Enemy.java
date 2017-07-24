@@ -1,6 +1,7 @@
 package com.crackerjacks.game.core.character;
 
-import com.crackerjacks.game.core.input.Interaction;
+import com.crackerjacks.game.core.interactions.Element;
+import com.crackerjacks.game.core.interactions.Interaction;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -12,11 +13,19 @@ import java.util.Random;
  */
 public class Enemy extends GameCharacter {
 
-    /*
-    Element element;
-    Behavior behavior; // AI
-     */
+    // genotypes
+    private Element element;
 
+    // getters and setters
+    public Element getElement() {
+        return element;
+    }
+
+    public void setElement(Element element) {
+        this.element = element;
+    }
+
+    // main methods
     public void update(GameCharacter player, ArrayList<Enemy> enemies, int[][] tilemap) {
 
         // handle dumb A.I. here
@@ -50,7 +59,7 @@ public class Enemy extends GameCharacter {
 
     public void draw(GraphicsContext graphicsContext, int startX, int startY, int tileHeight, int tileWidth) {
 
-        graphicsContext.setFill(Color.GREEN);
+        graphicsContext.setFill(getElement().getColor());
         graphicsContext.fillRect(getX()*tileHeight+startX, getY()*tileWidth+startY,
                 tileHeight, tileWidth);
 
