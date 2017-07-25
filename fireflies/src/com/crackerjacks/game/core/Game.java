@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import com.crackerjacks.game.core.states.GameStateManager;
@@ -21,7 +22,7 @@ import com.crackerjacks.game.core.states.GameStateManager;
 
 public class Game extends Application {
 
-    private Group root;
+    public static Group root;
     private Scene scene;
     private Canvas canvas;
     private GraphicsContext graphicsContext;
@@ -33,10 +34,9 @@ public class Game extends Application {
         super.init();
 
         root = new Group();
-        scene = new Scene(root, 800, 600);
-        scene.setFill(Color.BLACK);
+        scene = new Scene(root, 800, 600, Color.BLACK);
         canvas = new Canvas(3000, 3000);
-        root.getChildren().addAll(canvas);
+        root.getChildren().setAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
 
         // game state init

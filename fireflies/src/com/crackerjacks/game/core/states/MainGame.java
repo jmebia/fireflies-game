@@ -1,18 +1,19 @@
 package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.Interaction;
+import com.crackerjacks.game.core.character.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.Controller;
-import com.crackerjacks.game.core.character.GameCharacter;
+import com.crackerjacks.game.core.input.Mover;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
+
+import static com.crackerjacks.game.core.Game.root;
 
 /**
  * Created by jm on 5/23/17.
@@ -24,40 +25,51 @@ public class MainGame extends GameState {
 
     // elements for the dungeon map
     private int[][] tileMap;
-    final private int mapSize = 40;
+    final private int mapSize = 60;
     final private int grids = 4;
-    final private int roomSize = 5;
+    final private int roomSize = 7;
 
     // size of the dungeon when drawn on screen
     final private int tileHeight = 16;
     final private int tileWidth = 16;
 
     // player character
-    private GameCharacter player = new GameCharacter();
+    private Player player;
     private Generator generator;
 
     // enemies
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
+    // goal
+    Point goal;
+
     // player controller
     private Controller controller;
+    private Mover mover;
 
-    // text placement
-    private int textX;
-    private int textY = 128;
+    // canvas for hud
+    javafx.scene.canvas.Canvas hud;
+    GraphicsContext gcHud;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
         this.graphicsContext = graphicsContext;
 
+        // new canvas
+        hud = new Canvas(500, 300);
+        gcHud = hud.getGraphicsContext2D();
+        root.getChildren().addAll(hud);
+        hud.toFront();
+
         // set up camera
         camera.setTranslateZ(-1000);
         camera.setNearClip(0.1);
         camera.setFarClip(2000.0);
-        camera.setFieldOfView(20);
+        camera.setFieldOfView(21);
         scene.setCamera(camera);
 
         onEnter();
+
     }
 
     @Override
@@ -70,21 +82,12 @@ public class MainGame extends GameState {
         tileMap = new int[mapSize][mapSize];
         // generateDungeon dungeon
         System.out.println("Generating Dungeon");
-        generator.generateDungeon();
-        tileMap = generator.getDungeon();
 
-        // text placement
-        textX = tileMap.length * tileWidth + 64;
-        textY = 128;
-
-        // set player position
-        player.setName("Jean Gadot");
-        player.setX(5);
-        player.setY(5);
-        player.setDamage(5);
+        generateNewDungeon();
 
         // player controller
         controller = new Controller(scene);
+        mover = new Mover();
 
         // place enemies
         enemies.addAll(generator.getEnemies());
@@ -94,147 +97,42 @@ public class MainGame extends GameState {
     @Override
     void update(long time) {
 
-        /** handle player input */
+        /* handle player input */
+        mover.update(controller, player, enemies, tileMap, camera);
 
-        LinkedList input = controller.getInputs();
 
-        try {
-
-            GameCharacter enemy = null;
-
-            // move up
-            if (input.getLast().equals("UP")) {
-                int tempY = (int) player.getY() - 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == player.getX() && e.getY() == tempY) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[tempY][(int) player.getX()] > 0) {
-                    player.setY(tempY);
-                }
-
-                updateEnemy();
-            }
-
-            // move down
-            else if (input.getLast().equals("DOWN")) {
-                int tempY = (int) player.getY() + 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == player.getX() && e.getY() == tempY) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[tempY][(int) player.getX()] > 0) {
-                    player.setY(tempY);
-                }
-
-                updateEnemy();
-            }
-
-            // move left
-            else if (input.getLast().equals("LEFT")) {
-                int tempX = (int) player.getX() - 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == tempX && e.getY() == player.getY()) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[(int) player.getY()][tempX] > 0) {
-                    player.setX(tempX);
-                }
-
-                updateEnemy();
-            }
-
-            // move right
-            else if (input.getLast().equals("RIGHT")) {
-                int tempX = (int) player.getX() + 1;
-
-                //check if there is an enemy in the direction
-                for(GameCharacter e: enemies) {
-                    if (e.getX() == tempX && e.getY() == player.getY()) {
-                        enemy = e;
-                        break;
-                    }
-                }
-
-                if (enemy != null) {
-                    new Interaction().attackMove(player, enemy);
-                    if (enemy.getCurrentHealth() <= 0)
-                        enemies.remove(enemy);
-                }
-                else if (tileMap[(int) player.getY()][tempX] > 0) {
-                    player.setX(tempX);
-                }
-
-                updateEnemy();
-            }
-
-            // generateDungeon new dungeon rooms
-            if (input.getLast().equals("ENTER")) {
-                generator.generateDungeon();
-                System.out.println("New Dungeon Generated");
-                tileMap = generator.getDungeon();
-                enemies.clear();
-                enemies.addAll(generator.getEnemies());
-            }
-
-            // zoom camera in
-            if (input.getLast().equals("X")) {
-                camera.setFieldOfView(camera.getFieldOfView() - 5);
-            }
-            // zoom camera out of dungeon
-            if (input.getLast().equals("Z")) {
-                camera.setFieldOfView(camera.getFieldOfView() + 5);
-            }
-
-            controller.clearInputs();
-
-        } catch (NoSuchElementException e) {
-            // handle
+        if (player.getCurrentHealth() <= 0) {
+            generateNewDungeon();
         }
 
-        // reposition camera depending on player position
+        // check if player is in goal, if yes then generate new dungeon
+        if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
+            generateNewDungeon();
+        }
+
+        // reposition camera depending on player
         camera.setTranslateX(player.getX() * tileWidth + 500);
         camera.setTranslateY(player.getY() * tileHeight + 500);
 
+        // reposition hud
+        hud.setTranslateX(camera.getTranslateX() - 250);
+        hud.setTranslateY(camera.getTranslateY() - 186);
 
     }
 
-    public void updateEnemy() {
-        // update enemies
-        for (Enemy enemy: enemies) {
-            enemy.updateBehavior(player, enemies, tileMap);
-        }
-
+    private void generateNewDungeon() {
+        generator.generateDungeon();
+        System.out.println("New Dungeon Generated");
+        tileMap = generator.getDungeon();
+        enemies.clear();
+        enemies.addAll(generator.getEnemies());
+        player = new Player();
+        player.setName("Jean Gadot");
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
+        player.setDamage(2);
+        goal = new Point();
+        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
     }
 
     @Override
@@ -262,30 +160,46 @@ public class MainGame extends GameState {
             }
         }
 
-        /** draw characters in the map */
-        // player character
-        graphicsContext.setFill(Color.BLUE);
-        graphicsContext.fillRect(player.getX()*tileHeight+startY, player.getY()*tileWidth+startY,
-                tileHeight, tileWidth);
+        /* draw characters in the map */
+        // draw player character
+        player.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
 
         // draw enemies
-        for (GameCharacter enemy : enemies) {
-            graphicsContext.setFill(Color.GREEN);
-            graphicsContext.fillRect(enemy.getX()*tileHeight+startX, enemy.getY()*tileWidth+startY,
-                    tileHeight, tileWidth);
+        for (Enemy enemy : enemies) {
+            enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
         }
 
-        /** draw HUD */
-        graphicsContext.setFill(Color.DARKBLUE);
-        // draw hud background
-        graphicsContext.fillRect(camera.getTranslateX() - 240, camera.getTranslateY() - 180,
-                500, 50);
+        // draw goal
+        graphicsContext.setFill(Color.BROWN);
+        graphicsContext.fillRect(goal.getX() * tileWidth + startY, goal.getY() * tileHeight + startY,
+                tileHeight, tileWidth);
 
-        graphicsContext.setFill(Color.WHITE);
+        // draw attack side
+        if (mover.getAttackMode()) {
+            // transparent red
+            graphicsContext.setFill(new Color(1.0f, 0.0f, 0.0f, 0.5f));
+            if(mover.getAttackSide()== "left")
+                graphicsContext.fillRect((player.getX() - 1) * tileWidth + startX,
+                        player.getY() * tileHeight + startY, tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="right")
+                graphicsContext.fillRect((player.getX() + 1) * tileWidth + startX,
+                        player.getY() * tileHeight + startY, tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="up")
+                graphicsContext.fillRect(player.getX() * tileWidth + startX,
+                        (player.getY() - 1) * tileHeight + startY , tileWidth, tileHeight );
+            else if(mover.getAttackSide()=="down")
+                graphicsContext.fillRect(player.getX() * tileWidth + startX,
+                        (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
+        }
+
+        /* draw HUD */
+        gcHud.setFill(Color.DARKBLUE);
+        // draw hud background
+        gcHud.fillRect(0,0,500,70);
         // health
-        graphicsContext.fillText("HP : " + player.getCurrentHealth(),
-                camera.getTranslateX() - 200,
-                camera.getTranslateY() - 140 );
+        gcHud.setFill(Color.WHITE);
+        gcHud.fillText("Health : " + player.getCurrentHealth() + "/" + player.getMaxHealth(),
+                10, 20);
 
 
     }
