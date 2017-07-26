@@ -19,7 +19,7 @@ public class Controller {
         input = new LinkedList<>();
 
         scene.setOnKeyPressed(e -> {
-            System.out.println("Pressed " + e.getCode().toString());
+            // System.out.println("Pressed " + e.getCode().toString());
             String keyCode = e.getCode().toString();
             if (!disabled && !input.contains(keyCode))
                 input.add(keyCode);
@@ -27,7 +27,7 @@ public class Controller {
         });
 
         scene.setOnKeyReleased(e -> {
-            System.out.println("Released " + e.getCode().toString());
+            // System.out.println("Released " + e.getCode().toString());
             String keyCode = e.getCode().toString();
             if (input.contains(keyCode))
                 input.remove(keyCode);

@@ -17,7 +17,7 @@ public class Mover {
 
     private String attackSide = "right";
 
-    public void update(Controller controller, Player player, ArrayList<Enemy> enemies, int[][] tileMap, PerspectiveCamera camera) {
+    public void update(Controller controller, Player player, ArrayList<Enemy> enemies, ArrayList<Enemy> deadEnemies, int[][] tileMap, PerspectiveCamera camera) {
         LinkedList input = controller.getInputs();
 
         // movement mode
@@ -117,12 +117,12 @@ public class Mover {
                 // zoom camera in
                 if (input.getLast().equals("X")) {
                     camera.setFieldOfView(camera.getFieldOfView() - 1);
-                    System.out.println("Camera FOV: " + camera.getFieldOfView());
+                    // System.out.println("Camera FOV: " + camera.getFieldOfView());
                 }
                 // zoom camera out of dungeon
                 if (input.getLast().equals("Z")) {
                     camera.setFieldOfView(camera.getFieldOfView() + 1);
-                    System.out.println("Camera FOV: " + camera.getFieldOfView());
+                    // System.out.println("Camera FOV: " + camera.getFieldOfView());
                 }
                 /***-------------------------------------------**/
 
@@ -163,15 +163,15 @@ public class Mover {
                 // the following are attack inputs
                 // rock attack
                 else if (input.getLast().equals("Q")) {
-                    attacking(player, enemies, Element.rock.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.rock.getId(), tileMap);
                 }
                 // paper attack
                 else if (input.getLast().equals("W")) {
-                    attacking(player, enemies, Element.paper.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.paper.getId(), tileMap);
                 }
                 // scissors attack
                 else if (input.getLast().equals("E")) {
-                    attacking(player, enemies, Element.scissors.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.scissors.getId(), tileMap);
                 }
 
                 // go back to moving; cancel attack mode
@@ -197,7 +197,9 @@ public class Mover {
 
     }
 
-    private void attacking(Player player, ArrayList<Enemy> enemies, String attackElementID, int[][] tileMap) {
+    private void attacking(Player player, ArrayList<Enemy> enemies, ArrayList<Enemy> deadEnemies
+            ,String attackElementID, int[][] tileMap) {
+
         Enemy enemy = null;
 
         if (attackSide == "left") {
@@ -213,8 +215,10 @@ public class Mover {
             if (enemy != null) {
                 // damage enemy health by player
                 new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0)
+                if (enemy.getCurrentHealth() <= 0) {
+                    deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                }
             }
         }
 
@@ -231,8 +235,10 @@ public class Mover {
             if (enemy != null) {
                 // damage enemy health by player
                 new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0)
+                if (enemy.getCurrentHealth() <= 0) {
+                    deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                }
             }
         }
 
@@ -249,8 +255,10 @@ public class Mover {
             if (enemy != null) {
                 // damage enemy health by player
                 new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0)
+                if (enemy.getCurrentHealth() <= 0) {
+                    deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                }
             }
         }
 
@@ -267,8 +275,10 @@ public class Mover {
             if (enemy != null) {
                 // damage enemy health by player
                 new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0)
+                if (enemy.getCurrentHealth() <= 0) {
+                    deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                }
             }
         }
 

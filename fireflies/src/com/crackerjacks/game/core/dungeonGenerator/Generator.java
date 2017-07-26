@@ -1,7 +1,9 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
 import com.crackerjacks.game.core.character.Enemy;
+import com.crackerjacks.game.core.genetic.Algorithm;
 import com.crackerjacks.game.core.interactions.Element;
+import javafx.scene.Parent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,13 +43,13 @@ public class Generator {
 
     /** GENERATION **/
 
-    public void generateDungeon() {
+    public void generateDungeon(ArrayList<Enemy> parents) {
 
         initializeMap();
         createRooms();
         createCorridors();
         placeEntities(); // player, goal, loots, and enemies
-        addEnemyElements();
+        addEnemyElements(parents);
         plotRooms();
 
         if (firstGeneration) firstGeneration = false;
@@ -194,7 +196,7 @@ public class Generator {
 
         enemies.clear();
 
-        // create enemies for every r
+        // create enemies for every room
         for (Room room : rooms) {
 
             if (room.getId() == 1) {
@@ -202,7 +204,7 @@ public class Generator {
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             } else {
 
-                // create 2 enemies per r
+                // create 2 enemies per room
                 for (int i = 2; i > 0; i--) {
 
                     int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
@@ -228,7 +230,7 @@ public class Generator {
 
     }
 
-    private void addEnemyElements() {
+    private void addEnemyElements(ArrayList<Enemy> parents) {
 
         Random random = new Random();
 
@@ -249,25 +251,15 @@ public class Generator {
         }
         else {
             // placeholder while genetic algorithm is still a work in progress
-            for (Enemy e: enemies) {
-                int i = random.nextInt(3);
-                if (i == 0) {
-                    e.setElement(Element.rock);
-                } else if (i == 1) {
-                    e.setElement(Element.paper);
-                } else {
-                    e.setElement(Element.scissors);
-                }
-            }
+            Algorithm genetics = new Algorithm(parents, enemies);
+            genetics.produce();
+            enemies = genetics.getOffsprings();
         }
     }
 
     private void plotRooms() {
 
         for (Room room : rooms) {
-
-            System.out.println("Plotting room ("+room.getX()+","+room.getY()+")-h="
-                    +room.getHeight()+", w="+room.getWidth()+"...");
 
             for (int x = room.getX(); x < room.getX() + room.getWidth(); x++) {
                 for (int y = room.getY(); y < room.getY() + room.getHeight(); y++) {

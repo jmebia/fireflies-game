@@ -39,6 +39,7 @@ public class MainGame extends GameState {
 
     // enemies
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy> deadEnemies = new ArrayList<>();
 
     // goal
     Point goal;
@@ -98,8 +99,7 @@ public class MainGame extends GameState {
     void update(long time) {
 
         /* handle player input */
-        mover.update(controller, player, enemies, tileMap, camera);
-
+        mover.update(controller, player, enemies, deadEnemies, tileMap, camera);
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
@@ -121,7 +121,9 @@ public class MainGame extends GameState {
     }
 
     private void generateNewDungeon() {
-        generator.generateDungeon();
+        ArrayList p = new ArrayList(enemies);
+        p.addAll(deadEnemies);
+        generator.generateDungeon(p);
         System.out.println("New Dungeon Generated");
         tileMap = generator.getDungeon();
         enemies.clear();
@@ -131,8 +133,13 @@ public class MainGame extends GameState {
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
         player.setDamage(2);
+        player.setMaxHealth(100);
+        player.setCurrentHealth(100);
         goal = new Point();
         goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
+        System.out.println("Rock Enemies: " + generator.getRockEnemyCount());
+        System.out.println("Paper Enemies: " + generator.getPaperEnemyCount());
+        System.out.println("Scissors Enemies: " + generator.getScissorsEnemyCount());
     }
 
     @Override
