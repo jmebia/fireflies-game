@@ -127,6 +127,7 @@ public class MainGame extends GameState {
         generator.generateDungeon(p);
         System.out.println("New Dungeon Generated");
         tileMap = generator.getDungeon();
+        deadEnemies.clear();
         enemies.clear();
         enemies.addAll(generator.getEnemies());
         player = new Player();
