@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.crackerjacks.game.core.Game.root;
 

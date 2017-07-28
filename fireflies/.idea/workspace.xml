@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/MainGame.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/MainGame.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,36 +17,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
+            <state relative-caret-position="21">
               <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
               <folding>
-                <marker date="1501060488220" expanded="false" signature="1159:1165" ph=" }" />
+                <marker date="1501230494384" expanded="false" signature="1159:1165" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
+      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2425">
-              <caret line="253" column="36" lean-forward="false" selection-start-line="253" selection-start-column="36" selection-end-line="253" selection-end-column="36" />
+            <state relative-caret-position="-500">
+              <caret line="70" column="11" lean-forward="false" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
               <folding>
-                <marker date="1501060488220" expanded="true" signature="8647:8905" ph="{...}" />
-                <marker date="1501060488220" expanded="false" signature="8939:8950" ph=" { " />
-                <marker date="1501060488220" expanded="false" signature="8965:8971" ph=" }" />
-                <marker date="1501060488220" expanded="false" signature="9013:9024" ph=" { " />
-                <marker date="1501060488220" expanded="false" signature="9039:9045" ph=" }" />
-                <marker date="1501060488220" expanded="false" signature="9083:9094" ph=" { " />
-                <marker date="1501060488220" expanded="false" signature="9116:9122" ph=" }" />
-                <marker date="1501060488220" expanded="false" signature="9158:9169" ph=" { " />
-                <marker date="1501060488220" expanded="false" signature="9189:9195" ph=" }" />
-                <marker date="1501060488220" expanded="true" signature="9232:9424" ph="{...}" />
-                <marker date="1501060488220" expanded="true" signature="9462:9655" ph="{...}" />
-                <marker date="1501060488220" expanded="true" signature="9696:9892" ph="{...}" />
+                <marker date="1501230495416" expanded="false" signature="3447:3458" ph=" { " />
+                <marker date="1501230495416" expanded="false" signature="3492:3498" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -52,12 +45,12 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="134" column="28" lean-forward="false" selection-start-line="134" selection-start-column="28" selection-end-line="134" selection-end-column="28" />
+            <state relative-caret-position="72">
+              <caret line="142" column="85" lean-forward="false" selection-start-line="142" selection-start-column="85" selection-end-line="142" selection-end-column="85" />
               <folding>
-                <marker date="1501060488220" expanded="true" signature="4349:4359" ph="{...}" />
-                <marker date="1501060488220" expanded="true" signature="4391:7294" ph="{...}" />
-                <marker date="1501060488220" expanded="true" signature="7328:7336" ph="{}" />
+                <marker date="1501230494432" expanded="true" signature="4374:4384" ph="{...}" />
+                <marker date="1501230494432" expanded="true" signature="4416:7319" ph="{...}" />
+                <marker date="1501230494432" expanded="true" signature="7353:7361" ph="{}" />
               </folding>
             </state>
           </provider>
@@ -84,7 +77,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="jm" />
+        <entry key="$PROJECT_DIR$/.." value="features" />
       </map>
     </option>
   </component>
@@ -137,6 +130,7 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Mover.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" />
       </list>
     </option>
   </component>
@@ -162,6 +156,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,6 +199,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="genetic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fireflies" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="input" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -215,10 +221,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -618,28 +620,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1366" height="744" extended-state="6" />
+    <frame x="35" y="52" width="1366" height="744" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29082426" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26287878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24024025" sideWeight="0.48828697" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32503888" sideWeight="0.4492424" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32503888" sideWeight="0.5507576" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.4878788" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2439394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910313" sideWeight="0.4941435" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -870,7 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
           <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,10 +884,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="21">
           <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
           <folding>
-            <marker date="1501060488220" expanded="false" signature="1159:1165" ph=" }" />
+            <marker date="1501230494384" expanded="false" signature="1159:1165" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -902,20 +903,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2425">
           <caret line="253" column="36" lean-forward="false" selection-start-line="253" selection-start-column="36" selection-end-line="253" selection-end-column="36" />
-          <folding>
-            <marker date="1501060488220" expanded="true" signature="8647:8905" ph="{...}" />
-            <marker date="1501060488220" expanded="false" signature="8939:8950" ph=" { " />
-            <marker date="1501060488220" expanded="false" signature="8965:8971" ph=" }" />
-            <marker date="1501060488220" expanded="false" signature="9013:9024" ph=" { " />
-            <marker date="1501060488220" expanded="false" signature="9039:9045" ph=" }" />
-            <marker date="1501060488220" expanded="false" signature="9083:9094" ph=" { " />
-            <marker date="1501060488220" expanded="false" signature="9116:9122" ph=" }" />
-            <marker date="1501060488220" expanded="false" signature="9158:9169" ph=" { " />
-            <marker date="1501060488220" expanded="false" signature="9189:9195" ph=" }" />
-            <marker date="1501060488220" expanded="true" signature="9232:9424" ph="{...}" />
-            <marker date="1501060488220" expanded="true" signature="9462:9655" ph="{...}" />
-            <marker date="1501060488220" expanded="true" signature="9696:9892" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -923,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,12 +934,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="134" column="28" lean-forward="false" selection-start-line="134" selection-start-column="28" selection-end-line="134" selection-end-column="28" />
+        <state relative-caret-position="72">
+          <caret line="142" column="85" lean-forward="false" selection-start-line="142" selection-start-column="85" selection-end-line="142" selection-end-column="85" />
           <folding>
-            <marker date="1501060488220" expanded="true" signature="4349:4359" ph="{...}" />
-            <marker date="1501060488220" expanded="true" signature="4391:7294" ph="{...}" />
-            <marker date="1501060488220" expanded="true" signature="7328:7336" ph="{}" />
+            <marker date="1501230494432" expanded="true" signature="4374:4384" ph="{...}" />
+            <marker date="1501230494432" expanded="true" signature="4416:7319" ph="{...}" />
+            <marker date="1501230494432" expanded="true" signature="7353:7361" ph="{}" />
           </folding>
         </state>
       </provider>
