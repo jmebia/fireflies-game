@@ -218,6 +218,7 @@ public class Mover {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                    player.addChips(1);
                 }
             }
         }
@@ -238,6 +239,7 @@ public class Mover {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                    player.addChips(1);
                 }
             }
         }
@@ -258,6 +260,7 @@ public class Mover {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                    player.addChips(1);
                 }
             }
         }
