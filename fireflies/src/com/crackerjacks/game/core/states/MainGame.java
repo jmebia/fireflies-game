@@ -209,6 +209,10 @@ public class MainGame extends GameState {
         gcHud.setFill(Color.WHITE);
         gcHud.fillText("Health : " + player.getCurrentHealth() + "/" + player.getMaxHealth(),
                 10, 20);
+        // player's chips
+        gcHud.setFill(Color.WHITE);
+        gcHud.fillText("Chips : " + player.getChipCount(),
+                250, 20);
 
 
     }

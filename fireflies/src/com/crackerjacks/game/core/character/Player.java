@@ -5,9 +5,11 @@ import javafx.scene.paint.Color;
 
 public class Player extends GameCharacter {
 
-    boolean rock = true;
-    boolean paper = false;
-    boolean scissors = false;
+    private boolean rock = true;
+    private boolean paper = false;
+    private boolean scissors = false;
+
+    private int chipCount = 0;
 
     // getters and setters
     public void activateRock() {
@@ -42,4 +44,18 @@ public class Player extends GameCharacter {
                 tileHeight, tileWidth);
     }
 
+    public void addChips(int count) {
+        chipCount += count;
+    }
+
+    public void removeChips(int count) {
+        if (!(chipCount - count < 0))
+            chipCount += count;
+        else
+            System.out.println("Player's chips cannot be lower than zero!");
+    }
+
+    public int getChipCount() {
+        return chipCount;
+    }
 }
