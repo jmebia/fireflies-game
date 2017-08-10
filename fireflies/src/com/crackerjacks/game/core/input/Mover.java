@@ -102,10 +102,55 @@ public class Mover {
                     updateEnemy(enemies, player, tileMap);
                 }
 
-                // attack move
+                // initiate attack move
                 else if (input.getLast().equals("SPACE")) {
                     attackMode = true;
                     System.out.println("ATTACK MODE ON");
+                }
+
+                // initiate element switch
+                else if (input.contains("SHIFT")) {
+                    System.out.println("shift pressed!");
+                    int chips = player.getChipCount();
+                    // activate rock
+                    if (input.contains("Q")) {
+                        System.out.println("shift + Q !");
+                        if (chips >= 4) {
+                            player.activateRock();
+                            System.out.println("Rock Element Activated");
+                            System.out.print("Chip Count, then: " + chips);
+                            player.addChips(-4);
+                            System.out.print(" now: " + chips);
+                        } else {
+                            System.out.println("Not enough chips!");
+                        }
+                    }
+                    // activate paper
+                    else if (input.contains("W")) {
+                        System.out.println("shift + Q !");
+                        if (chips >= 4) {
+                            player.activatePaper();
+                            System.out.println("Paper Element Activated");
+                            System.out.print("Chip Count, then: " + chips);
+                            player.addChips(-4);
+                            System.out.println(" now: " + chips);
+                        } else {
+                            System.out.println("Not enough chips!");
+                        }
+                    }
+                    //activate scissors
+                    else if (input.contains("E")) {
+                        System.out.println("shift + Q !");
+                        if (chips >= 4) {
+                            player.activateScissors();
+                            System.out.println("Scissors Element Activated");
+                            System.out.print("Chip Count, then: " + chips);
+                            player.addChips(-4);
+                            System.out.println(" now: " + chips);
+                        } else {
+                            System.out.println("Not enough chips!");
+                        }
+                    }
                 }
 
                 // generateDungeon new dungeon rooms
@@ -124,13 +169,14 @@ public class Mover {
                     camera.setFieldOfView(camera.getFieldOfView() + 1);
                     // System.out.println("Camera FOV: " + camera.getFieldOfView());
                 }
-                /***-------------------------------------------**/
 
-                controller.clearInputs();
 
             } catch (NoSuchElementException e) {
                 // handle
             }
+
+
+            controller.clearInputs();
         }
 
         // attack mode
@@ -180,12 +226,11 @@ public class Mover {
                     System.out.println("ATTACK MODE OFF");
                 }
 
-                controller.clearInputs();
-
-
             } catch (NoSuchElementException e) {
                 // handle
             }
+
+            controller.clearInputs();
         }
     }
 
@@ -281,6 +326,7 @@ public class Mover {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
+                    player.addChips(1);
                 }
             }
         }
