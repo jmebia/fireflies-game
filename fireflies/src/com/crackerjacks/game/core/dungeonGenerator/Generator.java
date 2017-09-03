@@ -79,11 +79,7 @@ public class Generator {
             for (int y = 0; y < mapSize; y += gridSize) {
                 int roomHere = new Random().nextInt(2);
 
-                System.out.println("Creating new room (STEP 1)...");
-
                 if (roomHere == 1) { // generate room
-
-                    System.out.println("Creating new room (STEP 2)...");
 
                     int maxRoomSize = gridSize - 1;
                     // randomize room size based on the size of the grid
@@ -98,8 +94,6 @@ public class Generator {
                     int yPos = y + (y==0? 1 : ( y==mapSize - 1? -1 : new Random().nextInt((gridSize - height))));
 
                     rooms.add(new Room(xPos, yPos, width, height, rooms.size() + 1));
-
-                    System.out.println("Room "+rooms.get(rooms.size()-1).getId()+" added");
 
                 }
             }
@@ -213,7 +207,7 @@ public class Generator {
                     Enemy enemy = new Enemy();
                     enemy.setX(eX);
                     enemy.setY(eY);
-                    enemy.setName("Enemy Virus");
+                    enemy.setName("Enemy " + room.getId() + "-" + i);
 
                     enemies.add(enemy);
                     System.out.println("new enemy added...");

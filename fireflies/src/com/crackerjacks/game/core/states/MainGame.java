@@ -1,18 +1,23 @@
 package com.crackerjacks.game.core.states;
 
+import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
+import com.crackerjacks.game.core.input.InputHandler;
 import com.crackerjacks.game.core.input.Controller;
-import com.crackerjacks.game.core.input.Mover;
+import javafx.animation.Animation;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
+import javafx.scene.image.Image;
+import javafx.util.Duration;
 
 import static com.crackerjacks.game.core.Game.root;
 
@@ -30,9 +35,19 @@ public class MainGame extends GameState {
     final private int grids = 4;
     final private int roomSize = 7;
 
+    // how fast the player slides from one tile to another
+    int playerSpeed = 4;
+
+    int startX = 0;
+    int startY = 0;
+
+
+    // tile map for the fog of war
+    private int[][] fogMap;
+
     // size of the dungeon when drawn on screen
-    final private int tileHeight = 16;
-    final private int tileWidth = 16;
+    final private int tileHeight = 32;
+    final private int tileWidth = 32;
 
     // player character
     private Player player;
@@ -45,13 +60,26 @@ public class MainGame extends GameState {
     // goal
     Point goal;
 
-    // player controller
+    // player inputHandler
+    private InputHandler inputHandler;
     private Controller controller;
-    private Mover mover;
 
     // canvas for hud
     javafx.scene.canvas.Canvas hud;
     GraphicsContext gcHud;
+
+    // images for the sprites
+    Image characterSprites;
+    Image roomSprite;
+    Image corridorSprite;
+    Image background;
+
+    // image container
+    ImageView playerSpriteView;
+    SpriteAnimator animator;
+
+    // hud switch
+    boolean isHudOn = false;
 
     public MainGame(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
@@ -82,17 +110,40 @@ public class MainGame extends GameState {
 
         // initialize tile map
         tileMap = new int[mapSize][mapSize];
+        fogMap = new int[120][120];
+
         // generateDungeon dungeon
         System.out.println("Generating Dungeon");
 
         generateNewDungeon();
 
-        // player controller
-        controller = new Controller(scene);
-        mover = new Mover();
+        // player inputHandler
+        inputHandler = new InputHandler(scene);
+        controller = new Controller();
 
         // place enemies
         enemies.addAll(generator.getEnemies());
+
+        // load the images of the sprites
+        characterSprites = new Image(getClass().getResourceAsStream("../../resources/char_spritesheet.png"));
+        roomSprite = new Image(getClass().getResourceAsStream("../../resources/tile_room.png"));
+        corridorSprite = new Image(getClass().getResourceAsStream("../../resources/tile_corridor.png"));
+        background = new Image(getClass().getResourceAsStream("../../resources/space-background.png"));
+
+        // setting up the animator
+        playerSpriteView = new ImageView(characterSprites);
+        playerSpriteView = new ImageView(characterSprites);
+        playerSpriteView.setViewport(new Rectangle2D(0, 0, 200, 200));
+        playerSpriteView.setFitHeight(tileHeight);
+        playerSpriteView.setFitWidth(tileWidth);
+        playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
+        playerSpriteView.setTranslateY(player.getY()*tileWidth+startY);
+        root.getChildren().add(playerSpriteView);
+
+        animator = new SpriteAnimator(playerSpriteView, Duration.millis(700),
+                2, 2, 0, 0, 200, 200);
+        animator.setCycleCount(Animation.INDEFINITE);
+        animator.play();
 
     }
 
@@ -100,7 +151,7 @@ public class MainGame extends GameState {
     void update(long time) {
 
         /* handle player input */
-        mover.update(controller, player, enemies, deadEnemies, tileMap, camera);
+        controller.update(inputHandler, player, enemies, deadEnemies, tileMap, fogMap, camera);
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
@@ -111,109 +162,145 @@ public class MainGame extends GameState {
             generateNewDungeon();
         }
 
-        // reposition camera depending on player
-        camera.setTranslateX(player.getX() * tileWidth + 500);
-        camera.setTranslateY(player.getY() * tileHeight + 500);
-
         // reposition hud
         hud.setTranslateX(camera.getTranslateX() - 250);
         hud.setTranslateY(camera.getTranslateY() - 186);
 
     }
 
-    private void generateNewDungeon() {
-        ArrayList p = new ArrayList(enemies);
-        p.addAll(deadEnemies);
-        generator.generateDungeon(p);
-        System.out.println("New Dungeon Generated");
-        tileMap = generator.getDungeon();
-        deadEnemies.clear();
-        enemies.clear();
-        enemies.addAll(generator.getEnemies());
-        player = new Player();
-        player.setName("Jean Gadot");
-        player.setX(generator.getPlayerPosition().getX());
-        player.setY(generator.getPlayerPosition().getY());
-        player.setDamage(2);
-        player.setMaxHealth(100);
-        player.setCurrentHealth(100);
-        goal = new Point();
-        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
-        System.out.println("Rock Enemies: " + generator.getRockEnemyCount());
-        System.out.println("Paper Enemies: " + generator.getPaperEnemyCount());
-        System.out.println("Scissors Enemies: " + generator.getScissorsEnemyCount());
-    }
-
     @Override
     void draw() {
-        int startX = 500;
-        int startY = 500;
 
         // reset screen
-        graphicsContext.setFill(Color.BLACK);
-        graphicsContext.fillRect(0, 0, graphicsContext.getCanvas().getWidth(),
-                graphicsContext.getCanvas().getHeight());
+        // graphicsContext.setFill(Color.BLACK);
+        graphicsContext.drawImage(background,0
+                , 0
+                , 1920,
+                1920);
 
+        // draw rooms and corridors
         for(int i = 0; i < tileMap.length; i++) { // iterate through the rows
             for(int j = 0; j < tileMap.length; j++) { // iterate through the columns
 
                 if (tileMap[i][j] == 1 || tileMap[i][j] == 3) { // if point is traversable and a room
-                    graphicsContext.setFill(Color.DARKGRAY);
-                    graphicsContext.fillRect(j*tileHeight+startY, i*tileWidth + startX, tileHeight, tileWidth);
+                    //graphicsContext.setFill(Color.DARKGRAY);
+                    //graphicsContext.fillRect(j*tileHeight+startY, i*tileWidth + startX, tileHeight, tileWidth);
+                    graphicsContext.drawImage(roomSprite, j * tileWidth + startX, i * tileHeight + startY,
+                            tileWidth, tileHeight);
                 }
 
                 else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
-                    graphicsContext.setFill(Color.GRAY);
-                    graphicsContext.fillRect(j*tileHeight + startY, i*tileWidth + startX, tileHeight, tileWidth);
+                    //graphicsContext.setFill(Color.GRAY);
+                    //graphicsContext.fillRect(j*tileHeight + startX, i*tileWidth + startY, tileHeight, tileWidth);
+                    graphicsContext.drawImage(corridorSprite, j * tileWidth + startX, i * tileHeight + startY,
+                            tileWidth, tileHeight);
                 }
             }
         }
 
         /* draw characters in the map */
-        // draw player character
+        /*/ draw player character
         player.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
-
+*/
         // draw enemies
         for (Enemy enemy : enemies) {
-            enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
+            if (fogMap[(int) enemy.getY()][(int) enemy.getX()] == 2) {
+                enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
+            }
         }
 
         // draw goal
         graphicsContext.setFill(Color.BROWN);
-        graphicsContext.fillRect(goal.getX() * tileWidth + startY, goal.getY() * tileHeight + startY,
+        graphicsContext.fillRect(goal.getX() * tileWidth + startX, goal.getY() * tileHeight + startY,
                 tileHeight, tileWidth);
 
+        // draw fog of war
+        for (int y = 0; y < fogMap.length; y++) {
+            for (int x = 0; x < fogMap.length; x++) {
+                if (fogMap[y][x] == 0) {
+                    graphicsContext.setFill(Color.BLACK);
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                } else if (fogMap[y][x] == 1) {
+                    graphicsContext.setFill(new Color(0f,0f,0f,0.8));
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                }
+
+            }
+        }
+
+
         // draw attack side
-        if (mover.getAttackMode()) {
+        if (controller.getAttackMode()) {
             // transparent red
             graphicsContext.setFill(new Color(1.0f, 0.0f, 0.0f, 0.5f));
-            if(mover.getAttackSide()== "left")
+            if(controller.getAttackSide()== "left")
                 graphicsContext.fillRect((player.getX() - 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="right")
+            else if(controller.getAttackSide()=="right")
                 graphicsContext.fillRect((player.getX() + 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="up")
+            else if(controller.getAttackSide()=="up")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() - 1) * tileHeight + startY , tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="down")
+            else if(controller.getAttackSide()=="down")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
 
         /* draw HUD */
-        gcHud.setFill(Color.DARKBLUE);
-        // draw hud background
-        gcHud.fillRect(0,0,500,70);
-        // health
-        gcHud.setFill(Color.WHITE);
-        gcHud.fillText("Health : " + player.getCurrentHealth() + "/" + player.getMaxHealth(),
-                10, 20);
-        // player's chips
-        gcHud.setFill(Color.WHITE);
-        gcHud.fillText("Chips : " + player.getChipCount(),
-                250, 20);
+        // draw static hud texts
+        if (!isHudOn) {
+            gcHud.setFill(new Color(0.0f, 0.0f, 1.0f, 0.5f));
+            // draw hud background
+            gcHud.fillRect(0, 0, 500, 70);
+            isHudOn = true;
 
+            // health
+            gcHud.setFill(Color.WHITE);
+            gcHud.fillText("Health ",10, 20);
+            // player's chips
+            gcHud.setFill(Color.WHITE);
+            gcHud.fillText("Chips ", 250, 20);
+        }
+
+        // dynamic hud elements
+        // health bar
+        gcHud.setFill(Color.RED);
+        gcHud.fillRect(60, 10,
+                player.getMaxHealth(), 10);
+        gcHud.setFill(Color.GREEN);
+        gcHud.fillRect(60, 10,
+                player.getCurrentHealth(), 10);
+
+
+        // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
+        // checks through the X axis
+        if (playerSpriteView.getTranslateX() < player.getX()*tileWidth+startX) {
+            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() + playerSpeed);
+        } else if (playerSpriteView.getTranslateX() > player.getX()*tileWidth+startX) {
+            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() - playerSpeed);
+        }
+        // checks through the Y axis
+        if (playerSpriteView.getTranslateY() < player.getY()*tileWidth+startY) {
+            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() + playerSpeed);
+        } else if (playerSpriteView.getTranslateY() > player.getY()*tileWidth+startY) {
+            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() - playerSpeed);
+        }
+        // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
+        // player in the 2D game space
+        if ((playerSpriteView.getTranslateX() == player.getX()*tileWidth+startX)
+                && (playerSpriteView.getTranslateY() == player.getY()*tileWidth+startY)) {
+            inputHandler.setDisabled(false);
+        }
+
+        // reposition camera depending on player
+        camera.setTranslateX(playerSpriteView.getTranslateX());
+        camera.setTranslateY(playerSpriteView.getTranslateY());
+
+        // playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
+        // playerSpriteView.setTranslateY(player.getY()*tileHeight+startY-10);
 
     }
 
@@ -221,4 +308,49 @@ public class MainGame extends GameState {
     void onExit() {
 
     }
+
+    private void generateNewDungeon() {
+
+        // fill fog map
+        for (int i = 0; i < mapSize; i++) {
+            for (int j = 0; j < mapSize; j++) {
+                fogMap[i][j] = 0;
+            }
+        }
+
+        // create population for enemies
+        ArrayList p = new ArrayList(enemies);
+        p.addAll(deadEnemies);
+
+        // generate dungeon and throw current enemy population
+        generator.generateDungeon(p);
+        System.out.println("New Dungeon Generated");
+        tileMap = generator.getDungeon();
+
+        // clean up the previous enemy population
+        deadEnemies.clear();
+        enemies.clear();
+
+        // add the new generation of enemies
+        enemies.addAll(generator.getEnemies());
+
+        // set up player elements
+        player = new Player();
+        player.setName("Jean Gadot");
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
+        player.setDamage(2);
+        player.setMaxHealth(100);
+        player.setCurrentHealth(100);
+
+        // goal point
+        goal = new Point();
+        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
+
+        // display number of generated enemy types
+        System.out.println("Rock Enemies: " + generator.getRockEnemyCount());
+        System.out.println("Paper Enemies: " + generator.getPaperEnemyCount());
+        System.out.println("Scissors Enemies: " + generator.getScissorsEnemyCount());
+    }
+
 }

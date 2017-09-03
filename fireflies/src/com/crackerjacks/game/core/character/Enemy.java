@@ -3,13 +3,19 @@ package com.crackerjacks.game.core.character;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Enemy class that contains the default GameCharacter elements and enemy specific behavior functions.
+ * Enemy.java
+ *
+ * Enemy class that contains the default GameCharacter elements and enemy specific
+ * behavior functions.
+ *
+ *
  */
 public class Enemy extends GameCharacter {
 
@@ -28,7 +34,10 @@ public class Enemy extends GameCharacter {
     }
 
     // main methods
+
+    // contains the enemy behavior tree
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
+        System.out.println("<=== Updating "+getName()+" ===>");
 
         // handle dumb A.I. here
         double playerX = player.getX();
@@ -46,29 +55,37 @@ public class Enemy extends GameCharacter {
         else if (playerX >= getX() && playerX <= getX() + visionRadius
                 && playerY == getY()) {
             double i = getX() + 1;
-            if (!checkCollisions(enemies, tilemap, i, getY()))
+            if (!checkCollisions(enemies, tilemap, i, getY())) {
                 this.setX(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
         }
         // straight west; X--
         else if (playerX <= getX() && playerX >= getX() - visionRadius
                 && playerY == getY()) {
             double i = getX() - 1;
-            if (!checkCollisions(enemies, tilemap, i, getY()))
+            if (!checkCollisions(enemies, tilemap, i, getY())) {
                 this.setX(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
         }
         // straight north; Y--
         else if (playerY <= getY() && playerY >= getY() - visionRadius
                 && playerX == getX()) {
             double i = getY() - 1;
-            if (!checkCollisions(enemies, tilemap, getX(), i))
+            if (!checkCollisions(enemies, tilemap, getX(), i)) {
                 this.setY(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
         }
         // straight south; Y++
         else if (playerY >= getY() && playerY <= getY() + visionRadius
                 && playerX == getX()) {
             double i = getY() + 1;
-            if (!checkCollisions(enemies, tilemap, getX(), i))
+            if (!checkCollisions(enemies, tilemap, getX(), i)) {
                 this.setY(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
         }
         // first quadrant
         else if(playerX >= getX() && playerX <= getX() + visionRadius
@@ -76,14 +93,18 @@ public class Enemy extends GameCharacter {
             if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
                 // check collisions before moving through X space
                 double i = getX() + 1;
-                if (!checkCollisions(enemies, tilemap, i, getY()))
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
             else {
                 // check collisions before moving through Y space
                 double i = getY() - 1;
-                if (!checkCollisions(enemies, tilemap, getX(), i))
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
         }
         // second quadrant
@@ -92,14 +113,18 @@ public class Enemy extends GameCharacter {
             if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
                 // check collisions before moving through X space
                 double i = getX() - 1;
-                if (!checkCollisions(enemies, tilemap, i, getY()))
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
             else {
                 // check collisions before moving through Y space
                 double i = getY() - 1;
-                if (!checkCollisions(enemies, tilemap, getX(), i))
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
         }
         // third quadrant
@@ -108,14 +133,18 @@ public class Enemy extends GameCharacter {
             if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
                 // check collisions before moving through X space
                 double i = getX() - 1;
-                if (!checkCollisions(enemies, tilemap, i, getY()))
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
             else {
                 // check collisions before moving through Y space
                 double i = getY() + 1;
-                if (!checkCollisions(enemies, tilemap, getX(), i))
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
         }
         // fourth quadrant
@@ -124,17 +153,20 @@ public class Enemy extends GameCharacter {
             if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
                 // check collisions before moving through X space
                 double i = getX() + 1;
-                if (!checkCollisions(enemies, tilemap, i, getY()))
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
             else {
                 // check collisions before moving through Y space
                 double i = getY() + 1;
-                if (!checkCollisions(enemies, tilemap, getX(), i))
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
         }
-
 
         // if no one is around enemy, move around mindlessly
         else {
@@ -142,23 +174,28 @@ public class Enemy extends GameCharacter {
             // 0 = x , 1 = y
             if (axis == 0) {
                 double i = getX() + new Random().nextInt(3) - 1;
-                if (!checkCollisions(enemies, tilemap, i, getY()))
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             } else if (axis == 1) {
                 double i = getY() + new Random().nextInt(3) - 1;
-                if (!checkCollisions(enemies, tilemap, getX(), i))
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
             }
         }
 
+        System.out.println("Enemy " + getName() + " updated!");
     }
 
-    public void draw(GraphicsContext graphicsContext, int startX, int startY, int tileHeight, int tileWidth) {
+    public void draw(GraphicsContext graphicsContext,
+                     int startX, int startY, int tileHeight, int tileWidth) {
 
         graphicsContext.setFill(getElement().getColor());
         graphicsContext.fillRect(getX()*tileHeight+startX, getY()*tileWidth+startY,
-                tileHeight, tileWidth);
-
+               tileHeight, tileWidth);
     }
 
     private boolean checkCollisions(ArrayList<Enemy> enemies, int[][] tile,  double posX, double posY) {
