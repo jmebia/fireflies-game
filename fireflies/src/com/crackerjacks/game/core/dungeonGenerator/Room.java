@@ -6,7 +6,7 @@ import java.awt.*;
  * Created by jm on 7/7/17.
  */
 
-public class Room {
+class Room {
 
     // external element
     private final int id;

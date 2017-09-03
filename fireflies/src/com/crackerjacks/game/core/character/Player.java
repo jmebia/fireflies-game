@@ -11,6 +11,8 @@ public class Player extends GameCharacter {
 
     private int chipCount = 0;
 
+    private int lineOfSight = 4;
+
     // getters and setters
     public void activateRock() {
         rock = true;
@@ -57,5 +59,13 @@ public class Player extends GameCharacter {
 
     public int getChipCount() {
         return chipCount;
+    }
+
+    public void setLineOfSight(int los) {
+        this.lineOfSight = los;
+    }
+
+    public int getLineOfSight() {
+        return this.lineOfSight;
     }
 }

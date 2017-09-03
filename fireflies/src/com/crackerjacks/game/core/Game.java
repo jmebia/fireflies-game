@@ -35,7 +35,7 @@ public class Game extends Application {
 
         root = new Group();
         scene = new Scene(root, 800, 600, Color.BLACK);
-        canvas = new Canvas(3000, 3000);
+        canvas = new Canvas(4000, 4000);
         root.getChildren().setAll(canvas);
         graphicsContext = canvas.getGraphicsContext2D();
 
@@ -43,13 +43,15 @@ public class Game extends Application {
         stateManager = new GameStateManager();
         stateManager.stateList.add(new MainGame(scene, graphicsContext));
 
+
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ordeal of the Fireflies");
+        primaryStage.setTitle("Fireflies");
         primaryStage.getIcons().add(new Image("/com/crackerjacks/game/resources/icon.png"));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
