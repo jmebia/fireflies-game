@@ -6,6 +6,7 @@ package com.crackerjacks.game.core.genetic;
 
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.interactions.Element;
+import com.crackerjacks.game.core.interactions.Type;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,13 +38,15 @@ public class Algorithm {
 
             Enemy parents[] = selectParents();
 
-            child.setElement(crossover(parents[0], parents[1]));
+            child.setElement(crossoverElement(parents[0], parents[1]));
 
             // child = mutate(child);
 
-            Element element = crossover(parents[0], parents[1]);
+            Element element = crossoverElement(parents[0], parents[1]);
+            Type type = crossoverType(parents[0], parents[1]);
 
             child.setElement(element);
+            child.setType(type);
 
         }
 
@@ -87,7 +90,7 @@ public class Algorithm {
 
     }
 
-    private Element crossover(Enemy firstParent, Enemy secondParent) {
+    private Element crossoverElement(Enemy firstParent, Enemy secondParent) {
 
         Element e;
         Random r = new Random();
@@ -116,6 +119,42 @@ public class Algorithm {
                 else  if (i == 2 && !(firstParent.getElement().equals(Element.scissors)
                         || secondParent.getElement().equals(Element.scissors))) {
                     e = Element.scissors; break;
+                }
+            }
+        }
+
+        return e;
+    }
+
+    private Type crossoverType(Enemy firstParent, Enemy secondParent) {
+
+        Type e;
+        Random r = new Random();
+        int i;
+
+        // randomize if child is gonna get first or second parent's element
+        i = r.nextInt(2);
+
+        e = (i==0? firstParent.getType()
+                : secondParent.getType());
+
+        // mutation check
+        if (r.nextDouble() <= mutationRate) {
+            // pick a random element not found in parent
+            // 0 = rock, 1 = paper, 2 = scissors
+            while (true) {
+                i = r.nextInt(3);
+                if (i == 0 && !(firstParent.getType().equals(Type.a)
+                        || secondParent.getType().equals(Type.a))) {
+                    e = Type.a; break;
+                }
+                else  if (i == 1 && !(firstParent.getType().equals(Type.b)
+                        || secondParent.getType().equals(Type.b))) {
+                    e = Type.b; break;
+                }
+                else  if (i == 2 && !(firstParent.getType().equals(Type.c)
+                        || secondParent.getType().equals(Type.c))) {
+                    e = Type.c; break;
                 }
             }
         }

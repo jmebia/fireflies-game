@@ -1,18 +1,29 @@
 package com.crackerjacks.game.core.states;
 
+import com.crackerjacks.game.core.Global;
+import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.character.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
+import com.crackerjacks.game.core.input.InputHandler;
 import com.crackerjacks.game.core.input.Controller;
-import com.crackerjacks.game.core.input.Mover;
+import com.crackerjacks.game.core.interactions.Element;
+import com.crackerjacks.game.core.interactions.Type;
+import com.crackerjacks.game.core.io.Save;
+import com.crackerjacks.game.core.io.SaveIO;
+import javafx.animation.Animation;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
+import javafx.scene.image.Image;
+import javafx.util.Duration;
 
 import static com.crackerjacks.game.core.Game.root;
 
@@ -22,7 +33,7 @@ import static com.crackerjacks.game.core.Game.root;
 public class MainGame extends GameState {
 
     // 3D camera for the scene
-    private PerspectiveCamera camera = new PerspectiveCamera(true);
+    private PerspectiveCamera camera;
 
     // elements for the dungeon map
     private int[][] tileMap;
@@ -30,9 +41,28 @@ public class MainGame extends GameState {
     final private int grids = 4;
     final private int roomSize = 7;
 
+    // design map
+    private int[][] designMap;
+
+    // how fast the player slides from one tile to another
+    int playerSpeed = 2;
+
+    int startX = 0;
+    int startY = 0;
+
+    int YCharmModifier = -28;
+
+
+    // tile map for the fog of war
+    private int[][] fogMap;
+
     // size of the dungeon when drawn on screen
-    final private int tileHeight = 16;
-    final private int tileWidth = 16;
+    final private int tileHeight = 32;
+    final private int tileWidth = 32;
+
+    // size of the dungeon when drawn on screen
+    final private int charHeight = 48;
+    final private int charWidth = 32;
 
     // player character
     private Player player;
@@ -45,30 +75,37 @@ public class MainGame extends GameState {
     // goal
     Point goal;
 
-    // player controller
+    // player inputHandler
+    private InputHandler inputHandler;
     private Controller controller;
-    private Mover mover;
 
     // canvas for hud
     javafx.scene.canvas.Canvas hud;
     GraphicsContext gcHud;
 
-    public MainGame(Scene scene, GraphicsContext graphicsContext) {
+    // images for the sprites
+    Image characterSprites;
+    Image tileSprites;
+    Image background;
+
+    // image container
+    ImageView playerSpriteView;
+    SpriteAnimator animator;
+
+    // identifies if user loaded an existing save or a new game
+    private boolean isNewGame;
+
+    public MainGame(Scene scene, GraphicsContext graphicsContext, boolean isNewGame) {
         this.scene = scene;
         this.graphicsContext = graphicsContext;
 
+        this.isNewGame = isNewGame;
+
         // new canvas
-        hud = new Canvas(500, 300);
+        hud = new Canvas(800, 600);
         gcHud = hud.getGraphicsContext2D();
         root.getChildren().addAll(hud);
         hud.toFront();
-
-        // set up camera
-        camera.setTranslateZ(-1000);
-        camera.setNearClip(0.1);
-        camera.setFarClip(2000.0);
-        camera.setFieldOfView(21);
-        scene.setCamera(camera);
 
         onEnter();
 
@@ -77,22 +114,74 @@ public class MainGame extends GameState {
     @Override
     void onEnter() throws IndexOutOfBoundsException {
 
-        // create generator for dungeons passing our tilemap as the base
-        generator = new Generator(mapSize, grids, roomSize);
+        if (isNewGame) {
 
-        // initialize tile map
-        tileMap = new int[mapSize][mapSize];
-        // generateDungeon dungeon
-        System.out.println("Generating Dungeon");
+            // create generator for dungeons passing our tilemap as the base
+            generator = new Generator(mapSize, grids, roomSize);
 
-        generateNewDungeon();
+            // initialize tile map
+            tileMap = new int[mapSize][mapSize];
+            designMap = new int[mapSize][mapSize];
+            fogMap = new int[120][120];
 
-        // player controller
-        controller = new Controller(scene);
-        mover = new Mover();
+            // generate dungeon
+            System.out.println("Generating Dungeon");
+            generateNewDungeon();
 
-        // place enemies
-        enemies.addAll(generator.getEnemies());
+            // place enemies
+            enemies.addAll(generator.getEnemies());
+
+        } else {
+            Save save = Global.getSave();
+
+            generator = save.getGenerator();
+
+            player = save.getPlayer();
+
+            // initialize tile map
+            tileMap = save.getTileMap();
+            designMap = save.getDesignMap();
+            fogMap = save.getFogMap();
+
+            goal = new Point();
+            goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
+
+            // place enemies
+            enemies.addAll(save.getEnemies());
+            deadEnemies.addAll(save.getDeadEnemies());
+        }
+
+        // player inputHandler
+        inputHandler = new InputHandler(scene);
+        controller = new Controller();
+
+        // set up camera
+        camera = new PerspectiveCamera(true);
+        camera.setTranslateZ(-1000);
+        camera.setNearClip(0.1);
+        camera.setFarClip(2000.0);
+        camera.setFieldOfView(25);
+        scene.setCamera(camera);
+
+        // load the images of the sprites
+        ClassLoader classLoader = getClass().getClassLoader();
+        characterSprites = new Image(classLoader.getResource("sprites/char-spritesheet.png").toString());
+        tileSprites = new Image(classLoader.getResource("sprites/tiles-spritesheet.png").toString());
+        background = new Image(classLoader.getResource("sprites/space-background.png").toString());
+
+        // setting up the animator
+        playerSpriteView = new ImageView(characterSprites);
+        playerSpriteView.setViewport(new Rectangle2D(0, 0, charWidth, charHeight));
+        playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
+        playerSpriteView.setTranslateY(player.getY()*tileWidth+startY+YCharmModifier);
+        root.getChildren().add(playerSpriteView);
+
+        animator = new SpriteAnimator(playerSpriteView, Duration.millis(400),
+                2, 2, 0, 0, charWidth, charHeight);
+        animator.setCycleCount(Animation.INDEFINITE);
+        animator.play();
+
+
 
     }
 
@@ -100,103 +189,144 @@ public class MainGame extends GameState {
     void update(long time) {
 
         /* handle player input */
-        mover.update(controller, player, enemies, deadEnemies, tileMap, camera);
+        controller.update(inputHandler, player, enemies, deadEnemies, tileMap, fogMap, camera);
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
+            playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
+            playerSpriteView.setTranslateY(player.getY()*tileHeight+startY+YCharmModifier);
         }
 
         // check if player is in goal, if yes then generate new dungeon
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
             generateNewDungeon();
+            playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
+            playerSpriteView.setTranslateY(player.getY()*tileHeight+startY+YCharmModifier);
         }
-
-        // reposition camera depending on player
-        camera.setTranslateX(player.getX() * tileWidth + 500);
-        camera.setTranslateY(player.getY() * tileHeight + 500);
 
         // reposition hud
         hud.setTranslateX(camera.getTranslateX() - 250);
         hud.setTranslateY(camera.getTranslateY() - 186);
 
-    }
-
-    private void generateNewDungeon() {
-        ArrayList p = new ArrayList(enemies);
-        p.addAll(deadEnemies);
-        generator.generateDungeon(p);
-        System.out.println("New Dungeon Generated");
-        tileMap = generator.getDungeon();
-        deadEnemies.clear();
-        enemies.clear();
-        enemies.addAll(generator.getEnemies());
-        player = new Player();
-        player.setName("Jean Gadot");
-        player.setX(generator.getPlayerPosition().getX());
-        player.setY(generator.getPlayerPosition().getY());
-        player.setDamage(2);
-        player.setMaxHealth(100);
-        player.setCurrentHealth(100);
-        goal = new Point();
-        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
-        System.out.println("Rock Enemies: " + generator.getRockEnemyCount());
-        System.out.println("Paper Enemies: " + generator.getPaperEnemyCount());
-        System.out.println("Scissors Enemies: " + generator.getScissorsEnemyCount());
-    }
-
-    @Override
-    void draw() {
-        int startX = 500;
-        int startY = 500;
-
+        // DRAW
         // reset screen
-        graphicsContext.setFill(Color.BLACK);
-        graphicsContext.fillRect(0, 0, graphicsContext.getCanvas().getWidth(),
-                graphicsContext.getCanvas().getHeight());
+        // graphicsContext.setFill(Color.BLACK);
+        graphicsContext.drawImage(background,0
+                , 0
+                , 1920,
+                1920);
 
-        for(int i = 0; i < tileMap.length; i++) { // iterate through the rows
-            for(int j = 0; j < tileMap.length; j++) { // iterate through the columns
+        // draw rooms and corridors
+        for(int i = 0; i < designMap.length; i++) { // iterate through the rows
+            for(int j = 0; j < designMap.length; j++) { // iterate through the columns
 
-                if (tileMap[i][j] == 1 || tileMap[i][j] == 3) { // if point is traversable and a room
-                    graphicsContext.setFill(Color.DARKGRAY);
-                    graphicsContext.fillRect(j*tileHeight+startY, i*tileWidth + startX, tileHeight, tileWidth);
+                // ROOM
+                if (tileMap[i][j] == 1) {
+                    if (designMap[i][j] == generator.getROOM_TOP_LEFT()) {
+                        graphicsContext.drawImage(tileSprites, 0, 96, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_TOP_CENTER()) {
+                        graphicsContext.drawImage(tileSprites, 32, 96, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_TOP_RIGHT()) {
+                        graphicsContext.drawImage(tileSprites, 64, 96, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_LEFT()) {
+                        graphicsContext.drawImage(tileSprites, 0, 128, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_CENTER()) {
+                        graphicsContext.drawImage(tileSprites, 32, 128, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_RIGHT()) {
+                        graphicsContext.drawImage(tileSprites, 64, 128, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_BOTTOM_LEFT()) {
+                        graphicsContext.drawImage(tileSprites, 0, 160, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_BOTTOM_CENTER()) {
+                        graphicsContext.drawImage(tileSprites, 32, 160, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    } else if (designMap[i][j] == generator.getROOM_BOTTOM_RIGHT()) {
+                        graphicsContext.drawImage(tileSprites, 64, 160, 32, 32, j * tileWidth + startX,
+                                i * tileHeight + startY, tileWidth, tileHeight);
+                    }
                 }
-
-                else if (tileMap[i][j] == 2) { // if point is traversable and a corridor
-                    graphicsContext.setFill(Color.GRAY);
-                    graphicsContext.fillRect(j*tileHeight + startY, i*tileWidth + startX, tileHeight, tileWidth);
+                // CORRIDOR
+                else if (tileMap[i][j] == 2) {
+                    graphicsContext.drawImage(tileSprites, 96, 0, 32, 32, j * tileWidth + startX,
+                            i * tileHeight + startY, tileWidth, tileHeight);
                 }
             }
         }
 
-        /* draw characters in the map */
-        // draw player character
-        player.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
-
         // draw enemies
-        for (Enemy enemy : enemies) {
-            enemy.draw(graphicsContext, startX, startY, tileHeight, tileWidth);
+        for (Enemy e : enemies) {
+            if (fogMap[(int) e.getY()][(int) e.getX()] == 2) {
+                // initial offsetY depends on the enemy type,
+                // the offsetY modifier depends on the technique/element
+
+                int offsetY = 0;
+
+                // type
+                if (e.getType() == Type.a)
+                    offsetY = charHeight;
+                else if (e.getType() == Type.b)
+                    offsetY = charHeight * 4;
+                else if (e.getType() == Type.c)
+                    offsetY = charHeight * 7;
+
+                // element
+                if (e.getElement() == Element.rock)
+                    offsetY += 0;
+                else if (e.getElement() == Element.paper)
+                    offsetY += charHeight;
+                else if (e.getElement() == Element.scissors)
+                    offsetY += charHeight * 2;
+
+                e.draw(graphicsContext, characterSprites, 0, offsetY, startX, startY + YCharmModifier, charHeight, charWidth);
+
+                /*
+                e.getImage().setTranslateX(e.getX()*tileWidth+startX);
+                e.getImage().setTranslateY(e.getY()*tileWidth+startY+YCharmModifier);
+                */
+            }
         }
 
         // draw goal
         graphicsContext.setFill(Color.BROWN);
-        graphicsContext.fillRect(goal.getX() * tileWidth + startY, goal.getY() * tileHeight + startY,
+        graphicsContext.fillRect(goal.getX() * tileWidth + startX, goal.getY() * tileHeight + startY,
                 tileHeight, tileWidth);
 
+        // draw fog of war
+        for (int y = 0; y < fogMap.length; y++) {
+            for (int x = 0; x < fogMap.length; x++) {
+                if (fogMap[y][x] == 0) {
+                    graphicsContext.setFill(Color.BLACK);
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                } else if (fogMap[y][x] == 1) {
+                    graphicsContext.setFill(new Color(0f,0f,0f,0.8));
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                }
+
+            }
+        }
+
         // draw attack side
-        if (mover.getAttackMode()) {
+        if (controller.getAttackMode()) {
             // transparent red
             graphicsContext.setFill(new Color(1.0f, 0.0f, 0.0f, 0.5f));
-            if(mover.getAttackSide()== "left")
+            if(controller.getAttackSide()== "left")
                 graphicsContext.fillRect((player.getX() - 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="right")
+            else if(controller.getAttackSide()=="right")
                 graphicsContext.fillRect((player.getX() + 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="up")
+            else if(controller.getAttackSide()=="up")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() - 1) * tileHeight + startY , tileWidth, tileHeight );
-            else if(mover.getAttackSide()=="down")
+            else if(controller.getAttackSide()=="down")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
@@ -204,21 +334,196 @@ public class MainGame extends GameState {
         /* draw HUD */
         gcHud.setFill(Color.DARKBLUE);
         // draw hud background
-        gcHud.fillRect(0,0,500,70);
+        gcHud.fillRect(0, 0, 800, 70);
+
         // health
         gcHud.setFill(Color.WHITE);
-        gcHud.fillText("Health : " + player.getCurrentHealth() + "/" + player.getMaxHealth(),
-                10, 20);
-        // player's chips
+        gcHud.fillText("Health ",10, 20);
+        // player's fireflies essence
         gcHud.setFill(Color.WHITE);
-        gcHud.fillText("Chips : " + player.getChipCount(),
-                250, 20);
+        gcHud.fillText("FireFlies ", 250, 20);
 
+        // player's fireflies essence
+        gcHud.setFill(Color.WHITE);
+        gcHud.fillText(""+player.getChipCount(), 320, 20);
+
+        // health bar
+        gcHud.setFill(Color.RED);
+        gcHud.fillRect(60, 10,
+                player.getMaxHealth(), 10);
+        gcHud.setFill(Color.GREEN);
+        gcHud.fillRect(60, 10,
+                player.getCurrentHealth(), 10);
+
+
+        // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
+        // checks through the X axis
+        if (playerSpriteView.getTranslateX() < player.getX()*tileWidth+startX) {
+            animator.setOffsetX(64);
+            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() + playerSpeed);
+        } else if (playerSpriteView.getTranslateX() > player.getX()*tileWidth+startX) {
+            animator.setOffsetX(0);
+            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() - playerSpeed);
+        }
+        // checks through the Y axis
+        if (playerSpriteView.getTranslateY() < player.getY()*tileWidth+startY+YCharmModifier) {
+            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() + playerSpeed);
+        } else if (playerSpriteView.getTranslateY() > player.getY()*tileWidth+startY+YCharmModifier) {
+            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() - playerSpeed);
+        }
+        // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
+        // player in the 2D game space
+        if ((playerSpriteView.getTranslateX() == player.getX()*tileWidth+startX)
+                && (playerSpriteView.getTranslateY() == player.getY()*tileWidth+startY+YCharmModifier)) {
+            inputHandler.setDisabled(false);
+            controller.unfog(player, fogMap, inputHandler);
+        }
+
+
+
+        // reposition camera depending on player
+        camera.setTranslateX(playerSpriteView.getTranslateX());
+        camera.setTranslateY(playerSpriteView.getTranslateY());
+
+        hud.setTranslateX(playerSpriteView.getTranslateX() - 300);
+        hud.setTranslateY(playerSpriteView.getTranslateY() - 222);
 
     }
 
     @Override
     void onExit() {
 
+        Save save = new Save();
+        save.setPlayer(player);
+        save.setTileMap(tileMap);
+        save.setDesignMap(designMap);
+        save.setFogMap(fogMap);
+        save.setEnemies(enemies);
+        save.setDeadEnemies(deadEnemies);
+        save.setGenerator(generator);
+
+        try {
+            new SaveIO().serializeAddress(save);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Enemy e : enemies) {
+            root.getChildren().remove(e.getImage());
+        }
+
+        root.getChildren().removeAll(playerSpriteView, hud);
+
+
     }
+
+    private void generateNewDungeon() {
+
+        // fill fog map
+        for (int i = 0; i < mapSize; i++) {
+            for (int j = 0; j < mapSize; j++) {
+                fogMap[i][j] = 0;
+            }
+        }
+
+        // create population for enemies
+        ArrayList p = new ArrayList(enemies);
+        p.addAll(deadEnemies);
+
+        // generate dungeon and throw current enemy population
+        generator.generateDungeon(p);
+        System.out.println("New Dungeon Generated");
+        tileMap = generator.getDungeon();
+
+        // clean up the previous enemy population
+        deadEnemies.clear();
+        enemies.clear();
+
+        // add the new generation of enemies
+        enemies.addAll(generator.getEnemies());
+
+        // set up player elements
+        player = new Player();
+        player.setName("Jean Gadot");
+        player.setX(generator.getPlayerPosition().getX());
+        player.setY(generator.getPlayerPosition().getY());
+        player.setDamage(2);
+        player.setMaxHealth(100);
+        player.setCurrentHealth(100);
+
+        // goal point
+        goal = new Point();
+        goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
+
+        // get design mapping
+        designMap = generator.getDesignLayer1();
+
+        /*
+        // set image views or sprites for each enemy
+        for (Enemy e : enemies) {
+
+            // initial offsetY depends on the enemy type,
+            // the offsetY modifier depends on the technique/element
+
+            int offsetY = 0;
+
+            // type
+            if (e.getType() == Type.a)
+                offsetY = charHeight * 1;
+            else if (e.getType() == Type.b)
+                offsetY = charHeight * 4;
+            else if (e.getType() == Type.c)
+                offsetY = charHeight * 7;
+
+            // element
+            if (e.getElement() == Element.rock)
+                offsetY += 0;
+            else if (e.getElement() == Element.scissors)
+                offsetY += charHeight;
+            else if (e.getElement() == Element.paper)
+                offsetY += charHeight * 2;
+
+            e.setImage( new ImageView(characterSprites));
+            e.getImage().setViewport(new Rectangle2D(0, 0, charWidth, charHeight));
+            e.getImage().setTranslateX(e.getX()*tileWidth+startX);
+            e.getImage().setTranslateY(e.getY()*tileWidth+startY+YCharmModifier);
+            e.getImage().toFront();
+            root.getChildren().add(e.getImage());
+
+            e.setSpriteView(new SpriteAnimator(e.getImage(), Duration.millis(400),
+                    2, 2, 0, offsetY, charWidth-1, charHeight-1));
+            e.getSpriteView().setCycleCount(Animation.INDEFINITE);
+            e.getSpriteView().play();
+
+            System.out.println(root.getChildren().contains(e.getImage()));
+        }*/
+
+        // display number of generated enemy types
+        int[][] enemyStats = generator.getEnemyStats();
+
+        System.out.println("Rock + A Enemies: " + enemyStats[0][0]);
+        System.out.println("Rock + B Enemies: " + enemyStats[0][1]);
+        System.out.println("Rock + C Enemies: " + enemyStats[0][2]);
+
+        System.out.println("Paper + A Enemies: " + enemyStats[1][0]);
+        System.out.println("Paper + B Enemies: " + enemyStats[1][1]);
+        System.out.println("Paper + C Enemies: " + enemyStats[1][2]);
+
+        System.out.println("Scissors + A Enemies: " + enemyStats[2][0]);
+        System.out.println("Scissors + B Enemies: " + enemyStats[2][1]);
+        System.out.println("Scissors + C Enemies: " + enemyStats[2][2]);
+
+        System.out.println("TOTAL Rock Enemies: " + (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
+        System.out.println("TOTAL Paper Enemies: " + (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
+        System.out.println("TOTAL Scissors Enemies: " + (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
+
+        System.out.println("TOTAL A Enemies: " + (enemyStats[0][0] + enemyStats[1][0] + enemyStats[2][0]));
+        System.out.println("TOTAL B Enemies: " + (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
+        System.out.println("TOTAL C Enemies: " + (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
+
+
+        // System.out.println("B Enemies: " + generator.getPaperEnemyCount());
+        // System.out.println("C Enemies: " + generator.getScissorsEnemyCount());
+    }
+
 }

@@ -8,14 +8,20 @@ import java.util.Stack;
  */
 public class GameStateManager {
 
-    public LinkedList<GameState> stateList = new LinkedList<>();
+    private static LinkedList<GameState> stateList = new LinkedList<>();
 
-    public void update(long time) {
-        stateList.getFirst().update(time);
+    public static void update(long time) {
+        stateList.getLast().update(time);
     }
 
-    public void draw() {
-        stateList.getFirst().draw();
+    public static LinkedList getStateList() {
+        return stateList;
+    }
+
+    public static void removeLast() {
+        stateList.getLast().onExit();
+        stateList.removeLast();
+        stateList.getLast().onEnter();
     }
 
 }

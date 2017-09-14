@@ -3,9 +3,10 @@ package com.crackerjacks.game.core.dungeonGenerator;
 import com.crackerjacks.game.core.character.Enemy;
 import com.crackerjacks.game.core.genetic.Algorithm;
 import com.crackerjacks.game.core.interactions.Element;
-import javafx.scene.Parent;
+import com.crackerjacks.game.core.interactions.Type;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -13,17 +14,33 @@ import java.util.Random;
 /**
  * Created by jm on 7/7/17.
  */
-public class Generator {
+public class Generator implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Point playerPosition = new Point();
     private Point goalPosition = new Point();
     private int[][] dungeon;
+    private int[][] designLayer1; // main rooms and corridors
+    private int[][] designLayer2; // overlap-able background designs
 
+    // core map elements
     private final int ROOM = 1;
     private final int CORRIDOR = 2;
     private final int VOID = 0;
+
+    // core design elements
+    private final int ROOM_TOP_LEFT = 0;
+    private final int ROOM_TOP_CENTER = 1;
+    private final int ROOM_TOP_RIGHT = 2;
+    private final int ROOM_LEFT = 3;
+    private final int ROOM_CENTER = 4;
+    private final int ROOM_RIGHT = 5;
+    private final int ROOM_BOTTOM_LEFT = 6;
+    private final int ROOM_BOTTOM_CENTER = 7;
+    private final int ROOM_BOTTOM_RIGHT = 8;
 
     private final int gridRow;
     private final int minRoomSize;
@@ -39,6 +56,7 @@ public class Generator {
 
         firstGeneration = true;
         dungeon = new int[mapSize + 4][mapSize + 4];
+        designLayer1 = new int[mapSize + 4][mapSize + 4];
     }
 
     /** GENERATION **/
@@ -52,6 +70,8 @@ public class Generator {
         addEnemyElements(parents);
         plotRooms();
 
+        plotDesign();
+
         if (firstGeneration) firstGeneration = false;
     }
 
@@ -59,6 +79,7 @@ public class Generator {
         for (int x = 0; x < mapSize; x++) {
             for (int y = 0; y < mapSize; y++) {
                 dungeon[y][x] = VOID;
+                designLayer1[y][x] = VOID;
             }
         }
     }
@@ -79,11 +100,7 @@ public class Generator {
             for (int y = 0; y < mapSize; y += gridSize) {
                 int roomHere = new Random().nextInt(2);
 
-                System.out.println("Creating new room (STEP 1)...");
-
                 if (roomHere == 1) { // generate room
-
-                    System.out.println("Creating new room (STEP 2)...");
 
                     int maxRoomSize = gridSize - 1;
                     // randomize room size based on the size of the grid
@@ -98,8 +115,6 @@ public class Generator {
                     int yPos = y + (y==0? 1 : ( y==mapSize - 1? -1 : new Random().nextInt((gridSize - height))));
 
                     rooms.add(new Room(xPos, yPos, width, height, rooms.size() + 1));
-
-                    System.out.println("Room "+rooms.get(rooms.size()-1).getId()+" added");
 
                 }
             }
@@ -213,7 +228,7 @@ public class Generator {
                     Enemy enemy = new Enemy();
                     enemy.setX(eX);
                     enemy.setY(eY);
-                    enemy.setName("Enemy Virus");
+                    enemy.setName("Enemy " + room.getId() + "-" + i);
 
                     enemies.add(enemy);
                     System.out.println("new enemy added...");
@@ -239,6 +254,8 @@ public class Generator {
         // else if this is not the first generation, use the genetic algorithm
         if (firstGeneration) {
             for (Enemy e: enemies) {
+                // assign random element and type to enemy
+
                 int i = random.nextInt(3);
                 if (i == 0) {
                     e.setElement(Element.rock);
@@ -247,7 +264,20 @@ public class Generator {
                 } else {
                     e.setElement(Element.scissors);
                 }
+
+                int j = random.nextInt(3);
+                if (j == 0) {
+                    System.out.println("type A set!");
+                    e.setType(Type.a);
+                } else if (j == 1) {
+                    System.out.println("type B set!");
+                    e.setType(Type.b);
+                } else {
+                    System.out.println("type C set!");
+                    e.setType(Type.c);
+                }
             }
+
         }
         else {
             // placeholder while genetic algorithm is still a work in progress
@@ -271,9 +301,112 @@ public class Generator {
 
     }
 
+    private void plotDesign() {
+        for (int x = 0; x < mapSize; x++) {
+            for (int y = 0; y < mapSize; y++) {
+
+                // check first if tile has a room or corridor assigned
+                if (dungeon[y][x] != VOID) {
+                    // ROOM TILES
+                    // if center room
+                    if ( dungeon[y-1][x-1]==ROOM && dungeon[y-1][x]==ROOM && dungeon[y-1][x+1]==ROOM
+                            && dungeon[y][x-1]==ROOM && dungeon[y][x+1] == ROOM
+                            && dungeon[y+1][x-1]==ROOM && dungeon[y+1][x]==ROOM
+                            && dungeon[y+1][x+1]==ROOM) {
+                        designLayer1[y][x] = ROOM_CENTER;
+                    }
+                    // center left
+                    else if ( (dungeon[y-1][x-1]==VOID || dungeon[y-1][x-1]==CORRIDOR )&& dungeon[y-1][x]==ROOM
+                            && dungeon[y-1][x+1]==ROOM
+                            && (dungeon[y][x-1]==VOID || dungeon[y][x-1]==CORRIDOR) && dungeon[y][x+1] == ROOM
+                            && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR) && dungeon[y+1][x]==ROOM
+                            && dungeon[y+1][x+1]==ROOM) {
+                        designLayer1[y][x] = ROOM_LEFT;
+                    }
+                    // center right
+                    else if ( dungeon[y-1][x-1]==ROOM && dungeon[y-1][x]==ROOM
+                            && (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && dungeon[y][x-1]==ROOM && (dungeon[y][x+1] == VOID || dungeon[y][x+1] == CORRIDOR)
+                            && dungeon[y+1][x-1]==ROOM && dungeon[y+1][x]==ROOM
+                            && (dungeon[y+1][x+1]== VOID || dungeon[y+1][x+1]== CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_RIGHT;
+                    }
+                    // top center
+                    else if ( (dungeon[y-1][x-1]==VOID || dungeon[y-1][x-1]==CORRIDOR)
+                            && (dungeon[y-1][x]==VOID || dungeon[y-1][x]==CORRIDOR)
+                            && (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && dungeon[y][x-1]==ROOM && dungeon[y][x+1] == ROOM
+                            && dungeon[y+1][x-1]==ROOM && dungeon[y+1][x]==ROOM
+                            && dungeon[y+1][x+1]==ROOM) {
+                        designLayer1[y][x] = ROOM_TOP_CENTER;
+                    }
+                    // bottom center
+                    else if ( dungeon[y-1][x-1]==ROOM && dungeon[y-1][x]==ROOM && dungeon[y-1][x+1]==ROOM
+                            && dungeon[y][x-1]==ROOM && dungeon[y][x+1] == ROOM
+                            && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR)
+                            && (dungeon[y+1][x]==VOID || dungeon[y+1][x]==CORRIDOR)
+                            && (dungeon[y+1][x+1]==VOID || dungeon[y+1][x+1]==CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_BOTTOM_CENTER;
+                    }
+                    // top right
+                    else if ( (dungeon[y-1][x-1]==VOID || dungeon[y-1][x-1]==CORRIDOR)
+                            && (dungeon[y-1][x]==VOID || dungeon[y-1][x]==CORRIDOR)
+                            && (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && dungeon[y][x-1]==ROOM && (dungeon[y][x+1] == VOID || dungeon[y][x+1] == CORRIDOR)
+                            && dungeon[y+1][x-1]==ROOM && dungeon[y+1][x]==ROOM
+                            && (dungeon[y+1][x+1]==VOID || dungeon[y+1][x+1]==CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_TOP_RIGHT;
+                    }
+                    // top left
+                    else if ( (dungeon[y-1][x-1]==VOID || dungeon[y-1][x-1]==CORRIDOR)
+                            && (dungeon[y-1][x]==VOID || dungeon[y-1][x]==CORRIDOR)
+                            && (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && (dungeon[y][x-1]==VOID || dungeon[y][x-1]==CORRIDOR) && dungeon[y][x+1] == ROOM
+                            && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR) && dungeon[y+1][x]==ROOM
+                            && dungeon[y+1][x+1]==ROOM) {
+                        designLayer1[y][x] = ROOM_TOP_LEFT;
+                    }
+                    // bottom left
+                    else if ( (dungeon[y-1][x-1]==VOID || dungeon[y-1][x-1]==CORRIDOR) && dungeon[y-1][x]==ROOM
+                            && dungeon[y-1][x+1]==ROOM && (dungeon[y][x-1]==VOID || dungeon[y][x-1]==CORRIDOR)
+                            && dungeon[y][x+1] == ROOM && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR)
+                            && (dungeon[y+1][x]==VOID || dungeon[y+1][x]==CORRIDOR)
+                            && (dungeon[y+1][x+1]==VOID || dungeon[y+1][x+1]==CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_BOTTOM_LEFT;
+                    }
+                    // bottom right
+                    else if ( dungeon[y-1][x-1]==ROOM && dungeon[y-1][x]==ROOM &&
+                            (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && dungeon[y][x-1]==ROOM && (dungeon[y][x+1] == VOID || dungeon[y][x+1] == CORRIDOR)
+                            && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR)
+                            && (dungeon[y+1][x]==VOID || dungeon[y+1][x]==CORRIDOR)
+                            && (dungeon[y+1][x+1]==VOID || dungeon[y+1][x+1]==CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_BOTTOM_RIGHT;
+                    }
+
+                    // CORRIDORS
+
+                    else if ( dungeon[y-1][x-1]==ROOM && dungeon[y-1][x]==ROOM &&
+                            (dungeon[y-1][x+1]==VOID || dungeon[y-1][x+1]==CORRIDOR)
+                            && dungeon[y][x-1]==ROOM && (dungeon[y][x+1] == VOID || dungeon[y][x+1] == CORRIDOR)
+                            && (dungeon[y+1][x-1]==VOID || dungeon[y+1][x-1]==CORRIDOR)
+                            && (dungeon[y+1][x]==VOID || dungeon[y+1][x]==CORRIDOR)
+                            && (dungeon[y+1][x+1]==VOID || dungeon[y+1][x+1]==CORRIDOR)) {
+                        designLayer1[y][x] = ROOM_BOTTOM_RIGHT;
+                    }
+
+                }
+            }
+        }
+    }
+
 
     public int[][] getDungeon() {
         return dungeon;
+    }
+
+    public int[][] getDesignLayer1() {
+        return designLayer1;
     }
 
     public ArrayList<Enemy> getEnemies() {
@@ -288,37 +421,95 @@ public class Generator {
         return goalPosition;
     }
 
-    public int getRockEnemyCount() {
-        int count = 0;
+    public int[][] getEnemyStats() {
+        int[][] counts = new int[3][3];
 
-        for (Enemy e : enemies) {
-            if (e.getElement().getId().equals(Element.rock.getId()))
-                count++;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                counts[i][j] = 0;
+            }
         }
 
-        return count;
+        // [0][x] = rock, [1][x] = paper, [2][x] scissors
+        // [x][0] = A, [x][1] = B, [x][2] C
+
+
+        for (Enemy e : enemies) {
+            // rock
+            if (e.getElement().getId().equals(Element.rock.getId())) {
+                if (e.getType().getId().equals(Type.a.getId())) {
+                    counts[0][0]++;
+                }
+                else if (e.getType().getId().equals(Type.b.getId())) {
+                    counts[0][1]++;
+                }
+                else if (e.getType().getId().equals(Type.c.getId())) {
+                    counts[0][2]++;
+                }
+            }
+            // paper
+            else if (e.getElement().getId().equals(Element.paper.getId())) {
+                if (e.getType().getId().equals(Type.a.getId())) {
+                    counts[1][0]++;
+                }
+                else if (e.getType().getId().equals(Type.b.getId())) {
+                    counts[1][1]++;
+                }
+                else if (e.getType().getId().equals(Type.c.getId())) {
+                    counts[1][2]++;
+                }
+            }
+            // scissors
+            else if (e.getElement().getId().equals(Element.scissors.getId())) {
+                if (e.getType().getId().equals(Type.a.getId())) {
+                    counts[2][0]++;
+                }
+                else if (e.getType().getId().equals(Type.b.getId())) {
+                    counts[2][1]++;
+                }
+                else if (e.getType().getId().equals(Type.c.getId())) {
+                    counts[2][2]++;
+                }
+            }
+        }
+
+        return counts;
     }
 
-    public int getPaperEnemyCount() {
-        int count = 0;
-
-        for (Enemy e : enemies) {
-            if (e.getElement().getId().equals(Element.paper.getId()))
-                count++;
-        }
-
-        return count;
+    public int getROOM_TOP_LEFT() {
+        return ROOM_TOP_LEFT;
     }
 
-    public int getScissorsEnemyCount() {
-        int count = 0;
+    public int getROOM_TOP_CENTER() {
+        return ROOM_TOP_CENTER;
+    }
 
-        for (Enemy e : enemies) {
-            if (e.getElement().getId().equals(Element.scissors.getId()))
-                count++;
-        }
+    public int getROOM_TOP_RIGHT() {
+        return ROOM_TOP_RIGHT;
+    }
 
-        return count;
+    public int getROOM_LEFT() {
+        return ROOM_LEFT;
+    }
+
+    public int getROOM_CENTER() {
+        return ROOM_CENTER;
+    }
+
+    public int getROOM_RIGHT() {
+        return ROOM_RIGHT;
+    }
+
+    public int getROOM_BOTTOM_LEFT() {
+        return ROOM_BOTTOM_LEFT;
+    }
+
+    public int getROOM_BOTTOM_CENTER() {
+        return ROOM_BOTTOM_CENTER;
+    }
+
+    public int getROOM_BOTTOM_RIGHT() {
+        return ROOM_BOTTOM_RIGHT;
     }
 
 }

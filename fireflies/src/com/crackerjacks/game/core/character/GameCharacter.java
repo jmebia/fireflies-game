@@ -1,9 +1,13 @@
 package com.crackerjacks.game.core.character;
 
+import java.io.Serializable;
+
 /**
  * Created by jm on 5/23/17.
  */
-public class GameCharacter {
+public class GameCharacter implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     /** Variables */
 

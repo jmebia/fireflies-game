@@ -1,12 +1,15 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by jm on 7/7/17.
  */
 
-public class Room {
+class Room implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // external element
     private final int id;

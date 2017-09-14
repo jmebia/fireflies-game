@@ -16,6 +16,5 @@ abstract class GameState {
 
     abstract void onEnter();
     abstract void update(long time);
-    abstract void draw();
     abstract void onExit();
 }

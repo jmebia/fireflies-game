@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="fireflies:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fireflies_jar</output-path>
+    <root id="archive" name="fireflies.jar">
+      <element id="module-output" name="fireflies" />
+    </root>
+  </artifact>
+</component>

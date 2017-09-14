@@ -11,8 +11,8 @@ public class SpriteAnimator extends Transition{
     private final ImageView imageView;
     private final int count;
     private final int columns;
-    private final int offsetX;
-    private final int offsetY;
+    private int offsetX;
+    private int offsetY;
     private final int width;
     private final int height;
 
@@ -45,5 +45,16 @@ public class SpriteAnimator extends Transition{
                 imageView.setViewport(new Rectangle2D(x, y, width, height));
                 lastIndex = index;
             }
-            }
-        }
+    }
+
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public void setOffsetY(int offsetY) {
+        this.offsetX = offsetY;
+    }
+
+}
+
+
