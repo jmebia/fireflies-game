@@ -1,7 +1,7 @@
 package com.crackerjacks.game.core.io;
 
-import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 
 import java.io.Serializable;

@@ -1,14 +1,13 @@
 package com.crackerjacks.game.core.input;
 
-import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.GameCharacter;
-import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.GameCharacter;
+import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
 import com.crackerjacks.game.core.states.GameStateManager;
 import javafx.scene.PerspectiveCamera;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;

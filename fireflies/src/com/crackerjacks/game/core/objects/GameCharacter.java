@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core.character;
+package com.crackerjacks.game.core.objects;
 
 import java.io.Serializable;
 
@@ -49,7 +49,7 @@ public class GameCharacter implements Serializable{
         this.root = 0;
         this.stun = 0;
 
-        // the base damage of a character is always equal to the ceiling of
+        // the base damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
         this.damage = (int) Math.ceil( level * .1 );
     }
@@ -115,7 +115,7 @@ public class GameCharacter implements Serializable{
     }
 
     public void setDefaultDamage() {
-        // the default damage of a character is always equal to the ceiling of
+        // the default damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
         this.damage = (int) Math.ceil( level * .1 );
     }

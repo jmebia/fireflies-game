@@ -2,8 +2,8 @@ package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.animator.SpriteAnimator;
-import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.InputHandler;
 import com.crackerjacks.game.core.input.Controller;
@@ -64,7 +64,7 @@ public class MainGame extends GameState {
     final private int charHeight = 48;
     final private int charWidth = 32;
 
-    // player character
+    // player objects
     private Player player;
     private Generator generator;
 

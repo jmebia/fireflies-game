@@ -4,7 +4,7 @@
 
 package com.crackerjacks.game.core.genetic;
 
-import com.crackerjacks.game.core.character.Enemy;
+import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 

@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core.character;
+package com.crackerjacks.game.core.objects;
 
 import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.interactions.Element;
@@ -7,7 +7,6 @@ import com.crackerjacks.game.core.interactions.Type;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Random;

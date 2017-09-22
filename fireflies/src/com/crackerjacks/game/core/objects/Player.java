@@ -1,4 +1,4 @@
-package com.crackerjacks.game.core.character;
+package com.crackerjacks.game.core.objects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

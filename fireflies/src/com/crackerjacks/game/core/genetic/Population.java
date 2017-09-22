@@ -3,7 +3,7 @@
  */
 package com.crackerjacks.game.core.genetic;
 
-import com.crackerjacks.game.core.character.Enemy;
+import com.crackerjacks.game.core.objects.Enemy;
 
 import java.util.ArrayList;
 

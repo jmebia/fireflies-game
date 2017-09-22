@@ -1,8 +1,7 @@
 package com.crackerjacks.game.core.interactions;
 
-import com.crackerjacks.game.core.character.Enemy;
-import com.crackerjacks.game.core.character.GameCharacter;
-import com.crackerjacks.game.core.character.Player;
+import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.Player;
 
 /**
  * Created by jm on 6/1/17.
