@@ -345,7 +345,7 @@ public class MainGame extends GameState {
 
         // player's fireflies essence
         gcHud.setFill(Color.WHITE);
-        gcHud.fillText(""+player.getChipCount(), 320, 20);
+        gcHud.fillText(""+player.getFireflies(), 320, 20);
 
         // health bar
         gcHud.setFill(Color.RED);

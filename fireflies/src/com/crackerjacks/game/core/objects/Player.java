@@ -13,7 +13,7 @@ public class Player extends GameCharacter {
 
     private ArrayList<Item> inventory = new ArrayList<>();
 
-    private int chipCount = 0;
+    private int fireflies = 0;
 
     private int lineOfSight = 4;
 
@@ -50,19 +50,19 @@ public class Player extends GameCharacter {
                 tileHeight, tileWidth);
     }
 
-    public void addChips(int count) {
-        chipCount += count;
+    public void addFireflies(int count) {
+        fireflies += count;
     }
 
-    public void removeChips(int count) {
-        if (!(chipCount - count < 0))
-            chipCount += count;
+    public void removeFireflies(int count) {
+        if (!(fireflies - count < 0))
+            fireflies += count;
         else
             System.out.println("Player's chips cannot be lower than zero!");
     }
 
-    public int getChipCount() {
-        return chipCount;
+    public int getFireflies() {
+        return fireflies;
     }
 
     public void setLineOfSight(int los) {
@@ -72,4 +72,9 @@ public class Player extends GameCharacter {
     public int getLineOfSight() {
         return this.lineOfSight;
     }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
+    
 }

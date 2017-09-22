@@ -115,12 +115,12 @@ public class Controller {
 
                 // activate rock
                 if (input.contains("I")) {
-                    int chips = player.getChipCount();
+                    int chips = player.getFireflies();
                     if (chips >= 4) {
                         player.activateRock();
                         System.out.println("Rock Element Activated");
                         System.out.print("Chip Count, then: " + chips);
-                        player.addChips(-4);
+                        player.addFireflies(-4);
                         System.out.print(" now: " + chips);
                     } else {
                         System.out.println("Not enough chips!");
@@ -128,12 +128,12 @@ public class Controller {
                 }
                 // activate paper
                 else if (input.contains("O")) {
-                    int chips = player.getChipCount();
+                    int chips = player.getFireflies();
                     if (chips >= 4) {
                         player.activatePaper();
                         System.out.println("Paper Element Activated");
                         System.out.print("Chip Count, then: " + chips);
-                        player.addChips(-4);
+                        player.addFireflies(-4);
                         System.out.println(" now: " + chips);
                     } else {
                         System.out.println("Not enough chips!");
@@ -141,12 +141,12 @@ public class Controller {
                 }
                 //activate scissors
                 else if (input.contains("P")) {
-                    int chips = player.getChipCount();
+                    int chips = player.getFireflies();
                     if (chips >= 4) {
                         player.activateScissors();
                         System.out.println("Scissors Element Activated");
                         System.out.print("Chip Count, then: " + chips);
-                        player.addChips(-4);
+                        player.addFireflies(-4);
                         System.out.println(" now: " + chips);
                     } else {
                         System.out.println("Not enough chips!");
@@ -273,7 +273,7 @@ public class Controller {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
-                    player.addChips(1);
+                    player.addFireflies(1);
                 }
             }
         }
@@ -294,7 +294,7 @@ public class Controller {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
-                    player.addChips(1);
+                    player.addFireflies(1);
                 }
             }
         }
@@ -315,7 +315,7 @@ public class Controller {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
-                    player.addChips(1);
+                    player.addFireflies(1);
                 }
             }
         }
@@ -336,7 +336,7 @@ public class Controller {
                 if (enemy.getCurrentHealth() <= 0) {
                     deadEnemies.add(enemy);
                     enemies.remove(enemy);
-                    player.addChips(1);
+                    player.addFireflies(1);
                 }
             }
         }
