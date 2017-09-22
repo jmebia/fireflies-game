@@ -305,7 +305,7 @@ public class MainGame extends GameState {
                     graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
                             tileHeight, tileWidth);
                 } else if (fogMap[y][x] == 1) {
-                    graphicsContext.setFill(new Color(0f,0f,0f,0.8));
+                    graphicsContext.setFill(new Color(0f,0f,0f,0.5));
                     graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
                             tileHeight, tileWidth);
                 }

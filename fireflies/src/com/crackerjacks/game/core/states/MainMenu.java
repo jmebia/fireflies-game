@@ -37,7 +37,7 @@ public class MainMenu extends GameState {
     @Override
     void onEnter() {
 
-        // update existing save object in Global
+        // update existing save object in Global kuu
         try {
             File file = new File(Global.getSaveFile());
             if (file.exists()) {
@@ -52,7 +52,6 @@ public class MainMenu extends GameState {
             e.printStackTrace();
             System.out.println("A save file doesn't exist!");
         }
-
 
 
         // set up camera

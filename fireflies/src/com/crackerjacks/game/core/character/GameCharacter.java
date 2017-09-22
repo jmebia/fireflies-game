@@ -24,6 +24,11 @@ public class GameCharacter implements Serializable{
     private int currentHealth;
     private int damage;
 
+    // number of turns for the disable effects
+    private int bleed;
+    private int root;
+    private int stun;
+
     // 2D position
     private double X;
     private double Y;
@@ -39,6 +44,10 @@ public class GameCharacter implements Serializable{
         this.defense = 5;
         this.maxHealth = 10;
         this.currentHealth = maxHealth;
+
+        this.bleed = 0;
+        this.root = 0;
+        this.stun = 0;
 
         // the base damage of a character is always equal to the ceiling of
         // the 10 percent of her current level
@@ -105,6 +114,12 @@ public class GameCharacter implements Serializable{
         this.damage = damage;
     }
 
+    public void setDefaultDamage() {
+        // the default damage of a character is always equal to the ceiling of
+        // the 10 percent of her current level
+        this.damage = (int) Math.ceil( level * .1 );
+    }
+
     public double getX() {
         return X;
     }
@@ -127,5 +142,29 @@ public class GameCharacter implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getBleed() {
+        return bleed;
+    }
+
+    public void setBleed(int bleed) {
+        this.bleed = bleed;
+    }
+
+    public int getRoot() {
+        return root;
+    }
+
+    public void setRoot(int root) {
+        this.root = root;
+    }
+
+    public int getStun() {
+        return stun;
+    }
+
+    public void setStun(int stun) {
+        this.stun = stun;
     }
 }
