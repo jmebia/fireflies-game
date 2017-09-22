@@ -3,11 +3,15 @@ package com.crackerjacks.game.core.objects;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 public class Player extends GameCharacter {
 
     private boolean rock = true;
     private boolean paper = false;
     private boolean scissors = false;
+
+    private ArrayList<Item> inventory = new ArrayList<>();
 
     private int chipCount = 0;
 

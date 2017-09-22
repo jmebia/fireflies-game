@@ -3,7 +3,7 @@ package com.crackerjacks.game.core.objects;
 import java.util.ArrayList;
 
 public class Item {
-    
+
     private int level;
 
     private String name;
