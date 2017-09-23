@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MainMenu extends GameState {
 
@@ -111,6 +112,12 @@ public class MainMenu extends GameState {
 
                     case 4:
                         System.out.println("Quit Selected!");
+                        // serialize save file of player
+                        try {
+                            new SaveIO().serializeAddress(Global.getSave());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         Platform.exit();
                         break;
 

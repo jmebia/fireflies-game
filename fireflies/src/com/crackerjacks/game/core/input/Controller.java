@@ -111,15 +111,25 @@ public class Controller {
                     System.out.println("ATTACK MODE ON");
                 }
 
-                
+                // open in-game sub states
+
+                // open inventory
+                if (input.contains("I")) {
+
+                }
+                // open game menu
+                else if (input.contains("ESCAPE")) {
+
+                }
 
                 // generateDungeon new dungeon rooms
-                if (input.getLast().equals("ENTER")) {
+                if (input.getLast().equals("F10")) {
                     // generateNewDungeon();
                     GameStateManager.removeLast();
                 }
 
-                /** FOR DEBUGGING PURPOSES, MIGHT BE TEMPORARY **/
+                /*
+                // FOR DEBUGGING PURPOSES
                 // zoom camera in
                 if (input.getLast().equals("X")) {
                     camera.setFieldOfView(camera.getFieldOfView() - 1);
@@ -129,7 +139,7 @@ public class Controller {
                 if (input.getLast().equals("Z")) {
                     camera.setFieldOfView(camera.getFieldOfView() + 1);
                     // System.out.println("Camera FOV: " + camera.getFieldOfView());
-                }
+                } */
 
             } catch (NoSuchElementException e) {
                 // handle
