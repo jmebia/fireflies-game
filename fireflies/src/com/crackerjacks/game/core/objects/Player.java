@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class Player extends GameCharacter {
 
+    private int rockLevel = 0;
+    private int paperLevel = 0;
+    private int scissorsLevel = 0;
+
     private boolean rock = true;
     private boolean paper = false;
     private boolean scissors = false;
@@ -76,5 +80,29 @@ public class Player extends GameCharacter {
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-    
+
+    public int getRockLevel() {
+        return rockLevel;
+    }
+
+    public void setRockLevel(int rockLevel) {
+        this.rockLevel = rockLevel;
+    }
+
+    public int getPaperLevel() {
+        return paperLevel;
+    }
+
+    public void setPaperLevel(int paperLevel) {
+        this.paperLevel = paperLevel;
+    }
+
+    public int getScissorsLevel() {
+        return scissorsLevel;
+    }
+
+    public void setScissorsLevel(int scissorsLevel) {
+        this.scissorsLevel = scissorsLevel;
+    }
+
 }
