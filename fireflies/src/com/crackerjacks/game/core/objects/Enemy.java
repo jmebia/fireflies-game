@@ -69,9 +69,12 @@ public class Enemy extends GameCharacter {
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         System.out.println("<=== Updating "+getName()+" ===>");
 
-        updateBehaviorA(player, enemies, tilemap);
-        updateBehaviorB(player, enemies, tilemap);
-        updateBehaviorC(player, enemies, tilemap);
+        if (this.type.getId().equals("a"))
+            updateBehaviorA(player, enemies, tilemap);
+        else if (this.type.getId().equals("b"))
+            updateBehaviorB(player, enemies, tilemap);
+        else if (this.type.getId().equals("c"))
+            updateBehaviorC(player, enemies, tilemap);
 
         System.out.println("Enemy " + getName() + " updated!");
     }
@@ -228,6 +231,154 @@ public class Enemy extends GameCharacter {
 
     private void updateBehaviorB(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         // TODO: Update enemy B. Cannot go out their rooms. Chases player inside the room.
+
+        // handle dumb A.I. here
+        double playerX = player.getX();
+        double playerY = player.getY();
+
+        // if player is beside enemy, attack player
+        if ( (playerX == getX() + 1 && playerY == getY()) || (playerX == getX() - 1 && playerY == getY())
+                || (playerX == getX() && playerY == getY() + 1)
+                || (playerX == getX() && playerY == getY()-1)) {
+            new Interaction().attackMove(this, player);
+        }
+
+        // if player is within the vision radius
+        // straight east; X++
+        else if (playerX >= getX() && playerX <= getX() + visionRadius
+                && playerY == getY()) {
+            double i = getX() + 1;
+            if (!checkCollisions(enemies, tilemap, i, getY())) {
+                this.setX(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
+        }
+        // straight west; X--
+        else if (playerX <= getX() && playerX >= getX() - visionRadius
+                && playerY == getY()) {
+            double i = getX() - 1;
+            if (!checkCollisions(enemies, tilemap, i, getY())) {
+                this.setX(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
+        }
+        // straight north; Y--
+        else if (playerY <= getY() && playerY >= getY() - visionRadius
+                && playerX == getX()) {
+            double i = getY() - 1;
+            if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                this.setY(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
+        }
+        // straight south; Y++
+        else if (playerY >= getY() && playerY <= getY() + visionRadius
+                && playerX == getX()) {
+            double i = getY() + 1;
+            if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                this.setY(i);
+                System.out.println("Enemy " + getName() + " moved!");
+            }
+        }
+        // first quadrant
+        else if(playerX >= getX() && playerX <= getX() + visionRadius
+                && playerY <= getY() && playerY >= getY() - visionRadius) {
+            if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
+                // check collisions before moving through X space
+                double i = getX() + 1;
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
+                    this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+            else {
+                // check collisions before moving through Y space
+                double i = getY() - 1;
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                    this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+        }
+        // second quadrant
+        else if(playerX <= getX() && playerX >= getX() - visionRadius
+                && playerY <= getY() && playerY >= getY() - visionRadius) {
+            if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
+                // check collisions before moving through X space
+                double i = getX() - 1;
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
+                    this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+            else {
+                // check collisions before moving through Y space
+                double i = getY() - 1;
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                    this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+        }
+        // third quadrant
+        else if(playerX <= getX() && playerX >= getX() - visionRadius
+                && playerY >= getY() && playerY <= getY() + visionRadius) {
+            if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
+                // check collisions before moving through X space
+                double i = getX() - 1;
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
+                    this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+            else {
+                // check collisions before moving through Y space
+                double i = getY() + 1;
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                    this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+        }
+        // fourth quadrant
+        else if(playerX >= getX() && playerX <= getX() + visionRadius
+                && playerY >= getY() && playerY <= getY() + visionRadius) {
+            if (Math.abs(getX() - playerX) < Math.abs(playerY - getX())) {
+                // check collisions before moving through X space
+                double i = getX() + 1;
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
+                    this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+            else {
+                // check collisions before moving through Y space
+                double i = getY() + 1;
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                    this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+        }
+
+        // if no one is around enemy, move around mindlessly
+        else {
+            int axis = new Random().nextInt(2);
+            // 0 = x , 1 = y
+            if (axis == 0) {
+                double i = getX() + new Random().nextInt(3) - 1;
+                if (!checkCollisions(enemies, tilemap, i, getY())) {
+                    this.setX(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            } else if (axis == 1) {
+                double i = getY() + new Random().nextInt(3) - 1;
+                if (!checkCollisions(enemies, tilemap, getX(), i)) {
+                    this.setY(i);
+                    System.out.println("Enemy " + getName() + " moved!");
+                }
+            }
+        }
     }
 
     private void updateBehaviorC(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
