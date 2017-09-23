@@ -69,6 +69,12 @@ public class Enemy extends GameCharacter {
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         System.out.println("<=== Updating "+getName()+" ===>");
 
+        updateAI(player, enemies, tilemap);
+
+        System.out.println("Enemy " + getName() + " updated!");
+    }
+
+    private void updateAI(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         // handle dumb A.I. here
         double playerX = player.getX();
         double playerY = player.getY();
@@ -216,8 +222,6 @@ public class Enemy extends GameCharacter {
                 }
             }
         }
-
-        System.out.println("Enemy " + getName() + " updated!");
     }
 
     public void draw(GraphicsContext graphicsContext, Image image, int offsetX, int offsetY,
