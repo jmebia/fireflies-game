@@ -7,12 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Element.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Element.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+            <state relative-caret-position="255">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding>
                 <element signature="e#430#431#0" expanded="true" />
                 <element signature="e#458#459#0" expanded="true" />
@@ -97,13 +93,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2499">
-              <caret line="157" column="44" lean-forward="false" selection-start-line="157" selection-start-column="44" selection-end-line="157" selection-end-column="44" />
+            <state relative-caret-position="204">
+              <caret line="113" column="16" lean-forward="false" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
               <folding>
-                <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
+                <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -202,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/character/Enemy.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/io/WriteSave.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/io/SaveWR.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/Game.java" />
@@ -219,6 +214,7 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
       </list>
     </option>
   </component>
@@ -964,7 +960,7 @@
         <state relative-caret-position="2412">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
-            <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
+            <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1017,7 +1013,7 @@
         <state relative-caret-position="18">
           <caret line="133" column="37" lean-forward="false" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
           <folding>
-            <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
+            <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1063,7 +1059,7 @@
         <state relative-caret-position="2394">
           <caret line="133" column="37" lean-forward="false" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
           <folding>
-            <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
+            <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1116,7 +1112,7 @@
         <state relative-caret-position="18">
           <caret line="133" column="37" lean-forward="false" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
           <folding>
-            <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
+            <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1217,16 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2499">
-          <caret line="157" column="44" lean-forward="false" selection-start-line="157" selection-start-column="44" selection-end-line="157" selection-end-column="44" />
-          <folding>
-            <marker date="1506148980425" expanded="true" signature="6092:8801" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/sprites/char-spritesheet.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1262,20 +1248,6 @@
           <caret line="119" column="55" lean-forward="false" selection-start-line="119" selection-start-column="55" selection-end-line="119" selection-end-column="55" />
           <folding>
             <element signature="method#setCurrentHealth#0;class#GameCharacter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="519" column="75" lean-forward="false" selection-start-line="519" selection-start-column="75" selection-end-line="519" selection-end-column="75" />
-          <folding>
-            <element signature="method#update#0;class#Enemy#0" expanded="false" />
-            <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
-            <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
-            <element signature="method#draw#0;class#Enemy#0" expanded="false" />
-            <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1323,11 +1295,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        <state relative-caret-position="255">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
             <element signature="e#430#431#0" expanded="true" />
             <element signature="e#458#459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="519" column="75" lean-forward="false" selection-start-line="519" selection-start-column="75" selection-end-line="519" selection-end-column="75" />
+          <folding>
+            <element signature="method#update#0;class#Enemy#0" expanded="false" />
+            <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
+            <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
+            <element signature="method#draw#0;class#Enemy#0" expanded="false" />
+            <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="113" column="16" lean-forward="false" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
+          <folding>
+            <marker date="1506149616487" expanded="true" signature="4235:6944" ph="{...}" />
           </folding>
         </state>
       </provider>

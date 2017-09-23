@@ -111,47 +111,7 @@ public class Controller {
                     System.out.println("ATTACK MODE ON");
                 }
 
-                // initiate technique switch
-
-                // activate brute
-                if (input.contains("I")) {
-                    int chips = player.getFireflies();
-                    if (chips >= 4) {
-                        player.activateRock();
-                        System.out.println("Rock Element Activated");
-                        System.out.print("Chip Count, then: " + chips);
-                        player.addFireflies(-4);
-                        System.out.print(" now: " + chips);
-                    } else {
-                        System.out.println("Not enough chips!");
-                    }
-                }
-                // activate stable
-                else if (input.contains("O")) {
-                    int chips = player.getFireflies();
-                    if (chips >= 4) {
-                        player.activatePaper();
-                        System.out.println("Paper Element Activated");
-                        System.out.print("Chip Count, then: " + chips);
-                        player.addFireflies(-4);
-                        System.out.println(" now: " + chips);
-                    } else {
-                        System.out.println("Not enough chips!");
-                    }
-                }
-                //activate cut
-                else if (input.contains("P")) {
-                    int chips = player.getFireflies();
-                    if (chips >= 4) {
-                        player.activateScissors();
-                        System.out.println("Scissors Element Activated");
-                        System.out.print("Chip Count, then: " + chips);
-                        player.addFireflies(-4);
-                        System.out.println(" now: " + chips);
-                    } else {
-                        System.out.println("Not enough chips!");
-                    }
-                }
+                
 
                 // generateDungeon new dungeon rooms
                 if (input.getLast().equals("ENTER")) {
