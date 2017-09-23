@@ -69,12 +69,14 @@ public class Enemy extends GameCharacter {
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         System.out.println("<=== Updating "+getName()+" ===>");
 
-        updateAI(player, enemies, tilemap);
+        updateBehaviorA(player, enemies, tilemap);
+        updateBehaviorB(player, enemies, tilemap);
+        updateBehaviorC(player, enemies, tilemap);
 
         System.out.println("Enemy " + getName() + " updated!");
     }
 
-    private void updateAI(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
+    private void updateBehaviorA(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         // handle dumb A.I. here
         double playerX = player.getX();
         double playerY = player.getY();
@@ -222,6 +224,14 @@ public class Enemy extends GameCharacter {
                 }
             }
         }
+    }
+
+    private void updateBehaviorB(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
+        // TODO: Update enemy B. Cannot go out their rooms. Chases player inside the room.
+    }
+
+    private void updateBehaviorC(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
+        // TODO: Update enemy C. Patrols rooms by following corridors. Attacks player on sight.
     }
 
     public void draw(GraphicsContext graphicsContext, Image image, int offsetX, int offsetY,

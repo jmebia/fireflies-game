@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
     </list>
@@ -79,9 +79,13 @@
       <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
-              <folding />
+            <state relative-caret-position="313">
+              <caret line="233" column="95" lean-forward="false" selection-start-line="233" selection-start-column="95" selection-end-line="233" selection-end-column="95" />
+              <folding>
+                <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
+                <element signature="method#draw#0;class#Enemy#0" expanded="false" />
+                <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -237,6 +241,17 @@
             <path>
               <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
               <item name="fireflies" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fireflies" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fireflies" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
@@ -812,7 +827,14 @@
       <option name="project" value="LOCAL" />
       <updated>1505227090511</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Enemy AI update now in a separate method than the main update method.">
+      <created>1506144135902</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1506144135902</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -852,7 +874,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Redesigned attack move; attacking is now independent from positional movement controls." />
     <MESSAGE value="Added the rock, paper, scissors elements for the game, including the color assignments." />
     <MESSAGE value="Implemented the core combat mechanics of the game." />
     <MESSAGE value="Added counters for the enemy types in the generator." />
@@ -877,7 +898,8 @@
     <MESSAGE value="Updated tileset." />
     <MESSAGE value="Fixed corridors rendering." />
     <MESSAGE value="Added a simple main menu at the start up of the game with &quot;Start&quot; and &quot;Exit&quot; choices." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a simple main menu at the start up of the game with &quot;Start&quot; and &quot;Exit&quot; choices." />
+    <MESSAGE value="Enemy AI update now in a separate method than the main update method." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enemy AI update now in a separate method than the main update method." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1111,11 +1133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sprites/char-spritesheet.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -1261,11 +1278,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sprites/char-spritesheet.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="313">
+          <caret line="233" column="95" lean-forward="false" selection-start-line="233" selection-start-column="95" selection-end-line="233" selection-end-column="95" />
+          <folding>
+            <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
+            <element signature="method#draw#0;class#Enemy#0" expanded="false" />
+            <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
