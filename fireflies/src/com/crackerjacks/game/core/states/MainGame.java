@@ -402,7 +402,17 @@ public class MainGame extends GameState {
         save.setDeadEnemies(deadEnemies);
         save.setGenerator(generator);
 
+        System.out.println(Global.getSave());
         Global.setSave(save);
+        System.out.println("New Save file: " + Global.getSave());
+
+        // serialize save file of player
+        try {
+            new SaveIO().serializeAddress(Global.getSave());
+            System.out.println("Saved");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (Enemy e : enemies) {
             root.getChildren().remove(e.getImage());

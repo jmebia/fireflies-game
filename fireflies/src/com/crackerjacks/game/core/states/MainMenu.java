@@ -112,12 +112,7 @@ public class MainMenu extends GameState {
 
                     case 4:
                         System.out.println("Quit Selected!");
-                        // serialize save file of player
-                        try {
-                            new SaveIO().serializeAddress(Global.getSave());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
                         Platform.exit();
                         break;
 
