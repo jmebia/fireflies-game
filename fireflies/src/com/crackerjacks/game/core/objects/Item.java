@@ -1,5 +1,7 @@
 package com.crackerjacks.game.core.objects;
 
+import com.crackerjacks.game.core.interactions.Type;
+
 import java.io.Serializable;
 
 public class Item implements Serializable {
@@ -7,6 +9,7 @@ public class Item implements Serializable {
     private int level;
 
     private String name;
+    private Type type;
 
     // base stat modifiers
     private int damage;
@@ -19,8 +22,9 @@ public class Item implements Serializable {
     private double root_chance;
 
     // CONSTRUCTOR
-    public Item(String name) {
+    public Item(String name, Type type) {
         this.name = name;
+        this.type = type;
 
         this.damage = 0;
         this.health = 0;
