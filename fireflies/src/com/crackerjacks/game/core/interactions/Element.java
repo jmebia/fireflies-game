@@ -5,9 +5,9 @@ import javafx.scene.paint.Color;
 
 public enum Element {
 
-    rock("rock", Color.RED),
-    paper("paper", Color.BLUE),
-    scissors("scissors", Color.GREEN);
+    brute("brute", Color.RED),
+    stable("stable", Color.BLUE),
+    cut("cut", Color.GREEN);
 
     private String id;
     private Color color;

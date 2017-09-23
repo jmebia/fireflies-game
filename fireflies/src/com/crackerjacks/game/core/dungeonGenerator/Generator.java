@@ -258,11 +258,11 @@ public class Generator implements Serializable {
 
                 int i = random.nextInt(3);
                 if (i == 0) {
-                    e.setElement(Element.rock);
+                    e.setElement(Element.brute);
                 } else if (i == 1) {
-                    e.setElement(Element.paper);
+                    e.setElement(Element.stable);
                 } else {
-                    e.setElement(Element.scissors);
+                    e.setElement(Element.cut);
                 }
 
                 int j = random.nextInt(3);
@@ -430,13 +430,13 @@ public class Generator implements Serializable {
             }
         }
 
-        // [0][x] = rock, [1][x] = paper, [2][x] scissors
+        // [0][x] = brute, [1][x] = stable, [2][x] cut
         // [x][0] = A, [x][1] = B, [x][2] C
 
 
         for (Enemy e : enemies) {
-            // rock
-            if (e.getElement().getId().equals(Element.rock.getId())) {
+            // brute
+            if (e.getElement().getId().equals(Element.brute.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[0][0]++;
                 }
@@ -447,8 +447,8 @@ public class Generator implements Serializable {
                     counts[0][2]++;
                 }
             }
-            // paper
-            else if (e.getElement().getId().equals(Element.paper.getId())) {
+            // stable
+            else if (e.getElement().getId().equals(Element.stable.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[1][0]++;
                 }
@@ -459,8 +459,8 @@ public class Generator implements Serializable {
                     counts[1][2]++;
                 }
             }
-            // scissors
-            else if (e.getElement().getId().equals(Element.scissors.getId())) {
+            // cut
+            else if (e.getElement().getId().equals(Element.cut.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[2][0]++;
                 }

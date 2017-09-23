@@ -19,22 +19,22 @@ public class Interaction {
         if (attack < defense)
             damage -= defense - attack;
         // check elements, reduce or increment damage depending on compared element types
-        // rock type
-        if (attacker.getElement().getId().equals(Element.rock.getId())) {
+        // brute type
+        if (attacker.getElement().getId().equals(Element.brute.getId())) {
             if(defender.isPaper())
                 damage -= elementPenalty;
             else if (defender.isScissors())
                 damage += elementPenalty;
         }
-        // paper
-        else if (attacker.getElement().getId().equals(Element.paper.getId())) {
+        // stable
+        else if (attacker.getElement().getId().equals(Element.stable.getId())) {
             if(defender.isScissors())
                 damage -= elementPenalty;
             else if (defender.isRock())
                 damage += elementPenalty;
         }
-        //scissors
-        else if (attacker.getElement().getId().equals(Element.scissors.getId())) {
+        //cut
+        else if (attacker.getElement().getId().equals(Element.cut.getId())) {
             if (defender.isRock())
                 damage -= elementPenalty;
             else if (defender.isPaper())
@@ -59,25 +59,25 @@ public class Interaction {
             damage -= defense - attack;
 
         // check elements
-        // if rock is the attack element of the player
-        if (attackElementID.equals(Element.rock.getId())) {
-            if (defender.getElement().getId().equals(Element.paper))
+        // if brute is the attack element of the player
+        if (attackElementID.equals(Element.brute.getId())) {
+            if (defender.getElement().getId().equals(Element.stable))
                 damage -= elementalPenalty;
-            else if (defender.getElement().getId().equals(Element.scissors))
+            else if (defender.getElement().getId().equals(Element.cut))
                 damage += elementalPenalty;
         }
-        // if paper is the attack element of the player
-        if (attackElementID.equals(Element.paper.getId())) {
-            if (defender.getElement().getId().equals(Element.scissors))
+        // if stable is the attack element of the player
+        if (attackElementID.equals(Element.stable.getId())) {
+            if (defender.getElement().getId().equals(Element.cut))
                 damage -= elementalPenalty;
-            else if (defender.getElement().getId().equals(Element.rock))
+            else if (defender.getElement().getId().equals(Element.brute))
                 damage += elementalPenalty;
         }
-        // if scissors is the attack element of the player
-        if (attackElementID.equals(Element.scissors.getId())) {
-            if (defender.getElement().getId().equals(Element.rock))
+        // if cut is the attack element of the player
+        if (attackElementID.equals(Element.cut.getId())) {
+            if (defender.getElement().getId().equals(Element.brute))
                 damage -= elementalPenalty;
-            else if (defender.getElement().getId().equals(Element.paper))
+            else if (defender.getElement().getId().equals(Element.stable))
                 damage += elementalPenalty;
         }
 

@@ -276,11 +276,11 @@ public class MainGame extends GameState {
                     offsetY = charHeight * 7;
 
                 // element
-                if (e.getElement() == Element.rock)
+                if (e.getElement() == Element.brute)
                     offsetY += 0;
-                else if (e.getElement() == Element.paper)
+                else if (e.getElement() == Element.stable)
                     offsetY += charHeight;
-                else if (e.getElement() == Element.scissors)
+                else if (e.getElement() == Element.cut)
                     offsetY += charHeight * 2;
 
                 e.draw(graphicsContext, characterSprites, 0, offsetY, startX, startY + YCharmModifier, charHeight, charWidth);
@@ -476,11 +476,11 @@ public class MainGame extends GameState {
                 offsetY = charHeight * 7;
 
             // element
-            if (e.getElement() == Element.rock)
+            if (e.getElement() == Element.brute)
                 offsetY += 0;
-            else if (e.getElement() == Element.scissors)
+            else if (e.getElement() == Element.cut)
                 offsetY += charHeight;
-            else if (e.getElement() == Element.paper)
+            else if (e.getElement() == Element.stable)
                 offsetY += charHeight * 2;
 
             e.setImage( new ImageView(characterSprites));

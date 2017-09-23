@@ -105,20 +105,20 @@ public class Algorithm {
         // mutation check
         if (r.nextDouble() <= mutationRate) {
             // pick a random element not found in parent
-            // 0 = rock, 1 = paper, 2 = scissors
+            // 0 = brute, 1 = stable, 2 = cut
             while (true) {
                 i = r.nextInt(3);
-                if (i == 0 && !(firstParent.getElement().equals(Element.rock)
-                        || secondParent.getElement().equals(Element.rock))) {
-                    e = Element.rock; break;
+                if (i == 0 && !(firstParent.getElement().equals(Element.brute)
+                        || secondParent.getElement().equals(Element.brute))) {
+                    e = Element.brute; break;
                 }
-                else  if (i == 1 && !(firstParent.getElement().equals(Element.paper)
-                        || secondParent.getElement().equals(Element.paper))) {
-                    e = Element.paper; break;
+                else  if (i == 1 && !(firstParent.getElement().equals(Element.stable)
+                        || secondParent.getElement().equals(Element.stable))) {
+                    e = Element.stable; break;
                 }
-                else  if (i == 2 && !(firstParent.getElement().equals(Element.scissors)
-                        || secondParent.getElement().equals(Element.scissors))) {
-                    e = Element.scissors; break;
+                else  if (i == 2 && !(firstParent.getElement().equals(Element.cut)
+                        || secondParent.getElement().equals(Element.cut))) {
+                    e = Element.cut; break;
                 }
             }
         }
@@ -141,7 +141,7 @@ public class Algorithm {
         // mutation check
         if (r.nextDouble() <= mutationRate) {
             // pick a random element not found in parent
-            // 0 = rock, 1 = paper, 2 = scissors
+            // 0 = brute, 1 = stable, 2 = cut
             while (true) {
                 i = r.nextInt(3);
                 if (i == 0 && !(firstParent.getType().equals(Type.a)

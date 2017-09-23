@@ -113,7 +113,7 @@ public class Controller {
 
                 // initiate technique switch
 
-                // activate rock
+                // activate brute
                 if (input.contains("I")) {
                     int chips = player.getFireflies();
                     if (chips >= 4) {
@@ -126,7 +126,7 @@ public class Controller {
                         System.out.println("Not enough chips!");
                     }
                 }
-                // activate paper
+                // activate stable
                 else if (input.contains("O")) {
                     int chips = player.getFireflies();
                     if (chips >= 4) {
@@ -139,7 +139,7 @@ public class Controller {
                         System.out.println("Not enough chips!");
                     }
                 }
-                //activate scissors
+                //activate cut
                 else if (input.contains("P")) {
                     int chips = player.getFireflies();
                     if (chips >= 4) {
@@ -206,17 +206,17 @@ public class Controller {
                 }
 
                 // the following are attack inputs
-                // rock attack
+                // brute attack
                 else if (input.getLast().equals("Q")) {
-                    attacking(player, enemies, deadEnemies, Element.rock.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.brute.getId(), tileMap);
                 }
-                // paper attack
+                // stable attack
                 else if (input.getLast().equals("W")) {
-                    attacking(player, enemies, deadEnemies, Element.paper.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.stable.getId(), tileMap);
                 }
-                // scissors attack
+                // cut attack
                 else if (input.getLast().equals("E")) {
-                    attacking(player, enemies, deadEnemies, Element.scissors.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Element.cut.getId(), tileMap);
                 }
 
                 // go back to moving; cancel attack mode
