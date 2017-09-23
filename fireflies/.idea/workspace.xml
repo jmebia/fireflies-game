@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -78,11 +77,11 @@
       <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+            <state relative-caret-position="192">
+              <caret line="388" column="68" lean-forward="false" selection-start-line="388" selection-start-column="68" selection-end-line="388" selection-end-column="68" />
               <folding>
-                <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
                 <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
+                <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
                 <element signature="method#draw#0;class#Enemy#0" expanded="false" />
                 <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
               </folding>
@@ -273,6 +272,13 @@
               <item name="fireflies" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fireflies" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="dungeonGenerator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fireflies" type="b2602c69:ProjectViewProjectNode" />
@@ -1184,13 +1190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/Global.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1308,13 +1307,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+        <state relative-caret-position="192">
+          <caret line="388" column="68" lean-forward="false" selection-start-line="388" selection-start-column="68" selection-end-line="388" selection-end-column="68" />
           <folding>
-            <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
             <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
+            <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
             <element signature="method#draw#0;class#Enemy#0" expanded="false" />
             <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
           </folding>
