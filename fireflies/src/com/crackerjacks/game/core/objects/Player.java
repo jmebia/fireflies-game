@@ -19,7 +19,7 @@ public class Player extends GameCharacter {
 
     private int fireflies = 0;
 
-    private int lineOfSight = 4;
+    private int lineOfSight = 5;
 
     // getters and setters
     public void activateRock() {

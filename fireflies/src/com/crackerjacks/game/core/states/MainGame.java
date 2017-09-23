@@ -205,8 +205,8 @@ public class MainGame extends GameState {
         }
 
         // reposition hud
-        hud.setTranslateX(camera.getTranslateX() - 250);
-        hud.setTranslateY(camera.getTranslateY() - 186);
+        hud.setTranslateX(camera.getTranslateX());
+        hud.setTranslateY(camera.getTranslateY());
 
         // DRAW
         // reset screen
