@@ -16,6 +16,7 @@ public class Player extends GameCharacter {
     private boolean scissors = false;
 
     private ArrayList<Item> inventory = new ArrayList<>();
+    private Item equipped = null;
 
     private int fireflies = 0;
 
@@ -103,6 +104,17 @@ public class Player extends GameCharacter {
 
     public void setScissorsLevel(int scissorsLevel) {
         this.scissorsLevel = scissorsLevel;
+    }
+
+    public Item getEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(Item item) {
+        if (inventory.contains(item))
+            equipped = item;
+        else
+            System.out.println("Item doesn't exist in player's inventory.");
     }
 
 }
