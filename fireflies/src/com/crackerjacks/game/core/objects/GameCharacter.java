@@ -51,7 +51,7 @@ public class GameCharacter implements Serializable{
 
         // the base damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
-        this.damage = (int) Math.ceil( level * .1 );
+        this.damage = (int) Math.ceil( level * .1 ) + 1;
     }
 
     /** Getters and Setters */
@@ -117,7 +117,7 @@ public class GameCharacter implements Serializable{
     public void setDefaultDamage() {
         // the default damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
-        this.damage = (int) Math.ceil( level * .1 );
+        this.damage = (int) Math.ceil( level * .1 ) + 1;
     }
 
     public double getX() {
