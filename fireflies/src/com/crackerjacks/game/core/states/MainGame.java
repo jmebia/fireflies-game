@@ -343,22 +343,18 @@ public class MainGame extends GameState {
 
         // health
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("Health ",10, 20);
+        graphicsContext.fillText("Health ",hudx + 10, hudy + 20);
         // player's fireflies essence
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("FireFlies ", 250, 20);
+        graphicsContext.fillText("FireFlies ", hudx + 250, hudy + 20);
 
         // player's fireflies essence
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText(""+player.getFireflies(), 320, 20);
+        graphicsContext.fillText(""+player.getFireflies(), hudx + 330, hudy + 20);
 
-        // health bar
-        graphicsContext.setFill(Color.RED);
-        graphicsContext.fillRect(60, 10,
-                player.getMaxHealth(), 10);
-        graphicsContext.setFill(Color.GREEN);
-        graphicsContext.fillRect(60, 10,
-                player.getCurrentHealth(), 10);
+        // health
+        graphicsContext.fillText(player.getCurrentHealth()+"/"+player.getMaxHealth()
+                , hudx + 80, hudy + 20);
 
     }
 
