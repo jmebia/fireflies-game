@@ -86,6 +86,13 @@ public class Enemy extends GameCharacter {
                 setRoot(getRoot() - 1);
         }
 
+        // check if enemy has bleed effect
+        if (this.getBleed() > 0) {
+            // subtract health with the bleed damage
+            this.setCurrentHealth(getCurrentHealth() - getBleedDamage());
+            this.setBleed(getBleed() - 1);
+        }
+
         System.out.println("Enemy " + getName() + " updated!");
     }
 
