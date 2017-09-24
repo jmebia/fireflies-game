@@ -47,8 +47,8 @@ public class MainGame extends GameState {
     // how fast the player slides from one tile to another
     int playerSpeed = 4;
 
-    int startX = 0;
-    int startY = 0;
+    int startX = 500;
+    int startY = 500;
 
     int YCharmModifier = -28;
 
@@ -79,14 +79,10 @@ public class MainGame extends GameState {
     private InputHandler inputHandler;
     private Controller controller;
 
-    // canvas for hud
-    javafx.scene.canvas.Canvas hud;
-    GraphicsContext gcHud;
-
     // images for the sprites
     Image characterSprites;
     Image tileSprites;
-    Image background;
+    // Image background;
 
     // image container
     ImageView playerSpriteView;
@@ -100,12 +96,6 @@ public class MainGame extends GameState {
         this.graphicsContext = graphicsContext;
 
         this.isNewGame = isNewGame;
-
-        // new canvas
-        hud = new Canvas(800, 600);
-        gcHud = hud.getGraphicsContext2D();
-        root.getChildren().addAll(hud);
-        hud.toFront();
 
         onEnter();
 
@@ -167,7 +157,7 @@ public class MainGame extends GameState {
         ClassLoader classLoader = getClass().getClassLoader();
         characterSprites = new Image(classLoader.getResource("sprites/char-spritesheet.png").toString());
         tileSprites = new Image(classLoader.getResource("sprites/tiles-spritesheet.png").toString());
-        background = new Image(classLoader.getResource("sprites/space-background.png").toString());
+        // background = new Image(classLoader.getResource("sprites/space-background.png").toString());
 
         // setting up the animator
         playerSpriteView = new ImageView(characterSprites);
@@ -204,17 +194,11 @@ public class MainGame extends GameState {
             playerSpriteView.setTranslateY(player.getY()*tileHeight+startY+YCharmModifier);
         }
 
-        // reposition hud
-        hud.setTranslateX(camera.getTranslateX());
-        hud.setTranslateY(camera.getTranslateY());
-
         // DRAW
         // reset screen
-        // graphicsContext.setFill(Color.BLACK);
-        graphicsContext.drawImage(background,0
-                , 0
-                , 1920,
-                1920);
+        graphicsContext.setFill(Color.BLACK);
+        // graphicsContext.drawImage(background,0, 0, 1920, 1920);
+        graphicsContext.fillRect(200, 200, 3000, 3000);
 
         // draw rooms and corridors
         for(int i = 0; i < designMap.length; i++) { // iterate through the rows
@@ -331,30 +315,6 @@ public class MainGame extends GameState {
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
 
-        /* draw HUD */
-        gcHud.setFill(Color.DARKBLUE);
-        // draw hud background
-        gcHud.fillRect(0, 0, 800, 70);
-
-        // health
-        gcHud.setFill(Color.WHITE);
-        gcHud.fillText("Health ",10, 20);
-        // player's fireflies essence
-        gcHud.setFill(Color.WHITE);
-        gcHud.fillText("FireFlies ", 250, 20);
-
-        // player's fireflies essence
-        gcHud.setFill(Color.WHITE);
-        gcHud.fillText(""+player.getFireflies(), 320, 20);
-
-        // health bar
-        gcHud.setFill(Color.RED);
-        gcHud.fillRect(60, 10,
-                player.getMaxHealth(), 10);
-        gcHud.setFill(Color.GREEN);
-        gcHud.fillRect(60, 10,
-                player.getCurrentHealth(), 10);
-
 
         // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
         // checks through the X axis
@@ -380,13 +340,35 @@ public class MainGame extends GameState {
         }
 
 
-
-        // reposition camera depending on player
+        // reposition camera depending on player and map
         camera.setTranslateX(playerSpriteView.getTranslateX());
         camera.setTranslateY(playerSpriteView.getTranslateY());
 
-        hud.setTranslateX(playerSpriteView.getTranslateX() - 300);
-        hud.setTranslateY(playerSpriteView.getTranslateY() - 222);
+        /* draw HUD */
+        double hudx = camera.getTranslateX() - 356;
+        double hudy = camera.getTranslateY() - 269;
+        graphicsContext.setFill(Color.DARKBLUE);
+        // draw hud background
+        graphicsContext.fillRect(hudx, hudy, 800, 70);
+
+        // health
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Health ",10, 20);
+        // player's fireflies essence
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("FireFlies ", 250, 20);
+
+        // player's fireflies essence
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(""+player.getFireflies(), 320, 20);
+
+        // health bar
+        graphicsContext.setFill(Color.RED);
+        graphicsContext.fillRect(60, 10,
+                player.getMaxHealth(), 10);
+        graphicsContext.setFill(Color.GREEN);
+        graphicsContext.fillRect(60, 10,
+                player.getCurrentHealth(), 10);
 
     }
 
@@ -417,8 +399,6 @@ public class MainGame extends GameState {
         for (Enemy e : enemies) {
             root.getChildren().remove(e.getImage());
         }
-
-        root.getChildren().removeAll(playerSpriteView, hud);
 
 
     }
@@ -463,46 +443,6 @@ public class MainGame extends GameState {
 
         // get design mapping
         designMap = generator.getDesignLayer1();
-
-        /*
-        // set image views or sprites for each enemy
-        for (Enemy e : enemies) {
-
-            // initial offsetY depends on the enemy type,
-            // the offsetY modifier depends on the technique/element
-
-            int offsetY = 0;
-
-            // type
-            if (e.getType() == Type.a)
-                offsetY = charHeight * 1;
-            else if (e.getType() == Type.b)
-                offsetY = charHeight * 4;
-            else if (e.getType() == Type.c)
-                offsetY = charHeight * 7;
-
-            // element
-            if (e.getElement() == Element.brute)
-                offsetY += 0;
-            else if (e.getElement() == Element.cut)
-                offsetY += charHeight;
-            else if (e.getElement() == Element.stable)
-                offsetY += charHeight * 2;
-
-            e.setImage( new ImageView(characterSprites));
-            e.getImage().setViewport(new Rectangle2D(0, 0, charWidth, charHeight));
-            e.getImage().setTranslateX(e.getX()*tileWidth+startX);
-            e.getImage().setTranslateY(e.getY()*tileWidth+startY+YCharmModifier);
-            e.getImage().toFront();
-            root.getChildren().add(e.getImage());
-
-            e.setSpriteView(new SpriteAnimator(e.getImage(), Duration.millis(400),
-                    2, 2, 0, offsetY, charWidth-1, charHeight-1));
-            e.getSpriteView().setCycleCount(Animation.INDEFINITE);
-            e.getSpriteView().play();
-
-            System.out.println(root.getChildren().contains(e.getImage()));
-        }*/
 
         // display number of generated enemy types
         int[][] enemyStats = generator.getEnemyStats();
