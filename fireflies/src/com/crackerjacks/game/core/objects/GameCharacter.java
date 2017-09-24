@@ -29,6 +29,8 @@ public class GameCharacter implements Serializable{
     private int root;
     private int stun;
 
+    private int bleedDamage;
+
     // 2D position
     private double X;
     private double Y;
@@ -48,6 +50,8 @@ public class GameCharacter implements Serializable{
         this.bleed = 0;
         this.root = 0;
         this.stun = 0;
+
+        bleedDamage = 0;
 
         // the base damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
@@ -150,6 +154,14 @@ public class GameCharacter implements Serializable{
 
     public void setBleed(int bleed) {
         this.bleed = bleed;
+    }
+
+    public int getBleedDamage() {
+        return bleedDamage;
+    }
+
+    public void setBleedDamage(int bleedDamage) {
+        this.bleedDamage = bleedDamage;
     }
 
     public int getRoot() {
