@@ -11,19 +11,32 @@ public class Sprite {
 
     private int height;
 
+    private int frameCount;
+
     private long lastUpdate;
 
     private int currentListOffset;
 
     private long duration;
 
-    public Sprite(int width, int height, long duration) {
+    public Sprite(int frameCount, int width, int height, long duration) {
+        this.frameCount = frameCount;
         this.height = height;
         this.width = width;
         this.duration = duration;
         points = new LinkedList<>();
         lastUpdate = 0;
         currentListOffset = 0;
+    }
+
+    public void update(long time) {
+        // check if the duration has passed since the last update of the sprite
+        if (time - lastUpdate > duration) {
+            if (currentListOffset < frameCount)
+                currentListOffset++;
+            else
+                currentListOffset = 0;
+        }
     }
 
     public void setWidth(int width) {

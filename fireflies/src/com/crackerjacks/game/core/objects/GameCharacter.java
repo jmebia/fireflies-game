@@ -1,5 +1,7 @@
 package com.crackerjacks.game.core.objects;
 
+import com.crackerjacks.game.core.animator.Sprite;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,8 @@ public class GameCharacter implements Serializable{
     /** Variables */
 
     private String name;
+
+    private Sprite sprite;
 
     // leveling
     private int level;
@@ -188,5 +192,13 @@ public class GameCharacter implements Serializable{
 
     public void setDisarm(int disarm) {
         this.disarm = disarm;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }
