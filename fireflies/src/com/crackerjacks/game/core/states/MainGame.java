@@ -420,7 +420,7 @@ public class MainGame extends GameState {
         player.setCurrentHealth(100);
 
         Sprite playerSprite = new Sprite(1, player.getX() * tileWidth + startX,
-                player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 600);
+                player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 400);
         playerSprite.addPoint(new Point(0, 0));
         playerSprite.addPoint(new Point(32, 0));
         playerSprite.addPoint(new Point(64, 0));

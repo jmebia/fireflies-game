@@ -69,6 +69,9 @@ public class Controller {
 
                 // move left
                 else if (input.getLast().equals("LEFT")) {
+
+                    player.getSprite().setInitialOffset(0);
+
                     int tempX = (int) player.getX() - 1;
 
                     //check if there is an enemy in the direction
@@ -88,6 +91,9 @@ public class Controller {
 
                 // move right
                 else if (input.getLast().equals("RIGHT")) {
+
+                    player.getSprite().setInitialOffset(2);
+
                     int tempX = (int) player.getX() + 1;
 
                     //check if there is an enemy in the direction

@@ -15,6 +15,8 @@ public class Sprite implements Serializable {
 
     private int width;
 
+    private int initialOffset;
+
     private int height;
 
     private int frameCount;
@@ -22,6 +24,8 @@ public class Sprite implements Serializable {
     private long lastUpdate;
 
     private int currentListOffset;
+
+    private int offset;
 
     private long duration;
 
@@ -34,16 +38,18 @@ public class Sprite implements Serializable {
         this.duration = duration;
         points = new LinkedList<>();
         lastUpdate = 0;
-        currentListOffset = 0;
+        initialOffset = 0;
+        currentListOffset = initialOffset;
+        offset = 0;
     }
 
     public void update(long time) {
         // check if the duration has passed since the last update of the sprite
         if (time - lastUpdate > duration * 1000000) {
-            if (currentListOffset < frameCount)
+            if (currentListOffset < initialOffset + frameCount)
                 currentListOffset++;
             else
-                currentListOffset = 0;
+                currentListOffset = initialOffset;
             lastUpdate = time;
 
         }
@@ -111,5 +117,13 @@ public class Sprite implements Serializable {
 
     public double getY() {
         return y;
+    }
+
+    public void setInitialOffset(int initialOffset) {
+        this.initialOffset = initialOffset;
+    }
+
+    public int getInitialOffset() {
+        return initialOffset;
     }
 }
