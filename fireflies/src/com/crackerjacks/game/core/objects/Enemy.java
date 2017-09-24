@@ -81,11 +81,16 @@ public class Enemy extends GameCharacter {
         // if stunned, subtract one turn from the stun variable
         else {
             this.setStun(this.getStun() - 1);
-            // if root effect is also present after stun, subtract it also
-            if (getRoot() > 0)
-                setRoot(getRoot() - 1);
         }
 
+        // if root effect is present, subtract i
+        if (getRoot() > 0)
+            setRoot(getRoot() - 1);
+
+        // if disarm is present, subtract too
+        if (getDisarm() > 0)
+            setDisarm(getDisarm() - 1);
+        
         // check if enemy has bleed effect
         if (this.getBleed() > 0) {
             // subtract health with the bleed damage
@@ -251,11 +256,6 @@ public class Enemy extends GameCharacter {
                     }
                 }
             }
-        }
-        // if enemy is rooted and can't move, subtract a turn from root variable to complete
-        // the turn
-        else if (getRoot() > 0) {
-            setRoot(getRoot() - 1);
         }
     }
 

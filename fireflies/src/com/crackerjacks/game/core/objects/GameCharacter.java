@@ -28,6 +28,7 @@ public class GameCharacter implements Serializable{
     private int bleed;
     private int root;
     private int stun;
+    private int disarm;
 
     private int bleedDamage;
 
@@ -50,6 +51,7 @@ public class GameCharacter implements Serializable{
         this.bleed = 0;
         this.root = 0;
         this.stun = 0;
+        this.disarm = 0;
 
         bleedDamage = 0;
 
@@ -178,5 +180,13 @@ public class GameCharacter implements Serializable{
 
     public void setStun(int stun) {
         this.stun = stun;
+    }
+
+    public int getDisarm() {
+        return disarm;
+    }
+
+    public void setDisarm(int disarm) {
+        this.disarm = disarm;
     }
 }
