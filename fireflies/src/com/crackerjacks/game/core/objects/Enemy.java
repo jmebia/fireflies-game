@@ -1,6 +1,5 @@
 package com.crackerjacks.game.core.objects;
 
-import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
 import com.crackerjacks.game.core.interactions.Type;
@@ -25,7 +24,6 @@ public class Enemy extends GameCharacter {
     private Element element;
     private Type type;
 
-    private SpriteAnimator spriteView;
     private ImageView image;
 
     int visionRadius = 3;
@@ -45,14 +43,6 @@ public class Enemy extends GameCharacter {
 
     public void setElement(Element element) {
         this.element = element;
-    }
-
-    public void setSpriteView(SpriteAnimator animator) {
-        this.spriteView = animator;
-    }
-
-    public SpriteAnimator getSpriteView() {
-        return this.spriteView;
     }
 
     public void setImage(ImageView image) {

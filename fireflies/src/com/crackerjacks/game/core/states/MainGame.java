@@ -2,7 +2,6 @@ package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.animator.Sprite;
-import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
@@ -12,11 +11,9 @@ import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 import com.crackerjacks.game.core.io.Save;
 import com.crackerjacks.game.core.io.SaveIO;
-import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -24,7 +21,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
-import javafx.util.Duration;
 
 import static com.crackerjacks.game.core.Game.root;
 
@@ -84,9 +80,6 @@ public class MainGame extends GameState {
     Image characterSprites;
     Image tileSprites;
     // Image background;
-
-    // image container
-    ImageView playerSpriteView;
 
     // identifies if user loaded an existing save or a new game
     private boolean isNewGame;
@@ -159,13 +152,6 @@ public class MainGame extends GameState {
         tileSprites = new Image(classLoader.getResource("sprites/tiles-spritesheet.png").toString());
         // background = new Image(classLoader.getResource("sprites/space-background.png").toString());
 
-        // setting up the animator
-        playerSpriteView = new ImageView(characterSprites);
-        playerSpriteView.setViewport(new Rectangle2D(0, 0, charWidth, charHeight));
-        playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
-        playerSpriteView.setTranslateY(player.getY()*tileWidth+startY+YCharmModifier);
-        root.getChildren().add(playerSpriteView);
-
     }
 
     @Override
@@ -176,15 +162,11 @@ public class MainGame extends GameState {
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
-            playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
-            playerSpriteView.setTranslateY(player.getY()*tileHeight+startY+YCharmModifier);
         }
 
         // check if player is in goal, if yes then generate new dungeon
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
             generateNewDungeon();
-            playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
-            playerSpriteView.setTranslateY(player.getY()*tileHeight+startY+YCharmModifier);
         }
 
         // DRAW
@@ -309,8 +291,9 @@ public class MainGame extends GameState {
         }
 
         // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
+
+        player.getSprite().update(time);
         Sprite playerSprite = player.getSprite();
-        playerSprite.update(time);
         // checks through the X axis
         if (playerSprite.getX() < player.getX()*tileWidth+startX) {
             playerSprite.setX(playerSprite.getX() + playerSpeed);
@@ -436,8 +419,8 @@ public class MainGame extends GameState {
         player.setMaxHealth(100);
         player.setCurrentHealth(100);
 
-        Sprite playerSprite = new Sprite(2, player.getX() * tileWidth + startX,
-                player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 2000);
+        Sprite playerSprite = new Sprite(1, player.getX() * tileWidth + startX,
+                player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 600);
         playerSprite.addPoint(new Point(0, 0));
         playerSprite.addPoint(new Point(32, 0));
         playerSprite.addPoint(new Point(64, 0));

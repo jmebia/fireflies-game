@@ -1,9 +1,12 @@
 package com.crackerjacks.game.core.animator;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Sprite {
+public class Sprite implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private LinkedList<Point> points;
 
@@ -36,12 +39,13 @@ public class Sprite {
 
     public void update(long time) {
         // check if the duration has passed since the last update of the sprite
-        if (time - lastUpdate > duration) {
+        if (time - lastUpdate > duration * 1000000) {
             if (currentListOffset < frameCount)
                 currentListOffset++;
             else
                 currentListOffset = 0;
             lastUpdate = time;
+
         }
     }
 
