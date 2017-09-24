@@ -45,7 +45,7 @@ public class MainGame extends GameState {
     private int[][] designMap;
 
     // how fast the player slides from one tile to another
-    int playerSpeed = 2;
+    int playerSpeed = 4;
 
     int startX = 0;
     int startY = 0;
@@ -160,7 +160,7 @@ public class MainGame extends GameState {
         camera.setTranslateZ(-1000);
         camera.setNearClip(0.1);
         camera.setFarClip(2000.0);
-        camera.setFieldOfView(25);
+        camera.setFieldOfView(30);
         scene.setCamera(camera);
 
         // load the images of the sprites
