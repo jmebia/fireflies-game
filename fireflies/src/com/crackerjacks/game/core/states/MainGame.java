@@ -86,7 +86,6 @@ public class MainGame extends GameState {
 
     // image container
     ImageView playerSpriteView;
-    SpriteAnimator animator;
 
     // identifies if user loaded an existing save or a new game
     private boolean isNewGame;
@@ -165,13 +164,6 @@ public class MainGame extends GameState {
         playerSpriteView.setTranslateX(player.getX()*tileWidth+startX);
         playerSpriteView.setTranslateY(player.getY()*tileWidth+startY+YCharmModifier);
         root.getChildren().add(playerSpriteView);
-
-        animator = new SpriteAnimator(playerSpriteView, Duration.millis(400),
-                2, 2, 0, 0, charWidth, charHeight);
-        animator.setCycleCount(Animation.INDEFINITE);
-        animator.play();
-
-
 
     }
 
@@ -319,10 +311,8 @@ public class MainGame extends GameState {
         // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
         // checks through the X axis
         if (playerSpriteView.getTranslateX() < player.getX()*tileWidth+startX) {
-            animator.setOffsetX(64);
             playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() + playerSpeed);
         } else if (playerSpriteView.getTranslateX() > player.getX()*tileWidth+startX) {
-            animator.setOffsetX(0);
             playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() - playerSpeed);
         }
         // checks through the Y axis
