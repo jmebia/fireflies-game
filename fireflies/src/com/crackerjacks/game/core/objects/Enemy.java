@@ -81,6 +81,9 @@ public class Enemy extends GameCharacter {
         // if stunned, subtract one turn from the stun variable
         else {
             this.setStun(this.getStun() - 1);
+            // if root effect is also present after stun, subtract it also
+            if (getRoot() > 0)
+                setRoot(getRoot() - 1);
         }
 
         System.out.println("Enemy " + getName() + " updated!");
