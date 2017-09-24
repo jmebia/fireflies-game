@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,17 +29,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameCharacter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameCharacter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="163" column="39" lean-forward="false" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
+            <state relative-caret-position="901">
+              <caret line="156" column="5" lean-forward="true" selection-start-line="156" selection-start-column="5" selection-end-line="156" selection-end-column="5" />
               <folding>
                 <element signature="e#3080#3081#0" expanded="true" />
                 <element signature="e#3114#3115#0" expanded="true" />
                 <element signature="e#3165#3166#0" expanded="true" />
                 <element signature="e#3211#3212#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="100" column="8" lean-forward="false" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -183,12 +192,12 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/character/GameCharacter.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Item.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
       </list>
     </option>
   </component>
@@ -1134,7 +1143,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1168,14 +1176,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="163" column="39" lean-forward="false" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
+        <state relative-caret-position="901">
+          <caret line="156" column="5" lean-forward="true" selection-start-line="156" selection-start-column="5" selection-end-line="156" selection-end-column="5" />
           <folding>
             <element signature="e#3080#3081#0" expanded="true" />
             <element signature="e#3114#3115#0" expanded="true" />
             <element signature="e#3165#3166#0" expanded="true" />
             <element signature="e#3211#3212#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="100" column="8" lean-forward="false" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

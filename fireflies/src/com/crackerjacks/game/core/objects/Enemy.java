@@ -69,12 +69,19 @@ public class Enemy extends GameCharacter {
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
         System.out.println("<=== Updating "+getName()+" ===>");
 
-        if (this.type.getId().equals("a"))
-            updateBehaviorA(player, enemies, tilemap);
-        else if (this.type.getId().equals("b"))
-            updateBehaviorB(player, enemies, tilemap);
-        else if (this.type.getId().equals("c"))
-            updateBehaviorC(player, enemies, tilemap);
+        // check if enemy is not stunned
+        if (this.getStun() <= 0) {
+            if (this.type.getId().equals("a"))
+                updateBehaviorA(player, enemies, tilemap);
+            else if (this.type.getId().equals("b"))
+                updateBehaviorB(player, enemies, tilemap);
+            else if (this.type.getId().equals("c"))
+                updateBehaviorC(player, enemies, tilemap);
+        }
+        // if stunned, subtract one turn from the stun variable
+        else {
+            this.setStun(this.getStun() - 1);
+        }
 
         System.out.println("Enemy " + getName() + " updated!");
     }
@@ -91,7 +98,7 @@ public class Enemy extends GameCharacter {
                 || (playerX == getX() && playerY == getY()-1)) {
             new Interaction().attackMove(this, player);
         }
-
+        
         // check if player is inside room then chase player if she is inside a room
         else if (tilemap[(int)playerY][(int)playerX] == 1) {
             // if player is within the vision radius
