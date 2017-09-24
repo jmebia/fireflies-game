@@ -1,6 +1,7 @@
 package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.Global;
+import com.crackerjacks.game.core.animator.Sprite;
 import com.crackerjacks.game.core.animator.SpriteAnimator;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.Player;
@@ -307,39 +308,51 @@ public class MainGame extends GameState {
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
 
-
         // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
+        Sprite playerSprite = player.getSprite();
+        playerSprite.update(time);
         // checks through the X axis
-        if (playerSpriteView.getTranslateX() < player.getX()*tileWidth+startX) {
-            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() + playerSpeed);
-        } else if (playerSpriteView.getTranslateX() > player.getX()*tileWidth+startX) {
-            playerSpriteView.setTranslateX(playerSpriteView.getTranslateX() - playerSpeed);
+        if (playerSprite.getX() < player.getX()*tileWidth+startX) {
+            playerSprite.setX(playerSprite.getX() + playerSpeed);
+        } else if (playerSprite.getX() > player.getX()*tileWidth+startX) {
+            playerSprite.setX(playerSprite.getX() - playerSpeed);
         }
         // checks through the Y axis
-        if (playerSpriteView.getTranslateY() < player.getY()*tileWidth+startY+YCharmModifier) {
-            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() + playerSpeed);
-        } else if (playerSpriteView.getTranslateY() > player.getY()*tileWidth+startY+YCharmModifier) {
-            playerSpriteView.setTranslateY(playerSpriteView.getTranslateY() - playerSpeed);
+        if (playerSprite.getY() < player.getY()*tileWidth+startY+YCharmModifier) {
+            playerSprite.setY(playerSprite.getY() + playerSpeed);
+        } else if (playerSprite.getY() > player.getY()*tileWidth+startY+YCharmModifier) {
+            playerSprite.setY(playerSprite.getY() - playerSpeed);
         }
         // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
         // player in the 2D game space
-        if ((playerSpriteView.getTranslateX() == player.getX()*tileWidth+startX)
-                && (playerSpriteView.getTranslateY() == player.getY()*tileWidth+startY+YCharmModifier)) {
+        if ((playerSprite.getX() == player.getX()*tileWidth+startX)
+                && (playerSprite.getY() == player.getY()*tileWidth+startY+YCharmModifier)) {
             inputHandler.setDisabled(false);
             controller.unfog(player, fogMap, inputHandler);
         }
+        // draw player
+        Point playerOffset = playerSprite.getCurrentOffset();
+        graphicsContext.drawImage(characterSprites, playerOffset.getX(), playerOffset.getY(),
+                playerSprite.getWidth(), playerSprite.getHeight(), playerSprite.getX(),
+                playerSprite.getY(), charWidth, charHeight);
+
+
 
 
         // reposition camera depending on player and map
-        camera.setTranslateX(playerSpriteView.getTranslateX());
-        camera.setTranslateY(playerSpriteView.getTranslateY());
+        camera.setTranslateX(playerSprite.getX());
+        camera.setTranslateY(playerSprite.getY());
 
         /* draw HUD */
         double hudx = camera.getTranslateX() - 356;
         double hudy = camera.getTranslateY() - 269;
+
+        double hudh = camera.getTranslateY() + 269;
+        double hudw = camera.getTranslateX() + 100;
+
         graphicsContext.setFill(Color.DARKBLUE);
         // draw hud background
-        graphicsContext.fillRect(hudx, hudy, 800, 70);
+        graphicsContext.fillRect(hudx, hudy, hudw, 60);
 
         // health
         graphicsContext.setFill(Color.WHITE);
@@ -422,6 +435,15 @@ public class MainGame extends GameState {
         player.setDamage(2);
         player.setMaxHealth(100);
         player.setCurrentHealth(100);
+
+        Sprite playerSprite = new Sprite(2, player.getX() * tileWidth + startX,
+                player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 2000);
+        playerSprite.addPoint(new Point(0, 0));
+        playerSprite.addPoint(new Point(32, 0));
+        playerSprite.addPoint(new Point(64, 0));
+        playerSprite.addPoint(new Point(96, 0));
+
+        player.setSprite(playerSprite);
 
         // goal point
         goal = new Point();

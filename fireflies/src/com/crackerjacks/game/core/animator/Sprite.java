@@ -7,6 +7,9 @@ public class Sprite {
 
     private LinkedList<Point> points;
 
+    private double x;
+    private double y;
+
     private int width;
 
     private int height;
@@ -19,7 +22,9 @@ public class Sprite {
 
     private long duration;
 
-    public Sprite(int frameCount, int width, int height, long duration) {
+    public Sprite(int frameCount, double x, double y, int width, int height, long duration) {
+        this.x = x;
+        this.y = y;
         this.frameCount = frameCount;
         this.height = height;
         this.width = width;
@@ -36,6 +41,7 @@ public class Sprite {
                 currentListOffset++;
             else
                 currentListOffset = 0;
+            lastUpdate = time;
         }
     }
 
@@ -81,5 +87,25 @@ public class Sprite {
 
     public int getCurrentListOffset() {
         return currentListOffset;
+    }
+
+    public Point getCurrentOffset() {
+        return points.get(currentListOffset);
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 }
