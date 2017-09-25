@@ -28,6 +28,7 @@ public class GameStateManager {
     public static void addState(GameState state) {
         stateList.getLast().onExit();
         stateList.add(state);
+        stateList.getLast().onEnter();
     }
 
 }
