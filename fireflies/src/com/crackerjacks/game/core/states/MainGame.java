@@ -95,6 +95,8 @@ public class MainGame extends GameState {
     @Override
     void onEnter() throws IndexOutOfBoundsException {
 
+        System.out.println(isNewGame);
+
         if (isNewGame) {
 
             // create generator for dungeons passing our tilemap as the base
@@ -363,6 +365,8 @@ public class MainGame extends GameState {
     void onExit() {
 
         System.out.println("Main game onExit()");
+
+        isNewGame = false;
 
         Save save = new Save();
         save.setPlayer(player);
