@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/GameStateManager.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/GameStateManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,21 +19,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="368" column="26" lean-forward="false" selection-start-line="368" selection-start-column="26" selection-end-line="368" selection-end-column="26" />
+            <state relative-caret-position="144">
+              <caret line="366" column="49" lean-forward="true" selection-start-line="366" selection-start-column="49" selection-end-line="366" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameMenu.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameMenu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-63">
-              <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="46" />
+            <state relative-caret-position="187">
+              <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,10 +78,9 @@
       <file leaf-file-name="GameStateManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="92">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
-                <element signature="e#321#322#0" expanded="true" />
                 <element signature="e#369#370#0" expanded="true" />
               </folding>
             </state>
@@ -210,9 +207,9 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Item.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainMenu.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" />
       </list>
     </option>
   </component>
@@ -1202,17 +1199,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1241,21 +1227,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="46" />
+        <state relative-caret-position="144">
+          <caret line="366" column="49" lean-forward="true" selection-start-line="366" selection-start-column="49" selection-end-line="366" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="368" column="26" lean-forward="false" selection-start-line="368" selection-start-column="26" selection-end-line="368" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="187">
+          <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -15,6 +15,12 @@ public class GameMenu extends GameState {
     private Scene scene;
     private GraphicsContext gc;
 
+    private int hudX;
+    private int hudY;
+    private int hudW;
+    private int hudH;
+
+
     public GameMenu(Scene scene, GraphicsContext graphicsContext) {
         Save save = Global.getSave();
         player = save.getPlayer();
@@ -28,22 +34,33 @@ public class GameMenu extends GameState {
 
         scene.setOnKeyPressed(event -> {
 
-            if (event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == KeyCode.ESCAPE) {
                 System.out.println("Pressed ENTER");
                 GameStateManager.removeLast();
             }
 
         });
 
+
+
     }
 
     @Override
     void update(long time) {
 
-        gc.setFill(Color.DARKGREY);
-        gc.fillRect(0, 0, 4000, 4000);
+        hudX = (int) (scene.getCamera().getTranslateX() - 310);
+        hudY = (int) (scene.getCamera().getTranslateY() + 30);
+        hudW = 150;
+        hudH = 150;
 
-        System.out.println("Update GameMenu");
+
+        // main bg
+        gc.setFill(new Color(0f, 0f, 1f, 0.3));
+        gc.fillRect(hudX, hudY, hudW, hudH);
+
+        // border
+        gc.setStroke(Color.WHITE);
+        gc.strokeRect(hudX, hudY, hudW, hudH);
 
     }
 
