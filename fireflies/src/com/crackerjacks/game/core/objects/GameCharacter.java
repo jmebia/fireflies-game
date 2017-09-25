@@ -40,6 +40,9 @@ public class GameCharacter implements Serializable{
     private double X;
     private double Y;
 
+    // tile type
+    int tileType;
+
     /** Constructor */
 
     public GameCharacter() {
@@ -200,5 +203,13 @@ public class GameCharacter implements Serializable{
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public void setTileType(int tileType) {
+        this.tileType = tileType;
+    }
+
+    public int getTileType() {
+        return tileType;
     }
 }

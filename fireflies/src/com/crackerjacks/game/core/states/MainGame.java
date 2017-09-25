@@ -175,6 +175,13 @@ public class MainGame extends GameState {
         // graphicsContext.drawImage(background,0, 0, 1920, 1920);
         graphicsContext.fillRect(200, 200, 3000, 3000);
 
+        // update tile type where the enemies and player are standing
+        for (Enemy e : enemies) {
+            e.setTileType(tileMap[(int)e.getY()][(int)e.getX()]);
+        }
+
+        player.setTileType(tileMap[(int)player.getY()][(int)player.getX()]);
+
         // draw rooms and corridors
         for(int i = 0; i < designMap.length; i++) { // iterate through the rows
             for(int j = 0; j < designMap.length; j++) { // iterate through the columns

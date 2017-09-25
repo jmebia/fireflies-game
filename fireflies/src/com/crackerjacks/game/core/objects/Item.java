@@ -12,7 +12,8 @@ public class Item implements Serializable {
     private Type type;
 
     // base stat modifiers
-    private int damage;
+    private int maxDamage;
+    private int minDamage;
     private int health;
     private int attack;
     private int defense;
@@ -26,7 +27,8 @@ public class Item implements Serializable {
         this.name = name;
         this.type = type;
 
-        this.damage = 0;
+        this.maxDamage = 0;
+        this.minDamage = 0;
         this.health = 0;
         this.attack = 0;
         this.defense = 0;
@@ -52,12 +54,20 @@ public class Item implements Serializable {
         this.name = name;
     }
 
-    public int getDamage() {
-        return damage;
+    public int getMinDamage() {
+        return minDamage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setMinDamageDamage(int damage) {
+        this.minDamage = damage;
+    }
+
+    public int getMaxDamage() {
+        return maxDamage;
+    }
+
+    public void setMaxDamage(int damage) {
+        this.maxDamage = damage;
     }
 
     public int getHealth() {
