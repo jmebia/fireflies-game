@@ -362,7 +362,7 @@ public class MainGame extends GameState {
         // draw mini map
         for (int i = 0; i < tileMap.length; i++) {
             for (int j = 0; j < tileMap.length; j++) {
-                if (tileMap[j][i] > 0) {
+                if (tileMap[j][i] > 0 && fogMap[j][i] > 0) {
                     graphicsContext.setFill(new Color(1, 1, 1, 0.5));
                     graphicsContext.fillRect(i * 3 + hudx + 10, j * 3 + hudy + 320, 3, 3);
                 }
