@@ -337,12 +337,12 @@ public class MainGame extends GameState {
         double hudx = camera.getTranslateX() - 356;
         double hudy = camera.getTranslateY() - 269;
 
-        double hudh = camera.getTranslateY() + 269;
-        double hudw = camera.getTranslateX() + 100;
+        double hudh = 80;
+        double hudw = 711;
 
         graphicsContext.setFill(Color.DARKBLUE);
         // draw hud background
-        graphicsContext.fillRect(hudx, hudy, hudw, 60);
+        graphicsContext.fillRect(hudx, hudy, hudw, hudh);
 
         // health
         graphicsContext.setFill(Color.WHITE);
@@ -359,12 +359,23 @@ public class MainGame extends GameState {
         graphicsContext.fillText(player.getCurrentHealth()+"/"+player.getMaxHealth()
                 , hudx + 80, hudy + 20);
 
+        // draw mini map
+        for (int i = 0; i < tileMap.length; i++) {
+            for (int j = 0; j < tileMap.length; j++) {
+                if (tileMap[j][i] > 0) {
+                    graphicsContext.setFill(new Color(1, 1, 1, 0.5));
+                    graphicsContext.fillRect(i * 3 + hudx + 10, j * 3 + hudy + 320, 3, 3);
+                }
+            }
+        }
+        // draw player in minimap
+        graphicsContext.setFill(Color.GREEN);
+        graphicsContext.fillRect(player.getX() * 3 + hudx + 10, player.getY() * 3 + hudy + 320, 3, 3);
+
     }
 
     @Override
     void onExit() {
-
-        System.out.println("Main game onExit()");
 
         isNewGame = false;
 
