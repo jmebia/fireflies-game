@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.states;
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.animator.Sprite;
 import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.InputHandler;
@@ -18,6 +19,9 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import javafx.scene.image.Image;
 
 import static com.crackerjacks.game.core.Game.root;
@@ -29,6 +33,9 @@ public class MainGame extends GameState {
 
     // 3D camera for the scene
     private PerspectiveCamera camera;
+
+    // draw list
+    ArrayList<GameCharacter> charDrawList = new ArrayList();
 
     // elements for the dungeon map
     private int[][] tileMap;
@@ -225,59 +232,10 @@ public class MainGame extends GameState {
             }
         }
 
-        // draw enemies
-        for (Enemy e : enemies) {
-            if (fogMap[(int) e.getY()][(int) e.getX()] == 2) {
-                // initial offsetY depends on the enemy type,
-                // the offsetY modifier depends on the technique/element
-
-                int offsetY = 0;
-
-                // type
-                if (e.getType() == Type.a)
-                    offsetY = charHeight;
-                else if (e.getType() == Type.b)
-                    offsetY = charHeight * 4;
-                else if (e.getType() == Type.c)
-                    offsetY = charHeight * 7;
-
-                // element
-                if (e.getElement() == Element.brute)
-                    offsetY += 0;
-                else if (e.getElement() == Element.stable)
-                    offsetY += charHeight;
-                else if (e.getElement() == Element.cut)
-                    offsetY += charHeight * 2;
-
-                e.draw(graphicsContext, characterSprites, 0, offsetY, startX, startY + YCharmModifier, charHeight, charWidth);
-
-                /*
-                e.getImage().setTranslateX(e.getX()*tileWidth+startX);
-                e.getImage().setTranslateY(e.getY()*tileWidth+startY+YCharmModifier);
-                */
-            }
-        }
-
         // draw goal
         graphicsContext.setFill(Color.BROWN);
         graphicsContext.fillRect(goal.getX() * tileWidth + startX, goal.getY() * tileHeight + startY,
                 tileHeight, tileWidth);
-
-        // draw fog of war
-        for (int y = 0; y < fogMap.length; y++) {
-            for (int x = 0; x < fogMap.length; x++) {
-                if (fogMap[y][x] == 0) {
-                    graphicsContext.setFill(Color.BLACK);
-                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
-                            tileHeight, tileWidth);
-                } else if (fogMap[y][x] == 1) {
-                    graphicsContext.setFill(new Color(0f,0f,0f,0.5));
-                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
-                            tileHeight, tileWidth);
-                }
-
-            }
-        }
 
         // draw attack side
         if (mainGameController.getAttackMode()) {
@@ -297,6 +255,11 @@ public class MainGame extends GameState {
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
 
+        // sort game characters depending on their Y values
+        charDrawList.addAll(enemies);
+        charDrawList.add(player);
+        Collections.sort(charDrawList, Comparator.comparing(c -> c.getY()));
+
         // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
 
         player.getSprite().update(time);
@@ -313,6 +276,7 @@ public class MainGame extends GameState {
         } else if (playerSprite.getY() > player.getY()*tileWidth+startY+YCharmModifier) {
             playerSprite.setY(playerSprite.getY() - playerSpeed);
         }
+
         // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
         // player in the 2D game space
         if ((playerSprite.getX() == player.getX()*tileWidth+startX)
@@ -320,14 +284,64 @@ public class MainGame extends GameState {
             inputHandler.setDisabled(false);
             mainGameController.unfog(player, fogMap, inputHandler);
         }
-        // draw player
-        Point playerOffset = playerSprite.getCurrentOffset();
-        graphicsContext.drawImage(characterSprites, playerOffset.getX(), playerOffset.getY(),
-                playerSprite.getWidth(), playerSprite.getHeight(), playerSprite.getX(),
-                playerSprite.getY(), charWidth, charHeight);
+
+        //draw characters
+        for (GameCharacter character : charDrawList) {
+            // if enemy
+            if (character instanceof Enemy) {
+                Enemy e = (Enemy) character;
+                if (fogMap[(int) e.getY()][(int) e.getX()] == 2 && e.getCurrentHealth() > 0) {
+                    // initial offsetY depends on the enemy type,
+                    // the offsetY modifier depends on the technique/element
+
+                    int offsetY = 0;
+
+                    // type
+                    if (e.getType() == Type.a)
+                        offsetY = charHeight;
+                    else if (e.getType() == Type.b)
+                        offsetY = charHeight * 4;
+                    else if (e.getType() == Type.c)
+                        offsetY = charHeight * 7;
+
+                    // element
+                    if (e.getElement() == Element.brute)
+                        offsetY += 0;
+                    else if (e.getElement() == Element.stable)
+                        offsetY += charHeight;
+                    else if (e.getElement() == Element.cut)
+                        offsetY += charHeight * 2;
+
+                    e.draw(graphicsContext, characterSprites, 0, offsetY, startX, startY + YCharmModifier, charHeight, charWidth);
+                }
+            }
+            // if player
+            else {
+                // draw player
+                Point playerOffset = playerSprite.getCurrentOffset();
+                graphicsContext.drawImage(characterSprites, playerOffset.getX(), playerOffset.getY(),
+                        playerSprite.getWidth(), playerSprite.getHeight(), playerSprite.getX(),
+                        playerSprite.getY(), charWidth, charHeight);
+            }
+        }
 
 
 
+        // draw fog of war
+        for (int y = 0; y < fogMap.length; y++) {
+            for (int x = 0; x < fogMap.length; x++) {
+                if (fogMap[y][x] == 0) {
+                    graphicsContext.setFill(Color.BLACK);
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                } else if (fogMap[y][x] == 1) {
+                    graphicsContext.setFill(new Color(0f,0f,0f,0.5));
+                    graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
+                            tileHeight, tileWidth);
+                }
+
+            }
+        }
 
         // reposition camera depending on player and map
         camera.setTranslateX(playerSprite.getX());
@@ -399,11 +413,6 @@ public class MainGame extends GameState {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (Enemy e : enemies) {
-            root.getChildren().remove(e.getImage());
-        }
-
 
     }
 
