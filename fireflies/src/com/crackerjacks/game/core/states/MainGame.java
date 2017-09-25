@@ -6,16 +6,14 @@ import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.InputHandler;
-import com.crackerjacks.game.core.input.Controller;
+import com.crackerjacks.game.core.input.MainGameController;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 import com.crackerjacks.game.core.io.Save;
 import com.crackerjacks.game.core.io.SaveIO;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.IOException;
@@ -74,7 +72,7 @@ public class MainGame extends GameState {
 
     // player inputHandler
     private InputHandler inputHandler;
-    private Controller controller;
+    private MainGameController mainGameController;
 
     // images for the sprites
     Image characterSprites;
@@ -136,7 +134,7 @@ public class MainGame extends GameState {
 
         // player inputHandler
         inputHandler = new InputHandler(scene);
-        controller = new Controller();
+        mainGameController = new MainGameController();
 
         // set up camera
         camera = new PerspectiveCamera(true);
@@ -158,7 +156,7 @@ public class MainGame extends GameState {
     void update(long time) {
 
         /* handle player input */
-        controller.update(inputHandler, player, enemies, deadEnemies, tileMap, fogMap, camera);
+        mainGameController.update(inputHandler, player, enemies, deadEnemies, tileMap, scene, graphicsContext);
 
         if (player.getCurrentHealth() <= 0) {
             generateNewDungeon();
@@ -280,19 +278,19 @@ public class MainGame extends GameState {
         }
 
         // draw attack side
-        if (controller.getAttackMode()) {
+        if (mainGameController.getAttackMode()) {
             // transparent red
             graphicsContext.setFill(new Color(1.0f, 0.0f, 0.0f, 0.5f));
-            if(controller.getAttackSide()== "left")
+            if(mainGameController.getAttackSide()== "left")
                 graphicsContext.fillRect((player.getX() - 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(controller.getAttackSide()=="right")
+            else if(mainGameController.getAttackSide()=="right")
                 graphicsContext.fillRect((player.getX() + 1) * tileWidth + startX,
                         player.getY() * tileHeight + startY, tileWidth, tileHeight );
-            else if(controller.getAttackSide()=="up")
+            else if(mainGameController.getAttackSide()=="up")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() - 1) * tileHeight + startY , tileWidth, tileHeight );
-            else if(controller.getAttackSide()=="down")
+            else if(mainGameController.getAttackSide()=="down")
                 graphicsContext.fillRect(player.getX() * tileWidth + startX,
                         (player.getY() + 1) * tileHeight + startY, tileWidth, tileHeight );
         }
@@ -318,7 +316,7 @@ public class MainGame extends GameState {
         if ((playerSprite.getX() == player.getX()*tileWidth+startX)
                 && (playerSprite.getY() == player.getY()*tileWidth+startY+YCharmModifier)) {
             inputHandler.setDisabled(false);
-            controller.unfog(player, fogMap, inputHandler);
+            mainGameController.unfog(player, fogMap, inputHandler);
         }
         // draw player
         Point playerOffset = playerSprite.getCurrentOffset();

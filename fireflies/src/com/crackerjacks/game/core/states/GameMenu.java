@@ -5,6 +5,8 @@ import com.crackerjacks.game.core.io.Save;
 import com.crackerjacks.game.core.objects.Player;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class GameMenu extends GameState {
 
@@ -23,12 +25,23 @@ public class GameMenu extends GameState {
 
     @Override
     void onEnter() {
-        ;
+
+        scene.setOnKeyPressed(event -> {
+
+            if (event.getCode() == KeyCode.ESCAPE) {
+                System.out.println("Pressed ESCAPE");
+                GameStateManager.removeLast();
+            }
+
+        });
 
     }
 
     @Override
     void update(long time) {
+
+        gc.setFill(Color.DARKGREY);
+        gc.fillRect(0, 0, 4000, 4000);
 
     }
 

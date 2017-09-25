@@ -5,20 +5,25 @@ import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
+import com.crackerjacks.game.core.states.GameMenu;
 import com.crackerjacks.game.core.states.GameStateManager;
 import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class Controller {
+public class MainGameController {
 
     private boolean attackMode = false;
 
     private String attackSide = "right";
 
-    public void update(InputHandler inputHandler, Player player, ArrayList<Enemy> enemies, ArrayList<Enemy> deadEnemies, int[][] tileMap, int[][] fogmap, PerspectiveCamera camera) {
+    public void update(InputHandler inputHandler, Player player, ArrayList<Enemy> enemies,
+                       ArrayList<Enemy> deadEnemies, int[][] tileMap,
+                       Scene scene, GraphicsContext gc) {
         LinkedList input = inputHandler.getInputs();
 
         inputHandler.setDisabled(true);
@@ -125,7 +130,7 @@ public class Controller {
                 }
                 // open game menu
                 else if (input.contains("ESCAPE")) {
-
+                    GameStateManager.getStateList().add(new GameMenu(scene, gc));
                 }
 
                 // generateDungeon new dungeon rooms
