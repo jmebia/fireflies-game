@@ -362,6 +362,8 @@ public class MainGame extends GameState {
     @Override
     void onExit() {
 
+        System.out.println("Main game onExit()");
+
         Save save = new Save();
         save.setPlayer(player);
         save.setTileMap(tileMap);

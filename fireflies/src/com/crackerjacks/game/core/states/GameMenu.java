@@ -28,8 +28,8 @@ public class GameMenu extends GameState {
 
         scene.setOnKeyPressed(event -> {
 
-            if (event.getCode() == KeyCode.ESCAPE) {
-                System.out.println("Pressed ESCAPE");
+            if (event.getCode() == KeyCode.ENTER) {
+                System.out.println("Pressed ENTER");
                 GameStateManager.removeLast();
             }
 
@@ -42,6 +42,8 @@ public class GameMenu extends GameState {
 
         gc.setFill(Color.DARKGREY);
         gc.fillRect(0, 0, 4000, 4000);
+
+        System.out.println("Update GameMenu");
 
     }
 

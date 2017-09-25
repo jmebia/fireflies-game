@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.states;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -24,5 +25,9 @@ public class GameStateManager {
         stateList.getLast().onEnter();
     }
 
+    public static void addState(GameState state) {
+        stateList.getLast().onExit();
+        stateList.add(state);
+    }
 
 }

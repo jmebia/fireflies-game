@@ -130,7 +130,7 @@ public class MainGameController {
                 }
                 // open game menu
                 else if (input.contains("ESCAPE")) {
-                    GameStateManager.getStateList().add(new GameMenu(scene, gc));
+                    GameStateManager.addState(new GameMenu(scene, gc));
                 }
 
                 // generateDungeon new dungeon rooms
