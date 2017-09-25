@@ -256,12 +256,38 @@ public class MainGame extends GameState {
         }
 
         // sort game characters depending on their Y values
+        charDrawList.clear();
         charDrawList.addAll(enemies);
         charDrawList.add(player);
         Collections.sort(charDrawList, Comparator.comparing(c -> c.getY()));
 
-        // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
+        // update enemy sprites
+        for (Enemy e : enemies) {
+            Sprite sprite = e.getSprite();
+            sprite.update(time);
+            Point offset = sprite.getCurrentOffset();
 
+            // checks through the X axis
+            if (sprite.getX() < e.getX()*tileWidth+startX) {
+                sprite.setX(sprite.getX() + playerSpeed);
+            } else if (sprite.getX() > e.getX()*tileWidth+startX) {
+                sprite.setX(sprite.getX() - playerSpeed);
+            }
+            // checks through the Y axis
+            if (sprite.getY() < e.getY()*tileWidth+startY+YCharmModifier) {
+                sprite.setY(sprite.getY() + playerSpeed);
+            } else if (sprite.getY() > e.getY()*tileWidth+startY+YCharmModifier) {
+                sprite.setY(sprite.getY() - playerSpeed);
+            }
+            // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
+            // enemy in the 2D game space
+            if ((sprite.getX() == e.getX()*tileWidth+startX)
+                    && (sprite.getY() == e.getY()*tileWidth+startY+YCharmModifier)) {
+                // something something
+            }
+        }
+
+        // makes the player's sprite slide from one tile to another and snaps the sprite to the supposed tile placement
         player.getSprite().update(time);
         Sprite playerSprite = player.getSprite();
         // checks through the X axis
@@ -290,29 +316,15 @@ public class MainGame extends GameState {
             // if enemy
             if (character instanceof Enemy) {
                 Enemy e = (Enemy) character;
-                if (fogMap[(int) e.getY()][(int) e.getX()] == 2 && e.getCurrentHealth() > 0) {
-                    // initial offsetY depends on the enemy type,
-                    // the offsetY modifier depends on the technique/element
+                Sprite sprite = e.getSprite();
+                sprite.update(time);
+                Point offset = sprite.getCurrentOffset();
 
-                    int offsetY = 0;
-
-                    // type
-                    if (e.getType() == Type.a)
-                        offsetY = charHeight;
-                    else if (e.getType() == Type.b)
-                        offsetY = charHeight * 4;
-                    else if (e.getType() == Type.c)
-                        offsetY = charHeight * 7;
-
-                    // element
-                    if (e.getElement() == Element.brute)
-                        offsetY += 0;
-                    else if (e.getElement() == Element.stable)
-                        offsetY += charHeight;
-                    else if (e.getElement() == Element.cut)
-                        offsetY += charHeight * 2;
-
-                    e.draw(graphicsContext, characterSprites, 0, offsetY, startX, startY + YCharmModifier, charHeight, charWidth);
+                // draw enemy sprite if within player's line of sight
+                if (fogMap[(int) e.getY()][(int) e.getX()] == 2) {
+                    graphicsContext.drawImage(characterSprites, offset.getX(), offset.getY(),
+                            sprite.getWidth(), sprite.getHeight(), sprite.getX(),
+                            sprite.getY(), charWidth, charHeight);
                 }
             }
             // if player
@@ -324,7 +336,6 @@ public class MainGame extends GameState {
                         playerSprite.getY(), charWidth, charHeight);
             }
         }
-
 
 
         // draw fog of war
@@ -458,6 +469,24 @@ public class MainGame extends GameState {
         playerSprite.addPoint(new Point(96, 0));
 
         player.setSprite(playerSprite);
+
+        // set sprites for enemies
+        for (Enemy enemy : enemies) {
+            Sprite sprite = new Sprite(1, enemy.getX() * tileWidth + startX,
+                    enemy.getY() * tileHeight + startY + YCharmModifier, 32, 48, 400);
+
+            int yOffset = (enemy.getType().equals(Type.a)? 48 : (enemy.getType().equals(Type.b)? 192 : 336));
+
+            yOffset += (enemy.getElement().equals(Element.stable)? 48:
+                    (enemy.getElement().equals(Element.cut)? 96: 0));
+
+            sprite.addPoint(new Point(0, yOffset));
+            sprite.addPoint(new Point(32, yOffset));
+            sprite.addPoint(new Point(64, yOffset));
+            sprite.addPoint(new Point(96, yOffset));
+
+            enemy.setSprite(sprite);
+        }
 
         // goal point
         goal = new Point();
