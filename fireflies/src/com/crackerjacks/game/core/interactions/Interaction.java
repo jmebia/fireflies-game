@@ -13,7 +13,6 @@ public class Interaction {
 
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
-            double elementPenalty = 1;
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
@@ -24,24 +23,15 @@ public class Interaction {
             // check elements, reduce or increment damage depending on compared element types
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
-                if (defender.isPaper())
-                    damage -= elementPenalty;
-                else if (defender.isScissors())
-                    damage += elementPenalty;
+                // TODO: brute damage computation
             }
             // stable
             else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
-                if (defender.isScissors())
-                    damage -= elementPenalty;
-                else if (defender.isRock())
-                    damage += elementPenalty;
+                // TODO: stable damage computation
             }
             //cut
             else if (attacker.getTechnique().getId().equals(Technique.cut.getId())) {
-                if (defender.isRock())
-                    damage -= elementPenalty;
-                else if (defender.isPaper())
-                    damage += elementPenalty;
+                // TODO: cut damage computation
             }
 
             // if damage is less than 0 then the attack will be equal to 0 else it will be equal

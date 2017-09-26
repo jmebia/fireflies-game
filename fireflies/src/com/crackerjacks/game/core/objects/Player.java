@@ -11,10 +11,6 @@ public class Player extends GameCharacter {
     private int paperLevel = 0;
     private int scissorsLevel = 0;
 
-    private boolean rock = true;
-    private boolean paper = false;
-    private boolean scissors = false;
-
     private ArrayList<Item> inventory = new ArrayList<>();
     private Item equipped = null;
 
@@ -23,16 +19,6 @@ public class Player extends GameCharacter {
     private int lineOfSight = 4;
 
     // getters and setters
-
-    public boolean isRock() {
-        return rock;
-    }
-    public boolean isPaper() {
-        return paper;
-    }
-    public boolean isScissors() {
-        return scissors;
-    }
 
     public void addFireflies(int count) {
         fireflies += count;
