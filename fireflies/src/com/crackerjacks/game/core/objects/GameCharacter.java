@@ -17,9 +17,19 @@ public class GameCharacter implements Serializable{
 
     private Sprite sprite;
 
-    // leveling
+    // character leveling
+    // character's main experience accumulation depends on the leveling of the character's techniques
     private int level;
     private double experience;
+
+    // leveling for techniques
+    private int levelBrute;
+    private int levelStable;
+    private int levelCut;
+
+    private double experienceBrute;
+    private double experienceStable;
+    private double experienceCut;
 
     // attributes
     private int attack;
@@ -211,5 +221,53 @@ public class GameCharacter implements Serializable{
 
     public int getTileType() {
         return tileType;
+    }
+
+    public int getLevelBrute() {
+        return levelBrute;
+    }
+
+    public void setLevelBrute(int levelBrute) {
+        this.levelBrute = levelBrute;
+    }
+
+    public int getLevelStable() {
+        return levelStable;
+    }
+
+    public void setLevelStable(int levelStable) {
+        this.levelStable = levelStable;
+    }
+
+    public int getLevelCut() {
+        return levelCut;
+    }
+
+    public void setLevelCut(int levelCut) {
+        this.levelCut = levelCut;
+    }
+
+    public double getExperienceBrute() {
+        return experienceBrute;
+    }
+
+    public void setExperienceBrute(double experienceBrute) {
+        this.experienceBrute = experienceBrute;
+    }
+
+    public double getExperienceStable() {
+        return experienceStable;
+    }
+
+    public void setExperienceStable(double experienceStable) {
+        this.experienceStable = experienceStable;
+    }
+
+    public double getExperienceCut() {
+        return experienceCut;
+    }
+
+    public void setExperienceCut(double experienceCut) {
+        this.experienceCut = experienceCut;
     }
 }
