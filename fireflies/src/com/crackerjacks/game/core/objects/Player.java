@@ -20,24 +20,9 @@ public class Player extends GameCharacter {
 
     private int fireflies = 0;
 
-    private int lineOfSight = 5;
+    private int lineOfSight = 4;
 
     // getters and setters
-    public void activateRock() {
-        rock = true;
-        paper = false;
-        scissors = false;
-    }
-    public void activatePaper() {
-        rock = false;
-        paper = true;
-        scissors = false;
-    }
-    public void activateScissors() {
-        rock = false;
-        paper = false;
-        scissors = true;
-    }
 
     public boolean isRock() {
         return rock;
@@ -47,12 +32,6 @@ public class Player extends GameCharacter {
     }
     public boolean isScissors() {
         return scissors;
-    }
-
-    public void draw(GraphicsContext graphicsContext, int startX, int startY, int tileHeight, int tileWidth) {
-        graphicsContext.setFill(Color.YELLOW);
-        graphicsContext.fillRect(getX() * tileHeight + startX, getY() * tileWidth + startY,
-                tileHeight, tileWidth);
     }
 
     public void addFireflies(int count) {

@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/objects/Player.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/objects/Player.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,9 +25,33 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="286" column="13" lean-forward="false" selection-start-line="286" selection-start-column="13" selection-end-line="286" selection-end-column="13" />
+            <state relative-caret-position="196">
+              <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interaction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <folding>
+                <element signature="method#attackMove#0;class#Interaction#0" expanded="false" />
+                <element signature="e#1741#1825#0" expanded="false" />
+                <element signature="method#attackMove#1;class#Interaction#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,21 +59,9 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="884">
               <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameStateManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="e#369#370#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -54,7 +69,7 @@
       <file leaf-file-name="Sprite.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/animator/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
+            <state relative-caret-position="73">
               <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -64,32 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="char-spritesheet.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/sprites/char-spritesheet.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="582" column="0" lean-forward="false" selection-start-line="582" selection-start-column="0" selection-end-line="582" selection-end-column="0" />
-              <folding>
-                <element signature="e#953#954#0" expanded="true" />
-                <element signature="e#991#992#0" expanded="true" />
-                <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
-                <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GameMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="731">
               <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -111,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>textY</find>
-      <find>7-1</find>
       <find>for (Enemy enemy: enemies)</find>
       <find>(Enemy enemy: enemies)</find>
       <find>Enemy enemy: enemies</find>
@@ -141,6 +132,8 @@
       <find>camera.setTranslateX</find>
       <find>imageview</find>
       <find>enemies</find>
+      <find>setTile</find>
+      <find>setTileType</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,12 +190,10 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Room.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/character/GameCharacter.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Element.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/Game.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/Controller.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/animator/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Item.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
@@ -211,6 +202,8 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
       </list>
     </option>
   </component>
@@ -236,10 +229,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -315,6 +306,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -892,9 +885,9 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2876304" sideWeight="0.35276073" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2876304" sideWeight="0.3565951" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2876304" sideWeight="0.64723927" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2876304" sideWeight="0.6434049" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31296572" sideWeight="0.49386504" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1130,26 +1123,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-684">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/io/SaveIO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1178,13 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="20" column="33" lean-forward="false" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1195,7 +1165,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="731">
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1210,15 +1180,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="884">
           <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6851">
+          <caret line="600" column="5" lean-forward="false" selection-start-line="600" selection-start-column="5" selection-end-line="600" selection-end-column="5" />
+          <folding>
+            <element signature="e#953#954#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+            <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
+            <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="22">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="e#369#370#0" expanded="true" />
@@ -1226,9 +1209,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="685">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/animator/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="73">
           <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1239,21 +1230,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="286" column="13" lean-forward="false" selection-start-line="286" selection-start-column="13" selection-end-line="286" selection-end-column="13" />
+        <state relative-caret-position="196">
+          <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="582" column="0" lean-forward="false" selection-start-line="582" selection-start-column="0" selection-end-line="582" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding>
-            <element signature="e#953#954#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
-            <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
+            <element signature="method#attackMove#0;class#Interaction#0" expanded="false" />
+            <element signature="e#1741#1825#0" expanded="false" />
+            <element signature="method#attackMove#1;class#Interaction#0" expanded="false" />
           </folding>
         </state>
       </provider>

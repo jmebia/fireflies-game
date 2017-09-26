@@ -1,6 +1,7 @@
 package com.crackerjacks.game.core.interactions;
 
 import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
 
 /**
@@ -91,6 +92,25 @@ public class Interaction {
             defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0 ? 0 : damage));
             System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
         }
+    }
+
+    private boolean isInNarrowSpace(GameCharacter character) {
+
+        boolean isNarrow = false;
+
+        // if player is standing in a corridor
+        if (character.getTileType() == 2) {
+            // check if there are more than 2 movable tiles around the character
+            // int tiles = 0;
+
+            // if (character)
+
+            //if (tiles > 2)
+            isNarrow = true;
+        }
+
+        return isNarrow;
+
     }
 
 }
