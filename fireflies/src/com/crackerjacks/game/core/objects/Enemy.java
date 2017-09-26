@@ -46,6 +46,14 @@ public class Enemy extends GameCharacter {
         this.technique = technique;
     }
 
+    public void setTechniqueLevel(int techniqueLevel) {
+        this.techniqueLevel = techniqueLevel;
+    }
+
+    public int getTechniqueLevel() {
+        return techniqueLevel;
+    }
+
     // main methods
 
     // contains the enemy behavior tree

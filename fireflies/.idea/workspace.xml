@@ -66,13 +66,18 @@
       <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+            <state relative-caret-position="267">
+              <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
               <folding>
+                <element signature="e#1102#1103#0" expanded="true" />
+                <element signature="e#1154#1155#0" expanded="true" />
+                <element signature="e#1192#1193#0" expanded="true" />
+                <element signature="e#1229#1230#0" expanded="true" />
                 <element signature="method#update#0;class#Enemy#0" expanded="false" />
                 <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
                 <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
                 <element signature="method#updateBehaviorC#0;class#Enemy#0" expanded="false" />
+                <element signature="method#draw#0;class#Enemy#0" expanded="false" />
                 <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
               </folding>
             </state>
@@ -1266,13 +1271,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        <state relative-caret-position="267">
+          <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
           <folding>
+            <element signature="e#1102#1103#0" expanded="true" />
+            <element signature="e#1154#1155#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#1229#1230#0" expanded="true" />
             <element signature="method#update#0;class#Enemy#0" expanded="false" />
             <element signature="method#updateBehaviorB#0;class#Enemy#0" expanded="false" />
             <element signature="method#updateBehaviorA#0;class#Enemy#0" expanded="false" />
             <element signature="method#updateBehaviorC#0;class#Enemy#0" expanded="false" />
+            <element signature="method#draw#0;class#Enemy#0" expanded="false" />
             <element signature="method#checkCollisions#0;class#Enemy#0" expanded="false" />
           </folding>
         </state>
