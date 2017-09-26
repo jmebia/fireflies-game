@@ -22,6 +22,7 @@ public class Enemy extends GameCharacter {
 
     // genotypes
     private Technique technique;
+    private int techniqueLevel;
     private Type type;
 
     private ImageView image;
@@ -43,14 +44,6 @@ public class Enemy extends GameCharacter {
 
     public void setTechnique(Technique technique) {
         this.technique = technique;
-    }
-
-    public void setImage(ImageView image) {
-        this.image = image;
-    }
-
-    public ImageView getImage() {
-        return image;
     }
 
     // main methods
