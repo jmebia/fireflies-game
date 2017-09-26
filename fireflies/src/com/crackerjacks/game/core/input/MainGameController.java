@@ -1,13 +1,12 @@
 package com.crackerjacks.game.core.input;
 
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
-import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Interaction;
 import com.crackerjacks.game.core.states.GameMenu;
 import com.crackerjacks.game.core.states.GameStateManager;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -189,15 +188,15 @@ public class MainGameController {
                 // the following are attack inputs
                 // brute attack
                 else if (input.getLast().equals("Q")) {
-                    attacking(player, enemies, deadEnemies, Element.brute.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Technique.brute.getId(), tileMap);
                 }
                 // stable attack
                 else if (input.getLast().equals("W")) {
-                    attacking(player, enemies, deadEnemies, Element.stable.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Technique.stable.getId(), tileMap);
                 }
                 // cut attack
                 else if (input.getLast().equals("E")) {
-                    attacking(player, enemies, deadEnemies, Element.cut.getId(), tileMap);
+                    attacking(player, enemies, deadEnemies, Technique.cut.getId(), tileMap);
                 }
 
                 // go back to moving; cancel attack mode

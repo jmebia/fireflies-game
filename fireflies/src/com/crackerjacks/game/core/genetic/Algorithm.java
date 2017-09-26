@@ -4,8 +4,8 @@
 
 package com.crackerjacks.game.core.genetic;
 
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.objects.Enemy;
-import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 
 import java.util.ArrayList;
@@ -38,14 +38,14 @@ public class Algorithm {
 
             Enemy parents[] = selectParents();
 
-            child.setElement(crossoverElement(parents[0], parents[1]));
+            child.setTechnique(crossoverElement(parents[0], parents[1]));
 
             // child = mutate(child);
 
-            Element element = crossoverElement(parents[0], parents[1]);
+            Technique technique = crossoverElement(parents[0], parents[1]);
             Type type = crossoverType(parents[0], parents[1]);
 
-            child.setElement(element);
+            child.setTechnique(technique);
             child.setType(type);
 
         }
@@ -90,17 +90,17 @@ public class Algorithm {
 
     }
 
-    private Element crossoverElement(Enemy firstParent, Enemy secondParent) {
+    private Technique crossoverElement(Enemy firstParent, Enemy secondParent) {
 
-        Element e;
+        Technique e;
         Random r = new Random();
         int i;
 
         // randomize if child is gonna get first or second parent's element
         i = r.nextInt(2);
 
-        e = (i==0? firstParent.getElement()
-                : secondParent.getElement());
+        e = (i==0? firstParent.getTechnique()
+                : secondParent.getTechnique());
 
         // mutation check
         if (r.nextDouble() <= mutationRate) {
@@ -108,17 +108,17 @@ public class Algorithm {
             // 0 = brute, 1 = stable, 2 = cut
             while (true) {
                 i = r.nextInt(3);
-                if (i == 0 && !(firstParent.getElement().equals(Element.brute)
-                        || secondParent.getElement().equals(Element.brute))) {
-                    e = Element.brute; break;
+                if (i == 0 && !(firstParent.getTechnique().equals(Technique.brute)
+                        || secondParent.getTechnique().equals(Technique.brute))) {
+                    e = Technique.brute; break;
                 }
-                else  if (i == 1 && !(firstParent.getElement().equals(Element.stable)
-                        || secondParent.getElement().equals(Element.stable))) {
-                    e = Element.stable; break;
+                else  if (i == 1 && !(firstParent.getTechnique().equals(Technique.stable)
+                        || secondParent.getTechnique().equals(Technique.stable))) {
+                    e = Technique.stable; break;
                 }
-                else  if (i == 2 && !(firstParent.getElement().equals(Element.cut)
-                        || secondParent.getElement().equals(Element.cut))) {
-                    e = Element.cut; break;
+                else  if (i == 2 && !(firstParent.getTechnique().equals(Technique.cut)
+                        || secondParent.getTechnique().equals(Technique.cut))) {
+                    e = Technique.cut; break;
                 }
             }
         }

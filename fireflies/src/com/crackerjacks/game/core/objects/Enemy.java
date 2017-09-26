@@ -1,6 +1,6 @@
 package com.crackerjacks.game.core.objects;
 
-import com.crackerjacks.game.core.interactions.Element;
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.interactions.Interaction;
 import com.crackerjacks.game.core.interactions.Type;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,7 +21,7 @@ import java.util.Random;
 public class Enemy extends GameCharacter {
 
     // genotypes
-    private Element element;
+    private Technique technique;
     private Type type;
 
     private ImageView image;
@@ -29,8 +29,8 @@ public class Enemy extends GameCharacter {
     int visionRadius = 3;
 
     // getters and setters
-    public Element getElement() {
-        return element;
+    public Technique getTechnique() {
+        return technique;
     }
 
     public Type getType() {
@@ -41,8 +41,8 @@ public class Enemy extends GameCharacter {
         this.type = type;
     }
 
-    public void setElement(Element element) {
-        this.element = element;
+    public void setTechnique(Technique technique) {
+        this.technique = technique;
     }
 
     public void setImage(ImageView image) {
@@ -573,7 +573,7 @@ public class Enemy extends GameCharacter {
     public void draw(GraphicsContext graphicsContext, Image image, int offsetX, int offsetY,
                      int startX, int startY, int tileHeight, int tileWidth) {
 
-        // graphicsContext.setFill(getElement().getColor());
+        // graphicsContext.setFill(getTechnique().getColor());
         // graphicsContext.fillRect(getX()*tileHeight+startX, getY()*tileWidth+startY,
         //       tileHeight, tileWidth);
 

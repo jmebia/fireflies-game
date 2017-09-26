@@ -3,7 +3,7 @@ package com.crackerjacks.game.core.interactions;
 
 import javafx.scene.paint.Color;
 
-public enum Element {
+public enum Technique {
 
     brute("brute", Color.RED),
     stable("stable", Color.BLUE),
@@ -12,7 +12,7 @@ public enum Element {
     private String id;
     private Color color;
 
-    Element (String id, Color color) {
+    Technique(String id, Color color) {
         this.id = id;
         this.color = color;
     }

@@ -8,7 +8,7 @@ import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.InputHandler;
 import com.crackerjacks.game.core.input.MainGameController;
-import com.crackerjacks.game.core.interactions.Element;
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.interactions.Type;
 import com.crackerjacks.game.core.io.Save;
 import com.crackerjacks.game.core.io.SaveIO;
@@ -23,8 +23,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javafx.scene.image.Image;
-
-import static com.crackerjacks.game.core.Game.root;
 
 /**
  * Created by jm on 5/23/17.
@@ -477,8 +475,8 @@ public class MainGame extends GameState {
 
             int yOffset = (enemy.getType().equals(Type.a)? 48 : (enemy.getType().equals(Type.b)? 192 : 336));
 
-            yOffset += (enemy.getElement().equals(Element.stable)? 48:
-                    (enemy.getElement().equals(Element.cut)? 96: 0));
+            yOffset += (enemy.getTechnique().equals(Technique.stable)? 48:
+                    (enemy.getTechnique().equals(Technique.cut)? 96: 0));
 
             sprite.addPoint(new Point(0, yOffset));
             sprite.addPoint(new Point(32, yOffset));

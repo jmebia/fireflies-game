@@ -23,21 +23,21 @@ public class Interaction {
                 damage -= defense - attack;
             // check elements, reduce or increment damage depending on compared element types
             // brute type
-            if (attacker.getElement().getId().equals(Element.brute.getId())) {
+            if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
                 if (defender.isPaper())
                     damage -= elementPenalty;
                 else if (defender.isScissors())
                     damage += elementPenalty;
             }
             // stable
-            else if (attacker.getElement().getId().equals(Element.stable.getId())) {
+            else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
                 if (defender.isScissors())
                     damage -= elementPenalty;
                 else if (defender.isRock())
                     damage += elementPenalty;
             }
             //cut
-            else if (attacker.getElement().getId().equals(Element.cut.getId())) {
+            else if (attacker.getTechnique().getId().equals(Technique.cut.getId())) {
                 if (defender.isRock())
                     damage -= elementPenalty;
                 else if (defender.isPaper())
@@ -66,24 +66,24 @@ public class Interaction {
 
             // check elements
             // if brute is the attack element of the player
-            if (attackElementID.equals(Element.brute.getId())) {
-                if (defender.getElement().getId().equals(Element.stable))
+            if (attackElementID.equals(Technique.brute.getId())) {
+                if (defender.getTechnique().getId().equals(Technique.stable))
                     damage -= elementalPenalty;
-                else if (defender.getElement().getId().equals(Element.cut))
+                else if (defender.getTechnique().getId().equals(Technique.cut))
                     damage += elementalPenalty;
             }
             // if stable is the attack element of the player
-            if (attackElementID.equals(Element.stable.getId())) {
-                if (defender.getElement().getId().equals(Element.cut))
+            if (attackElementID.equals(Technique.stable.getId())) {
+                if (defender.getTechnique().getId().equals(Technique.cut))
                     damage -= elementalPenalty;
-                else if (defender.getElement().getId().equals(Element.brute))
+                else if (defender.getTechnique().getId().equals(Technique.brute))
                     damage += elementalPenalty;
             }
             // if cut is the attack element of the player
-            if (attackElementID.equals(Element.cut.getId())) {
-                if (defender.getElement().getId().equals(Element.brute))
+            if (attackElementID.equals(Technique.cut.getId())) {
+                if (defender.getTechnique().getId().equals(Technique.brute))
                     damage -= elementalPenalty;
-                else if (defender.getElement().getId().equals(Element.stable))
+                else if (defender.getTechnique().getId().equals(Technique.stable))
                     damage += elementalPenalty;
             }
 

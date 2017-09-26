@@ -1,8 +1,8 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.genetic.Algorithm;
-import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 
 import java.awt.*;
@@ -258,11 +258,11 @@ public class Generator implements Serializable {
 
                 int i = random.nextInt(3);
                 if (i == 0) {
-                    e.setElement(Element.brute);
+                    e.setTechnique(Technique.brute);
                 } else if (i == 1) {
-                    e.setElement(Element.stable);
+                    e.setTechnique(Technique.stable);
                 } else {
-                    e.setElement(Element.cut);
+                    e.setTechnique(Technique.cut);
                 }
 
                 int j = random.nextInt(3);
@@ -436,7 +436,7 @@ public class Generator implements Serializable {
 
         for (Enemy e : enemies) {
             // brute
-            if (e.getElement().getId().equals(Element.brute.getId())) {
+            if (e.getTechnique().getId().equals(Technique.brute.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[0][0]++;
                 }
@@ -448,7 +448,7 @@ public class Generator implements Serializable {
                 }
             }
             // stable
-            else if (e.getElement().getId().equals(Element.stable.getId())) {
+            else if (e.getTechnique().getId().equals(Technique.stable.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[1][0]++;
                 }
@@ -460,7 +460,7 @@ public class Generator implements Serializable {
                 }
             }
             // cut
-            else if (e.getElement().getId().equals(Element.cut.getId())) {
+            else if (e.getTechnique().getId().equals(Technique.cut.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[2][0]++;
                 }
