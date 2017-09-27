@@ -7,6 +7,7 @@ import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.interactions.Interaction;
 import com.crackerjacks.game.core.states.GameMenu;
 import com.crackerjacks.game.core.states.GameStateManager;
+import com.crackerjacks.game.core.states.InventoryMenu;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -125,7 +126,7 @@ public class MainGameController {
 
                 // open inventory
                 if (input.contains("I")) {
-
+                    GameStateManager.addState(new InventoryMenu(scene, gc));
                 }
                 // open game menu
                 else if (input.contains("ESCAPE")) {
