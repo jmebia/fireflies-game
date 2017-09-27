@@ -25,8 +25,6 @@ public class MainMenu extends GameState {
     private int minMarker = 1;
     private int maxMarker = 4;
 
-
-
     public MainMenu(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
         this.graphicsContext = graphicsContext;

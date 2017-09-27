@@ -24,6 +24,7 @@ public class Interaction {
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
                 // TODO: brute damage computation
+
             }
             // stable
             else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
