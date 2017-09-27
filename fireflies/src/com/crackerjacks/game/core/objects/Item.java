@@ -23,9 +23,8 @@ public class Item implements Serializable {
     private double root_chance;
 
     // CONSTRUCTOR
-    public Item(String name, Type type) {
+    public Item(String name) {
         this.name = name;
-        this.type = type;
 
         this.maxDamage = 0;
         this.minDamage = 0;
