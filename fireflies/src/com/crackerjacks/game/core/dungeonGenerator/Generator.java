@@ -244,9 +244,7 @@ public class Generator implements Serializable {
 
                     enemies.add(enemy);
                     System.out.println("new enemy added...");
-
                 }
-
             }
             // add goal to the last room
             if (tempRooms.get(1) == room) {
@@ -296,6 +294,16 @@ public class Generator implements Serializable {
             Algorithm genetics = new Algorithm(parents, enemies);
             genetics.produce();
             enemies = genetics.getOffsprings();
+        }
+
+        for (Enemy enemy : enemies) {
+
+            if (enemy.getType().equals(Type.a))
+                enemy.setName("Varmint");
+            if (enemy.getType().equals(Type.b))
+                enemy.setName("Guardian");
+            if (enemy.getType().equals(Type.c))
+                enemy.setName("Wraith");
         }
     }
 
@@ -416,6 +424,12 @@ public class Generator implements Serializable {
 
         for (int x = 0; x < mapSize; x++) {
             for (int y = 1; y < mapSize; y++) {
+                designLayer2[y][x] = 0;
+            }
+        }
+
+        for (int x = 0; x < mapSize; x++) {
+            for (int y = 1; y < mapSize; y++) {
 
                 // check if tile has room or corridor tile
                 if (dungeon[y][x] == VOID) {
@@ -432,8 +446,6 @@ public class Generator implements Serializable {
                     else if (dungeon[y - 1][x] == CORRIDOR) {
                         designLayer2[y][x] = 4;
                     }
-                } else {
-                    designLayer2[y][x] = 0;
                 }
 
             }

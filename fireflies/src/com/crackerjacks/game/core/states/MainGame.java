@@ -372,7 +372,7 @@ public class MainGame extends GameState {
 
         // reposition camera depending on player and map
         camera.setTranslateX(playerSprite.getX());
-        camera.setTranslateY(playerSprite.getY());
+        camera.setTranslateY(playerSprite.getY() + 48);
 
         /* draw HUD */
         double hudx = camera.getTranslateX() - 356;
