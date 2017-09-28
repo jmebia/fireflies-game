@@ -50,7 +50,7 @@ public class Generator implements Serializable {
     private boolean firstGeneration;
 
     // objective requirements
-    private int keys = 0;
+    private ArrayList<Point> keysCoordinates = new ArrayList<>();
 
     /** CONSTRUCTOR **/
     public Generator(int mapSize, int gridCount, int minRoomSize) {
@@ -67,6 +67,8 @@ public class Generator implements Serializable {
     /** GENERATION **/
 
     public void generateDungeon(ArrayList<Enemy> parents) {
+
+        keysCoordinates.clear();
 
         initializeMap();
         createRooms();
@@ -213,22 +215,18 @@ public class Generator implements Serializable {
             place the goal in the last room
 
          */
+
         Random random = new Random();
 
+        // randomize the rooms order
+        ArrayList<Room> tempRooms = rooms;
+        Collections.shuffle(tempRooms);
+
         enemies.clear();
-
         // create enemies for every room
-        for (Room room : rooms) {
+        for (Room room : tempRooms) {
 
-            //TODO: Place player in room
-
-            // TODO: Place goal in room
-
-            // TODO: place keys in room
-
-            // TODO: place keys
-
-            if (room.getId() == 1) {
+            if (tempRooms.get(0) == room) {
                 playerPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             } else {
@@ -251,7 +249,7 @@ public class Generator implements Serializable {
 
             }
             // add goal to the last room
-            if (room.getId() == rooms.size()) {
+            if (tempRooms.get(1) == room) {
                 goalPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             }
@@ -423,7 +421,6 @@ public class Generator implements Serializable {
                 if (dungeon[y][x] == VOID) {
                     // check if edge room tile
                     int tile = designLayer1[y - 1][x];
-                    System.out.println("Tile one y above = " + tile);
                     if (tile == ROOM_BOTTOM_LEFT) {
                         designLayer2[y][x] = 1;
                     } else if (tile == ROOM_BOTTOM_CENTER) {
@@ -554,10 +551,6 @@ public class Generator implements Serializable {
 
     public int getROOM_BOTTOM_RIGHT() {
         return ROOM_BOTTOM_RIGHT;
-    }
-
-    public int getKeyRequirement() {
-        return keys;
     }
 
     public int[][] getDesignLayer2() {
