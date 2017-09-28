@@ -183,13 +183,14 @@ public class MainGame extends GameState {
         }
 
         // updates items in the game; checks if player is on top of the items
-        
+
         for (ItemObject2D item : items) {
             if (item.update(player)) {
                 // if item is a key
                 if (item.getItem().getName().equals("Key")) {
                     player.setKeys(player.getKeys() + 1);
                     items.remove(item);
+                    System.out.println("Keys = " + player.getKeys());
                 }
                 // else if it is a weapon crystal or potion
                 else {
@@ -197,6 +198,9 @@ public class MainGame extends GameState {
                     if (player.getInventory().size() < 8) {
                         player.getInventory().add(item.getItem());
                         items.remove(item);
+                        for (Item it : player.getInventory()) {
+                            System.out.println("Item: " + it.getName());
+                        }
                     }
                 }
             }
