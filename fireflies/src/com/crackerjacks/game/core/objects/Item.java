@@ -9,9 +9,6 @@ public class Item implements Serializable {
     private int level;
 
     private String name;
-    private Type type;
-
-
 
     // CONSTRUCTOR
     public Item(String name) {

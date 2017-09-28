@@ -21,4 +21,76 @@ public class WeaponItem extends Item {
         super(name);
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public int getMaxDamage() {
+        return maxDamage;
+    }
+
+    public void setMaxDamage(int maxDamage) {
+        this.maxDamage = maxDamage;
+    }
+
+    public int getMinDamage() {
+        return minDamage;
+    }
+
+    public void setMinDamage(int minDamage) {
+        this.minDamage = minDamage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public double getStun_chance() {
+        return stun_chance;
+    }
+
+    public void setStun_chance(double stun_chance) {
+        this.stun_chance = stun_chance;
+    }
+
+    public double getBleed_chance() {
+        return bleed_chance;
+    }
+
+    public void setBleed_chance(double bleed_chance) {
+        this.bleed_chance = bleed_chance;
+    }
+
+    public double getRoot_chance() {
+        return root_chance;
+    }
+
+    public void setRoot_chance(double root_chance) {
+        this.root_chance = root_chance;
+    }
+
 }
