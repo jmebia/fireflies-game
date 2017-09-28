@@ -192,8 +192,11 @@ public class MainGame extends GameState {
                 }
                 // else if it is a weapon crystal or potion
                 else {
-                    player.getInventory().add(item.getItem());
-                    items.remove(item);
+                    // check if inventory is full
+                    if (player.getInventory().size() < 8) {
+                        player.getInventory().add(item.getItem());
+                        items.remove(item);
+                    }
                 }
             }
         }
@@ -312,7 +315,6 @@ public class MainGame extends GameState {
         for (Enemy e : enemies) {
             Sprite sprite = e.getSprite();
             sprite.update(time);
-            Point offset = sprite.getCurrentOffset();
 
             // checks through the X axis
             if (sprite.getX() < e.getX()*tileWidth+startX) {
@@ -443,7 +445,6 @@ public class MainGame extends GameState {
         // draw player in minimap
         graphicsContext.setFill(Color.GREEN);
         graphicsContext.fillRect(player.getX() * 3 + hudx + 10, player.getY() * 3 + hudy + 320, 3, 3);
-
 
     }
 
