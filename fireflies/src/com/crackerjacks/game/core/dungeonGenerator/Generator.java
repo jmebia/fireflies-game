@@ -256,11 +256,12 @@ public class Generator implements Serializable {
         }
 
         // place keys if rooms are 4 or more
-        if (rooms.size() >= 4) {
-            int keycount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
+        if (rooms.size() > 3) {
+            System.out.println("Umabot dito");
+            int keyCount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
 
             // place all keys
-            for (int i = keycount; i > 0; i--) {
+            for (int i = keyCount; i > 0; i--) {
                 Room room = tempRooms.get(i);
 
                 Point key = new Point();
@@ -268,6 +269,7 @@ public class Generator implements Serializable {
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
 
                 keysCoordinates.add(key);
+                System.out.println("Nakapag add ng keys sa x="+key.x + " y="+key.y);
 
             }
 

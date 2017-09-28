@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
 
 /**
  * Created by jm on 5/23/17.
@@ -256,6 +257,15 @@ public class MainGame extends GameState {
         graphicsContext.fillRect(goal.getX() * tileWidth + startX, goal.getY() * tileHeight + startY,
                 tileHeight, tileWidth);
 
+        // draw items
+        for (ItemObject2D item : items) {
+            if (item.getItem().getName().equals("Key")) {
+                graphicsContext.setFill(Color.GOLD);
+                graphicsContext.fillRect(item.getX() * tileWidth + startX, item.getY() * tileHeight + startY,
+                        tileHeight, tileWidth);
+            }
+        }
+
         // draw attack side
         if (mainGameController.getAttackMode()) {
             // transparent red
@@ -463,13 +473,6 @@ public class MainGame extends GameState {
         // clear all items
         items.clear();
 
-        // add keys to items
-        ArrayList<Point> keys = generator.getKeysCoordinates();
-
-        for (Point key : keys) {
-            items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(), tileWidth, tileHeight));
-        }
-
         // generate dungeon and throw current enemy population
         generator.generateDungeon(p);
         System.out.println("New Dungeon Generated");
@@ -481,6 +484,15 @@ public class MainGame extends GameState {
 
         // add the new generation of enemies
         enemies.addAll(generator.getEnemies());
+
+        // add keys to items
+        ArrayList<Point> keys = generator.getKeysCoordinates();
+        System.out.println("Generator keys = " + generator.getKeysCoordinates());
+
+        for (Point key : keys) {
+            System.out.println("Mayroong keys sa x="+key.x + " y="+key.y);
+            items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(), tileWidth, tileHeight));
+        }
 
         // set up player elements
         player = new Player();
