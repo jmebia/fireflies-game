@@ -52,6 +52,9 @@ public class Generator implements Serializable {
     // objective requirements
     private ArrayList<Point> keysCoordinates = new ArrayList<>();
 
+    // items
+    private ArrayList<Point> itemLoots = new ArrayList<>();
+
     /** CONSTRUCTOR **/
     public Generator(int mapSize, int gridCount, int minRoomSize) {
         this.gridRow = gridCount;
@@ -255,9 +258,9 @@ public class Generator implements Serializable {
             }
         }
 
-        // place keys if rooms are 4 or more
+        // loots and keys if rooms are more than 3
         if (rooms.size() > 3) {
-            System.out.println("Umabot dito");
+            // place keys if rooms are 4 or more
             int keyCount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
 
             // place all keys
@@ -270,10 +273,25 @@ public class Generator implements Serializable {
 
                 keysCoordinates.add(key);
                 System.out.println("Nakapag add ng keys sa x="+key.x + " y="+key.y);
+            }
 
+            int itemsCount = random.nextInt((rooms.size()/2) + 1 - 3) + 3;
+
+            while (itemsCount > 0) {
+                int roomNum = random.nextInt(rooms.size() - 1);
+                Room room = tempRooms.get(roomNum);
+
+                Point item = new Point();
+                item.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+                itemLoots.add(item);
+
+                itemsCount--;
             }
 
         }
+
+
 
     }
 

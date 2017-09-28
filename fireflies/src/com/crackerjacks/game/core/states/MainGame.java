@@ -284,6 +284,10 @@ public class MainGame extends GameState {
                 graphicsContext.setFill(Color.GOLD);
                 graphicsContext.fillRect(item.getX() * tileWidth + startX, item.getY() * tileHeight + startY,
                         tileHeight, tileWidth);
+            } else {
+                graphicsContext.setFill(Color.BLUE);
+                graphicsContext.fillRect(item.getX() * tileWidth + startX, item.getY() * tileHeight + startY,
+                        tileHeight, tileWidth);
             }
         }
 
