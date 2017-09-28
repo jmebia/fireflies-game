@@ -31,5 +31,4 @@ public class Item implements Serializable {
         this.name = name;
     }
 
-
 }

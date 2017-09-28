@@ -43,6 +43,7 @@ public class MainGame extends GameState {
 
     // design map
     private int[][] designMap;
+    private int[][] designMap2;
 
     // how fast the player slides from one tile to another
     int playerSpeed = 4;
@@ -110,6 +111,7 @@ public class MainGame extends GameState {
             // initialize tile map
             tileMap = new int[mapSize][mapSize];
             designMap = new int[mapSize][mapSize];
+            designMap2 = new int[mapSize][mapSize];
             fogMap = new int[120][120];
 
             // generate dungeon
@@ -191,6 +193,22 @@ public class MainGame extends GameState {
         for(int i = 0; i < designMap.length; i++) { // iterate through the rows
             for(int j = 0; j < designMap.length; j++) { // iterate through the columns
 
+                // draw back layer first
+                if (designMap2[i][j] == 1) {
+                    graphicsContext.drawImage(tileSprites, 0, 192, 32, 32, j * tileWidth + startX,
+                            i * tileHeight + startY, tileWidth, tileHeight);
+                } else if (designMap2[i][j] == 2) {
+                    graphicsContext.drawImage(tileSprites, 32, 192, 32, 32, j * tileWidth + startX,
+                            i * tileHeight + startY, tileWidth, tileHeight);
+                } else if (designMap2[i][j] == 3) {
+                    graphicsContext.drawImage(tileSprites, 64, 192, 32, 32, j * tileWidth + startX,
+                            i * tileHeight + startY, tileWidth, tileHeight);
+                } else if (designMap2[i][j] == 4) {
+                    graphicsContext.drawImage(tileSprites, 96, 32, 32, 32, j * tileWidth + startX,
+                            i * tileHeight + startY, tileWidth, tileHeight);
+                }
+
+                // draw main layer next
                 // ROOM
                 if (tileMap[i][j] == 1) {
                     if (designMap[i][j] == generator.getROOM_TOP_LEFT()) {
@@ -492,6 +510,7 @@ public class MainGame extends GameState {
 
         // get design mapping
         designMap = generator.getDesignLayer1();
+        designMap2 = generator.getDesignLayer2();
 
         // display number of generated enemy types
         int[][] enemyStats = generator.getEnemyStats();

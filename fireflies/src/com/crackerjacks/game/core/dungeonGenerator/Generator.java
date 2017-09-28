@@ -24,6 +24,7 @@ public class Generator implements Serializable {
     private Point goalPosition = new Point();
     private int[][] dungeon;
     private int[][] designLayer1; // main rooms and corridors
+
     private int[][] designLayer2; // overlap-able background designs
 
     // core map elements
@@ -48,6 +49,9 @@ public class Generator implements Serializable {
 
     private boolean firstGeneration;
 
+    // objective requirements
+    private int keys = 0;
+
     /** CONSTRUCTOR **/
     public Generator(int mapSize, int gridCount, int minRoomSize) {
         this.gridRow = gridCount;
@@ -57,6 +61,7 @@ public class Generator implements Serializable {
         firstGeneration = true;
         dungeon = new int[mapSize + 4][mapSize + 4];
         designLayer1 = new int[mapSize + 4][mapSize + 4];
+        designLayer2 = new int[mapSize + 4][mapSize + 4];
     }
 
     /** GENERATION **/
@@ -71,6 +76,7 @@ public class Generator implements Serializable {
         plotRooms();
 
         plotDesign();
+        plotDesign2();
 
         if (firstGeneration) firstGeneration = false;
     }
@@ -213,6 +219,14 @@ public class Generator implements Serializable {
 
         // create enemies for every room
         for (Room room : rooms) {
+
+            //TODO: Place player in room
+
+            // TODO: Place goal in room
+
+            // TODO: place keys in room
+
+            // TODO: place keys
 
             if (room.getId() == 1) {
                 playerPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
@@ -400,6 +414,36 @@ public class Generator implements Serializable {
         }
     }
 
+    private void plotDesign2() {
+
+        for (int x = 0; x < mapSize; x++) {
+            for (int y = 1; y < mapSize; y++) {
+
+                // check if tile has room or corridor tile
+                if (dungeon[y][x] == VOID) {
+                    // check if edge room tile
+                    int tile = designLayer1[y - 1][x];
+                    System.out.println("Tile one y above = " + tile);
+                    if (tile == ROOM_BOTTOM_LEFT) {
+                        designLayer2[y][x] = 1;
+                    } else if (tile == ROOM_BOTTOM_CENTER) {
+                        designLayer2[y][x] = 2;
+                    } else if (tile == ROOM_BOTTOM_RIGHT) {
+                        designLayer2[y][x] = 3;
+                    }
+                    // check if corridor tile
+                    else if (dungeon[y - 1][x] == CORRIDOR) {
+                        designLayer2[y][x] = 4;
+                    }
+                } else {
+                    designLayer2[y][x] = 0;
+                }
+
+            }
+        }
+
+    }
+
 
     public int[][] getDungeon() {
         return dungeon;
@@ -510,6 +554,14 @@ public class Generator implements Serializable {
 
     public int getROOM_BOTTOM_RIGHT() {
         return ROOM_BOTTOM_RIGHT;
+    }
+
+    public int getKeyRequirement() {
+        return keys;
+    }
+
+    public int[][] getDesignLayer2() {
+        return designLayer2;
     }
 
 }
