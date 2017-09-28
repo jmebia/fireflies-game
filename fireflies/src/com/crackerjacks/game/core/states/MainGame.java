@@ -2,9 +2,7 @@ package com.crackerjacks.game.core.states;
 
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.animator.Sprite;
-import com.crackerjacks.game.core.objects.Enemy;
-import com.crackerjacks.game.core.objects.GameCharacter;
-import com.crackerjacks.game.core.objects.Player;
+import com.crackerjacks.game.core.objects.*;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 import com.crackerjacks.game.core.input.InputHandler;
 import com.crackerjacks.game.core.input.MainGameController;
@@ -76,6 +74,9 @@ public class MainGame extends GameState {
     // goal
     Point goal;
 
+    // items
+    ArrayList<ItemObject2D> items = new ArrayList<>();
+
     // player inputHandler
     private InputHandler inputHandler;
     private MainGameController mainGameController;
@@ -132,6 +133,8 @@ public class MainGame extends GameState {
             tileMap = save.getTileMap();
             designMap = save.getDesignMap();
             fogMap = save.getFogMap();
+
+            items = save.getItems();
 
             goal = new Point();
             goal.setLocation(generator.getGoalPosition().getX(), generator.getGoalPosition().getY());
@@ -428,6 +431,7 @@ public class MainGame extends GameState {
         save.setEnemies(enemies);
         save.setDeadEnemies(deadEnemies);
         save.setGenerator(generator);
+        save.setItems(items);
 
         System.out.println(Global.getSave());
         Global.setSave(save);
@@ -455,6 +459,16 @@ public class MainGame extends GameState {
         // create population for enemies
         ArrayList p = new ArrayList(enemies);
         p.addAll(deadEnemies);
+
+        // clear all items
+        items.clear();
+
+        // add keys to items
+        ArrayList<Point> keys = generator.getKeysCoordinates();
+
+        for (Point key : keys) {
+            items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(), tileWidth, tileHeight));
+        }
 
         // generate dungeon and throw current enemy population
         generator.generateDungeon(p);

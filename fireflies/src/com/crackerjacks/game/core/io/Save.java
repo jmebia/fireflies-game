@@ -1,6 +1,8 @@
 package com.crackerjacks.game.core.io;
 
 import com.crackerjacks.game.core.objects.Enemy;
+import com.crackerjacks.game.core.objects.Item;
+import com.crackerjacks.game.core.objects.ItemObject2D;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 
@@ -18,6 +20,8 @@ public class Save implements Serializable {
 
     private ArrayList<Enemy> enemies = null;
     private ArrayList<Enemy> deadEnemies = null;
+
+    private ArrayList<ItemObject2D> items = null;
 
     // map
     private int[][] tileMap = null;
@@ -78,5 +82,13 @@ public class Save implements Serializable {
 
     public void setGenerator(Generator generator) {
         this.generator = generator;
+    }
+
+    public ArrayList<ItemObject2D> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<ItemObject2D> items) {
+        this.items = items;
     }
 }
