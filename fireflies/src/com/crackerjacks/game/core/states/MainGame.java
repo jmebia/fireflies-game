@@ -183,6 +183,7 @@ public class MainGame extends GameState {
         }
 
         // updates items in the game; checks if player is on top of the items
+        
         for (ItemObject2D item : items) {
             if (item.update(player)) {
                 // if item is a key
@@ -511,11 +512,16 @@ public class MainGame extends GameState {
 
         // add keys to items
         ArrayList<Point> keys = generator.getKeysCoordinates();
+        ArrayList<Point> loot = generator.getItemLoots();
         System.out.println("Generator keys = " + generator.getKeysCoordinates());
 
         for (Point key : keys) {
             System.out.println("Mayroong keys sa x="+key.x + " y="+key.y);
             items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(), tileWidth, tileHeight));
+        }
+
+        for (Point item : loot) {
+            items.add(new ItemObject2D(new Item("Something"), (int) item.getX(), (int)item.getY(), tileWidth, tileHeight));
         }
 
         // set up player elements

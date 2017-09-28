@@ -612,4 +612,8 @@ public class Generator implements Serializable {
     public ArrayList<Point> getKeysCoordinates() {
         return keysCoordinates;
     }
+
+    public ArrayList<Point> getItemLoots() {
+        return itemLoots;
+    }
 }

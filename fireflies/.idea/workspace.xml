@@ -23,9 +23,21 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="287" column="50" lean-forward="false" selection-start-line="287" selection-start-column="50" selection-end-line="287" selection-end-column="50" />
+            <state relative-caret-position="41">
+              <caret line="185" column="8" lean-forward="false" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="8" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameStateManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#369#370#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,8 +137,8 @@
       <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="276" column="0" lean-forward="true" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
+            <state relative-caret-position="331">
+              <caret line="616" column="8" lean-forward="false" selection-start-line="616" selection-start-column="8" selection-end-line="616" selection-end-column="25" />
               <folding>
                 <element signature="method#initializeMap#0;class#Generator#0" expanded="false" />
                 <element signature="method#createCorridors#0;class#Generator#0" expanded="false" />
@@ -139,6 +151,8 @@
                 <element signature="e#22527#22528#0" expanded="true" />
                 <element signature="e#22579#22580#0" expanded="true" />
                 <element signature="e#22617#22618#0" expanded="true" />
+                <element signature="e#22663#22664#0" expanded="true" />
+                <element signature="e#22695#22696#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1138,16 +1152,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#369#370#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1350,26 +1354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="276" column="0" lean-forward="true" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
-          <folding>
-            <element signature="method#initializeMap#0;class#Generator#0" expanded="false" />
-            <element signature="method#createCorridors#0;class#Generator#0" expanded="false" />
-            <element signature="method#addEnemyElements#0;class#Generator#0" expanded="false" />
-            <element signature="method#plotRooms#0;class#Generator#0" expanded="false" />
-            <element signature="method#plotDesign#0;class#Generator#0" expanded="false" />
-            <element signature="method#plotDesign2#0;class#Generator#0" expanded="false" />
-            <element signature="method#getEnemyStats#0;class#Generator#0" expanded="false" />
-            <element signature="e#22492#22493#0" expanded="true" />
-            <element signature="e#22527#22528#0" expanded="true" />
-            <element signature="e#22579#22580#0" expanded="true" />
-            <element signature="e#22617#22618#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1404,10 +1388,42 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="616" column="8" lean-forward="false" selection-start-line="616" selection-start-column="8" selection-end-line="616" selection-end-column="25" />
+          <folding>
+            <element signature="method#initializeMap#0;class#Generator#0" expanded="false" />
+            <element signature="method#createCorridors#0;class#Generator#0" expanded="false" />
+            <element signature="method#addEnemyElements#0;class#Generator#0" expanded="false" />
+            <element signature="method#plotRooms#0;class#Generator#0" expanded="false" />
+            <element signature="method#plotDesign#0;class#Generator#0" expanded="false" />
+            <element signature="method#plotDesign2#0;class#Generator#0" expanded="false" />
+            <element signature="method#getEnemyStats#0;class#Generator#0" expanded="false" />
+            <element signature="e#22492#22493#0" expanded="true" />
+            <element signature="e#22527#22528#0" expanded="true" />
+            <element signature="e#22579#22580#0" expanded="true" />
+            <element signature="e#22617#22618#0" expanded="true" />
+            <element signature="e#22663#22664#0" expanded="true" />
+            <element signature="e#22695#22696#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/GameStateManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#369#370#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="287" column="50" lean-forward="false" selection-start-line="287" selection-start-column="50" selection-end-line="287" selection-end-column="50" />
+        <state relative-caret-position="41">
+          <caret line="185" column="8" lean-forward="false" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="8" />
           <folding />
         </state>
       </provider>
