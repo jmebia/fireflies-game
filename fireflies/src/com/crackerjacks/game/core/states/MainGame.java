@@ -177,6 +177,7 @@ public class MainGame extends GameState {
 
         // check if player is in goal, if yes then generate new dungeon
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
+            if ()
             generateNewDungeon();
         }
 

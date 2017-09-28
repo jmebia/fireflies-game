@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/MainGame.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,38 +20,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="261" column="57" lean-forward="false" selection-start-line="261" selection-start-column="57" selection-end-line="261" selection-end-column="57" />
+            <state relative-caret-position="158">
+              <caret line="179" column="16" lean-forward="false" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
+            <state relative-caret-position="328">
+              <caret line="121" column="26" lean-forward="false" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
               <folding>
-                <element signature="e#1951#1952#0" expanded="true" />
-                <element signature="e#1981#1982#0" expanded="true" />
-                <element signature="e#2024#2025#0" expanded="true" />
-                <element signature="e#2062#2063#0" expanded="true" />
-                <element signature="e#2094#2095#0" expanded="true" />
-                <element signature="e#2125#2126#0" expanded="true" />
-                <element signature="e#2170#2171#0" expanded="true" />
-                <element signature="e#2210#2211#0" expanded="true" />
-                <element signature="e#2245#2246#0" expanded="true" />
-                <element signature="e#2279#2280#0" expanded="true" />
-                <element signature="e#2330#2331#0" expanded="true" />
-                <element signature="e#2376#2377#0" expanded="true" />
-                <element signature="e#2435#2436#0" expanded="true" />
-                <element signature="e#2477#2478#0" expanded="true" />
-                <element signature="e#2524#2525#0" expanded="true" />
-                <element signature="e#2566#2567#0" expanded="true" />
+                <element signature="e#1978#1979#0" expanded="true" />
+                <element signature="e#2008#2009#0" expanded="true" />
+                <element signature="e#2051#2052#0" expanded="true" />
+                <element signature="e#2089#2090#0" expanded="true" />
+                <element signature="e#2121#2122#0" expanded="true" />
+                <element signature="e#2152#2153#0" expanded="true" />
+                <element signature="e#2197#2198#0" expanded="true" />
+                <element signature="e#2237#2238#0" expanded="true" />
+                <element signature="e#2272#2273#0" expanded="true" />
+                <element signature="e#2306#2307#0" expanded="true" />
+                <element signature="e#2357#2358#0" expanded="true" />
+                <element signature="e#2403#2404#0" expanded="true" />
+                <element signature="e#2462#2463#0" expanded="true" />
+                <element signature="e#2504#2505#0" expanded="true" />
+                <element signature="e#2551#2552#0" expanded="true" />
+                <element signature="e#2593#2594#0" expanded="true" />
+                <element signature="e#2648#2649#0" expanded="true" />
+                <element signature="e#2685#2686#0" expanded="true" />
+                <element signature="e#2717#2718#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -250,10 +252,10 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Item.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/ItemObject2D.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/io/Save.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
       </list>
     </option>
   </component>
@@ -1312,31 +1314,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
-          <folding>
-            <element signature="e#1951#1952#0" expanded="true" />
-            <element signature="e#1981#1982#0" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2062#2063#0" expanded="true" />
-            <element signature="e#2094#2095#0" expanded="true" />
-            <element signature="e#2125#2126#0" expanded="true" />
-            <element signature="e#2170#2171#0" expanded="true" />
-            <element signature="e#2210#2211#0" expanded="true" />
-            <element signature="e#2245#2246#0" expanded="true" />
-            <element signature="e#2279#2280#0" expanded="true" />
-            <element signature="e#2330#2331#0" expanded="true" />
-            <element signature="e#2376#2377#0" expanded="true" />
-            <element signature="e#2435#2436#0" expanded="true" />
-            <element signature="e#2477#2478#0" expanded="true" />
-            <element signature="e#2524#2525#0" expanded="true" />
-            <element signature="e#2566#2567#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -1399,9 +1376,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="261" column="57" lean-forward="false" selection-start-line="261" selection-start-column="57" selection-end-line="261" selection-end-column="57" />
+        <state relative-caret-position="158">
+          <caret line="179" column="16" lean-forward="false" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="121" column="26" lean-forward="false" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
+          <folding>
+            <element signature="e#1978#1979#0" expanded="true" />
+            <element signature="e#2008#2009#0" expanded="true" />
+            <element signature="e#2051#2052#0" expanded="true" />
+            <element signature="e#2089#2090#0" expanded="true" />
+            <element signature="e#2121#2122#0" expanded="true" />
+            <element signature="e#2152#2153#0" expanded="true" />
+            <element signature="e#2197#2198#0" expanded="true" />
+            <element signature="e#2237#2238#0" expanded="true" />
+            <element signature="e#2272#2273#0" expanded="true" />
+            <element signature="e#2306#2307#0" expanded="true" />
+            <element signature="e#2357#2358#0" expanded="true" />
+            <element signature="e#2403#2404#0" expanded="true" />
+            <element signature="e#2462#2463#0" expanded="true" />
+            <element signature="e#2504#2505#0" expanded="true" />
+            <element signature="e#2551#2552#0" expanded="true" />
+            <element signature="e#2593#2594#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+            <element signature="e#2685#2686#0" expanded="true" />
+            <element signature="e#2717#2718#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -14,6 +14,8 @@ public class Player extends GameCharacter {
     private int scissorsLevel = 0;
     private int scissorsExp = 0;
 
+    private int keys = 0;
+
     private ArrayList<Item> inventory = new ArrayList<>();
     private Item equipped = null;
 
@@ -115,5 +117,13 @@ public class Player extends GameCharacter {
 
     public void setFireflies(int fireflies) {
         this.fireflies = fireflies;
+    }
+
+    public int getKeys() {
+        return keys;
+    }
+
+    public void setKeys(int keys) {
+        this.keys = keys;
     }
 }
