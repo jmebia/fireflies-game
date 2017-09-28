@@ -275,7 +275,7 @@ public class Generator implements Serializable {
                 System.out.println("Nakapag add ng keys sa x="+key.x + " y="+key.y);
             }
 
-            int itemsCount = random.nextInt((rooms.size()/2) + 1 - 3) + 3;
+            int itemsCount = random.nextInt((rooms.size()/2) + 1 - 2) + 2;
 
             while (itemsCount > 0) {
                 int roomNum = random.nextInt(rooms.size() - 1);

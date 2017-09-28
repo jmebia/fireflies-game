@@ -529,13 +529,16 @@ public class MainGame extends GameState {
         }
 
         // set up player elements
-        player = new Player();
-        player.setName("Jean Gadot");
+        if (isNewGame) {
+            player = new Player();
+            player.setName("Jean Gadot");
+            player.setDamage(2);
+            player.setMaxHealth(100);
+            player.setCurrentHealth(100);
+        }
+
         player.setX(generator.getPlayerPosition().getX());
         player.setY(generator.getPlayerPosition().getY());
-        player.setDamage(2);
-        player.setMaxHealth(100);
-        player.setCurrentHealth(100);
 
         Sprite playerSprite = new Sprite(1, player.getX() * tileWidth + startX,
                 player.getY() * tileHeight + startY + YCharmModifier, 32, 48, 400);
@@ -595,7 +598,7 @@ public class MainGame extends GameState {
         System.out.println("TOTAL B Enemies: " + (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
         System.out.println("TOTAL C Enemies: " + (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
 
-
+        isNewGame = false;
         // System.out.println("B Enemies: " + generator.getPaperEnemyCount());
         // System.out.println("C Enemies: " + generator.getScissorsEnemyCount());
     }
