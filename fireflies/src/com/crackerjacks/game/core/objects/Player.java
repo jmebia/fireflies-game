@@ -8,8 +8,11 @@ import java.util.ArrayList;
 public class Player extends GameCharacter {
 
     private int rockLevel = 0;
+    private int rockExp = 0;
+    private int paperExp = 0;
     private int paperLevel = 0;
     private int scissorsLevel = 0;
+    private int scissorsExp = 0;
 
     private ArrayList<Item> inventory = new ArrayList<>();
     private Item equipped = null;
@@ -82,4 +85,35 @@ public class Player extends GameCharacter {
             System.out.println("Item doesn't exist in player's inventory.");
     }
 
+    public int getRockExp() {
+        return rockExp;
+    }
+
+    public void setRockExp(int rockExp) {
+        this.rockExp = rockExp;
+    }
+
+    public int getPaperExp() {
+        return paperExp;
+    }
+
+    public void setPaperExp(int paperExp) {
+        this.paperExp = paperExp;
+    }
+
+    public int getScissorsExp() {
+        return scissorsExp;
+    }
+
+    public void setScissorsExp(int scissorsExp) {
+        this.scissorsExp = scissorsExp;
+    }
+
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setFireflies(int fireflies) {
+        this.fireflies = fireflies;
+    }
 }
