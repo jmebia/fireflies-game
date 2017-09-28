@@ -23,9 +23,8 @@ public class ItemObject2D {
 
         // checks if player is standing above the item
         if (player.getX() == this.x && player.getY() == y) {
-            // checks if player inventory is full
-            if (player.getInventory().size() == 8)
-                isGettable = true;
+            System.out.println("Player is standing in tile");
+            isGettable = true;
         }
 
         return isGettable;

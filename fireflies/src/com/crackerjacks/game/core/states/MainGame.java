@@ -177,8 +177,25 @@ public class MainGame extends GameState {
 
         // check if player is in goal, if yes then generate new dungeon
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
-            if ()
-            generateNewDungeon();
+            if (player.getKeys() == generator.getKeysCoordinates().size()) {
+                generateNewDungeon();
+            }
+        }
+
+        // updates items in the game; checks if player is on top of the items
+        for (ItemObject2D item : items) {
+            if (item.update(player)) {
+                // if item is a key
+                if (item.getItem().getName().equals("Key")) {
+                    player.setKeys(player.getKeys() + 1);
+                    items.remove(item);
+                }
+                // else if it is a weapon crystal or potion
+                else {
+                    player.getInventory().add(item.getItem());
+                    items.remove(item);
+                }
+            }
         }
 
         // DRAW
@@ -426,6 +443,7 @@ public class MainGame extends GameState {
         // draw player in minimap
         graphicsContext.setFill(Color.GREEN);
         graphicsContext.fillRect(player.getX() * 3 + hudx + 10, player.getY() * 3 + hudy + 320, 3, 3);
+
 
     }
 
