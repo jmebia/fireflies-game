@@ -128,7 +128,9 @@ public class Generator implements Serializable {
             }
         }
 
+        System.out.println("Generated " + rooms.size() + " rooms");
         System.out.println("Generating rooms finished...");
+
     }
 
     private void createCorridors() {
@@ -251,6 +253,24 @@ public class Generator implements Serializable {
                 goalPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             }
+        }
+
+        // place keys if rooms are 4 or more
+        if (rooms.size() >= 4) {
+            int keycount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
+
+            // place all keys
+            for (int i = keycount; i > 0; i--) {
+                Room room = tempRooms.get(i);
+
+                Point key = new Point();
+                key.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+
+                keysCoordinates.add(key);
+
+            }
+
         }
 
     }
@@ -569,4 +589,7 @@ public class Generator implements Serializable {
         return designLayer2;
     }
 
+    public ArrayList<Point> getKeysCoordinates() {
+        return keysCoordinates;
+    }
 }
