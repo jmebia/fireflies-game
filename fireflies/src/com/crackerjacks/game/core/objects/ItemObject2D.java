@@ -1,6 +1,8 @@
 package com.crackerjacks.game.core.objects;
 
-public class ItemObject2D {
+import java.io.Serializable;
+
+public class ItemObject2D implements Serializable {
 
     int x;
     int y;
