@@ -442,9 +442,9 @@ public class MainGame extends GameState {
         // damage
         graphicsContext.fillText("Damage: " + player.getDamage() + " + ",hudx + 10, hudy + 60);
         // attack
-        graphicsContext.fillText("Attack: " + player.getAttack() + " + ",hudx + 110, hudy + 60);
+        graphicsContext.fillText("Attack: " + player.getAttack() + " + ",hudx + 130, hudy + 60);
         // defense
-        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + ",hudx + 210, hudy + 60);
+        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + ",hudx + 230, hudy + 60);
 
         // brute
         graphicsContext.fillText("Brute lvl " + player.getLevelBrute(),hudx + 400, hudy + 20);
@@ -457,7 +457,7 @@ public class MainGame extends GameState {
 
         // player's fireflies essence
         // graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 650, hudy + 20);
+        graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 600, hudy + 20);
 
         // level
         graphicsContext.fillText("Player Level " + player.getLevel(),hudx + 150, hudy + 20);
