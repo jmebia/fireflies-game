@@ -436,12 +436,31 @@ public class MainGame extends GameState {
                 ,hudx + 10, hudy + 20);
 
         // equipped item
-        graphicsContext.fillText("Current Item "
+        graphicsContext.fillText("Equipped Item: "
                 + (player.getEquipped()==null? " None" : player.getEquipped().getName()),hudx + 10, hudy + 40);
+
+        // damage
+        graphicsContext.fillText("Damage: " + player.getDamage(),hudx + 10, hudy + 60);
+        // attack
+        graphicsContext.fillText("Attack: " + player.getAttack(),hudx + 110, hudy + 60);
+        // defense
+        graphicsContext.fillText("Defense: "+ (int) player.getDefense(),hudx + 210, hudy + 60);
+
+        // brute
+        graphicsContext.fillText("Brute lvl " + player.getLevelBrute(),hudx + 400, hudy + 20);
+
+        // stable
+        graphicsContext.fillText("Stable lvl " + player.getLevelStable(),hudx + 400, hudy + 40);
+
+        // cut
+        graphicsContext.fillText("Cut lvl " + player.getLevelCut(),hudx + 400, hudy + 60);
 
         // player's fireflies essence
         // graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 250, hudy + 20);
+        graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 650, hudy + 20);
+
+        // level
+        graphicsContext.fillText("Player Level " + player.getLevel(),hudx + 150, hudy + 20);
 
 
 
@@ -525,11 +544,13 @@ public class MainGame extends GameState {
 
         for (Point key : keys) {
             System.out.println("Mayroong keys sa x="+key.x + " y="+key.y);
-            items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(), tileWidth, tileHeight));
+            items.add(new ItemObject2D(new Item("Key"), (int) key.getX(), (int)key.getY(),
+                    tileWidth, tileHeight));
         }
 
         for (Point item : loot) {
-            items.add(new ItemObject2D(new WeaponItem("Something", Type.a), (int) item.getX(), (int)item.getY(), tileWidth, tileHeight));
+            items.add(new ItemObject2D(new WeaponItem("Something", Type.a), (int) item.getX(), (int)item.getY(),
+                    tileWidth, tileHeight));
         }
 
         // set up player elements

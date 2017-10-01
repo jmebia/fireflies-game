@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/InventoryMenu.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/InventoryMenu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,8 +22,8 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="531" column="73" lean-forward="false" selection-start-line="531" selection-start-column="73" selection-end-line="531" selection-end-column="73" />
+            <state relative-caret-position="311">
+              <caret line="462" column="79" lean-forward="false" selection-start-line="462" selection-start-column="79" selection-end-line="462" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -1337,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="531" column="73" lean-forward="false" selection-start-line="531" selection-start-column="73" selection-end-line="531" selection-end-column="73" />
+        <state relative-caret-position="311">
+          <caret line="462" column="79" lean-forward="false" selection-start-line="462" selection-start-column="79" selection-end-line="462" selection-end-column="79" />
           <folding />
         </state>
       </provider>
