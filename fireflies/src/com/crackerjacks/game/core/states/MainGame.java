@@ -503,9 +503,15 @@ public class MainGame extends GameState {
         graphicsContext.strokeRect(hudx + (hudw / 2 + 50), hudy + 410, 280, 120);
         // draw texts
         graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL, 10));
-        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setFill(Color.GREY);
 
         for (int i = 0; i < Global.getHistory().size(); i++) {
+
+            if (i > 7)
+                graphicsContext.setFill(Color.YELLOW);
+            else if (i > 2)
+                graphicsContext.setFill(Color.LIGHTYELLOW);
+
             graphicsContext.fillText(Global.getHistory().get(i), hudx + (hudw / 2 + 50), hudy + 410 + 10 + i * 11);
         }
 
