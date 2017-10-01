@@ -60,31 +60,7 @@ public class Player extends GameCharacter {
         else
             System.out.println("Item doesn't exist in player's inventory.");
     }
-
-    public int getRockExp() {
-        return rockExp;
-    }
-
-    public void setRockExp(int rockExp) {
-        this.rockExp = rockExp;
-    }
-
-    public int getPaperExp() {
-        return paperExp;
-    }
-
-    public void setPaperExp(int paperExp) {
-        this.paperExp = paperExp;
-    }
-
-    public int getScissorsExp() {
-        return scissorsExp;
-    }
-
-    public void setScissorsExp(int scissorsExp) {
-        this.scissorsExp = scissorsExp;
-    }
-
+    
     public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
     }
