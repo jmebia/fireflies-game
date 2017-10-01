@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.states;
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.objects.Item;
 import com.crackerjacks.game.core.objects.Player;
+import com.crackerjacks.game.core.objects.WeaponItem;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -75,7 +76,14 @@ public class InventoryMenu extends GameState {
 
             // use or equip item
             else if (e.getCode() == KeyCode.ENTER) {
+                if (maxCounter != -1) {
+                    Item usable = inventory.get(currentMarker);
 
+                    // do the equip method if item is a weapon
+                    if (usable instanceof WeaponItem) {
+                        player.setEquipped(usable);
+                    }
+                }
             }
 
             // discard item
