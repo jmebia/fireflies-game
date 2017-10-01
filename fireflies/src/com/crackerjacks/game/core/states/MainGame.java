@@ -122,7 +122,6 @@ public class MainGame extends GameState {
             System.out.println("Generating Dungeon");
             generateNewDungeon();
 
-
         } else {
             Save save = Global.getSave();
 
