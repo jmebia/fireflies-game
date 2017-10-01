@@ -410,7 +410,6 @@ public class MainGame extends GameState {
                     graphicsContext.fillRect(x * tileWidth + startX, y * tileHeight + startY,
                             tileHeight, tileWidth);
                 }
-
             }
         }
 
@@ -440,11 +439,14 @@ public class MainGame extends GameState {
                 + (player.getEquipped()==null? " None" : player.getEquipped().getName()),hudx + 10, hudy + 40);
 
         // damage
-        graphicsContext.fillText("Damage: " + player.getDamage() + " + ",hudx + 10, hudy + 60);
+        graphicsContext.fillText("Damage: " + player.getDamage() + " + " + player.getDamageMod()
+                ,hudx + 10,hudy + 60);
         // attack
-        graphicsContext.fillText("Attack: " + player.getAttack() + " + ",hudx + 130, hudy + 60);
+        graphicsContext.fillText("Attack: " + player.getAttack() + " + " + player.getAttackMod()
+                ,hudx + 130, hudy + 60);
         // defense
-        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + ",hudx + 230, hudy + 60);
+        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + " + player.getDefenseMod()
+                ,hudx + 230, hudy + 60);
 
         // brute
         graphicsContext.fillText("Brute lvl " + player.getLevelBrute(),hudx + 400, hudy + 20);

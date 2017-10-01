@@ -1,5 +1,7 @@
 package com.crackerjacks.game.core.objects;
 
+import com.crackerjacks.game.core.animator.Sprite;
+
 import java.io.Serializable;
 
 public class ItemObject2D implements Serializable {
@@ -8,6 +10,8 @@ public class ItemObject2D implements Serializable {
     int y;
     int width;
     int height;
+
+    Sprite sprite = null;
 
     Item item;
 
@@ -69,5 +73,13 @@ public class ItemObject2D implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
     }
 }
