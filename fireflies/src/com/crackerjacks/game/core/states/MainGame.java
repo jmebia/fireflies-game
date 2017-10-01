@@ -22,6 +22,8 @@ import java.util.Comparator;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Created by jm on 5/23/17.
@@ -428,19 +430,21 @@ public class MainGame extends GameState {
         graphicsContext.fillRect(hudx, hudy, hudw, hudh);
 
         // health
+        graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("Health ",hudx + 10, hudy + 20);
-        // player's fireflies essence
-        graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText("FireFlies ", hudx + 250, hudy + 20);
+        graphicsContext.fillText("Health " + player.getCurrentHealth()+"/"+player.getMaxHealth()
+                ,hudx + 10, hudy + 20);
+
+        // equipped item
+        graphicsContext.fillText("Current Item "
+                + (player.getEquipped()==null? " None" : player.getEquipped().getName()),hudx + 10, hudy + 40);
 
         // player's fireflies essence
-        graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText(""+player.getFireflies(), hudx + 330, hudy + 20);
+        // graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 250, hudy + 20);
 
-        // health
-        graphicsContext.fillText(player.getCurrentHealth()+"/"+player.getMaxHealth()
-                , hudx + 80, hudy + 20);
+
+
 
         // draw mini map
         for (int i = 0; i < tileMap.length; i++) {
@@ -525,7 +529,7 @@ public class MainGame extends GameState {
         }
 
         for (Point item : loot) {
-            items.add(new ItemObject2D(new Item("Something"), (int) item.getX(), (int)item.getY(), tileWidth, tileHeight));
+            items.add(new ItemObject2D(new WeaponItem("Something", Type.a), (int) item.getX(), (int)item.getY(), tileWidth, tileHeight));
         }
 
         // set up player elements

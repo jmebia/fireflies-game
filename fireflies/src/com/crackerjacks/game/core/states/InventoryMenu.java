@@ -76,11 +76,13 @@ public class InventoryMenu extends GameState {
 
             // use or equip item
             else if (e.getCode() == KeyCode.ENTER) {
-                if (maxCounter != -1) {
+                System.out.println("Pressed Enter");
+                // check if an item exists in an inventory
+                if (maxCounter > -1) {
                     Item usable = inventory.get(currentMarker);
-
                     // do the equip method if item is a weapon
                     if (usable instanceof WeaponItem) {
+                        System.out.println(usable.getName());
                         player.setEquipped(usable);
                     }
                 }
@@ -88,7 +90,16 @@ public class InventoryMenu extends GameState {
 
             // discard item
             else if (e.getCode() == KeyCode.DELETE) {
+                // check if an item exists in the inventory
+                if (maxCounter > -1) {
+                    Item usable = inventory.get(currentMarker);
 
+                    // do the equip method if item is a weapon
+                    if (usable instanceof WeaponItem) {
+                        System.out.println(usable.getName());
+                        player.setEquipped(usable);
+                    }
+                }
             }
 
             // exit inventory
