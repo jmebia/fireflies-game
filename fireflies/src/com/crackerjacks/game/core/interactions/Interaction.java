@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.interactions;
 
+import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
@@ -38,7 +39,8 @@ public class Interaction {
             // if damage is less than 0 then the attack will be equal to 0 else it will be equal
             // to the total damage value
             defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0 ? 0 : damage));
-            System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
+            System.out.println(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
+            Global.addHistoryText(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
         }
     }
 
@@ -82,6 +84,7 @@ public class Interaction {
             // to the total damage value
             defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0 ? 0 : damage));
             System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
+            Global.addHistoryText(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
         }
     }
 

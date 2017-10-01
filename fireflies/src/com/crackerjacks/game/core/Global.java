@@ -2,11 +2,14 @@ package com.crackerjacks.game.core;
 
 import com.crackerjacks.game.core.io.Save;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Global {
 
     private static Save save = null;
+
+    private static ArrayList<String> history = new ArrayList<>();
 
     private static String saveFile = System.getProperty("user.home") + "\\fireflies.sav";
 
@@ -22,7 +25,15 @@ public class Global {
         Global.save = save;
     }
 
-    LinkedList<String> history = new LinkedList<>();
+    public static ArrayList<String> getHistory() {
+        return history;
+    }
 
+    public static void addHistoryText(String text) {
+        if (history.size() == 10) {
+            history.remove(history.get(0));
+            history.add(text);
+        }
+    }
 
 }
