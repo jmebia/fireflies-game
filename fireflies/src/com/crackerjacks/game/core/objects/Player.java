@@ -7,11 +7,8 @@ import java.util.ArrayList;
 
 public class Player extends GameCharacter {
 
-    private int rockLevel = 0;
     private int rockExp = 0;
     private int paperExp = 0;
-    private int paperLevel = 0;
-    private int scissorsLevel = 0;
     private int scissorsExp = 0;
 
     private int keys = 0;
@@ -52,29 +49,6 @@ public class Player extends GameCharacter {
         return inventory;
     }
 
-    public int getRockLevel() {
-        return rockLevel;
-    }
-
-    public void setRockLevel(int rockLevel) {
-        this.rockLevel = rockLevel;
-    }
-
-    public int getPaperLevel() {
-        return paperLevel;
-    }
-
-    public void setPaperLevel(int paperLevel) {
-        this.paperLevel = paperLevel;
-    }
-
-    public int getScissorsLevel() {
-        return scissorsLevel;
-    }
-
-    public void setScissorsLevel(int scissorsLevel) {
-        this.scissorsLevel = scissorsLevel;
-    }
 
     public Item getEquipped() {
         return equipped;

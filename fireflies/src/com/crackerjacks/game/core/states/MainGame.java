@@ -440,11 +440,11 @@ public class MainGame extends GameState {
                 + (player.getEquipped()==null? " None" : player.getEquipped().getName()),hudx + 10, hudy + 40);
 
         // damage
-        graphicsContext.fillText("Damage: " + player.getDamage(),hudx + 10, hudy + 60);
+        graphicsContext.fillText("Damage: " + player.getDamage() + " + ",hudx + 10, hudy + 60);
         // attack
-        graphicsContext.fillText("Attack: " + player.getAttack(),hudx + 110, hudy + 60);
+        graphicsContext.fillText("Attack: " + player.getAttack() + " + ",hudx + 110, hudy + 60);
         // defense
-        graphicsContext.fillText("Defense: "+ (int) player.getDefense(),hudx + 210, hudy + 60);
+        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + ",hudx + 210, hudy + 60);
 
         // brute
         graphicsContext.fillText("Brute lvl " + player.getLevelBrute(),hudx + 400, hudy + 20);
