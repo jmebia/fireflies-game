@@ -210,7 +210,7 @@ public class MainGame extends GameState {
         // reset screen
         graphicsContext.setFill(Color.BLACK);
         // graphicsContext.drawImage(background,0, 0, 1920, 1920);
-        graphicsContext.fillRect(200, 200, 3000, 3000);
+        graphicsContext.fillRect(150, 150, 3000, 3000);
 
         // update tile type where the enemies and player are standing
         for (Enemy e : enemies) {
@@ -473,7 +473,8 @@ public class MainGame extends GameState {
         graphicsContext.fillText("Player Level " + player.getLevel(),hudx + 150, hudy + 20);
 
 
-        // draw mini map
+        // MINI MAP
+        // draw dungeon mini map
         for (int i = 0; i < tileMap.length; i++) {
             for (int j = 0; j < tileMap.length; j++) {
                 if (tileMap[j][i] > 0 && fogMap[j][i] > 0) {
@@ -482,9 +483,21 @@ public class MainGame extends GameState {
                 }
             }
         }
-        // draw player in minimap
+        // draw player in mini map
         graphicsContext.setFill(Color.GREEN);
         graphicsContext.fillRect(player.getX() * 3 + hudx + 10, player.getY() * 3 + hudy + 320, 3, 3);
+
+        // MESSAGE BOX
+        // draw main box
+        graphicsContext.setFill(new Color(0, 0, 0, 0.5));
+        graphicsContext.fillRect(hudx + (hudw / 2 + 20), hudy + 400, 360, 120);
+        // draw box border
+        graphicsContext.setStroke(Color.WHITE);
+        graphicsContext.strokeRect(hudx + (hudw / 2 + 50), hudy + 400, 280, 120);
+        // draw texts
+        graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL, 10));
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Gemu starto Gemu starto Gemu starto Gemu starto Gemu starto Gemu starto Gemu starto Gemu starto",hudx + (hudw / 2 + 50), hudy + 400);
 
     }
 

@@ -2,6 +2,8 @@ package com.crackerjacks.game.core;
 
 import com.crackerjacks.game.core.io.Save;
 
+import java.util.LinkedList;
+
 public class Global {
 
     private static Save save = null;
@@ -20,6 +22,7 @@ public class Global {
         Global.save = save;
     }
 
+    LinkedList<String> history = new LinkedList<>();
 
 
 }
