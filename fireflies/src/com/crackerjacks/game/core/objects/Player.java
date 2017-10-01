@@ -18,7 +18,7 @@ public class Player extends GameCharacter {
     private int keys = 0;
 
     private ArrayList<Item> inventory = new ArrayList<>();
-    private Item equipped = null;
+    private WeaponItem equipped = null;
 
     private int fireflies = 0;
 
@@ -58,11 +58,15 @@ public class Player extends GameCharacter {
         return equipped;
     }
 
-    public void setEquipped(Item item) {
-        if (inventory.contains(item))
-            equipped = item;
+    public void setEquipped(WeaponItem weaponItem) {
+        if (inventory.contains(weaponItem))
+            equipped = weaponItem;
         else
             System.out.println("Item doesn't exist in player's inventory.");
+    }
+
+    public void useItem(PotionItem potionItem) {
+
     }
 
     public void setInventory(ArrayList<Item> inventory) {

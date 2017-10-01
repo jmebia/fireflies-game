@@ -122,8 +122,6 @@ public class MainGame extends GameState {
             System.out.println("Generating Dungeon");
             generateNewDungeon();
 
-            // place enemies
-            enemies.addAll(generator.getEnemies());
 
         } else {
             Save save = Global.getSave();
@@ -449,23 +447,31 @@ public class MainGame extends GameState {
         graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + " + player.getDefenseMod()
                 ,hudx + 230, hudy + 60);
 
-        // brute
-        graphicsContext.fillText("Brute lvl " + player.getLevelBrute(),hudx + 400, hudy + 20);
+        // brute lvl and exp
+        graphicsContext.fillText("Brute lvl " + player.getLevelBrute() + " | "
+                        + player.getExperienceBrute() + " exp",hudx + 400, hudy + 20);
 
-        // stable
-        graphicsContext.fillText("Stable lvl " + player.getLevelStable(),hudx + 400, hudy + 40);
+        // stable lvl and exp
+        graphicsContext.fillText("Stable lvl " + player.getLevelStable() + " | "
+                + player.getExperienceStable() + " exp",hudx + 400, hudy + 40);
 
-        // cut
-        graphicsContext.fillText("Cut lvl " + player.getLevelCut(),hudx + 400, hudy + 60);
+        // cut lvl and exp
+        graphicsContext.fillText("Cut lvl " + player.getLevelCut() + " | "
+                + player.getExperienceCut() + " exp",hudx + 400, hudy + 60);
 
         // player's fireflies essence
         // graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText("FireFlies " + player.getFireflies(), hudx + 600, hudy + 20);
 
+        // check if keys are required to beat the level
+        if (generator.getKeysCoordinates().size() > 0) {
+            graphicsContext.fillText("Keys: " + player.getKeys() + "/" + generator.getKeysCoordinates().size(),
+                    hudx + 600, hudy + 40);
+        } else {
+            graphicsContext.fillText("No keys required",hudx + 600, hudy + 40);
+        }
         // level
         graphicsContext.fillText("Player Level " + player.getLevel(),hudx + 150, hudy + 20);
-
-
 
 
         // draw mini map

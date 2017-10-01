@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.states;
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.objects.Item;
 import com.crackerjacks.game.core.objects.Player;
+import com.crackerjacks.game.core.objects.PotionItem;
 import com.crackerjacks.game.core.objects.WeaponItem;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
@@ -83,7 +84,13 @@ public class InventoryMenu extends GameState {
                     // do the equip method if item is a weapon
                     if (usable instanceof WeaponItem) {
                         System.out.println(usable.getName());
-                        player.setEquipped(usable);
+                        player.setEquipped((WeaponItem) usable);
+                    }
+
+                    // else if it is a potion item
+                    else if (usable instanceof PotionItem) {
+                        System.out.println(usable.getName());
+                        player.useItem((PotionItem) usable);
                     }
                 }
             }
@@ -94,11 +101,11 @@ public class InventoryMenu extends GameState {
                 if (maxCounter > -1) {
                     Item usable = inventory.get(currentMarker);
 
-                    // do the equip method if item is a weapon
-                    if (usable instanceof WeaponItem) {
-                        System.out.println(usable.getName());
-                        player.setEquipped(usable);
-                    }
+                    player.getInventory().remove(usable);
+                    System.out.println("Removed " + usable.getName() + " from your inventory.");
+                    inventory = player.getInventory();
+                    maxCounter = inventory.size() - 1;
+                    currentMarker = minCounter;
                 }
             }
 
