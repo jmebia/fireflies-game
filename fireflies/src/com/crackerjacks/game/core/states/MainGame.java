@@ -185,8 +185,11 @@ public class MainGame extends GameState {
 
         // check if player is in goal, if yes then generate new dungeon
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
+
             if (player.getKeys() == generator.getKeysCoordinates().size()) {
-                generateNewDungeon();
+                if (!inputHandler.isDisabled())
+                    player.setKeys(0);
+                    generateNewDungeon();
             }
         }
 
@@ -207,7 +210,7 @@ public class MainGame extends GameState {
                     if (player.getInventory().size() < 8) {
                         player.getInventory().add(item.getItem());
                         items.remove(item);
-                        Global.addHistoryText(player.getName().toUpperCase() + " picked a " + item.getItem().getName().toUpperCase());
+                        Global.addHistoryText(player.getName().toUpperCase() + " picked up " + item.getItem().getName().toUpperCase());
                     }
                 }
             }
