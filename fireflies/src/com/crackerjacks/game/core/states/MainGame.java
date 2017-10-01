@@ -135,6 +135,7 @@ public class MainGame extends GameState {
             // initialize tile map
             tileMap = save.getTileMap();
             designMap = save.getDesignMap();
+            designMap2 = save.getDesignMap2();
             fogMap = save.getFogMap();
 
             items = save.getItems();
@@ -496,6 +497,7 @@ public class MainGame extends GameState {
         save.setDeadEnemies(deadEnemies);
         save.setGenerator(generator);
         save.setItems(items);
+        save.setDesignMap2(designMap2);
 
         System.out.println(Global.getSave());
         Global.setSave(save);

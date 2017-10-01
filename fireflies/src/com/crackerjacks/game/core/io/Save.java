@@ -26,6 +26,7 @@ public class Save implements Serializable {
     // map
     private int[][] tileMap = null;
     private int[][] designMap = null;
+    private int[][] designMap2 = null;
     private int[][] fogMap = null;
 
     public Player getPlayer() {
@@ -90,5 +91,13 @@ public class Save implements Serializable {
 
     public void setItems(ArrayList<ItemObject2D> items) {
         this.items = items;
+    }
+
+    public int[][] getDesignMap2() {
+        return designMap2;
+    }
+
+    public void setDesignMap2(int[][] designMap2) {
+        this.designMap2 = designMap2;
     }
 }

@@ -51,7 +51,7 @@ public class InventoryMenu extends GameState {
 
             //navigate through the inventory
             if (e.getCode() == KeyCode.DOWN) {
-                if (currentMarker + 1 < maxCounter) {
+                if (currentMarker + 1 <= maxCounter) {
                     currentMarker++;
                 } else if (currentMarker + 1 > maxCounter) {
                     currentMarker = minCounter;
@@ -63,7 +63,7 @@ public class InventoryMenu extends GameState {
             }
 
             else if (e.getCode() == KeyCode.UP) {
-                if (currentMarker - 1 > minCounter) {
+                if (currentMarker - 1 >= minCounter) {
                     currentMarker--;
                 } else if (currentMarker - 1 < minCounter) {
                     currentMarker = maxCounter;

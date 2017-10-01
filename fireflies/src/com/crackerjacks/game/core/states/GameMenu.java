@@ -35,7 +35,7 @@ public class GameMenu extends GameState {
         scene.setOnKeyPressed(event -> {
 
             if (event.getCode() == KeyCode.ESCAPE) {
-                System.out.println("Pressed ENTER");
+                System.out.println("Pressed Escape");
                 GameStateManager.removeLast();
             }
 
