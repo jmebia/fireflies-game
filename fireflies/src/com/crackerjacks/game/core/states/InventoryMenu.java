@@ -50,19 +50,27 @@ public class InventoryMenu extends GameState {
 
             //navigate through the inventory
             if (e.getCode() == KeyCode.DOWN) {
-                if (currentMarker++ <= maxCounter) {
+                if (currentMarker + 1 < maxCounter) {
                     currentMarker++;
-                } else if (currentMarker++ > maxCounter) {
+                } else if (currentMarker + 1 > maxCounter) {
                     currentMarker = minCounter;
                 }
+
+                System.out.println("MinCounter = " + minCounter);
+                System.out.println("MaxCounter = " + maxCounter);
+                System.out.println("CurrentCounter = " + currentMarker);
             }
 
             else if (e.getCode() == KeyCode.UP) {
-                if (currentMarker-- <= maxCounter) {
+                if (currentMarker - 1 > minCounter) {
                     currentMarker--;
-                } else if (currentMarker-- > maxCounter) {
+                } else if (currentMarker - 1 < minCounter) {
                     currentMarker = maxCounter;
                 }
+
+                System.out.println("MinCounter = " + minCounter);
+                System.out.println("MaxCounter = " + maxCounter);
+                System.out.println("CurrentCounter = " + currentMarker);
             }
 
             // use or equip item
@@ -87,9 +95,6 @@ public class InventoryMenu extends GameState {
     @Override
     void update(long time) {
 
-        // TODO: Display inventory items
-
-
         // draw
         hudX = (int) (scene.getCamera().getTranslateX() - 310);
         hudY = (int) (scene.getCamera().getTranslateY() - 160);
@@ -100,6 +105,23 @@ public class InventoryMenu extends GameState {
         // main bg
         gc.setFill(new Color(0f, 0f, 1f, 0.3));
         gc.fillRect(hudX, hudY, hudW, hudH);
+
+
+        // TODO: Display inventory items
+        for (int i = 0; i < inventory.size(); i++) {
+
+            // get item
+            Item item = inventory.get(i);
+
+            // print item name in inventory
+            gc.setFill(Color.WHITE);
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL,
+                    (currentMarker == i? 20 : 12)));
+            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 15);
+
+        }
+
+
 
         // border
         gc.setStroke(Color.WHITE);
