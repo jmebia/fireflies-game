@@ -40,7 +40,8 @@ public class Interaction {
             // to the total damage value
             defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0 ? 0 : damage));
             System.out.println(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
-            Global.addHistoryText(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
+            Global.addHistoryText(attacker.getName().toUpperCase() + " dealt "
+                    + damage + " damage to " + defender.getName().toUpperCase());
         }
     }
 
@@ -84,7 +85,8 @@ public class Interaction {
             // to the total damage value
             defender.setCurrentHealth(defender.getCurrentHealth() - (damage < 0 ? 0 : damage));
             System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
-            Global.addHistoryText(attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
+            Global.addHistoryText(attacker.getName().toUpperCase() + " dealt "
+                    + damage + " damage to " + defender.getName().toUpperCase());
         }
     }
 

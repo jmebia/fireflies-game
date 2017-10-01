@@ -35,7 +35,7 @@ public class MainGame extends GameState {
     private PerspectiveCamera camera;
 
     // draw list
-    ArrayList<GameCharacter> charDrawList = new ArrayList();
+    private ArrayList<GameCharacter> charDrawList = new ArrayList();
 
     // elements for the dungeon map
     private int[][] tileMap;
@@ -48,12 +48,12 @@ public class MainGame extends GameState {
     private int[][] designMap2;
 
     // how fast the player slides from one tile to another
-    int playerSpeed = 4;
+    private int playerSpeed = 4;
 
-    int startX = 500;
-    int startY = 500;
+    private int startX = 500;
+    private int startY = 500;
 
-    int YCharmModifier = -28;
+    private int YCharmModifier = -28;
 
 
     // tile map for the fog of war
@@ -76,18 +76,19 @@ public class MainGame extends GameState {
     private ArrayList<Enemy> deadEnemies = new ArrayList<>();
 
     // goal
-    Point goal;
+    private Point goal;
+    private boolean isOnGoal = false;
 
     // items
-    ArrayList<ItemObject2D> items = new ArrayList<>();
+    private ArrayList<ItemObject2D> items = new ArrayList<>();
 
     // player inputHandler
     private InputHandler inputHandler;
     private MainGameController mainGameController;
 
     // images for the sprites
-    Image characterSprites;
-    Image tileSprites;
+    private Image characterSprites;
+    private Image tileSprites;
     // Image background;
 
     // identifies if user loaded an existing save or a new game
@@ -197,6 +198,7 @@ public class MainGame extends GameState {
                 if (item.getItem().getName().equals("Key")) {
                     player.setKeys(player.getKeys() + 1);
                     items.remove(item);
+                    Global.addHistoryText(player.getName().toUpperCase() + " got a KEY!");
                     System.out.println("Keys = " + player.getKeys());
                 }
                 // else if it is a weapon crystal or potion
@@ -205,9 +207,7 @@ public class MainGame extends GameState {
                     if (player.getInventory().size() < 8) {
                         player.getInventory().add(item.getItem());
                         items.remove(item);
-                        for (Item it : player.getInventory()) {
-                            System.out.println("Item: " + it.getName());
-                        }
+                        Global.addHistoryText(player.getName().toUpperCase() + " picked a " + item.getItem().getName().toUpperCase());
                     }
                 }
             }
@@ -507,9 +507,9 @@ public class MainGame extends GameState {
 
         for (int i = 0; i < Global.getHistory().size(); i++) {
 
-            if (i > 7)
+            if (i == 9)
                 graphicsContext.setFill(Color.YELLOW);
-            else if (i > 2)
+            else if (i > 4)
                 graphicsContext.setFill(Color.LIGHTYELLOW);
 
             graphicsContext.fillText(Global.getHistory().get(i), hudx + (hudw / 2 + 50), hudy + 410 + 10 + i * 11);
