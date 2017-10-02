@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.input;
 
+import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.GameCharacter;
@@ -331,6 +332,8 @@ public class MainGameController {
                     }
                 }
             }
+        } else {
+            Global.addHistoryText(player.getName().toUpperCase() + " is DISARMED");
         }
 
         updateEnemy(enemies, player, tileMap);

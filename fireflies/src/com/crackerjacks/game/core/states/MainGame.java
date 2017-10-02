@@ -632,10 +632,10 @@ public class MainGame extends GameState {
 
         player.setSprite(playerSprite);
 
-        // FOR DUBUGGING
+        /*// FOR DUBUGGING
         player.setBleed(5);
         player.setBleedDamage(5);
-        player.setDisarm(5);
+        player.setDisarm(40);*/
 
         // set sprites for enemies
         for (Enemy enemy : enemies) {

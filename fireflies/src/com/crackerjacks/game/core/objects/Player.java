@@ -1,8 +1,10 @@
 package com.crackerjacks.game.core.objects;
 
+import com.crackerjacks.game.core.Global;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import javax.xml.bind.annotation.XmlElementDecl;
 import java.util.ArrayList;
 
 public class Player extends GameCharacter {
@@ -159,6 +161,7 @@ public class Player extends GameCharacter {
             // subtract health with the bleed damage
             this.setCurrentHealth(getCurrentHealth() - getBleedDamage());
             this.setBleed(getBleed() - 1);
+            Global.addHistoryText(getName().toUpperCase() + " bleeds " + getBleedDamage() + " HP");
         }
     }
 }
