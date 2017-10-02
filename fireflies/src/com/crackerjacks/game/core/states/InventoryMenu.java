@@ -7,6 +7,7 @@ import com.crackerjacks.game.core.objects.PotionItem;
 import com.crackerjacks.game.core.objects.WeaponItem;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,6 +32,9 @@ public class InventoryMenu extends GameState {
     private int maxCounter = 7; // up to 8 inventory slots
     private int minCounter = 0;
 
+    // sprite image
+    private Image itemSprites;
+
     // player
     Player player;
     ArrayList<Item> inventory;
@@ -48,6 +52,8 @@ public class InventoryMenu extends GameState {
         inventory = player.getInventory();
         maxCounter = inventory.size() - 1;
 
+        ClassLoader classLoader = getClass().getClassLoader();
+        itemSprites = new Image(classLoader.getResource("sprites/char-spritesheet.png").toString());
 
         scene.setOnKeyPressed(e -> {
 
@@ -156,6 +162,19 @@ public class InventoryMenu extends GameState {
             }
 
             gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 22);
+
+            // draw item sprite
+            gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
+                    hudY + 50, 48, 48);
+
+            // draw description
+            if (item instanceof WeaponItem) {
+                
+
+            } else if (item instanceof PotionItem) {
+
+
+            }
 
         }
 

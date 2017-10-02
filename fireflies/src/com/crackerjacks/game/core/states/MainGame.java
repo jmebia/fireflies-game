@@ -608,6 +608,7 @@ public class MainGame extends GameState {
                     tileWidth, tileHeight));
         }
 
+
         // set up player elements
         if (isNewGame) {
             player = new Player();
