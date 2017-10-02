@@ -5,6 +5,8 @@ import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
 
+import java.util.Random;
+
 /**
  * Created by jm on 6/1/17.
  */
@@ -18,22 +20,45 @@ public class Interaction {
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
 
+            // get chance for status effect
+            double chance = Math.random() * 100;
+
             // check native attack and defense properties
             if (attack < defense)
                 damage -= defense - attack;
+
             // check elements, reduce or increment damage depending on compared element types
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
                 // TODO: brute damage computation
 
+
+                // determines if stun effect will take place
+                if ( (chance -= attacker.getStunChance()) < 0 ) {
+                    defender.setStun(new Random().nextInt(3 - 1) + 1);
+                }
+
             }
             // stable
             else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
                 // TODO: stable damage computation
+
+                // determines if disarm effect will take place
+                if ( (chance -= attacker.getDisarmChance()) < 0 ) {
+                    defender.setDisarm(new Random().nextInt(3 - 1) + 1);
+                }
+
             }
             //cut
             else if (attacker.getTechnique().getId().equals(Technique.cut.getId())) {
                 // TODO: cut damage computation
+
+                // determines if bleed effect will take place
+                if ( (chance -= attacker.getBleedChance()) < 0 ) {
+                    defender.setBleed(new Random().nextInt(4 - 1) + 1);
+                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
+                }
+
             }
 
             // if damage is less than 0 then the attack will be equal to 0 else it will be equal
@@ -54,6 +79,9 @@ public class Interaction {
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
 
+            // get chance for status effect
+            double chance = Math.random() * 100;
+
             // check native attack and defense properties
             if (attack < defense)
                 damage -= defense - attack;
@@ -65,20 +93,41 @@ public class Interaction {
                     damage -= elementalPenalty;
                 else if (defender.getTechnique().getId().equals(Technique.cut))
                     damage += elementalPenalty;
+
+                // determines if stun effect will take place
+                if ( (chance -= attacker.getStunChance()) < 0 ) {
+                    defender.setStun(new Random().nextInt(3 - 1) + 1);
+                }
+
             }
+
             // if stable is the attack element of the player
             if (attackElementID.equals(Technique.stable.getId())) {
                 if (defender.getTechnique().getId().equals(Technique.cut))
                     damage -= elementalPenalty;
                 else if (defender.getTechnique().getId().equals(Technique.brute))
                     damage += elementalPenalty;
+
+                // determines if disarm effect will take place
+                if ( (chance -= attacker.getDisarmChance()) < 0 ) {
+                    defender.setDisarm(new Random().nextInt(3 - 1) + 1);
+                }
+
             }
+
             // if cut is the attack element of the player
             if (attackElementID.equals(Technique.cut.getId())) {
                 if (defender.getTechnique().getId().equals(Technique.brute))
                     damage -= elementalPenalty;
                 else if (defender.getTechnique().getId().equals(Technique.stable))
                     damage += elementalPenalty;
+
+                // determines if bleed effect will take place
+                if ( (chance -= attacker.getBleedChance()) < 0 ) {
+                    defender.setBleed(new Random().nextInt(4 - 1) + 1);
+                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
+                }
+
             }
 
             // if damage is less than 0 then the attack will be equal to 0 else it will be equal

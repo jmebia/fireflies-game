@@ -46,6 +46,10 @@ public class GameCharacter implements Serializable{
 
     private int bleedDamage;
 
+    private double stunChance;
+    private double disarmChance;
+    private double bleedChance;
+
     // 2D position
     private double X;
     private double Y;
@@ -71,6 +75,10 @@ public class GameCharacter implements Serializable{
         this.disarm = 0;
 
         bleedDamage = 0;
+
+        bleedChance = 0.01;
+        stunChance = 0.01;
+        disarmChance = 0.01;
 
         // the base damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
@@ -269,5 +277,29 @@ public class GameCharacter implements Serializable{
 
     public void setExperienceCut(double experienceCut) {
         this.experienceCut = experienceCut;
+    }
+
+    public double getStunChance() {
+        return stunChance;
+    }
+
+    public void setStunChance(double stunChance) {
+        this.stunChance = stunChance;
+    }
+
+    public double getDisarmChance() {
+        return disarmChance;
+    }
+
+    public void setDisarmChance(double disarmChance) {
+        this.disarmChance = disarmChance;
+    }
+
+    public double getBleedChance() {
+        return bleedChance;
+    }
+
+    public void setBleedChance(double bleedChance) {
+        this.bleedChance = bleedChance;
     }
 }
