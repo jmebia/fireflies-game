@@ -51,6 +51,8 @@ public class MainGameController {
                         if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
                             player.setY(tempY);
                         }
+                    } else {
+                        Global.addHistoryText(player.getName().toUpperCase() + " is STUNNED");
                     }
 
                     updateEnemy(enemies, player, tileMap);
@@ -73,6 +75,8 @@ public class MainGameController {
                         if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
                             player.setY(tempY);
                         }
+                    } else {
+                        Global.addHistoryText(player.getName().toUpperCase() + " is STUNNED");
                     }
 
                     updateEnemy(enemies, player, tileMap);
@@ -99,6 +103,8 @@ public class MainGameController {
                         if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
                             player.setX(tempX);
                         }
+                    } else {
+                        Global.addHistoryText(player.getName().toUpperCase() + " is STUNNED");
                     }
 
                     updateEnemy(enemies, player, tileMap);
@@ -125,6 +131,8 @@ public class MainGameController {
                         if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
                             player.setX(tempX);
                         }
+                    } else {
+                        Global.addHistoryText(player.getName().toUpperCase() + " is STUNNED");
                     }
 
                     updateEnemy(enemies, player, tileMap);
@@ -134,8 +142,14 @@ public class MainGameController {
 
                 // initiate attack move
                 else if (input.getLast().equals("SPACE")) {
-                    attackMode = true;
-                    System.out.println("ATTACK MODE ON");
+                    if (player.getStun() <= 0) {
+                        attackMode = true;
+                        System.out.println("ATTACK MODE ON");
+                    } else {
+                        Global.addHistoryText(player.getName().toUpperCase() + " is STUNNED");
+                        updateEnemy(enemies, player, tileMap);
+                        player.updateStatus();
+                    }
                 }
 
                 // open in-game sub states
