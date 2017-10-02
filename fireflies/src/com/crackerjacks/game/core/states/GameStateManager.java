@@ -31,4 +31,13 @@ public class GameStateManager {
         stateList.getLast().onEnter();
     }
 
+    public static void removeLast2() {
+        stateList.getLast().onExit();
+        stateList.removeLast();
+        stateList.getLast().onEnter();
+        stateList.getLast().onExit();
+        stateList.removeLast();
+        stateList.getLast().onEnter();
+    }
+
 }

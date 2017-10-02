@@ -3,6 +3,7 @@ package com.crackerjacks.game.core.states;
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.io.Save;
 import com.crackerjacks.game.core.objects.Player;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -68,7 +69,15 @@ public class GameMenu extends GameState {
 
             // trigger command selected
             else if (event.getCode() == KeyCode.ENTER) {
+                // main menu
+                if (currentMarker == 0) {
+                    GameStateManager.removeLast2();
+                }
 
+                // quit game
+                else if (currentMarker == 1) {
+                    Platform.exit();
+                }
             }
 
             // exit game menu
@@ -88,19 +97,21 @@ public class GameMenu extends GameState {
 
         hudX = (int) (scene.getCamera().getTranslateX() - 310);
         hudY = (int) (scene.getCamera().getTranslateY() + 30);
-        hudW = 150;
-        hudH = 150;
+        hudW = 170;
+        hudH = 120;
 
         // main bg
         gc.setFill(new Color(0f, 0f, 1f, 0.3));
         gc.fillRect(hudX, hudY, hudW, hudH);
 
         // draw texts
-        gc.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
-        gc.setFill((currentMarker==0? Color.WHITE : Color.LIGHTGRAY));
-        gc.fillText("Quit to Main Menu", hudX + 20, hudY + 40);
-        gc.setFill((currentMarker==1? Color.WHITE : Color.LIGHTGRAY));
-        gc.fillText("Quit Game", hudX + 20, hudY + 70);
+        gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==0? 16 : 14)));
+        gc.setFill((currentMarker==0? Color.YELLOW : Color.LIGHTGRAY));
+        gc.fillText("Main Menu", hudX + 28, hudY + 40);
+
+        gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==1? 16 : 14)));
+        gc.setFill((currentMarker==1? Color.YELLOW : Color.LIGHTGRAY));
+        gc.fillText("Quit Game", hudX + 30, hudY + 80);
 
         // border
         gc.setStroke(Color.WHITE);
