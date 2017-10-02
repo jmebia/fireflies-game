@@ -142,4 +142,18 @@ public class Player extends GameCharacter {
     public void setRegenTurns(int regenTurns) {
         this.regenTurns = regenTurns;
     }
+
+
+    public void updateStatus() {
+        // if disarmed, minus one
+        if (getDisarm() > 0)
+            setDisarm(getDisarm() - 1);
+
+        // check if enemy has bleed effect
+        if (this.getBleed() > 0) {
+            // subtract health with the bleed damage
+            this.setCurrentHealth(getCurrentHealth() - getBleedDamage());
+            this.setBleed(getBleed() - 1);
+        }
+    }
 }
