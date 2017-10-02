@@ -84,6 +84,15 @@ public class Interaction {
             double chance = Math.random() * 100;
 
             // add atk and def modifiers from weapon
+            try {
+                if (!attacker.getEquipped().equals(null)) {
+                    WeaponItem weap = (WeaponItem) attacker.getEquipped();
+                    attack += weap.getAttack();
+                    defense += weap.getDefense();
+                }
+            } catch (NullPointerException e) {
+                // handle event
+            }
 
             // check native attack and defense properties
             if (attack < defense)
