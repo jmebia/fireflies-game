@@ -15,6 +15,8 @@ public class Player extends GameCharacter {
     private int attackMod;
     private int defenseMod;
 
+    private int regenTurns = 0;
+
     private int keys = 0;
 
     private ArrayList<Item> inventory = new ArrayList<>();
@@ -131,5 +133,13 @@ public class Player extends GameCharacter {
 
     public void setKeys(int keys) {
         this.keys = keys;
+    }
+
+    public int getRegenTurns() {
+        return regenTurns;
+    }
+
+    public void setRegenTurns(int regenTurns) {
+        this.regenTurns = regenTurns;
     }
 }
