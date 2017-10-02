@@ -4,6 +4,7 @@ import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.objects.GameCharacter;
 import com.crackerjacks.game.core.objects.Player;
+import com.crackerjacks.game.core.objects.WeaponItem;
 
 import java.util.Random;
 
@@ -82,9 +83,21 @@ public class Interaction {
             // get chance for status effect
             double chance = Math.random() * 100;
 
+            // add atk and def modifiers from weapon
+
             // check native attack and defense properties
             if (attack < defense)
                 damage -= defense - attack;
+
+            // add damage modifier from weapon
+            try {
+                if (!attacker.getEquipped().equals(null)) {
+                    WeaponItem weap = (WeaponItem) attacker.getEquipped();
+                    damage += new Random().nextInt(weap.getMaxDamage() - weap.getMinDamage()) + weap.getMinDamage();
+                }
+            } catch (NullPointerException e) {
+                // handle event
+            }
 
             // check elements
             // if brute is the attack element of the player
