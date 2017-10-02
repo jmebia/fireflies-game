@@ -145,6 +145,11 @@ public class Player extends GameCharacter {
 
 
     public void updateStatus() {
+
+        if (getStun() > 0) {
+            setStun(getStun()-1);
+        }
+
         // if disarmed, minus one
         if (getDisarm() > 0)
             setDisarm(getDisarm() - 1);

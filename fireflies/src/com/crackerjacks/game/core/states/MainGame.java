@@ -532,6 +532,8 @@ public class MainGame extends GameState {
             graphicsContext.fillText(Global.getHistory().get(i), hudx + (hudw / 2 + 50), hudy + 410 + 10 + i * 11);
         }
 
+        System.out.println(player.getDisarm());
+
     }
 
     @Override
@@ -629,6 +631,11 @@ public class MainGame extends GameState {
         playerSprite.addPoint(new Point(96, 0));
 
         player.setSprite(playerSprite);
+
+        // FOR DUBUGGING
+        player.setBleed(5);
+        player.setBleedDamage(5);
+        player.setDisarm(5);
 
         // set sprites for enemies
         for (Enemy enemy : enemies) {

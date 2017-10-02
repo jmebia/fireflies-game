@@ -46,11 +46,14 @@ public class MainGameController {
                         }
                     }
 
-                    if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
-                        player.setY(tempY);
+                    if (player.getStun() <= 0) {
+                        if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
+                            player.setY(tempY);
+                        }
                     }
 
                     updateEnemy(enemies, player, tileMap);
+                    player.updateStatus();
                 }
 
                 // move down
@@ -65,11 +68,15 @@ public class MainGameController {
                         }
                     }
 
-                    if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
-                        player.setY(tempY);
+                    if (player.getStun() <= 0) {
+                        if (tileMap[tempY][(int) player.getX()] > 0 && enemy == null) {
+                            player.setY(tempY);
+                        }
                     }
 
                     updateEnemy(enemies, player, tileMap);
+
+                    player.updateStatus();
                 }
 
                 // move left
@@ -87,11 +94,15 @@ public class MainGameController {
                         }
                     }
 
-                    if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
-                        player.setX(tempX);
+                    if (player.getStun() <= 0) {
+                        if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
+                            player.setX(tempX);
+                        }
                     }
 
                     updateEnemy(enemies, player, tileMap);
+
+                    player.updateStatus();
                 }
 
                 // move right
@@ -109,11 +120,15 @@ public class MainGameController {
                         }
                     }
 
-                    if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
-                        player.setX(tempX);
+                    if (player.getStun() <= 0) {
+                        if (tileMap[(int) player.getY()][tempX] > 0 && enemy == null) {
+                            player.setX(tempX);
+                        }
                     }
 
                     updateEnemy(enemies, player, tileMap);
+
+                    player.updateStatus();
                 }
 
                 // initiate attack move
@@ -238,91 +253,88 @@ public class MainGameController {
 
         Enemy enemy = null;
 
-        if (attackSide == "left") {
-            // check if there is an enemy for the player's attack to damage
-            for(Enemy e : enemies) {
-                if (player.getX() - 1 == e.getX() && player.getY() == e.getY()) {
-                    enemy = e;
-                    break;
+        if (player.getDisarm() <= 0) {
+            if (attackSide == "left") {
+                // check if there is an enemy for the player's attack to damage
+                for (Enemy e : enemies) {
+                    if (player.getX() - 1 == e.getX() && player.getY() == e.getY()) {
+                        enemy = e;
+                        break;
+                    }
                 }
-            }
 
-            // check if enemy is empty or not
-            if (enemy != null) {
-                // damage enemy health by player
-                new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0) {
-                    deadEnemies.add(enemy);
-                    enemies.remove(enemy);
-                    player.addFireflies(1);
+                // check if enemy is empty or not
+                if (enemy != null) {
+                    // damage enemy health by player
+                    new Interaction().attackMove(player, enemy, attackElementID);
+                    if (enemy.getCurrentHealth() <= 0) {
+                        deadEnemies.add(enemy);
+                        enemies.remove(enemy);
+                        player.addFireflies(1);
+                    }
                 }
-            }
-        }
-
-        else if (attackSide == "right") {
-            // check if there is an enemy for the player's attack to damage
-            for(Enemy e : enemies) {
-                if (player.getX() + 1 == e.getX() && player.getY() == e.getY()) {
-                    enemy = e;
-                    break;
+            } else if (attackSide == "right") {
+                // check if there is an enemy for the player's attack to damage
+                for (Enemy e : enemies) {
+                    if (player.getX() + 1 == e.getX() && player.getY() == e.getY()) {
+                        enemy = e;
+                        break;
+                    }
                 }
-            }
 
-            // check if enemy is empty or not
-            if (enemy != null) {
-                // damage enemy health by player
-                new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0) {
-                    deadEnemies.add(enemy);
-                    enemies.remove(enemy);
-                    player.addFireflies(1);
+                // check if enemy is empty or not
+                if (enemy != null) {
+                    // damage enemy health by player
+                    new Interaction().attackMove(player, enemy, attackElementID);
+                    if (enemy.getCurrentHealth() <= 0) {
+                        deadEnemies.add(enemy);
+                        enemies.remove(enemy);
+                        player.addFireflies(1);
+                    }
                 }
-            }
-        }
-
-        else if (attackSide == "up") {
-            // check if there is an enemy for the player's attack to damage
-            for(Enemy e : enemies) {
-                if (player.getX() == e.getX() && player.getY() - 1  == e.getY()) {
-                    enemy = e;
-                    break;
+            } else if (attackSide == "up") {
+                // check if there is an enemy for the player's attack to damage
+                for (Enemy e : enemies) {
+                    if (player.getX() == e.getX() && player.getY() - 1 == e.getY()) {
+                        enemy = e;
+                        break;
+                    }
                 }
-            }
 
-            // check if enemy is empty or not
-            if (enemy != null) {
-                // damage enemy health by player
-                new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0) {
-                    deadEnemies.add(enemy);
-                    enemies.remove(enemy);
-                    player.addFireflies(1);
+                // check if enemy is empty or not
+                if (enemy != null) {
+                    // damage enemy health by player
+                    new Interaction().attackMove(player, enemy, attackElementID);
+                    if (enemy.getCurrentHealth() <= 0) {
+                        deadEnemies.add(enemy);
+                        enemies.remove(enemy);
+                        player.addFireflies(1);
+                    }
                 }
-            }
-        }
-
-        else if (attackSide == "down") {
-            // check if there is an enemy for the player's attack to damage
-            for(Enemy e : enemies) {
-                if (player.getX() == e.getX() && player.getY() + 1  == e.getY()) {
-                    enemy = e;
-                    break;
+            } else if (attackSide == "down") {
+                // check if there is an enemy for the player's attack to damage
+                for (Enemy e : enemies) {
+                    if (player.getX() == e.getX() && player.getY() + 1 == e.getY()) {
+                        enemy = e;
+                        break;
+                    }
                 }
-            }
 
-            // check if enemy is empty or not
-            if (enemy != null) {
-                // damage enemy health by player
-                new Interaction().attackMove(player, enemy, attackElementID);
-                if (enemy.getCurrentHealth() <= 0) {
-                    deadEnemies.add(enemy);
-                    enemies.remove(enemy);
-                    player.addFireflies(1);
+                // check if enemy is empty or not
+                if (enemy != null) {
+                    // damage enemy health by player
+                    new Interaction().attackMove(player, enemy, attackElementID);
+                    if (enemy.getCurrentHealth() <= 0) {
+                        deadEnemies.add(enemy);
+                        enemies.remove(enemy);
+                        player.addFireflies(1);
+                    }
                 }
             }
         }
 
         updateEnemy(enemies, player, tileMap);
+        player.updateStatus();
         attackMode = false;
         System.out.println("ATTACK MODE OFF");
     }
