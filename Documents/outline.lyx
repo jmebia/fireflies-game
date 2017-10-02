@@ -1,0 +1,236 @@
+#LyX 1.6.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+
+
+\title{ThesisProposal:Title}\author{JuanDelaCruz\\DepartmentofComputerScience\\UniversityofthePhilippines}\date{}
+\end_preamble
+\options titlepage
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+abstract
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+A paragraph describing the problem, related material and your proposed approach.
+ It is usually key sentences and phrases taken from the other sections.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Newpage newpage
+\end_inset
+
+ 
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Set the scene and problem statement.
+ Introduce structure of thesis, state contributions (3-5).
+\end_layout
+
+\begin_layout Section
+Literature Review
+\end_layout
+
+\begin_layout Standard
+Background material related to your research.
+ Key concepts, approaches, similar work and their answers.
+ Here try to be critical in the analysis of their approaches and ideas.
+ This will help you formulate the statement of problem better as you bounce
+ your ideas with other existing work.
+\end_layout
+
+\begin_layout Section
+Statement of the Problem
+\end_layout
+
+\begin_layout Standard
+Normally, one of the most difficult parts to formulate because you must
+ be able to express the problem in a sentence or two.
+ Each word in the problem statement is a key concept that you introduce
+ to the reader and later elaborate on in the supporting paragraphs.
+ You must address at the very least the following questions.
+ 
+\end_layout
+
+\begin_layout Itemize
+What is the problem you are answering? 
+\end_layout
+
+\begin_layout Itemize
+Why is it important to answer the question? 
+\end_layout
+
+\begin_layout Section
+Proposed Methodology
+\end_layout
+
+\begin_layout Standard
+From the problem definition, you identify key techniques and approaches
+ you feel are necessary to successfully find a resolution.
+ You can further motivate the approaches by outlining how they were used
+ in other contexts.
+ This is an extension of the Literature review but with emphasis on how
+ you intend to apply the methodology/ies to your problem.
+\end_layout
+
+\begin_layout Section
+Timeline
+\end_layout
+
+\begin_layout Standard
+Sometimes it also important to outline an action plan or schedule.
+ This will enable you to track progress and milestones.
+ As this is a tentative schedule, expect that it will change as you move
+ further in your work.
+\end_layout
+
+\begin_layout Section
+Sample Citations
+\end_layout
+
+\begin_layout Standard
+This is a citation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pavlovic"
+
+\end_inset
+
+ and another by Vapnik 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vapnik"
+
+\end_inset
+
+.
+ You can find the entries in the 
+\shape italic
+biblio.bib
+\shape default
+ file.
+ There are two other citations namely the work of Kohonen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kohonen2"
+
+\end_inset
+
+ and the work of Kohonen et.
+ al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kohonen1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibliographystyle{plain}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "biblio"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

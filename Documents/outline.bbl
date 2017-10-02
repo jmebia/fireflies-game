@@ -1,0 +1,65 @@
+\begin{thebibliography}{1}
+
+\bibitem{Togelius1}
+Julian Togelius, Georgios N. Yannakakis, Kenneth O. Stanley, and Cameron Browne.
+\newblock Search-Based Procedural Content Generation:
+A Taxonomy and Survey.
+\newblock {\em IEEE Transactions on Computational Intelligence and AI in Games, vol. 3, no. 3}, 2011.
+
+\bibitem{Togelius2}
+Julian Togelius, Alex J. Champandard, Pier Luca Lanzi, Michael Mateas, Ana Paiva, Mike Preuss, and Kenneth O. Stanley.
+\newblock Procedural Content Generation: Goals, Challenges and Actionable Steps.
+\newblock {\em Dagstuhl Follow-Ups 6}, 2013.
+
+\bibitem{Cole}
+Nicholas Cole, Sushil J. Louis, and Chris Miles.
+\newblock Using a genetic algorithm to tune first-person shooter bots.
+\newblock {\em Evolutionary Computation, 2004. CEC2004. Congress on. Vol. 1. IEEE.}, 2004.
+
+\bibitem{Holland}
+John Holland.
+\newblock Genetic algorithms.
+\newblock 1992.
+
+\bibitem{Whitley}
+Darrell Whitley.
+\newblock A genetic algorithm tutorial.
+\newblock {\em Statistics and computing 4.2 (1994): 65-85}, 1994.
+
+\bibitem{Almgren}
+Simon Almgren, Leo Anttila, David Oskarsson, Fabian Sorensson, and Samuel Tiensuu.
+\newblock Astrogue: A Roguelike.
+\newblock 2014.
+
+\bibitem{Hunicke}
+Robin Hunicke, Marc LeBlanc, and Robert Zubek.
+\newblock MDA: A formal approach to game design and game research.
+\newblock {\em Proceedings of the AAAI Workshop on Challenges in Game AI. Vol. 4. No. 1. 2004}, 2004.
+
+\bibitem{Smith}
+Gillian Smith, Elaine Gan, Alexei Othenin-Girard, and Jim Whitehead.
+\newblock PCG-based game design: enabling new play experiences through procedural content generation.
+\newblock {\em Proceedings of the 2nd international workshop on procedural content generation in games. ACM, 2011}, 2011.
+
+
+\bibitem{Sims}
+Karl Sims.
+\newblock Genetic Images.
+\newblock {\em http://www.karlsims.com/genetic-images.html}, 1993.
+
+\bibitem{Berlin}
+The Berlin Interpretation.
+\newblock {\em http://www.roguebasin.com}, 2008.
+
+\bibitem{Toy}
+Michael Toy, Glenn Wichman.
+\newblock Rogue.
+\newblock {\em (Game)} 1980.
+
+
+\bibitem{Bethesda}
+Bethesda Softworks.
+\newblock The Elder Scrolls: Arena.
+\newblock {\em (Game)} 1994.
+
+\end{thebibliography}
