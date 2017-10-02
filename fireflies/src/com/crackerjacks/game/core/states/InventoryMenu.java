@@ -141,9 +141,9 @@ public class InventoryMenu extends GameState {
 
             // print item name in inventory
             gc.setFill(Color.WHITE);
-            gc.setFont(Font.font("Verdana", FontWeight.NORMAL,
-                    (currentMarker == i? 20 : 12)));
-            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 15);
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==i? 18 : 20)));
+            gc.setFill((currentMarker==i? Color.LIGHTYELLOW : Color.LIGHTGRAY));
+            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 20);
 
         }
 

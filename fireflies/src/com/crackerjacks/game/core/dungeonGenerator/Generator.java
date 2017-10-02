@@ -236,19 +236,25 @@ public class Generator implements Serializable {
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             } else {
 
-                // create 2 enemies per room
-                for (int i = 2; i > 0; i--) {
+                if (rooms.size() > 3) {
+                    // create 2 enemies per room
+                    for (int i = 2; i > 0; i--) {
 
-                    int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
-                    int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
+                        int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
+                        int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
 
-                    Enemy enemy = new Enemy();
-                    enemy.setX(eX);
-                    enemy.setY(eY);
-                    enemy.setName("Enemy " + room.getId() + "-" + i);
+                        Enemy enemy = new Enemy();
+                        enemy.setX(eX);
+                        enemy.setY(eY);
+                        enemy.setName("Enemy " + room.getId() + "-" + i);
 
-                    enemies.add(enemy);
-                    System.out.println("new enemy added...");
+                        enemies.add(enemy);
+                        System.out.println("new enemy added...");
+                    }
+                }
+                // 3 or less rooms
+                else {
+
                 }
             }
             // add goal to the last room
@@ -289,6 +295,23 @@ public class Generator implements Serializable {
                 itemsCount--;
             }
 
+        }
+
+        // if rooms are 3 below
+        else {
+            int itemsCount = random.nextInt(4 + 1 - 2) + 2;
+
+            while (itemsCount > 0) {
+                int roomNum = random.nextInt(rooms.size() - 1) + 1;
+                Room room = tempRooms.get(roomNum);
+
+                Point item = new Point();
+                item.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+                itemLoots.add(item);
+
+                itemsCount--;
+            }
         }
 
 

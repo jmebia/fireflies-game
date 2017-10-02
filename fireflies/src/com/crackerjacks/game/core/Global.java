@@ -3,7 +3,6 @@ package com.crackerjacks.game.core;
 import com.crackerjacks.game.core.io.Save;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Global {
 

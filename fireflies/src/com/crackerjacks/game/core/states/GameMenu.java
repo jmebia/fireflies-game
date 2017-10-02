@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class GameMenu extends GameState {
 
@@ -22,7 +24,7 @@ public class GameMenu extends GameState {
 
     // navigate counters
     private int currentMarker = 0;
-    private int maxCounter = 7; // up to 8 inventory slots
+    private int maxCounter = 1;
     private int minCounter = 0;
 
 
@@ -92,6 +94,13 @@ public class GameMenu extends GameState {
         // main bg
         gc.setFill(new Color(0f, 0f, 1f, 0.3));
         gc.fillRect(hudX, hudY, hudW, hudH);
+
+        // draw texts
+        gc.setFont(Font.font("Verdana", FontWeight.NORMAL, 14));
+        gc.setFill((currentMarker==0? Color.WHITE : Color.LIGHTGRAY));
+        gc.fillText("Quit to Main Menu", hudX + 20, hudY + 40);
+        gc.setFill((currentMarker==1? Color.WHITE : Color.LIGHTGRAY));
+        gc.fillText("Quit Game", hudX + 20, hudY + 70);
 
         // border
         gc.setStroke(Color.WHITE);

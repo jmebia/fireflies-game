@@ -89,7 +89,7 @@ public class MainGame extends GameState {
     // images for the sprites
     private Image characterSprites;
     private Image tileSprites;
-    // Image background;
+    // private Image background;
 
     // identifies if user loaded an existing save or a new game
     private boolean isNewGame;
