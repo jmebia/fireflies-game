@@ -168,8 +168,31 @@ public class InventoryMenu extends GameState {
                     hudY + 50, 48, 48);
 
             // draw description
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
             if (item instanceof WeaponItem) {
-                
+
+                WeaponItem w = (WeaponItem) item;
+                int hp = w.getHealth();
+                int atk = w.getAttack();
+                int def = w.getDefense();
+                int md = w.getMinDamage();
+                int xd = w.getMaxDamage();
+                double stun = w.getStun_chance();
+                double bleed = w.getBleed_chance();
+                double disarm = w.getDisarm_chance();
+
+                gc.fillText( w.getName().toUpperCase()
+                        + "\nTYPE " + w.getType() + "\n"
+                        + "\nATK DMG +(" + md + "-" + xd + ")"
+                        + (hp>0?"\nHP BONUS +" + hp : "")
+                        + (atk>0?"\nATK POWER +" + atk:"")
+                        + (def>0?"\nDEFENSE +" + def:"")
+                        + (stun>0?"\n\nSTUN %CHANCE +" + stun : "")
+                        + (bleed>0?"\n\nBLEED %CHANCE +" + bleed : "")
+                        + (disarm>0?"\n\nDISARM %CHANCE +" + disarm : "")
+                        + "\n\n[ENTER KEY] to equip\n[DELETE KEY] to discard"
+                        , hudX + 230, hudY + 150);
+
 
             } else if (item instanceof PotionItem) {
 

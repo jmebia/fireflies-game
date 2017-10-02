@@ -15,7 +15,7 @@ public class WeaponItem extends Item {
 
     private double stun_chance;
     private double bleed_chance;
-    private double root_chance;
+    private double disarm_chance;
 
     public WeaponItem(String name, Type type) {
         super(name);
@@ -85,12 +85,12 @@ public class WeaponItem extends Item {
         this.bleed_chance = bleed_chance;
     }
 
-    public double getRoot_chance() {
-        return root_chance;
+    public double getDisarm_chance() {
+        return disarm_chance;
     }
 
-    public void setRoot_chance(double root_chance) {
-        this.root_chance = root_chance;
+    public void setDisarm_chance(double disarm_chance) {
+        this.disarm_chance = disarm_chance;
     }
 
 }
