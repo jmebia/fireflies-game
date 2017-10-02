@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -180,7 +181,20 @@ public class MainGame extends GameState {
         mainGameController.update(inputHandler, player, enemies, deadEnemies, tileMap, scene, graphicsContext);
 
         if (player.getCurrentHealth() <= 0) {
-            generateNewDungeon();
+            Global.setSave(null);
+            String sPath = System.getProperty("user.home") + "\\fireflies.sav";
+            Path path = Paths.get(sPath);
+            try {
+                Files.delete(path);
+            } catch (NoSuchFileException x) {
+                System.err.format("%s: no such" + " file or directory%n", path);
+            } catch (DirectoryNotEmptyException x) {
+                System.err.format("%s not empty%n", path);
+            } catch (IOException x) {
+                // File permission problems are caught here.
+                System.err.println(x);
+            }
+            GameStateManager.removeLast();
         }
 
         // check if player is in goal, if yes then generate new dungeon

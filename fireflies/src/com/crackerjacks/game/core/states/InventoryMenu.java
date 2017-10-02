@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
+import java.util.zip.CheckedOutputStream;
 
 public class InventoryMenu extends GameState {
 
@@ -129,7 +130,7 @@ public class InventoryMenu extends GameState {
 
 
         // main bg
-        gc.setFill(new Color(0f, 0f, 1f, 0.3));
+        gc.setFill(Color.BLACK);
         gc.fillRect(hudX, hudY, hudW, hudH);
 
 
@@ -140,10 +141,21 @@ public class InventoryMenu extends GameState {
             Item item = inventory.get(i);
 
             // print item name in inventory
-            gc.setFill(Color.WHITE);
-            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==i? 18 : 20)));
-            gc.setFill((currentMarker==i? Color.LIGHTYELLOW : Color.LIGHTGRAY));
-            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 20);
+            // gc.setFill(Color.WHITE);
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==i? 22 : 20)));
+
+            try {
+                if (player.getEquipped().equals(item)) {
+                    gc.setFill((currentMarker == i ? Color.GREENYELLOW : Color.LIGHTGREEN));
+                } else {
+                    gc.setFill((currentMarker == i ? Color.LIGHTYELLOW : Color.LIGHTGRAY));
+                }
+            } catch (NullPointerException event) {
+                // System.out.println("no item equipped");
+                gc.setFill((currentMarker == i ? Color.LIGHTYELLOW : Color.LIGHTGRAY));
+            }
+
+            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 22);
 
         }
 
