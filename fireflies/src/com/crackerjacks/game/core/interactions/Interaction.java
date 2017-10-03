@@ -24,7 +24,7 @@ public class Interaction {
             int defense = (int) defender.getDefense();
 
             // penalty
-            int penalty = damage / 3;
+            double penalty = damage / 2;
 
             // get chance for status effect
             double chance = Math.random() * 100;
@@ -88,7 +88,7 @@ public class Interaction {
             int defense = (int) defender.getDefense();
             WeaponItem weap = null;
 
-            int penalty = damage / 3;
+            double penalty = damage / 2;
 
             // get weapon from player
             try {
@@ -146,7 +146,7 @@ public class Interaction {
             }
 
             // if stable is the attack element of the player
-            if (attackTechniqueID.equals(Technique.stable.getId())) {
+            else if (attackTechniqueID.equals(Technique.stable.getId())) {
                 if (defenderType.equals(Technique.cut.getId()))
                     damage -= penalty;
                 else if (defenderType.equals(Technique.brute.getId()))
@@ -160,7 +160,7 @@ public class Interaction {
             }
 
             // if cut is the attack element of the player
-            if (attackTechniqueID.equals(Technique.cut.getId())) {
+            else if (attackTechniqueID.equals(Technique.cut.getId())) {
                 if (defenderType.equals(Technique.brute))
                     damage -= penalty;
                 else if (defenderType.equals(Technique.stable))
