@@ -26,7 +26,7 @@ public class Enemy extends GameCharacter {
 
     private ImageView image;
 
-    int visionRadius = 3;
+    private int visionRadius = 3;
 
     // getters and setters
     public Technique getTechnique() {
@@ -43,6 +43,14 @@ public class Enemy extends GameCharacter {
 
     public void setTechnique(Technique technique) {
         this.technique = technique;
+    }
+
+    public int getVisionRadius() {
+        return visionRadius;
+    }
+
+    public void setVisionRadius(int visionRadius) {
+        this.visionRadius = visionRadius;
     }
 
     // main methods
@@ -539,7 +547,6 @@ public class Enemy extends GameCharacter {
                 }
             }
 
-            // TODO: If no player is around this, move toward an unchecked room
             // if no one is around enemy, move towards next room
             else {
                 int axis = new Random().nextInt(2);

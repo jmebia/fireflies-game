@@ -142,7 +142,6 @@ public class Interaction {
                 if ( (chance -= attacker.getStunChance()) < 0 ) {
                     defender.setStun(new Random().nextInt(3 - 1) + 1);
                 }
-
             }
 
             // if stable is the attack element of the player

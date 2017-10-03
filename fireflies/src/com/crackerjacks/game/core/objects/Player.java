@@ -164,4 +164,15 @@ public class Player extends GameCharacter {
             Global.addHistoryText(getName().toUpperCase() + " bleeds " + getBleedDamage() + " HP");
         }
     }
+
+    public void updateLevels() {
+
+        // required exp
+        double expBrute = getLevelBrute();
+        double expStable = getLevelStable();
+        double expCut = getLevelCut();
+
+        // TODO: Level up player's techniques if the required experience is met
+
+    }
 }

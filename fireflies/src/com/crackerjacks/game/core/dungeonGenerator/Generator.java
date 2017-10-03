@@ -314,8 +314,6 @@ public class Generator implements Serializable {
             }
         }
 
-
-
     }
 
     private void addEnemyElements(ArrayList<Enemy> parents) {
@@ -340,18 +338,18 @@ public class Generator implements Serializable {
 
                 int j = random.nextInt(3);
                 if (j == 0) {
-                    System.out.println("type A set!");
+                    System.out.println("VARMINT [A] type set!");
                     e.setType(Type.a);
                 } else if (j == 1) {
-                    System.out.println("type B set!");
+                    System.out.println("GUARDIAN [B] type set!");
                     e.setType(Type.b);
                 } else {
-                    System.out.println("type C set!");
+                    System.out.println("WRAITH [C] type set!");
                     e.setType(Type.c);
                 }
             }
-
         }
+
         else {
             // placeholder while genetic algorithm is still a work in progress
             Algorithm genetics = new Algorithm(parents, enemies);
