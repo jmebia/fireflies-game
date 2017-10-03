@@ -71,16 +71,20 @@ public class Interaction {
         }
     }
 
-    public void attackMove(Player attacker, Enemy defender, String attackElementID) {
+    public void attackMove(Player attacker, Enemy defender, String attackTechniqueID) {
 
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
-            double elementalPenalty = 1;
+            // get defender's type
+            String defenderType = defender.getTechnique().getId();
+            double penalty = 1;
+
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
-            WeaponItem weap = null
+            WeaponItem weap = null;
 
+            // get weapon from player
             try {
                 if (!attacker.getEquipped().equals(null)) {
                     weap = (WeaponItem) attacker.getEquipped();
@@ -93,9 +97,13 @@ public class Interaction {
             double chance = Math.random() * 100;
 
             // add atk and def modifiers from weapon
-            if (!weap.equals(null)) {
-                attack += weap.getAttack();
-                defense += weap.getDefense();
+            try {
+                if (!weap.equals(null)) {
+                    attack += weap.getAttack();
+                    defense += weap.getDefense();
+                }
+            } catch (NullPointerException e) {
+
             }
 
             // check native attack and defense properties
@@ -103,17 +111,26 @@ public class Interaction {
                 damage -= defense - attack;
 
             // add damage modifier from weapon
-            if (!weap.equals(null)) {
-                damage += new Random().nextInt(weap.getMaxDamage() - weap.getMinDamage()) + weap.getMinDamage();
+            try {
+                if (!weap.equals(null)) {
+                    damage += new Random().nextInt(weap.getMaxDamage() - weap.getMinDamage()) + weap.getMinDamage();
+                }
+            } catch (NullPointerException e) {
+
             }
 
             // check elements
             // if brute is the attack element of the player
-            if (attackElementID.equals(Technique.brute.getId())) {
-                if (defender.getTechnique().getId().equals(Technique.stable))
-                    damage -= elementalPenalty;
-                else if (defender.getTechnique().getId().equals(Technique.cut))
-                    damage += elementalPenalty;
+            if (attackTechniqueID.equals(Technique.brute.getId())) {
+                System.out.println("Attack is brute");
+                if (defenderType.equals(Technique.stable.getId())) {
+                    System.out.println("Enemy is stable type");
+                    damage -= penalty;
+                }
+                else if (defenderType.equals(Technique.cut.getId())) {
+                    System.out.println("Enemy is cut type");
+                    damage += penalty;
+                }
 
                 // determines if stun effect will take place
                 if ( (chance -= attacker.getStunChance()) < 0 ) {
@@ -123,11 +140,11 @@ public class Interaction {
             }
 
             // if stable is the attack element of the player
-            if (attackElementID.equals(Technique.stable.getId())) {
-                if (defender.getTechnique().getId().equals(Technique.cut))
-                    damage -= elementalPenalty;
-                else if (defender.getTechnique().getId().equals(Technique.brute))
-                    damage += elementalPenalty;
+            if (attackTechniqueID.equals(Technique.stable.getId())) {
+                if (defenderType.equals(Technique.cut.getId()))
+                    damage -= penalty;
+                else if (defenderType.equals(Technique.brute.getId()))
+                    damage += penalty;
 
                 // determines if disarm effect will take place
                 if ( (chance -= attacker.getDisarmChance()) < 0 ) {
@@ -137,11 +154,11 @@ public class Interaction {
             }
 
             // if cut is the attack element of the player
-            if (attackElementID.equals(Technique.cut.getId())) {
-                if (defender.getTechnique().getId().equals(Technique.brute))
-                    damage -= elementalPenalty;
-                else if (defender.getTechnique().getId().equals(Technique.stable))
-                    damage += elementalPenalty;
+            if (attackTechniqueID.equals(Technique.cut.getId())) {
+                if (defenderType.equals(Technique.brute))
+                    damage -= penalty;
+                else if (defenderType.equals(Technique.stable))
+                    damage += penalty;
 
                 // determines if bleed effect will take place
                 if ( (chance -= attacker.getBleedChance()) < 0 ) {

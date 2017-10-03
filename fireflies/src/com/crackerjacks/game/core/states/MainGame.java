@@ -532,7 +532,6 @@ public class MainGame extends GameState {
             graphicsContext.fillText(Global.getHistory().get(i), hudx + (hudw / 2 + 50), hudy + 410 + 10 + i * 11);
         }
 
-        System.out.println(player.getDisarm());
 
     }
 
