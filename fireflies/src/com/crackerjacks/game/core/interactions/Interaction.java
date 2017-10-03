@@ -79,19 +79,23 @@ public class Interaction {
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
+            WeaponItem weap = null
+
+            try {
+                if (!attacker.getEquipped().equals(null)) {
+                    weap = (WeaponItem) attacker.getEquipped();
+                }
+            } catch (NullPointerException e) {
+                // handle event
+            }
 
             // get chance for status effect
             double chance = Math.random() * 100;
 
             // add atk and def modifiers from weapon
-            try {
-                if (!attacker.getEquipped().equals(null)) {
-                    WeaponItem weap = (WeaponItem) attacker.getEquipped();
-                    attack += weap.getAttack();
-                    defense += weap.getDefense();
-                }
-            } catch (NullPointerException e) {
-                // handle event
+            if (!weap.equals(null)) {
+                attack += weap.getAttack();
+                defense += weap.getDefense();
             }
 
             // check native attack and defense properties
@@ -99,13 +103,8 @@ public class Interaction {
                 damage -= defense - attack;
 
             // add damage modifier from weapon
-            try {
-                if (!attacker.getEquipped().equals(null)) {
-                    WeaponItem weap = (WeaponItem) attacker.getEquipped();
-                    damage += new Random().nextInt(weap.getMaxDamage() - weap.getMinDamage()) + weap.getMinDamage();
-                }
-            } catch (NullPointerException e) {
-                // handle event
+            if (!weap.equals(null)) {
+                damage += new Random().nextInt(weap.getMaxDamage() - weap.getMinDamage()) + weap.getMinDamage();
             }
 
             // check elements
