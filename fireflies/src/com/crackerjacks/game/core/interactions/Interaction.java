@@ -18,7 +18,19 @@ public class Interaction {
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
             // get defending player's proficient technique
+            Technique playerTech = null;
+            int playerBrute = defender.getLevelBrute();
+            int playerStable = defender.getLevelStable();
+            int playerCut = defender.getLevelCut();
 
+            if (playerBrute > playerStable && playerBrute > playerCut)
+                playerTech = Technique.brute;
+            else if (playerStable > playerBrute && playerStable > playerCut)
+                playerTech = Technique.stable;
+            else if (playerCut > playerBrute && playerCut > playerStable)
+                playerTech = Technique.cut;
+
+            // get base combat stats of enemy
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
