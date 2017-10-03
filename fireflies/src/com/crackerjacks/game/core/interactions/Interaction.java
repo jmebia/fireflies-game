@@ -17,9 +17,14 @@ public class Interaction {
 
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
+            // get defending player's proficient technique
+
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
+
+            // penalty
+            int penalty = damage / 3;
 
             // get chance for status effect
             double chance = Math.random() * 100;
@@ -77,12 +82,13 @@ public class Interaction {
         if (attacker.getDisarm() <= 0) {
             // get defender's type
             String defenderType = defender.getTechnique().getId();
-            double penalty = 1;
 
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
             WeaponItem weap = null;
+
+            int penalty = damage / 3;
 
             // get weapon from player
             try {
