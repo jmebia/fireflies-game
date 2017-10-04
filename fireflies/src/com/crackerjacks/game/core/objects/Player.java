@@ -165,14 +165,16 @@ public class Player extends GameCharacter {
         }
     }
 
-    public void updateLevels() {
+    public void updateLevel() {
 
         // required exp
-        double expBrute = getLevelBrute();
-        double expStable = getLevelStable();
-        double expCut = getLevelCut();
+//        double expBrute = getLevelBrute();
+//        double expStable = getLevelStable();
+//        double expCut = getLevelCut();
 
-        // TODO: Level up player's techniques if the required experience is met
+        if (getExperience() >= Math.pow(2, getLevel()) * 100) {
+            // level up
+        }
 
     }
 }
