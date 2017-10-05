@@ -3,14 +3,22 @@ package com.crackerjacks.game.core;
 import com.crackerjacks.game.core.io.Save;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Global {
 
+    // Save file variables
     private static Save save = null;
 
+    private static String saveFile = System.getProperty("user.home") + "\\fireflies.sav";
+
+    // activity history variables
     private static ArrayList<String> history = new ArrayList<>();
 
-    private static String saveFile = System.getProperty("user.home") + "\\fireflies.sav";
+    // count of enemies spawned
+    private static LinkedList<HashMap<String, Integer>> enemySpawnStatistics = new LinkedList<>();
+
 
     public static String getSaveFile() {
         return saveFile;
@@ -35,4 +43,15 @@ public class Global {
         }
     }
 
+    public static void setHistory(ArrayList<String> history) {
+        Global.history = history;
+    }
+
+    public static LinkedList<HashMap<String, Integer>> getEnemySpawnStatistics() {
+        return enemySpawnStatistics;
+    }
+
+    public static void setEnemySpawnStatistics(LinkedList<HashMap<String, Integer>> enemySpawnStatistics) {
+        Global.enemySpawnStatistics = enemySpawnStatistics;
+    }
 }

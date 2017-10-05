@@ -171,9 +171,13 @@ public class Player extends GameCharacter {
 //        double expBrute = getLevelBrute();
 //        double expStable = getLevelStable();
 //        double expCut = getLevelCut();
+        double reqExperience = Math.pow(getLevel(), 2) * 100;
 
-        if (getExperience() >= Math.pow(2, getLevel()) * 100) {
+        if (getExperience() >= reqExperience) {
             // level up
+            setLevel(getLevel() + 1);
+            setExperience(getExperience() - reqExperience);
+            Global.addHistoryText();
         }
 
     }
