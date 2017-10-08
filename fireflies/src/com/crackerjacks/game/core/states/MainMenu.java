@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MainMenu extends GameState {
 
@@ -23,8 +24,6 @@ public class MainMenu extends GameState {
     private int currentMarker = 1;
     private int minMarker = 1;
     private int maxMarker = 4;
-
-
 
     public MainMenu(Scene scene, GraphicsContext graphicsContext) {
         this.scene = scene;
@@ -111,6 +110,7 @@ public class MainMenu extends GameState {
 
                     case 4:
                         System.out.println("Quit Selected!");
+
                         Platform.exit();
                         break;
 

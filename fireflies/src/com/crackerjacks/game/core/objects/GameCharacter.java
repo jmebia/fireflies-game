@@ -1,5 +1,7 @@
 package com.crackerjacks.game.core.objects;
 
+import com.crackerjacks.game.core.animator.Sprite;
+
 import java.io.Serializable;
 
 /**
@@ -13,9 +15,21 @@ public class GameCharacter implements Serializable{
 
     private String name;
 
-    // leveling
+    private Sprite sprite;
+
+    // character leveling
+    // character's main experience accumulation depends on the leveling of the character's techniques
     private int level;
     private double experience;
+
+    // leveling for techniques
+    private int levelBrute;
+    private int levelStable;
+    private int levelCut;
+
+    private double experienceBrute;
+    private double experienceStable;
+    private double experienceCut;
 
     // attributes
     private int attack;
@@ -28,10 +42,20 @@ public class GameCharacter implements Serializable{
     private int bleed;
     private int root;
     private int stun;
+    private int disarm;
+
+    private int bleedDamage;
+
+    private double stunChance;
+    private double disarmChance;
+    private double bleedChance;
 
     // 2D position
     private double X;
     private double Y;
+
+    // tile type
+    int tileType;
 
     /** Constructor */
 
@@ -48,10 +72,17 @@ public class GameCharacter implements Serializable{
         this.bleed = 0;
         this.root = 0;
         this.stun = 0;
+        this.disarm = 0;
+
+        bleedDamage = 0;
+
+        bleedChance = 0.1;
+        stunChance = 0.1;
+        disarmChance = 0.1;
 
         // the base damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
-        this.damage = (int) Math.ceil( level * .1 );
+        this.damage = (int) Math.ceil( level * .1 ) + 1;
     }
 
     /** Getters and Setters */
@@ -62,7 +93,6 @@ public class GameCharacter implements Serializable{
 
     public void setLevel(int level) {
         this.level = level;
-        this.maxHealth = 10 + 10 * this.level;
     }
 
     public double getExperience() {
@@ -117,7 +147,7 @@ public class GameCharacter implements Serializable{
     public void setDefaultDamage() {
         // the default damage of a objects is always equal to the ceiling of
         // the 10 percent of her current level
-        this.damage = (int) Math.ceil( level * .1 );
+        this.damage = (int) Math.ceil( level * .1 ) + 1;
     }
 
     public double getX() {
@@ -152,6 +182,14 @@ public class GameCharacter implements Serializable{
         this.bleed = bleed;
     }
 
+    public int getBleedDamage() {
+        return bleedDamage;
+    }
+
+    public void setBleedDamage(int bleedDamage) {
+        this.bleedDamage = bleedDamage;
+    }
+
     public int getRoot() {
         return root;
     }
@@ -166,5 +204,101 @@ public class GameCharacter implements Serializable{
 
     public void setStun(int stun) {
         this.stun = stun;
+    }
+
+    public int getDisarm() {
+        return disarm;
+    }
+
+    public void setDisarm(int disarm) {
+        this.disarm = disarm;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setTileType(int tileType) {
+        this.tileType = tileType;
+    }
+
+    public int getTileType() {
+        return tileType;
+    }
+
+    public int getLevelBrute() {
+        return levelBrute;
+    }
+
+    public void setLevelBrute(int levelBrute) {
+        this.levelBrute = levelBrute;
+    }
+
+    public int getLevelStable() {
+        return levelStable;
+    }
+
+    public void setLevelStable(int levelStable) {
+        this.levelStable = levelStable;
+    }
+
+    public int getLevelCut() {
+        return levelCut;
+    }
+
+    public void setLevelCut(int levelCut) {
+        this.levelCut = levelCut;
+    }
+
+    public double getExperienceBrute() {
+        return experienceBrute;
+    }
+
+    public void setExperienceBrute(double experienceBrute) {
+        this.experienceBrute = experienceBrute;
+    }
+
+    public double getExperienceStable() {
+        return experienceStable;
+    }
+
+    public void setExperienceStable(double experienceStable) {
+        this.experienceStable = experienceStable;
+    }
+
+    public double getExperienceCut() {
+        return experienceCut;
+    }
+
+    public void setExperienceCut(double experienceCut) {
+        this.experienceCut = experienceCut;
+    }
+
+    public double getStunChance() {
+        return stunChance;
+    }
+
+    public void setStunChance(double stunChance) {
+        this.stunChance = stunChance;
+    }
+
+    public double getDisarmChance() {
+        return disarmChance;
+    }
+
+    public void setDisarmChance(double disarmChance) {
+        this.disarmChance = disarmChance;
+    }
+
+    public double getBleedChance() {
+        return bleedChance;
+    }
+
+    public void setBleedChance(double bleedChance) {
+        this.bleedChance = bleedChance;
     }
 }

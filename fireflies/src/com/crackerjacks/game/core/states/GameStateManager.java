@@ -1,5 +1,6 @@
 package com.crackerjacks.game.core.states;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -19,6 +20,21 @@ public class GameStateManager {
     }
 
     public static void removeLast() {
+        stateList.getLast().onExit();
+        stateList.removeLast();
+        stateList.getLast().onEnter();
+    }
+
+    public static void addState(GameState state) {
+        stateList.getLast().onExit();
+        stateList.add(state);
+        stateList.getLast().onEnter();
+    }
+
+    public static void removeLast2() {
+        stateList.getLast().onExit();
+        stateList.removeLast();
+        stateList.getLast().onEnter();
         stateList.getLast().onExit();
         stateList.removeLast();
         stateList.getLast().onEnter();

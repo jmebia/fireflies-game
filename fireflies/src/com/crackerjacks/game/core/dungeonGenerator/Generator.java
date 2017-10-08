@@ -1,8 +1,8 @@
 package com.crackerjacks.game.core.dungeonGenerator;
 
+import com.crackerjacks.game.core.interactions.Technique;
 import com.crackerjacks.game.core.objects.Enemy;
 import com.crackerjacks.game.core.genetic.Algorithm;
-import com.crackerjacks.game.core.interactions.Element;
 import com.crackerjacks.game.core.interactions.Type;
 
 import java.awt.*;
@@ -24,6 +24,7 @@ public class Generator implements Serializable {
     private Point goalPosition = new Point();
     private int[][] dungeon;
     private int[][] designLayer1; // main rooms and corridors
+
     private int[][] designLayer2; // overlap-able background designs
 
     // core map elements
@@ -48,6 +49,12 @@ public class Generator implements Serializable {
 
     private boolean firstGeneration;
 
+    // objective requirements
+    private ArrayList<Point> keysCoordinates = new ArrayList<>();
+
+    // items
+    private ArrayList<Point> itemLoots = new ArrayList<>();
+
     /** CONSTRUCTOR **/
     public Generator(int mapSize, int gridCount, int minRoomSize) {
         this.gridRow = gridCount;
@@ -57,11 +64,14 @@ public class Generator implements Serializable {
         firstGeneration = true;
         dungeon = new int[mapSize + 4][mapSize + 4];
         designLayer1 = new int[mapSize + 4][mapSize + 4];
+        designLayer2 = new int[mapSize + 4][mapSize + 4];
     }
 
     /** GENERATION **/
 
     public void generateDungeon(ArrayList<Enemy> parents) {
+
+        keysCoordinates.clear();
 
         initializeMap();
         createRooms();
@@ -71,6 +81,7 @@ public class Generator implements Serializable {
         plotRooms();
 
         plotDesign();
+        plotDesign2();
 
         if (firstGeneration) firstGeneration = false;
     }
@@ -120,7 +131,9 @@ public class Generator implements Serializable {
             }
         }
 
+        System.out.println("Generated " + rooms.size() + " rooms");
         System.out.println("Generating rooms finished...");
+
     }
 
     private void createCorridors() {
@@ -207,39 +220,97 @@ public class Generator implements Serializable {
             place the goal in the last room
 
          */
+
         Random random = new Random();
 
+        // randomize the rooms order
+        ArrayList<Room> tempRooms = rooms;
+        Collections.shuffle(tempRooms);
+
         enemies.clear();
-
         // create enemies for every room
-        for (Room room : rooms) {
+        for (Room room : tempRooms) {
 
-            if (room.getId() == 1) {
+            if (tempRooms.get(0) == room) {
                 playerPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
             } else {
 
-                // create 2 enemies per room
-                for (int i = 2; i > 0; i--) {
+                if (rooms.size() > 3) {
+                    // create 2 enemies per room
+                    for (int i = 2; i > 0; i--) {
 
-                    int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
-                    int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
+                        int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
+                        int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
 
-                    Enemy enemy = new Enemy();
-                    enemy.setX(eX);
-                    enemy.setY(eY);
-                    enemy.setName("Enemy " + room.getId() + "-" + i);
+                        Enemy enemy = new Enemy();
+                        enemy.setX(eX);
+                        enemy.setY(eY);
+                        enemy.setName("Enemy " + room.getId() + "-" + i);
 
-                    enemies.add(enemy);
-                    System.out.println("new enemy added...");
+                        enemies.add(enemy);
+                        System.out.println("new enemy added...");
+                    }
+                }
+                // 3 or less rooms
+                else {
 
                 }
-
             }
             // add goal to the last room
-            if (room.getId() == rooms.size()) {
+            if (tempRooms.get(1) == room) {
                 goalPosition.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
                         , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+            }
+        }
+
+        // loots and keys if rooms are more than 3
+        if (rooms.size() > 3) {
+            // place keys if rooms are 4 or more
+            int keyCount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
+
+            // place all keys
+            for (int i = keyCount; i > 0; i--) {
+                Room room = tempRooms.get(i);
+
+                Point key = new Point();
+                key.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+
+                keysCoordinates.add(key);
+                System.out.println("Nakapag add ng keys sa x="+key.x + " y="+key.y);
+            }
+
+            int itemsCount = random.nextInt((rooms.size()/2) + 1 - 2) + 2;
+
+            while (itemsCount > 0) {
+                int roomNum = random.nextInt(rooms.size() - 1);
+                Room room = tempRooms.get(roomNum);
+
+                Point item = new Point();
+                item.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+                itemLoots.add(item);
+
+                itemsCount--;
+            }
+
+        }
+
+        // if rooms are 3 below
+        else {
+            int itemsCount = random.nextInt(4 + 1 - 2) + 2;
+
+            while (itemsCount > 0) {
+                int roomNum = random.nextInt(rooms.size() - 1) + 1;
+                Room room = tempRooms.get(roomNum);
+
+                Point item = new Point();
+                item.setLocation(random.nextInt((room.getX() + room.getWidth() - 1) - (room.getX() + 1)) + room.getX() + 1
+                        , random.nextInt((room.getY() + room.getHeight() - 1) - (room.getY() + 1)) + room.getY() + 1);
+                itemLoots.add(item);
+
+                itemsCount--;
             }
         }
 
@@ -258,32 +329,42 @@ public class Generator implements Serializable {
 
                 int i = random.nextInt(3);
                 if (i == 0) {
-                    e.setElement(Element.rock);
+                    e.setTechnique(Technique.brute);
                 } else if (i == 1) {
-                    e.setElement(Element.paper);
+                    e.setTechnique(Technique.stable);
                 } else {
-                    e.setElement(Element.scissors);
+                    e.setTechnique(Technique.cut);
                 }
 
                 int j = random.nextInt(3);
                 if (j == 0) {
-                    System.out.println("type A set!");
+                    System.out.println("VARMINT [A] type set!");
                     e.setType(Type.a);
                 } else if (j == 1) {
-                    System.out.println("type B set!");
+                    System.out.println("GUARDIAN [B] type set!");
                     e.setType(Type.b);
                 } else {
-                    System.out.println("type C set!");
+                    System.out.println("WRAITH [C] type set!");
                     e.setType(Type.c);
                 }
             }
-
         }
+
         else {
             // placeholder while genetic algorithm is still a work in progress
             Algorithm genetics = new Algorithm(parents, enemies);
             genetics.produce();
             enemies = genetics.getOffsprings();
+        }
+
+        for (Enemy enemy : enemies) {
+
+            if (enemy.getType().equals(Type.a))
+                enemy.setName("Varmint");
+            if (enemy.getType().equals(Type.b))
+                enemy.setName("Guardian");
+            if (enemy.getType().equals(Type.c))
+                enemy.setName("Wraith");
         }
     }
 
@@ -400,6 +481,39 @@ public class Generator implements Serializable {
         }
     }
 
+    private void plotDesign2() {
+
+        for (int x = 0; x < mapSize; x++) {
+            for (int y = 1; y < mapSize; y++) {
+                designLayer2[y][x] = 0;
+            }
+        }
+
+        for (int x = 0; x < mapSize; x++) {
+            for (int y = 1; y < mapSize; y++) {
+
+                // check if tile has room or corridor tile
+                if (dungeon[y][x] == VOID) {
+                    // check if edge room tile
+                    int tile = designLayer1[y - 1][x];
+                    if (tile == ROOM_BOTTOM_LEFT) {
+                        designLayer2[y][x] = 1;
+                    } else if (tile == ROOM_BOTTOM_CENTER) {
+                        designLayer2[y][x] = 2;
+                    } else if (tile == ROOM_BOTTOM_RIGHT) {
+                        designLayer2[y][x] = 3;
+                    }
+                    // check if corridor tile
+                    else if (dungeon[y - 1][x] == CORRIDOR) {
+                        designLayer2[y][x] = 4;
+                    }
+                }
+
+            }
+        }
+
+    }
+
 
     public int[][] getDungeon() {
         return dungeon;
@@ -430,13 +544,13 @@ public class Generator implements Serializable {
             }
         }
 
-        // [0][x] = rock, [1][x] = paper, [2][x] scissors
+        // [0][x] = brute, [1][x] = stable, [2][x] cut
         // [x][0] = A, [x][1] = B, [x][2] C
 
 
         for (Enemy e : enemies) {
-            // rock
-            if (e.getElement().getId().equals(Element.rock.getId())) {
+            // brute
+            if (e.getTechnique().getId().equals(Technique.brute.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[0][0]++;
                 }
@@ -447,8 +561,8 @@ public class Generator implements Serializable {
                     counts[0][2]++;
                 }
             }
-            // paper
-            else if (e.getElement().getId().equals(Element.paper.getId())) {
+            // stable
+            else if (e.getTechnique().getId().equals(Technique.stable.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[1][0]++;
                 }
@@ -459,8 +573,8 @@ public class Generator implements Serializable {
                     counts[1][2]++;
                 }
             }
-            // scissors
-            else if (e.getElement().getId().equals(Element.scissors.getId())) {
+            // cut
+            else if (e.getTechnique().getId().equals(Technique.cut.getId())) {
                 if (e.getType().getId().equals(Type.a.getId())) {
                     counts[2][0]++;
                 }
@@ -512,4 +626,15 @@ public class Generator implements Serializable {
         return ROOM_BOTTOM_RIGHT;
     }
 
+    public int[][] getDesignLayer2() {
+        return designLayer2;
+    }
+
+    public ArrayList<Point> getKeysCoordinates() {
+        return keysCoordinates;
+    }
+
+    public ArrayList<Point> getItemLoots() {
+        return itemLoots;
+    }
 }

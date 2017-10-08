@@ -51,9 +51,6 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
-
-
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fireflies");
         primaryStage.getIcons().add(new Image(classLoader.getResource("icons/icon.png").toString()));

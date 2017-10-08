@@ -1,0 +1,235 @@
+package com.crackerjacks.game.core.states;
+
+import com.crackerjacks.game.core.Global;
+import com.crackerjacks.game.core.objects.Item;
+import com.crackerjacks.game.core.objects.Player;
+import com.crackerjacks.game.core.objects.PotionItem;
+import com.crackerjacks.game.core.objects.WeaponItem;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+import java.util.ArrayList;
+import java.util.zip.CheckedOutputStream;
+
+public class InventoryMenu extends GameState {
+
+    private Scene scene;
+    private GraphicsContext gc;
+
+    // inventory hud properties
+    private int hudX;
+    private int hudY;
+    private int hudW;
+    private int hudH;
+
+    // navigate counters
+    private int currentMarker = 0;
+    private int maxCounter = 7; // up to 8 inventory slots
+    private int minCounter = 0;
+
+    // sprite image
+    private Image itemSprites;
+
+    // player
+    Player player;
+    ArrayList<Item> inventory;
+
+    public InventoryMenu(Scene scene, GraphicsContext graphicsContext) {
+        this.scene = scene;
+        gc = graphicsContext;
+    }
+
+    @Override
+    void onEnter() {
+
+        // get player from save file
+        player = Global.getSave().getPlayer();
+        inventory = player.getInventory();
+        maxCounter = inventory.size() - 1;
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        itemSprites = new Image(classLoader.getResource("sprites/char-spritesheet.png").toString());
+
+        scene.setOnKeyPressed(e -> {
+
+            //navigate through the inventory
+            if (e.getCode() == KeyCode.DOWN) {
+                if (currentMarker + 1 <= maxCounter) {
+                    currentMarker++;
+                } else if (currentMarker + 1 > maxCounter) {
+                    currentMarker = minCounter;
+                }
+
+                System.out.println("MinCounter = " + minCounter);
+                System.out.println("MaxCounter = " + maxCounter);
+                System.out.println("CurrentCounter = " + currentMarker);
+            }
+
+            else if (e.getCode() == KeyCode.UP) {
+                if (currentMarker - 1 >= minCounter) {
+                    currentMarker--;
+                } else if (currentMarker - 1 < minCounter) {
+                    currentMarker = maxCounter;
+                }
+
+                System.out.println("MinCounter = " + minCounter);
+                System.out.println("MaxCounter = " + maxCounter);
+                System.out.println("CurrentCounter = " + currentMarker);
+            }
+
+            // use or equip item
+            else if (e.getCode() == KeyCode.ENTER) {
+                System.out.println("Pressed Enter");
+                // check if an item exists in an inventory
+                if (maxCounter > -1) {
+                    Item usable = inventory.get(currentMarker);
+                    // do the equip method if item is a weapon
+                    if (usable instanceof WeaponItem) {
+                        System.out.println(usable.getName());
+                        player.setEquipped((WeaponItem) usable);
+                    }
+
+                    // else if it is a potion item
+                    else if (usable instanceof PotionItem) {
+                        System.out.println(usable.getName());
+                        player.useItem((PotionItem) usable);
+                        player.getInventory().remove(usable);
+                        System.out.println("Removed " + usable.getName() + " from your inventory.");
+                        inventory = player.getInventory();
+                        maxCounter = inventory.size() - 1;
+                        currentMarker = minCounter;
+
+                    }
+                }
+            }
+
+            // discard item
+            else if (e.getCode() == KeyCode.DELETE) {
+                // check if an item exists in the inventory
+                if (maxCounter > -1) {
+                    Item usable = inventory.get(currentMarker);
+
+                    player.getInventory().remove(usable);
+                    System.out.println("Removed " + usable.getName() + " from your inventory.");
+                    inventory = player.getInventory();
+                    maxCounter = inventory.size() - 1;
+                    currentMarker = minCounter;
+                }
+            }
+
+            // exit inventory
+            else if (e.getCode() == KeyCode.I || e.getCode() == KeyCode.ESCAPE) {
+                GameStateManager.removeLast();
+            }
+
+        });
+
+    }
+
+    @Override
+    void update(long time) {
+
+        // draw
+        hudX = (int) (scene.getCamera().getTranslateX() - 310);
+        hudY = (int) (scene.getCamera().getTranslateY() - 160);
+        hudW = 400;
+        hudH = 400;
+
+
+        // main bg
+        gc.setFill(Color.DARKBLUE);
+        gc.fillRect(hudX, hudY, hudW, hudH);
+
+
+        // Display inventory items
+        for (int i = 0; i < inventory.size(); i++) {
+
+            // get item
+            Item item = inventory.get(i);
+
+            // print item name in inventory
+            // gc.setFill(Color.WHITE);
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, (currentMarker==i? 22 : 20)));
+
+            try {
+                if (player.getEquipped().equals(item)) {
+                    gc.setFill((currentMarker == i ? Color.GREENYELLOW : Color.LIGHTGREEN));
+                } else {
+                    gc.setFill((currentMarker == i ? Color.LIGHTYELLOW : Color.LIGHTGRAY));
+                }
+            } catch (NullPointerException event) {
+                // System.out.println("no item equipped");
+                gc.setFill((currentMarker == i ? Color.LIGHTYELLOW : Color.LIGHTGRAY));
+            }
+
+            gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 22);
+
+            // draw description
+            gc.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+            if (item instanceof WeaponItem) {
+
+                // draw item sprite
+                gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
+                        hudY + 50, 48, 48);
+
+                WeaponItem w = (WeaponItem) item;
+                int hp = w.getHealth();
+                int atk = w.getAttack();
+                int def = w.getDefense();
+                int md = w.getMinDamage();
+                int xd = w.getMaxDamage();
+                double stun = w.getStun_chance();
+                double bleed = w.getBleed_chance();
+                double disarm = w.getDisarm_chance();
+
+                gc.fillText( w.getName().toUpperCase()
+                        + "\nTYPE " + w.getType() + "\n"
+                        + "\nATK DMG +(" + md + "-" + xd + ")"
+                        + (hp>0?"\nHP BONUS +" + hp : "")
+                        + (atk>0?"\nATK POWER +" + atk:"")
+                        + (def>0?"\nDEFENSE +" + def:"")
+                        + (stun>0?"\n\nSTUN %CHANCE +" + stun : "")
+                        + (bleed>0?"\n\nBLEED %CHANCE +" + bleed : "")
+                        + (disarm>0?"\n\nDISARM %CHANCE +" + disarm : "")
+                        + "\n\n[ENTER KEY] to equip\n[DELETE KEY] to discard"
+                        , hudX + 230, hudY + 150);
+
+
+            }
+
+            else if (item instanceof PotionItem) {
+
+                PotionItem potion = (PotionItem) item;
+
+                // draw item sprite
+                gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
+                        hudY + 50, 48, 48);
+
+                gc.fillText( potion.getName().toUpperCase()
+                                + "\n\nRecover " + potion.getHealth() + " HP per turn"
+                                + "\nfor " + potion.getDurationHealth() + " turns."
+                                + "\n\n[ENTER KEY] to equip\n[DELETE KEY] to discard"
+                        , hudX + 230, hudY + 150);
+
+            }
+
+        }
+
+
+
+        // border
+        gc.setStroke(Color.WHITE);
+        gc.strokeRect(hudX, hudY, hudW, hudH);
+
+    }
+
+    @Override
+    void onExit() {
+
+    }
+}
