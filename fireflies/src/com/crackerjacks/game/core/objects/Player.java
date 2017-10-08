@@ -177,6 +177,9 @@ public class Player extends GameCharacter {
             // level up
             setLevel(getLevel() + 1);
             setExperience(getExperience() - reqExperience);
+            // update health value
+            setMaxHealth(getMaxHealth() + 5);
+            setCurrentHealth(getCurrentHealth() + 5);
             Global.addHistoryText(getName().toUpperCase() + " reached level " + getLevel() + "!");
         }
 

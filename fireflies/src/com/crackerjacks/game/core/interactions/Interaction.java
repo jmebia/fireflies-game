@@ -45,6 +45,10 @@ public class Interaction {
             if (attack < defense)
                 damage -= defense - attack;
 
+            // if character is in a corridor
+            if (isInNarrowSpace(defender))
+                damage += new Random().nextInt(attack);
+
             // check elements, reduce or increment damage depending on compared element types
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
@@ -53,7 +57,8 @@ public class Interaction {
 
                 // determines if stun effect will take place
                 if ( (chance - attacker.getStunChance()) < 0 ) {
-                    defender.setStun(new Random().nextInt(3 - 1) + 1);
+                    // if defender is cut type then stun turns is higher
+                    defender.setStun(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.cut)? 2 : 1));
                 }
 
             }
@@ -63,7 +68,8 @@ public class Interaction {
 
                 // determines if disarm effect will take place
                 if ( (chance - attacker.getDisarmChance()) < 0 ) {
-                    defender.setDisarm(new Random().nextInt(3 - 1) + 1);
+                    // if defender is brute type then disarm turns is higher
+                    defender.setDisarm(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.brute)? 2 : 1));
                 }
 
             }
@@ -74,7 +80,8 @@ public class Interaction {
                 // determines if bleed effect will take place
                 if ( (chance - attacker.getBleedChance()) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
-                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
+                    // if defender is stable type then bleed damage is higher
+                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + (playerTech.equals(Technique.stable)? 2 : 1));
                 }
 
             }
@@ -133,6 +140,10 @@ public class Interaction {
             if (attack < defense)
                 damage -= defense - attack;
 
+            // if character is in a corridor
+            if (isInNarrowSpace(defender))
+                damage += new Random().nextInt(attack);
+
             // add damage modifier from weapon
             try {
                 if (!weap.equals(null)) {
@@ -157,7 +168,8 @@ public class Interaction {
 
                 // determines if stun effect will take place
                 if ( (chance - attacker.getStunChance()) < 0 ) {
-                    defender.setStun(new Random().nextInt(3 - 1) + 1);
+                    // if defender is cut type then stun turns is higher
+                    defender.setStun(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.cut)? 2 : 1));
                 }
             }
 
@@ -170,7 +182,8 @@ public class Interaction {
 
                 // determines if disarm effect will take place
                 if ( (chance - attacker.getDisarmChance()) < 0 ) {
-                    defender.setDisarm(new Random().nextInt(3 - 1) + 1);
+                    // if defender is brute type then disarm turns are higher
+                    defender.setDisarm(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.brute)? 2 : 1));
                 }
 
             }
@@ -185,7 +198,8 @@ public class Interaction {
                 // determines if bleed effect will take place
                 if ( (chance - attacker.getBleedChance()) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
-                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
+                    // if defender is stable type then bleed damage is higher
+                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + (defenderType.equals(Technique.stable)? 2 : 1));
                 }
 
             }
