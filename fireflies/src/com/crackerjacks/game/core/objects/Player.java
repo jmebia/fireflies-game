@@ -9,13 +9,16 @@ import java.util.ArrayList;
 
 public class Player extends GameCharacter {
 
+    private int healTurns = 0;
+    private int healAmout = 0;
+
     private int rockExp = 0;
     private int paperExp = 0;
     private int scissorsExp = 0;
 
-    private int damageMod;
-    private int attackMod;
-    private int defenseMod;
+    private int damageMod = 0;
+    private int attackMod = 0;
+    private int defenseMod = 0;
 
     private int regenTurns = 0;
 
@@ -163,6 +166,16 @@ public class Player extends GameCharacter {
             this.setBleed(getBleed() - 1);
             Global.addHistoryText(getName().toUpperCase() + " bleeds " + getBleedDamage() + " HP");
         }
+
+        // heal player
+        if (getHealTurns() > 0) {
+            if (getCurrentHealth() + getHealAmout() >= getMaxHealth())
+                setCurrentHealth(getMaxHealth());
+            else
+                setCurrentHealth(getCurrentHealth() + getHealAmout());
+
+            setHealTurns(getHealTurns() - 1);
+        }
     }
 
     public void updateLevel() {
@@ -173,15 +186,33 @@ public class Player extends GameCharacter {
 //        double expCut = getLevelCut();
         double reqExperience = Math.pow(getLevel(), 2) * 100;
 
+        System.out.println("Player level req = ");
+
         if (getExperience() >= reqExperience) {
             // level up
             setLevel(getLevel() + 1);
             setExperience(getExperience() - reqExperience);
             // update health value
-            setMaxHealth(getMaxHealth() + 5);
-            setCurrentHealth(getCurrentHealth() + 5);
+            setMaxHealth(getMaxHealth() + 10);
+            setCurrentHealth(getCurrentHealth() + 10);
             Global.addHistoryText(getName().toUpperCase() + " reached level " + getLevel() + "!");
         }
 
+    }
+
+    public int getHealTurns() {
+        return healTurns;
+    }
+
+    public void setHealTurns(int healTurns) {
+        this.healTurns = healTurns;
+    }
+
+    public int getHealAmout() {
+        return healAmout;
+    }
+
+    public void setHealAmout(int healAmout) {
+        this.healAmout = healAmout;
     }
 }

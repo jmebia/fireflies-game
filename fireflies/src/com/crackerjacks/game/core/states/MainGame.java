@@ -494,7 +494,9 @@ public class MainGame extends GameState {
             graphicsContext.fillText("No keys required",hudx + 600, hudy + 40);
         }
         // level
-        graphicsContext.fillText("Player Level " + player.getLevel(),hudx + 150, hudy + 20);
+        graphicsContext.fillText("Player Level " + player.getLevel() + " | exp "
+                + player.getExperience() + "/"+String.valueOf( Math.pow(player.getLevel(), 2) * 100)
+                ,hudx + 150, hudy + 20);
 
 
         // MINI MAP
@@ -523,6 +525,8 @@ public class MainGame extends GameState {
         graphicsContext.setFill(Color.GREY);
 
         for (int i = 0; i < Global.getHistory().size(); i++) {
+
+            System.out.println("Drawing text");
 
             if (i == 9)
                 graphicsContext.setFill(Color.YELLOW);
