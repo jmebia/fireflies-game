@@ -59,6 +59,8 @@ public class Interaction {
                 if ( (chance - attacker.getStunChance()) < 0 ) {
                     // if defender is cut type then stun turns is higher
                     defender.setStun(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.cut)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
+                    Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                 }
 
             }
@@ -70,6 +72,7 @@ public class Interaction {
                 if ( (chance - attacker.getDisarmChance()) < 0 ) {
                     // if defender is brute type then disarm turns is higher
                     defender.setDisarm(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.brute)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " got DISARMED!");
                 }
 
             }
@@ -82,6 +85,7 @@ public class Interaction {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     // if defender is stable type then bleed damage is higher
                     defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + (playerTech.equals(Technique.stable)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " is BLEEDING!");
                 }
 
             }
@@ -170,6 +174,7 @@ public class Interaction {
                 if ( (chance - attacker.getStunChance()) < 0 ) {
                     // if defender is cut type then stun turns is higher
                     defender.setStun(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.cut)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                 }
             }
 
@@ -184,6 +189,7 @@ public class Interaction {
                 if ( (chance - attacker.getDisarmChance()) < 0 ) {
                     // if defender is brute type then disarm turns are higher
                     defender.setDisarm(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.brute)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " got DISARMED!");
                 }
 
             }
@@ -199,7 +205,9 @@ public class Interaction {
                 if ( (chance - attacker.getBleedChance()) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     // if defender is stable type then bleed damage is higher
-                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + (defenderType.equals(Technique.stable)? 2 : 1));
+                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1)
+                            + (defenderType.equals(Technique.stable)? 2 : 1));
+                    Global.addHistoryText(defender.getName().toUpperCase() + " is BLEEDING!");
                 }
 
             }

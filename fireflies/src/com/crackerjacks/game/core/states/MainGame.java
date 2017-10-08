@@ -516,10 +516,10 @@ public class MainGame extends GameState {
         // MESSAGE BOX
         // draw main box
         graphicsContext.setFill(new Color(0, 0, 0, 0.5));
-        graphicsContext.fillRect(hudx + (hudw / 2 + 20), hudy + 410, 360, 120);
+        graphicsContext.fillRect(hudx + (hudw / 2 + 40), hudy + 410, 360, 120);
         // draw box border
         graphicsContext.setStroke(Color.WHITE);
-        graphicsContext.strokeRect(hudx + (hudw / 2 + 50), hudy + 410, 280, 120);
+        graphicsContext.strokeRect(hudx + (hudw / 2 + 40), hudy + 410, 280, 120);
         // draw texts
         graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL, 10));
         graphicsContext.setFill(Color.GREY);
