@@ -238,10 +238,10 @@ public class MainGame extends GameState {
 
         // update tile type where the enemies and player are standing
         for (Enemy e : enemies) {
-            e.setTileType(designMap[(int)e.getY()][(int)e.getX()]);
+            e.setTileType(tileMap[(int)e.getY()][(int)e.getX()]);
         }
 
-        player.setTileType(designMap[(int)player.getY()][(int)player.getX()]);
+        player.setTileType(tileMap[(int)player.getY()][(int)player.getX()]);
 
         // draw rooms and corridors
         for(int i = 0; i < designMap.length; i++) { // iterate through the rows
