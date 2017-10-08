@@ -14,6 +14,7 @@ public class Item implements Serializable {
     // CONSTRUCTOR
     public Item(String name) {
         this.name = name;
+        this.level = 1;
     }
 
     public int getLevel() {

@@ -52,7 +52,7 @@ public class Interaction {
 
 
                 // determines if stun effect will take place
-                if ( (chance -= attacker.getStunChance()) < 0 ) {
+                if ( (chance - attacker.getStunChance()) < 0 ) {
                     defender.setStun(new Random().nextInt(3 - 1) + 1);
                 }
 
@@ -62,7 +62,7 @@ public class Interaction {
                 // TODO: stable damage computation
 
                 // determines if disarm effect will take place
-                if ( (chance -= attacker.getDisarmChance()) < 0 ) {
+                if ( (chance - attacker.getDisarmChance()) < 0 ) {
                     defender.setDisarm(new Random().nextInt(3 - 1) + 1);
                 }
 
@@ -72,7 +72,7 @@ public class Interaction {
                 // TODO: cut damage computation
 
                 // determines if bleed effect will take place
-                if ( (chance -= attacker.getBleedChance()) < 0 ) {
+                if ( (chance - attacker.getBleedChance()) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
                 }
@@ -98,6 +98,10 @@ public class Interaction {
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
             int defense = (int) defender.getDefense();
+//            int minAttack = new Double(attack * 0.7).intValue();
+//            int minDefense = new Double(defense * 0.7).intValue();
+//            int finAttack = new Random().nextInt(attack - minAttack) + minAttack;
+//            int finDefense = new Random().nextInt(defense - minDefense) + minDefense;
             WeaponItem weap = null;
 
             double penalty = damage / 2;
@@ -125,6 +129,7 @@ public class Interaction {
             }
 
             // check native attack and defense properties
+            // if attack is greater than defense, attack will hit, else it will miss
             if (attack < defense)
                 damage -= defense - attack;
 
@@ -151,7 +156,7 @@ public class Interaction {
                 }
 
                 // determines if stun effect will take place
-                if ( (chance -= attacker.getStunChance()) < 0 ) {
+                if ( (chance - attacker.getStunChance()) < 0 ) {
                     defender.setStun(new Random().nextInt(3 - 1) + 1);
                 }
             }
@@ -164,7 +169,7 @@ public class Interaction {
                     damage += penalty;
 
                 // determines if disarm effect will take place
-                if ( (chance -= attacker.getDisarmChance()) < 0 ) {
+                if ( (chance - attacker.getDisarmChance()) < 0 ) {
                     defender.setDisarm(new Random().nextInt(3 - 1) + 1);
                 }
 
@@ -178,7 +183,7 @@ public class Interaction {
                     damage += penalty;
 
                 // determines if bleed effect will take place
-                if ( (chance -= attacker.getBleedChance()) < 0 ) {
+                if ( (chance - attacker.getBleedChance()) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + 1 );
                 }

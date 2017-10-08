@@ -54,4 +54,5 @@ public class Global {
     public static void setEnemySpawnStatistics(LinkedList<HashMap<String, Integer>> enemySpawnStatistics) {
         Global.enemySpawnStatistics = enemySpawnStatistics;
     }
+
 }

@@ -177,7 +177,7 @@ public class Player extends GameCharacter {
             // level up
             setLevel(getLevel() + 1);
             setExperience(getExperience() - reqExperience);
-            Global.addHistoryText();
+            Global.addHistoryText(getName().toUpperCase() + " reached level " + getLevel() + "!");
         }
 
     }
