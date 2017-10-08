@@ -18,17 +18,18 @@ public class Interaction {
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
             // get defending player's proficient technique
-            Technique playerTech = null;
-            int playerBrute = defender.getLevelBrute();
-            int playerStable = defender.getLevelStable();
-            int playerCut = defender.getLevelCut();
+            Technique playerTech = defender.getProficientTechnique();
 
-            if (playerBrute > playerStable && playerBrute > playerCut)
-                playerTech = Technique.brute;
-            else if (playerStable > playerBrute && playerStable > playerCut)
-                playerTech = Technique.stable;
-            else if (playerCut > playerBrute && playerCut > playerStable)
-                playerTech = Technique.cut;
+//            int playerBrute = defender.getLevelBrute();
+//            int playerStable = defender.getLevelStable();
+//            int playerCut = defender.getLevelCut();
+//
+//            if (playerBrute > playerStable && playerBrute > playerCut)
+//                playerTech = Technique.brute;
+//            else if (playerStable > playerBrute && playerStable > playerCut)
+//                playerTech = Technique.stable;
+//            else if (playerCut > playerBrute && playerCut > playerStable)
+//                playerTech = Technique.cut;
 
             // get base combat stats of enemy
             int damage = attacker.getDamage();
@@ -66,7 +67,6 @@ public class Interaction {
                 if ( (chance - attacker.getStunChance()) < 0 ) {
                     // if defender is cut type then stun turns is higher
                     defender.setStun(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.cut)? 2 : 1));
-                    Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                     Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                 }
 

@@ -1,6 +1,7 @@
 package com.crackerjacks.game.core.objects;
 
 import com.crackerjacks.game.core.Global;
+import com.crackerjacks.game.core.interactions.Technique;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -15,6 +16,8 @@ public class Player extends GameCharacter {
     private int rockExp = 0;
     private int paperExp = 0;
     private int scissorsExp = 0;
+
+    private Technique proficientTechnique = Technique.brute;
 
     private int damageMod = 0;
     private int attackMod = 0;
@@ -214,5 +217,13 @@ public class Player extends GameCharacter {
 
     public void setHealAmout(int healAmout) {
         this.healAmout = healAmout;
+    }
+
+    public Technique getProficientTechnique() {
+        return proficientTechnique;
+    }
+
+    public void setProficientTechnique(Technique proficientTechnique) {
+        this.proficientTechnique = proficientTechnique;
     }
 }

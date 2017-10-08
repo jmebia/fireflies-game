@@ -526,8 +526,6 @@ public class MainGame extends GameState {
 
         for (int i = 0; i < Global.getHistory().size(); i++) {
 
-            System.out.println("Drawing text");
-
             if (i == 9)
                 graphicsContext.setFill(Color.YELLOW);
             else if (i > 4)
