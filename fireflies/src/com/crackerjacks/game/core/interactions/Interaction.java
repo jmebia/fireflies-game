@@ -54,11 +54,11 @@ public class Interaction {
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
                 // brute damage computation
-                if (playerTech.equals(Technique.stable.getId())) {
+                if (playerTech.equals(Technique.stable)) {
                     System.out.println("Enemy is stable type");
                     damage -= penalty;
                 }
-                else if (playerTech.equals(Technique.cut.getId())) {
+                else if (playerTech.equals(Technique.cut)) {
                     System.out.println("Enemy is cut type");
                     damage += penalty;
                 }
@@ -74,9 +74,9 @@ public class Interaction {
             // stable
             else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
                 // stable damage computation
-                if (playerTech.equals(Technique.cut.getId()))
+                if (playerTech.equals(Technique.cut))
                     damage -= penalty;
-                else if (playerTech.equals(Technique.brute.getId()))
+                else if (playerTech.equals(Technique.brute))
                     damage += penalty;
 
                 // determines if disarm effect will take place
@@ -90,9 +90,9 @@ public class Interaction {
             //cut
             else if (attacker.getTechnique().getId().equals(Technique.cut.getId())) {
                 // cut damage computation
-                if (playerTech.equals(Technique.brute.getId()))
+                if (playerTech.equals(Technique.brute))
                     damage -= penalty;
-                else if (playerTech.equals(Technique.stable.getId()))
+                else if (playerTech.equals(Technique.stable))
                     damage += penalty;
 
                 // determines if bleed effect will take place
@@ -161,7 +161,7 @@ public class Interaction {
 
             // if character is in a corridor
             if (isInNarrowSpace(defender))
-                damage += new Random().nextInt(attack);
+                damage += new Random().nextInt((int)penalty);
 
             // add damage modifier from weapon
             try {

@@ -152,6 +152,48 @@ public class MainGameController {
                     }
                 }
 
+                // activate brute
+                else if (input.getLast().equals("J")) {
+                    if (!player.getProficientTechnique().equals(Technique.brute)) {
+                        if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setProficientTechnique(Technique.brute);
+                            Global.addHistoryText("Switched proficiency to BRUTE technique.");
+                        } else {
+                            Global.addHistoryText("Not enough fireflies!");
+                        }
+                    } else {
+                        Global.addHistoryText("You are already proficient in BRUTE technique!");
+                    }
+                }
+
+                // activate stable
+                else if (input.getLast().equals("K")) {
+                    if (!player.getProficientTechnique().equals(Technique.stable)) {
+                        if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setProficientTechnique(Technique.stable);
+                            Global.addHistoryText("Switched proficiency to BRUTE technique.");
+                        } else {
+                            Global.addHistoryText("Not enough fireflies!");
+                        }
+                    } else {
+                        Global.addHistoryText("You are already proficient in BRUTE technique!");
+                    }
+                }
+
+                // activate cut
+                else if (input.getLast().equals("L")) {
+                    if (!player.getProficientTechnique().equals(Technique.cut)) {
+                        if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setProficientTechnique(Technique.cut);
+                            Global.addHistoryText("Switched proficiency to BRUTE technique.");
+                        } else {
+                            Global.addHistoryText("Not enough fireflies!");
+                        }
+                    } else {
+                        Global.addHistoryText("You are already proficient in BRUTE technique!");
+                    }
+                }
+
                 // open in-game sub states
 
                 // open inventory

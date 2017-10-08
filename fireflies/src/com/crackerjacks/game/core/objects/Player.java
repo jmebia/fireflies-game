@@ -19,6 +19,8 @@ public class Player extends GameCharacter {
 
     private Technique proficientTechnique = Technique.brute;
 
+    private int techniqueCost = 2;
+
     private int damageMod = 0;
     private int attackMod = 0;
     private int defenseMod = 0;
@@ -228,5 +230,13 @@ public class Player extends GameCharacter {
 
     public void setProficientTechnique(Technique proficientTechnique) {
         this.proficientTechnique = proficientTechnique;
+    }
+
+    public int getTechniqueCost() {
+        return techniqueCost;
+    }
+
+    public void setTechniqueCost(int techniqueCost) {
+        this.techniqueCost = techniqueCost;
     }
 }
