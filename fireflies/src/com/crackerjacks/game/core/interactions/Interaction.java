@@ -48,7 +48,7 @@ public class Interaction {
 
             // if character is in a corridor
             if (isInNarrowSpace(defender))
-                damage += new Random().nextInt(attack);
+                damage += new Random().nextInt((int)penalty);
 
             // check elements, reduce or increment damage depending on compared element types
             // brute type

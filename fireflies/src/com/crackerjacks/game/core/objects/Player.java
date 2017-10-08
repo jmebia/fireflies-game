@@ -198,6 +198,9 @@ public class Player extends GameCharacter {
             // update health value
             setMaxHealth(getMaxHealth() + 10);
             setCurrentHealth(getCurrentHealth() + 10);
+            // update damage
+            setDamage(getDamage() + 1);
+
             Global.addHistoryText(getName().toUpperCase() + " reached level " + getLevel() + "!");
         }
 
