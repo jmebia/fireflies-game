@@ -2,16 +2,12 @@ package com.crackerjacks.game.core.objects;
 
 import com.crackerjacks.game.core.Global;
 import com.crackerjacks.game.core.interactions.Technique;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
-import javax.xml.bind.annotation.XmlElementDecl;
 import java.util.ArrayList;
 
 public class Player extends GameCharacter {
 
     private int healTurns = 0;
-    private int healAmout = 0;
+    private int healAmount = 0;
 
     private int rockExp = 0;
     private int paperExp = 0;
@@ -78,7 +74,8 @@ public class Player extends GameCharacter {
     }
 
     public void useItem(PotionItem potionItem) {
-
+        setHealTurns(potionItem.getDurationHealth());
+        setHealAmount(potionItem.getHealth());
     }
 
     public void setInventory(ArrayList<Item> inventory) {
@@ -174,10 +171,10 @@ public class Player extends GameCharacter {
 
         // heal player
         if (getHealTurns() > 0) {
-            if (getCurrentHealth() + getHealAmout() >= getMaxHealth())
+            if (getCurrentHealth() + getHealAmount() >= getMaxHealth())
                 setCurrentHealth(getMaxHealth());
             else
-                setCurrentHealth(getCurrentHealth() + getHealAmout());
+                setCurrentHealth(getCurrentHealth() + getHealAmount());
 
             setHealTurns(getHealTurns() - 1);
         }
@@ -216,12 +213,12 @@ public class Player extends GameCharacter {
         this.healTurns = healTurns;
     }
 
-    public int getHealAmout() {
-        return healAmout;
+    public int getHealAmount() {
+        return healAmount;
     }
 
-    public void setHealAmout(int healAmout) {
-        this.healAmout = healAmout;
+    public void setHealAmount(int healAmount) {
+        this.healAmount = healAmount;
     }
 
     public Technique getProficientTechnique() {
