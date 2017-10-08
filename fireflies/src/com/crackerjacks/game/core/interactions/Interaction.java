@@ -210,6 +210,15 @@ public class Interaction {
             System.out.println(attacker.getName() + " did " + damage + " damage to " + defender.getName());
             Global.addHistoryText(attacker.getName().toUpperCase() + " dealt "
                     + damage + " damage to " + defender.getName().toUpperCase());
+
+            if (defender.getCurrentHealth() <= 0) {
+                // level up attacker (player)
+                double levelReq = Math.pow(attacker.getLevel(), 2) * 100;
+                double exp = levelReq / (attacker.getLevel() * 4);
+                attacker.setExperience(exp);
+                Global.addHistoryText(defender.getName().toUpperCase() + " died. You gained " + exp + " exp!");
+                attacker.updateLevel();
+            }
         }
     }
 
