@@ -470,17 +470,20 @@ public class MainGame extends GameState {
         graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + " + player.getDefenseMod()
                 ,hudx + 230, hudy + 60);
 
-        // brute lvl and exp
-        graphicsContext.fillText("Brute lvl " + player.getLevelBrute() + " | "
-                        + player.getExperienceBrute() + " exp",hudx + 400, hudy + 20);
+        // display proficient technique
+        graphicsContext.fillText("Proficiency: " + player.getProficientTechnique().getId(),hudx + 400, hudy + 20);
 
-        // stable lvl and exp
-        graphicsContext.fillText("Stable lvl " + player.getLevelStable() + " | "
-                + player.getExperienceStable() + " exp",hudx + 400, hudy + 40);
-
-        // cut lvl and exp
-        graphicsContext.fillText("Cut lvl " + player.getLevelCut() + " | "
-                + player.getExperienceCut() + " exp",hudx + 400, hudy + 60);
+//        // brute lvl and exp
+//        graphicsContext.fillText("Brute lvl " + player.getLevelBrute() + " | "
+//                        + player.getExperienceBrute() + " exp",hudx + 400, hudy + 20);
+//
+//        // stable lvl and exp
+//        graphicsContext.fillText("Stable lvl " + player.getLevelStable() + " | "
+//                + player.getExperienceStable() + " exp",hudx + 400, hudy + 40);
+//
+//        // cut lvl and exp
+//        graphicsContext.fillText("Cut lvl " + player.getLevelCut() + " | "
+//                + player.getExperienceCut() + " exp",hudx + 400, hudy + 60);
 
         // player's fireflies essence
         // graphicsContext.setFill(Color.WHITE);
