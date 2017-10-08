@@ -608,6 +608,15 @@ public class MainGame extends GameState {
                     tileWidth, tileHeight));
         }
 
+        // set up player elements
+        if (isNewGame) {
+            player = new Player();
+            player.setName("Jean Gadot");
+            player.setDamage(2);
+            player.setMaxHealth(100);
+            player.setCurrentHealth(100);
+        }
+
         for (Point item : loot) {
             if (potionCount < 1) {
                 PotionItem potionItem = new PotionItem("Health Potion");
@@ -618,19 +627,11 @@ public class MainGame extends GameState {
                 potionCount++;
             } else {
                 WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]", Type.a);
+                newWeap.setMinDamage(0);
                 newWeap.setMinDamage(1);
                 items.add(new ItemObject2D(newWeap, (int) item.getX(), (int) item.getY(),
                         tileWidth, tileHeight));
             }
-        }
-
-        // set up player elements
-        if (isNewGame) {
-            player = new Player();
-            player.setName("Jean Gadot");
-            player.setDamage(2);
-            player.setMaxHealth(100);
-            player.setCurrentHealth(100);
         }
 
         player.setX(generator.getPlayerPosition().getX());
