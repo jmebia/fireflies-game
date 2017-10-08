@@ -7,15 +7,15 @@ public class WeaponItem extends Item {
     private Type type;
 
     // base stat modifiers
-    private int maxDamage;
-    private int minDamage;
-    private int health;
-    private int attack;
-    private int defense;
+    private int maxDamage = 0;
+    private int minDamage = 0;
+    private int health = 0;
+    private int attack = 0;
+    private int defense = 0;
 
-    private double stun_chance;
-    private double bleed_chance;
-    private double disarm_chance;
+    private double stun_chance = 0;
+    private double bleed_chance = 0;
+    private double disarm_chance = 0;
 
     public WeaponItem(String name, Type type) {
         super(name);

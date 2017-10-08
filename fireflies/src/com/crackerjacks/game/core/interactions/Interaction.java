@@ -215,7 +215,6 @@ public class Interaction {
                     defender.setDisarm(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.brute)? 2 : 1));
                     Global.addHistoryText(defender.getName().toUpperCase() + " got DISARMED!");
                 }
-
             }
 
             // if cut is the attack element of the player

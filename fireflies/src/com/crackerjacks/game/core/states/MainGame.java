@@ -610,7 +610,8 @@ public class MainGame extends GameState {
         }
 
         for (Point item : loot) {
-            items.add(new ItemObject2D(new WeaponItem("Something", Type.a), (int) item.getX(), (int)item.getY(),
+            WeaponItem newWeap = new WeaponItem("Something", Type.a);
+            items.add(new ItemObject2D(newWeap, (int) item.getX(), (int)item.getY(),
                     tileWidth, tileHeight));
         }
 
