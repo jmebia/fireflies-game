@@ -52,8 +52,15 @@ public class Interaction {
             // check elements, reduce or increment damage depending on compared element types
             // brute type
             if (attacker.getTechnique().getId().equals(Technique.brute.getId())) {
-                // TODO: brute damage computation
-
+                // brute damage computation
+                if (playerTech.equals(Technique.stable.getId())) {
+                    System.out.println("Enemy is stable type");
+                    damage -= penalty;
+                }
+                else if (playerTech.equals(Technique.cut.getId())) {
+                    System.out.println("Enemy is cut type");
+                    damage += penalty;
+                }
 
                 // determines if stun effect will take place
                 if ( (chance - attacker.getStunChance()) < 0 ) {
@@ -66,7 +73,11 @@ public class Interaction {
             }
             // stable
             else if (attacker.getTechnique().getId().equals(Technique.stable.getId())) {
-                // TODO: stable damage computation
+                // stable damage computation
+                if (playerTech.equals(Technique.cut.getId()))
+                    damage -= penalty;
+                else if (playerTech.equals(Technique.brute.getId()))
+                    damage += penalty;
 
                 // determines if disarm effect will take place
                 if ( (chance - attacker.getDisarmChance()) < 0 ) {
@@ -78,7 +89,11 @@ public class Interaction {
             }
             //cut
             else if (attacker.getTechnique().getId().equals(Technique.cut.getId())) {
-                // TODO: cut damage computation
+                // cut damage computation
+                if (playerTech.equals(Technique.brute.getId()))
+                    damage -= penalty;
+                else if (playerTech.equals(Technique.stable.getId()))
+                    damage += penalty;
 
                 // determines if bleed effect will take place
                 if ( (chance - attacker.getBleedChance()) < 0 ) {
