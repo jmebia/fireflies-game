@@ -98,6 +98,12 @@ public class InventoryMenu extends GameState {
                     else if (usable instanceof PotionItem) {
                         System.out.println(usable.getName());
                         player.useItem((PotionItem) usable);
+                        player.getInventory().remove(usable);
+                        System.out.println("Removed " + usable.getName() + " from your inventory.");
+                        inventory = player.getInventory();
+                        maxCounter = inventory.size() - 1;
+                        currentMarker = minCounter;
+
                     }
                 }
             }
@@ -136,11 +142,11 @@ public class InventoryMenu extends GameState {
 
 
         // main bg
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.DARKBLUE);
         gc.fillRect(hudX, hudY, hudW, hudH);
 
 
-        // TODO: Display inventory items
+        // Display inventory items
         for (int i = 0; i < inventory.size(); i++) {
 
             // get item
@@ -163,13 +169,13 @@ public class InventoryMenu extends GameState {
 
             gc.fillText(item.getName(), hudX + 10, hudY + 30 + i * 22);
 
-            // draw item sprite
-            gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
-                    hudY + 50, 48, 48);
-
             // draw description
             gc.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
             if (item instanceof WeaponItem) {
+
+                // draw item sprite
+                gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
+                        hudY + 50, 48, 48);
 
                 WeaponItem w = (WeaponItem) item;
                 int hp = w.getHealth();
@@ -194,9 +200,15 @@ public class InventoryMenu extends GameState {
                         , hudX + 230, hudY + 150);
 
 
-            } else if (item instanceof PotionItem) {
+            }
+
+            else if (item instanceof PotionItem) {
 
                 PotionItem potion = (PotionItem) item;
+
+                // draw item sprite
+                gc.drawImage(itemSprites,  0, 192, 32, 32, hudX + 230,
+                        hudY + 50, 48, 48);
 
                 gc.fillText( potion.getName().toUpperCase()
                                 + "\n\nRecover " + potion.getHealth() + " HP per turn"

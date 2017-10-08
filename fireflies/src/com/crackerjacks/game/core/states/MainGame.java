@@ -628,7 +628,7 @@ public class MainGame extends GameState {
             } else {
                 WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]", Type.a);
                 newWeap.setMinDamage(0);
-                newWeap.setMinDamage(1);
+                newWeap.setMaxDamage(2);
                 items.add(new ItemObject2D(newWeap, (int) item.getX(), (int) item.getY(),
                         tileWidth, tileHeight));
             }
