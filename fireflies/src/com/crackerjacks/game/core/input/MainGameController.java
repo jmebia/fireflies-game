@@ -289,7 +289,7 @@ public class MainGameController {
 
     private void updateEnemy(ArrayList<Enemy> enemies, Player player, int[][] tileMap) {
 
-        System.out.println("<============= Updating enemies =============>");
+//        System.out.println("<============= Updating enemies =============>");
 
         // container for checked enemies
         ArrayList<Enemy> checked = new ArrayList<>();

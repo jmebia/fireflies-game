@@ -77,7 +77,7 @@ public class GameCharacter implements Serializable{
         bleedDamage = 0;
 
         bleedChance = 0.1;
-        stunChance = 1;
+        stunChance = 0.1;
         disarmChance = 0.1;
 
         // the base damage of a objects is always equal to the ceiling of

@@ -42,6 +42,10 @@ public class Interaction {
             // get chance for status effect
             double chance = Math.random() * 100;
 
+            System.out.println("====================> "+attacker.getName().toUpperCase()+" CHANCE = " + chance + " <====================");
+
+            System.out.println("===================> e.chance - stun chance = " + (chance - attacker.getStunChance() * 100));
+
             // check native attack and defense properties
             if (attack < defense)
                 damage -= defense - attack;
@@ -64,9 +68,10 @@ public class Interaction {
                 }
 
                 // determines if stun effect will take place
-                if ( (chance - attacker.getStunChance()) < 0 ) {
+                if ( (chance - attacker.getStunChance() * 100) < 0 ) {
                     // if defender is cut type then stun turns is higher
                     defender.setStun(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.cut)? 2 : 1));
+                    System.out.println(defender.getName().toUpperCase() + " got STUNNED!");
                     Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                 }
 
@@ -80,7 +85,7 @@ public class Interaction {
                     damage += penalty;
 
                 // determines if disarm effect will take place
-                if ( (chance - attacker.getDisarmChance()) < 0 ) {
+                if ( (chance - attacker.getDisarmChance() * 100) < 0 ) {
                     // if defender is brute type then disarm turns is higher
                     defender.setDisarm(new Random().nextInt(3 - 1) + (playerTech.equals(Technique.brute)? 2 : 1));
                     Global.addHistoryText(defender.getName().toUpperCase() + " got DISARMED!");
@@ -96,10 +101,10 @@ public class Interaction {
                     damage += penalty;
 
                 // determines if bleed effect will take place
-                if ( (chance - attacker.getBleedChance()) < 0 ) {
+                if ( (chance - attacker.getBleedChance() * 100) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     // if defender is stable type then bleed damage is higher
-                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1) + (playerTech.equals(Technique.stable)? 2 : 1));
+                    defender.setBleedDamage((int)(playerTech.equals(Technique.stable)? penalty + 1 : penalty));
                     Global.addHistoryText(defender.getName().toUpperCase() + " is BLEEDING!");
                 }
 
@@ -119,7 +124,7 @@ public class Interaction {
         // check if attacker is not disarmed
         if (attacker.getDisarm() <= 0) {
             // get defender's type
-            String defenderType = defender.getTechnique().getId();
+            Technique defenderType = defender.getTechnique();
 
             int damage = attacker.getDamage();
             int attack = attacker.getAttack();
@@ -143,6 +148,9 @@ public class Interaction {
 
             // get chance for status effect
             double chance = Math.random() * 100;
+            System.out.println("====================> PLAYER CHANCE = " + chance + " <====================");
+            System.out.println("===================> p.chance - stun chance = " + (chance - attacker.getStunChance() * 100)
+                    + " <=====================");
 
             // add atk and def modifiers from weapon
             try {
@@ -176,19 +184,20 @@ public class Interaction {
             // if brute is the attack element of the player
             if (attackTechniqueID.equals(Technique.brute.getId())) {
                 System.out.println("Attack is brute");
-                if (defenderType.equals(Technique.stable.getId())) {
+                if (defenderType.equals(Technique.stable)) {
                     System.out.println("Enemy is stable type");
                     damage -= penalty;
                 }
-                else if (defenderType.equals(Technique.cut.getId())) {
+                else if (defenderType.equals(Technique.cut)) {
                     System.out.println("Enemy is cut type");
                     damage += penalty;
                 }
 
                 // determines if stun effect will take place
-                if ( (chance - attacker.getStunChance()) < 0 ) {
+                if ( (chance - attacker.getStunChance() * 100) < 0 ) {
                     // if defender is cut type then stun turns is higher
                     defender.setStun(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.cut)? 2 : 1));
+                    System.out.println(defender.getName().toUpperCase() + " got STUNNED!");
                     Global.addHistoryText(defender.getName().toUpperCase() + " got STUNNED!");
                 }
             }
@@ -197,11 +206,11 @@ public class Interaction {
             else if (attackTechniqueID.equals(Technique.stable.getId())) {
                 if (defenderType.equals(Technique.cut.getId()))
                     damage -= penalty;
-                else if (defenderType.equals(Technique.brute.getId()))
+                else if (defenderType.equals(Technique.brute))
                     damage += penalty;
 
                 // determines if disarm effect will take place
-                if ( (chance - attacker.getDisarmChance()) < 0 ) {
+                if ( (chance - attacker.getDisarmChance() * 100) < 0 ) {
                     // if defender is brute type then disarm turns are higher
                     defender.setDisarm(new Random().nextInt(3 - 1) + (defenderType.equals(Technique.brute)? 2 : 1));
                     Global.addHistoryText(defender.getName().toUpperCase() + " got DISARMED!");
@@ -217,10 +226,10 @@ public class Interaction {
                     damage += penalty;
 
                 // determines if bleed effect will take place
-                if ( (chance - attacker.getBleedChance()) < 0 ) {
+                if ( (chance - attacker.getBleedChance() * 100) < 0 ) {
                     defender.setBleed(new Random().nextInt(4 - 1) + 1);
                     // if defender is stable type then bleed damage is higher
-                    defender.setBleedDamage( new Random().nextInt((damage / 4) - 1)
+                    defender.setBleedDamage( new Random().nextInt(((int)penalty) - 1)
                             + (defenderType.equals(Technique.stable)? 2 : 1));
                     Global.addHistoryText(defender.getName().toUpperCase() + " is BLEEDING!");
                 }

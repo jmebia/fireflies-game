@@ -57,7 +57,7 @@ public class Enemy extends GameCharacter {
 
     // contains the enemy behavior tree
     public void update(Player player, ArrayList<Enemy> enemies, int[][] tilemap) {
-        System.out.println("<=== Updating "+getName()+" ===>");
+//        System.out.println("<=== Updating "+getName()+" ===>");
 
         // check if enemy is not stunned
         if (this.getStun() <= 0) {
@@ -88,7 +88,7 @@ public class Enemy extends GameCharacter {
             this.setBleed(getBleed() - 1);
         }
 
-        System.out.println("Enemy " + getName() + " updated!");
+//        System.out.println("Enemy " + getName() + " updated!");
     }
 
     // behavior B. Enemy only chases player if the player is inside a room
@@ -116,7 +116,7 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(2);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
                 // straight west; X--
@@ -126,7 +126,7 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(0);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
                 // straight north; Y--
@@ -135,7 +135,7 @@ public class Enemy extends GameCharacter {
                     double i = getY() - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
                 // straight south; Y++
@@ -144,7 +144,7 @@ public class Enemy extends GameCharacter {
                     double i = getY() + 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
                 // first quadrant
@@ -156,14 +156,14 @@ public class Enemy extends GameCharacter {
                         if (!checkCollisions(enemies, tilemap, i, getY())) {
                             this.setX(i);
                             this.getSprite().setInitialOffset(2);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     } else {
                         // check collisions before moving through Y space
                         double i = getY() - 1;
                         if (!checkCollisions(enemies, tilemap, getX(), i)) {
                             this.setY(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 }
@@ -176,14 +176,14 @@ public class Enemy extends GameCharacter {
                         if (!checkCollisions(enemies, tilemap, i, getY())) {
                             this.setX(i);
                             this.getSprite().setInitialOffset(0);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     } else {
                         // check collisions before moving through Y space
                         double i = getY() - 1;
                         if (!checkCollisions(enemies, tilemap, getX(), i)) {
                             this.setY(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 }
@@ -196,14 +196,14 @@ public class Enemy extends GameCharacter {
                         if (!checkCollisions(enemies, tilemap, i, getY())) {
                             this.setX(i);
                             this.getSprite().setInitialOffset(0);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     } else {
                         // check collisions before moving through Y space
                         double i = getY() + 1;
                         if (!checkCollisions(enemies, tilemap, getX(), i)) {
                             this.setY(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 }
@@ -216,14 +216,14 @@ public class Enemy extends GameCharacter {
                         if (!checkCollisions(enemies, tilemap, i, getY())) {
                             this.setX(i);
                             this.getSprite().setInitialOffset(2);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     } else {
                         // check collisions before moving through Y space
                         double i = getY() + 1;
                         if (!checkCollisions(enemies, tilemap, getX(), i)) {
                             this.setY(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 }
@@ -239,7 +239,7 @@ public class Enemy extends GameCharacter {
                         // check if he'll move inside a room
                         if (tilemap[(int) getY()][(int) i] == 1) {
                             this.setX(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 } else if (axis == 1) {
@@ -247,7 +247,7 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         if (tilemap[(int) i][(int) getX()] == 1) {
                             this.setY(i);
-                            System.out.println("Enemy " + getName() + " moved!");
+//                            System.out.println("Enemy " + getName() + " moved!");
                         }
                     }
                 }
@@ -279,7 +279,7 @@ public class Enemy extends GameCharacter {
                 if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
                     this.getSprite().setInitialOffset(2);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight west; X--
@@ -289,7 +289,7 @@ public class Enemy extends GameCharacter {
                 if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
                     this.getSprite().setInitialOffset(0);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight north; Y--
@@ -298,7 +298,7 @@ public class Enemy extends GameCharacter {
                 double i = getY() - 1;
                 if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight south; Y++
@@ -307,7 +307,7 @@ public class Enemy extends GameCharacter {
                 double i = getY() + 1;
                 if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // first quadrant
@@ -319,14 +319,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(2);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -339,14 +339,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(0);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -359,14 +359,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(0);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() + 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -379,14 +379,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(2);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() + 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -399,13 +399,13 @@ public class Enemy extends GameCharacter {
                     double i = getX() + new Random().nextInt(3) - 1;
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else if (axis == 1) {
                     double i = getY() + new Random().nextInt(3) - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -435,7 +435,7 @@ public class Enemy extends GameCharacter {
                 if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
                     this.getSprite().setInitialOffset(2);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight west; X--
@@ -445,7 +445,7 @@ public class Enemy extends GameCharacter {
                 if (!checkCollisions(enemies, tilemap, i, getY())) {
                     this.setX(i);
                     this.getSprite().setInitialOffset(0);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight north; Y--
@@ -454,7 +454,7 @@ public class Enemy extends GameCharacter {
                 double i = getY() - 1;
                 if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // straight south; Y++
@@ -463,7 +463,7 @@ public class Enemy extends GameCharacter {
                 double i = getY() + 1;
                 if (!checkCollisions(enemies, tilemap, getX(), i)) {
                     this.setY(i);
-                    System.out.println("Enemy " + getName() + " moved!");
+//                    System.out.println("Enemy " + getName() + " moved!");
                 }
             }
             // first quadrant
@@ -475,14 +475,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(2);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -495,14 +495,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(0);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -515,14 +515,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(0);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() + 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -535,14 +535,14 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset(2);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else {
                     // check collisions before moving through Y space
                     double i = getY() + 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
@@ -556,13 +556,13 @@ public class Enemy extends GameCharacter {
                     if (!checkCollisions(enemies, tilemap, i, getY())) {
                         this.setX(i);
                         this.getSprite().setInitialOffset((i<0? 0: 2));
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 } else if (axis == 1) {
                     double i = getY() + new Random().nextInt(3) - 1;
                     if (!checkCollisions(enemies, tilemap, getX(), i)) {
                         this.setY(i);
-                        System.out.println("Enemy " + getName() + " moved!");
+//                        System.out.println("Enemy " + getName() + " moved!");
                     }
                 }
             }
