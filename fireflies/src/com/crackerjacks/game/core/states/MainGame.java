@@ -17,10 +17,7 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
@@ -572,6 +569,8 @@ public class MainGame extends GameState {
 
     private void generateNewDungeon() {
 
+        int potionCount = 0;
+
         // fill fog map
         for (int i = 0; i < mapSize; i++) {
             for (int j = 0; j < mapSize; j++) {
@@ -610,11 +609,20 @@ public class MainGame extends GameState {
         }
 
         for (Point item : loot) {
-            WeaponItem newWeap = new WeaponItem("Something", Type.a);
-            items.add(new ItemObject2D(newWeap, (int) item.getX(), (int)item.getY(),
-                    tileWidth, tileHeight));
+            if (potionCount < 1) {
+                PotionItem potionItem = new PotionItem("Health Potion");
+                potionItem.setDurationHealth(new Random().nextInt(6 - 4) + 4);
+                potionItem.setHealth(player.getLevel() * 5);
+                items.add(new ItemObject2D(potionItem, (int) item.getX(), (int) item.getY(),
+                        tileWidth, tileHeight));
+                potionCount++;
+            } else {
+                WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]", Type.a);
+                newWeap.setMinDamage(1);
+                items.add(new ItemObject2D(newWeap, (int) item.getX(), (int) item.getY(),
+                        tileWidth, tileHeight));
+            }
         }
-
 
         // set up player elements
         if (isNewGame) {

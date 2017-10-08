@@ -159,7 +159,7 @@ public class MainGameController {
                             player.setProficientTechnique(Technique.brute);
                             Global.addHistoryText("Switched proficiency to BRUTE technique.");
                         } else {
-                            Global.addHistoryText("Not enough fireflies!");
+                            Global.addHistoryText("Not enough Fireflies essence!");
                         }
                     } else {
                         Global.addHistoryText("You are already proficient in BRUTE technique!");
@@ -173,7 +173,7 @@ public class MainGameController {
                             player.setProficientTechnique(Technique.stable);
                             Global.addHistoryText("Switched proficiency to STABLE technique.");
                         } else {
-                            Global.addHistoryText("Not enough fireflies!");
+                            Global.addHistoryText("Not enough Fireflies essence!");
                         }
                     } else {
                         Global.addHistoryText("You are already proficient in STABLE technique!");
@@ -187,7 +187,7 @@ public class MainGameController {
                             player.setProficientTechnique(Technique.cut);
                             Global.addHistoryText("Switched proficiency to CUT technique.");
                         } else {
-                            Global.addHistoryText("Not enough fireflies!");
+                            Global.addHistoryText("Not enough Fireflies essence!");
                         }
                     } else {
                         Global.addHistoryText("You are already proficient in CUT technique!");

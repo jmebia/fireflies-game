@@ -196,6 +196,13 @@ public class InventoryMenu extends GameState {
 
             } else if (item instanceof PotionItem) {
 
+                PotionItem potion = (PotionItem) item;
+
+                gc.fillText( potion.getName().toUpperCase()
+                                + "\n\nRecover " + potion.getHealth() + " HP per turn"
+                                + "\nfor " + potion.getDurationHealth() + " turns."
+                                + "\n\n[ENTER KEY] to equip\n[DELETE KEY] to discard"
+                        , hudX + 230, hudY + 150);
 
             }
 
