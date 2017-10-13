@@ -392,6 +392,14 @@ public class MainGameController {
             Global.addHistoryText(player.getName().toUpperCase() + " is DISARMED");
         }
 
+        // check if an enemy is dead
+        for (Enemy e : enemies) {
+            if (e.getCurrentHealth() <= 0) {
+                deadEnemies.add(e);
+                enemies.remove(e);
+            }
+        }
+
         updateEnemy(enemies, player, tileMap);
         player.updateStatus();
         attackMode = false;

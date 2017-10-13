@@ -7,12 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/sprites/bg-space2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/dungeonGenerator/Generator.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/dungeonGenerator/Generator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/interactions/Interaction.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/interactions/Interaction.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/input/MainGameController.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/input/MainGameController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/MainGame.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/states/MainGame.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,14 +26,34 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="233" column="34" lean-forward="false" selection-start-line="233" selection-start-column="34" selection-end-line="233" selection-end-column="34" />
+            <state relative-caret-position="102">
+              <caret line="227" column="9" lean-forward="false" selection-start-line="227" selection-start-column="9" selection-end-line="227" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Interaction.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainGameController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="415" column="9" lean-forward="true" selection-start-line="415" selection-start-column="9" selection-end-line="415" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interaction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1066">
@@ -47,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state relative-caret-position="155">
+              <caret line="361" column="34" lean-forward="false" selection-start-line="361" selection-start-column="27" selection-end-line="361" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -62,26 +80,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1445">
               <caret line="99" column="60" lean-forward="false" selection-start-line="99" selection-start-column="60" selection-end-line="99" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Global.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/Global.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -113,7 +111,6 @@
       <find>is</find>
       <find>penalt</find>
       <find>Behaior</find>
-      <find>enemies</find>
       <find>visionRadius</find>
       <find>chance -=</find>
       <find>tiletype</find>
@@ -130,6 +127,7 @@
       <find>item</find>
       <find>itemLoo</find>
       <find>draw</find>
+      <find>enemies</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,12 +192,12 @@
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/GameCharacter.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Enemy.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/WeaponItem.java" />
-        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/InventoryMenu.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java" />
         <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
+        <option value="$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
       </list>
     </option>
   </component>
@@ -882,7 +880,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1320" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -892,7 +889,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32041728" sideWeight="0.43558282" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32041728" sideWeight="0.5644172" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32041728" sideWeight="0.5644172" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31296572" sideWeight="0.49386504" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970452" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1032,13 +1029,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/animator/SpriteAnimator.java" />
     <entry file="file://$PROJECT_DIR$/resources/sprites/source" />
     <entry file="file://$PROJECT_DIR$/resources/saves/save_file.ser" />
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/io/SaveIO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1150,7 +1140,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1189,22 +1178,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="233" column="34" lean-forward="false" selection-start-line="233" selection-start-column="34" selection-end-line="233" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1066">
@@ -1212,6 +1185,38 @@
           <folding>
             <marker date="1507865410011" expanded="true" signature="12184:12190" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="227" column="9" lean-forward="false" selection-start-line="227" selection-start-column="9" selection-end-line="227" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="415" column="9" lean-forward="true" selection-start-line="415" selection-start-column="9" selection-end-line="415" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="361" column="34" lean-forward="false" selection-start-line="361" selection-start-column="27" selection-end-line="361" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

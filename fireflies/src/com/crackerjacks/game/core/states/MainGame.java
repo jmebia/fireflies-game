@@ -227,14 +227,6 @@ public class MainGame extends GameState {
             }
         }
 
-        // check if an enemy is dead
-        for (Enemy e : enemies) {
-            if (e.getCurrentHealth() <= 0) {
-                deadEnemies.add(e);
-                enemies.remove(e);
-            }
-        }
-
         // DRAW
         // reset screen
         graphicsContext.setFill(Color.BLACK);
