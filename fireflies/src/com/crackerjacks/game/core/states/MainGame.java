@@ -87,7 +87,7 @@ public class MainGame extends GameState {
     // images for the sprites
     private Image characterSprites;
     private Image tileSprites;
-    // private Image background;
+    private Image background;
 
     // identifies if user loaded an existing save or a new game
     private boolean isNewGame;
@@ -167,7 +167,7 @@ public class MainGame extends GameState {
         ClassLoader classLoader = getClass().getClassLoader();
         characterSprites = new Image(classLoader.getResource("sprites/char-spritesheet.png").toString());
         tileSprites = new Image(classLoader.getResource("sprites/tiles-spritesheet.png").toString());
-        // background = new Image(classLoader.getResource("sprites/space-background.png").toString());
+        background = new Image(classLoader.getResource("sprites/bg-space2.png").toString());
 
     }
 
@@ -227,11 +227,19 @@ public class MainGame extends GameState {
             }
         }
 
+        // check if an enemy is dead
+        for (Enemy e : enemies) {
+            if (e.getCurrentHealth() <= 0) {
+                deadEnemies.add(e);
+                enemies.remove(e);
+            }
+        }
+
         // DRAW
         // reset screen
         graphicsContext.setFill(Color.BLACK);
-        // graphicsContext.drawImage(background,0, 0, 1920, 1920);
         graphicsContext.fillRect(150, 150, 3000, 3000);
+        graphicsContext.drawImage(background,0 + startX, 0 + startY, 2048, 2048);
 
         // update tile type where the enemies and player are standing
         for (Enemy e : enemies) {
@@ -391,19 +399,23 @@ public class MainGame extends GameState {
         }
 
         //draw characters
+        ArrayList<Enemy> drawnEnemies = new ArrayList<>();
         for (GameCharacter character : charDrawList) {
             // if enemy
             if (character instanceof Enemy) {
-                Enemy e = (Enemy) character;
-                Sprite sprite = e.getSprite();
-                sprite.update(time);
-                Point offset = sprite.getCurrentOffset();
+                if (!drawnEnemies.contains(character)) {
+                    Enemy e = (Enemy) character;
+                    drawnEnemies.add(e);
+                    Sprite sprite = e.getSprite();
+                    sprite.update(time);
+                    Point offset = sprite.getCurrentOffset();
 
-                // draw enemy sprite if within player's line of sight
-                if (fogMap[(int) e.getY()][(int) e.getX()] == 2) {
-                    graphicsContext.drawImage(characterSprites, offset.getX(), offset.getY(),
-                            sprite.getWidth(), sprite.getHeight(), sprite.getX(),
-                            sprite.getY(), charWidth, charHeight);
+                    // draw enemy sprite if within player's line of sight
+                    if (fogMap[(int) e.getY()][(int) e.getX()] == 2) {
+                        graphicsContext.drawImage(characterSprites, offset.getX(), offset.getY(),
+                                sprite.getWidth(), sprite.getHeight(), sprite.getX(),
+                                sprite.getY(), charWidth, charHeight);
+                    }
                 }
             }
             // if player

@@ -72,6 +72,8 @@ public class Generator implements Serializable {
     public void generateDungeon(ArrayList<Enemy> parents) {
 
         keysCoordinates.clear();
+        itemLoots.clear();
+
 
         initializeMap();
         createRooms();
