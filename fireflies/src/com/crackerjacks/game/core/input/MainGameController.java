@@ -156,6 +156,8 @@ public class MainGameController {
                 else if (input.getLast().equals("J")) {
                     if (!player.getProficientTechnique().equals(Technique.brute)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setFireflies(player.getFireflies() - player.getTechniqueCost());
+                            player.setTechniqueCost(player.getTechniqueCost() * 2);
                             player.setProficientTechnique(Technique.brute);
                             Global.addHistoryText("Switched proficiency to BRUTE technique.");
                         } else {
@@ -170,6 +172,8 @@ public class MainGameController {
                 else if (input.getLast().equals("K")) {
                     if (!player.getProficientTechnique().equals(Technique.stable)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setFireflies(player.getFireflies() - player.getTechniqueCost());
+                            player.setTechniqueCost(player.getTechniqueCost() * 2);
                             player.setProficientTechnique(Technique.stable);
                             Global.addHistoryText("Switched proficiency to STABLE technique.");
                         } else {
@@ -184,6 +188,8 @@ public class MainGameController {
                 else if (input.getLast().equals("L")) {
                     if (!player.getProficientTechnique().equals(Technique.cut)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
+                            player.setFireflies(player.getFireflies() - player.getTechniqueCost());
+                            player.setTechniqueCost(player.getTechniqueCost() * 2);
                             player.setProficientTechnique(Technique.cut);
                             Global.addHistoryText("Switched proficiency to CUT technique.");
                         } else {

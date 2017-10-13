@@ -474,6 +474,9 @@ public class MainGame extends GameState {
         // display proficient technique
         graphicsContext.fillText("Proficiency: " + player.getProficientTechnique().getId(),hudx + 400, hudy + 20);
 
+        // display proficient technique
+        graphicsContext.fillText("Tech. Cost: " + player.getTechniqueCost(),hudx + 400, hudy + 40);
+
 //        // brute lvl and exp
 //        graphicsContext.fillText("Brute lvl " + player.getLevelBrute() + " | "
 //                        + player.getExperienceBrute() + " exp",hudx + 400, hudy + 20);
