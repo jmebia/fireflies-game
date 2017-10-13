@@ -440,6 +440,7 @@ public class MainGame extends GameState {
         camera.setTranslateX(playerSprite.getX());
         camera.setTranslateY(playerSprite.getY() + 48);
 
+
         /* draw HUD */
         double hudx = camera.getTranslateX() - 356;
         double hudy = camera.getTranslateY() - 269;
@@ -639,7 +640,7 @@ public class MainGame extends GameState {
             } else {
                 // 0 = a, 1 = b, 2 = c
                 int t = random.nextInt(2);
-                WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]",
+                WeaponItem newWeap = new WeaponItem("Crystal Weapon",
                         (t==0? Type.a : (t==1? Type.b : (t==2? Type.c : null ) ) ) );
                 newWeap.setMinDamage(random.nextInt( player.getLevel()) );
                 newWeap.setMaxDamage(random.nextInt( (player.getLevel() + 3) - (newWeap.getMinDamage() + 1))

@@ -117,6 +117,11 @@ public class InventoryMenu extends GameState {
                     player.getInventory().remove(usable);
                     System.out.println("Removed " + usable.getName() + " from your inventory.");
                     inventory = player.getInventory();
+
+                    if (!inventory.contains(player.getEquipped())) {
+                        player.setEquipped(null);
+                    }
+
                     maxCounter = inventory.size() - 1;
                     currentMarker = minCounter;
                 }

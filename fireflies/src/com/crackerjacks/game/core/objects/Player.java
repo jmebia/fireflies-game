@@ -67,10 +67,14 @@ public class Player extends GameCharacter {
     }
 
     public void setEquipped(WeaponItem weaponItem) {
-        if (inventory.contains(weaponItem))
-            equipped = weaponItem;
-        else
-            System.out.println("Item doesn't exist in player's inventory.");
+        try {
+            if (inventory.contains(weaponItem) || weaponItem.equals(null))
+                equipped = weaponItem;
+            else
+                System.out.println("Item doesn't exist in player's inventory.");
+        } catch (NullPointerException e) {
+            equipped = null;
+        }
     }
 
     public void useItem(PotionItem potionItem) {
