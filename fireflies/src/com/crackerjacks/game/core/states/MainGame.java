@@ -462,13 +462,13 @@ public class MainGame extends GameState {
                 + (player.getEquipped()==null? " None" : player.getEquipped().getName()),hudx + 10, hudy + 40);
 
         // damage
-        graphicsContext.fillText("Damage: " + player.getDamage() + " + " + player.getDamageMod()
+        graphicsContext.fillText("Damage: " + player.getDamage()
                 ,hudx + 10,hudy + 60);
         // attack
-        graphicsContext.fillText("Attack: " + player.getAttack() + " + " + player.getAttackMod()
+        graphicsContext.fillText("Attack: " + player.getAttack()
                 ,hudx + 130, hudy + 60);
         // defense
-        graphicsContext.fillText("Defense: "+ (int) player.getDefense() + " + " + player.getDefenseMod()
+        graphicsContext.fillText("Defense: "+ (int) player.getDefense()
                 ,hudx + 230, hudy + 60);
 
         // display proficient technique
