@@ -615,10 +615,14 @@ public class MainGame extends GameState {
             player.setDamage(2);
             player.setMaxHealth(100);
             player.setCurrentHealth(100);
+            player.setLevel(1);
         }
 
+        Random random = new Random();
+        int pc = random.nextInt(2 - 1) + 1;
+
         for (Point item : loot) {
-            if (potionCount < 1) {
+            if (potionCount < pc) {
                 PotionItem potionItem = new PotionItem("Health Potion");
                 potionItem.setDurationHealth(new Random().nextInt(6 - 4) + 4);
                 potionItem.setHealth(player.getLevel() * 5);
@@ -626,9 +630,13 @@ public class MainGame extends GameState {
                         tileWidth, tileHeight));
                 potionCount++;
             } else {
-                WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]", Type.a);
-                newWeap.setMinDamage(0);
-                newWeap.setMaxDamage(2);
+                // 0 = a, 1 = b, 2 = c
+                int t = random.nextInt(2);
+                WeaponItem newWeap = new WeaponItem("Broken Crystal [Weapon]",
+                        (t==0? Type.a : (t==1? Type.b : (t==2? Type.c : null ) ) ) );
+                newWeap.setMinDamage(random.nextInt( player.getLevel()) );
+                newWeap.setMaxDamage(random.nextInt( (player.getLevel() + 3) - (newWeap.getMinDamage() + 1))
+                        + (newWeap.getMinDamage() + 1) );
                 items.add(new ItemObject2D(newWeap, (int) item.getX(), (int) item.getY(),
                         tileWidth, tileHeight));
             }

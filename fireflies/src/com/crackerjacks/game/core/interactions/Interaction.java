@@ -135,7 +135,7 @@ public class Interaction {
 //            int finDefense = new Random().nextInt(defense - minDefense) + minDefense;
             WeaponItem weap = null;
 
-            double penalty = damage / 2;
+            double penalty = attacker.getLevel() + 1;
 
             // get weapon from player
             try {
