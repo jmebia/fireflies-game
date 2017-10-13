@@ -18,6 +18,8 @@ public class Global {
 
     // count of enemies spawned
     private static LinkedList<HashMap<String, Integer>> enemySpawnStatistics = new LinkedList<>();
+    private static ArrayList<String> proficiency = new ArrayList<>();
+    private static ArrayList<HashMap<String, Integer>> killedEnemies = new ArrayList<>();
 
 
     public static String getSaveFile() {
@@ -55,4 +57,19 @@ public class Global {
         Global.enemySpawnStatistics = enemySpawnStatistics;
     }
 
+    public static ArrayList<String> getProficiency() {
+        return proficiency;
+    }
+
+    public static void setProficiency(ArrayList<String> proficiency) {
+        Global.proficiency = proficiency;
+    }
+
+    public static ArrayList<HashMap<String, Integer>> getKilledEnemies() {
+        return killedEnemies;
+    }
+
+    public static void setKilledEnemies(ArrayList<HashMap<String, Integer>> killedEnemies) {
+        Global.killedEnemies = killedEnemies;
+    }
 }

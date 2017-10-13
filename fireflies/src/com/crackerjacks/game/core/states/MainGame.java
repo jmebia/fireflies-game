@@ -20,7 +20,6 @@ import java.nio.file.*;
 import java.util.*;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -114,6 +113,9 @@ public class MainGame extends GameState {
         System.out.println(isNewGame);
 
         if (isNewGame) {
+            Global.getEnemySpawnStatistics().clear();
+            Global.getProficiency().clear();
+            Global.getKilledEnemies().clear();
 
             // create generator for dungeons passing our tilemap as the base
             generator = new Generator(mapSize, grids, roomSize);
@@ -131,6 +133,12 @@ public class MainGame extends GameState {
         } else {
             Save save = Global.getSave();
 
+            // monitor
+            Global.setEnemySpawnStatistics(save.getGenerations());
+            Global.setProficiency(save.getProficiency());
+            Global.setKilledEnemies(save.getKilledEnemies());
+
+            // game elements
             generator = save.getGenerator();
 
             player = save.getPlayer();
@@ -590,6 +598,11 @@ public class MainGame extends GameState {
         ArrayList p = new ArrayList(enemies);
         p.addAll(deadEnemies);
 
+        // add dead enemies from previous level
+        if (!isNewGame) {
+
+        }
+
         // clear all items
         items.clear();
 
@@ -696,25 +709,25 @@ public class MainGame extends GameState {
         // display number of generated enemy types
         int[][] enemyStats = generator.getEnemyStats();
 
-        System.out.println("Rock + A Enemies: " + enemyStats[0][0]);
-        System.out.println("Rock + B Enemies: " + enemyStats[0][1]);
-        System.out.println("Rock + C Enemies: " + enemyStats[0][2]);
+        HashMap<String, Integer> hashMap = new HashMap<>();
+//        hashMap.put("Rock + A Enemies", enemyStats[0][0]);
+//        hashMap.put("Rock + B Enemies", enemyStats[0][1]);
+//        hashMap.put("Rock + C Enemies", enemyStats[0][2]);
+//        hashMap.put("Paper + A Enemies", enemyStats[1][0]);
+//        hashMap.put("Paper + B Enemies" , enemyStats[1][1]);
+//        hashMap.put("Paper + C Enemies" , enemyStats[1][2]);
+//        hashMap.put("Scissors + A Enemies" , enemyStats[2][0]);
+//        hashMap.put("Scissors + B Enemies" , enemyStats[2][1]);
+//        hashMap.put("Scissors + C Enemies" , enemyStats[2][2]);
+        hashMap.put("TOTAL Rock Enemies" , (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
+        hashMap.put("TOTAL Paper Enemies" , (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
+        hashMap.put("TOTAL Scissors Enemies" , (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
+//        hashMap.put("TOTAL A Enemies" , (enemyStats[0][0] + enemyStats[1][0] + enemyStats[2][0]));
+//        hashMap.put("TOTAL B Enemies" , (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
+//        hashMap.put("TOTAL C Enemies" , (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
 
-        System.out.println("Paper + A Enemies: " + enemyStats[1][0]);
-        System.out.println("Paper + B Enemies: " + enemyStats[1][1]);
-        System.out.println("Paper + C Enemies: " + enemyStats[1][2]);
-
-        System.out.println("Scissors + A Enemies: " + enemyStats[2][0]);
-        System.out.println("Scissors + B Enemies: " + enemyStats[2][1]);
-        System.out.println("Scissors + C Enemies: " + enemyStats[2][2]);
-
-        System.out.println("TOTAL Rock Enemies: " + (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
-        System.out.println("TOTAL Paper Enemies: " + (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
-        System.out.println("TOTAL Scissors Enemies: " + (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
-
-        System.out.println("TOTAL A Enemies: " + (enemyStats[0][0] + enemyStats[1][0] + enemyStats[2][0]));
-        System.out.println("TOTAL B Enemies: " + (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
-        System.out.println("TOTAL C Enemies: " + (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
+        Global.getProficiency().add(player.getProficientTechnique().getId());
+        Global.getEnemySpawnStatistics().add(hashMap);
 
         isNewGame = false;
         // System.out.println("B Enemies: " + generator.getPaperEnemyCount());

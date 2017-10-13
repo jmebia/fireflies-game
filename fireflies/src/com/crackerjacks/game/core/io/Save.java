@@ -1,17 +1,22 @@
 package com.crackerjacks.game.core.io;
 
 import com.crackerjacks.game.core.objects.Enemy;
-import com.crackerjacks.game.core.objects.Item;
 import com.crackerjacks.game.core.objects.ItemObject2D;
 import com.crackerjacks.game.core.objects.Player;
 import com.crackerjacks.game.core.dungeonGenerator.Generator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Save implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private LinkedList<HashMap<String, Integer>> generations = null;
+    private ArrayList<String> proficiency = null;
+    private ArrayList<HashMap<String, Integer>> killedEnemies = null;
 
     private Generator generator = null;
 
@@ -99,5 +104,29 @@ public class Save implements Serializable {
 
     public void setDesignMap2(int[][] designMap2) {
         this.designMap2 = designMap2;
+    }
+
+    public LinkedList<HashMap<String, Integer>> getGenerations() {
+        return generations;
+    }
+
+    public void setGenerations(LinkedList<HashMap<String, Integer>> generations) {
+        this.generations = generations;
+    }
+
+    public ArrayList<String> getProficiency() {
+        return proficiency;
+    }
+
+    public void setProficiency(ArrayList<String> proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    public ArrayList<HashMap<String, Integer>> getKilledEnemies() {
+        return killedEnemies;
+    }
+
+    public void setKilledEnemies(ArrayList<HashMap<String, Integer>> killedEnemies) {
+        this.killedEnemies = killedEnemies;
     }
 }
