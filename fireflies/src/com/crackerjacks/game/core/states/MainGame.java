@@ -600,7 +600,19 @@ public class MainGame extends GameState {
 
         // add dead enemies from previous level
         if (!isNewGame) {
+            int brute = 0;
+            int stable = 0;
+            int cut = 0;
+            for (Enemy e : deadEnemies) {
+                if (e.getTechnique().equals(Technique.brute)) brute++;
+                else if (e.getTechnique().equals(Technique.stable)) stable++;
+                else if (e.getTechnique().equals(Technique.cut)) cut++;
+            }
 
+            HashMap<String, Integer> hashMap = new HashMap<>();
+            hashMap.put("Brute" , brute);
+            hashMap.put("Stable" , stable);
+            hashMap.put("Cut" , cut);
         }
 
         // clear all items
@@ -719,9 +731,9 @@ public class MainGame extends GameState {
 //        hashMap.put("Scissors + A Enemies" , enemyStats[2][0]);
 //        hashMap.put("Scissors + B Enemies" , enemyStats[2][1]);
 //        hashMap.put("Scissors + C Enemies" , enemyStats[2][2]);
-        hashMap.put("TOTAL Rock Enemies" , (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
-        hashMap.put("TOTAL Paper Enemies" , (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
-        hashMap.put("TOTAL Scissors Enemies" , (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
+        hashMap.put("Brute" , (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
+        hashMap.put("Stable" , (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
+        hashMap.put("Cut" , (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
 //        hashMap.put("TOTAL A Enemies" , (enemyStats[0][0] + enemyStats[1][0] + enemyStats[2][0]));
 //        hashMap.put("TOTAL B Enemies" , (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
 //        hashMap.put("TOTAL C Enemies" , (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
