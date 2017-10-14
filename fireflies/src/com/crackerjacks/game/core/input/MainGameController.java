@@ -173,7 +173,7 @@ public class MainGameController {
                     if (!player.getProficientTechnique().equals(Technique.stable)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
                             player.setFireflies(player.getFireflies() - player.getTechniqueCost());
-                            player.setTechniqueCost(player.getTechniqueCost() + 3);
+                            player.setTechniqueCost(player.getTechniqueCost() + 2);
                             player.setProficientTechnique(Technique.stable);
                             Global.addHistoryText("Switched proficiency to STABLE technique.");
                         } else {
@@ -189,7 +189,7 @@ public class MainGameController {
                     if (!player.getProficientTechnique().equals(Technique.cut)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
                             player.setFireflies(player.getFireflies() - player.getTechniqueCost());
-                            player.setTechniqueCost(player.getTechniqueCost() + player.getTechniqueCost() + 3);
+                            player.setTechniqueCost(player.getTechniqueCost() + 2);
                             player.setProficientTechnique(Technique.cut);
                             Global.addHistoryText("Switched proficiency to CUT technique.");
                         } else {
