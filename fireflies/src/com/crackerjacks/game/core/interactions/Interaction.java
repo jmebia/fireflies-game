@@ -245,7 +245,7 @@ public class Interaction {
             if (defender.getCurrentHealth() <= 0) {
                 // level up attacker (player)
                 double levelReq = Math.pow(attacker.getLevel(), 2) * 100;
-                double exp = levelReq / (attacker.getLevel() * 4);
+                double exp = levelReq / (attacker.getLevel() * 5);
                 attacker.setExperience(attacker.getExperience() + exp);
                 Global.addHistoryText(defender.getName().toUpperCase() + "["+defender.getTechnique().getId()
                         +"] died. You gained " + exp + " exp!");

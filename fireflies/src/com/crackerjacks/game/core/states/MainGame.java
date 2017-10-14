@@ -355,28 +355,32 @@ public class MainGame extends GameState {
         charDrawList.add(player);
         Collections.sort(charDrawList, Comparator.comparing(c -> c.getY()));
 
+        ArrayList<Enemy> checkedEnemy = new ArrayList<>();
         // update enemy sprites
         for (Enemy e : enemies) {
-            Sprite sprite = e.getSprite();
-            sprite.update(time);
+            if (!checkedEnemy.contains(e)) {
+                checkedEnemy.add(e);
+                Sprite sprite = e.getSprite();
+                sprite.update(time);
 
-            // checks through the X axis
-            if (sprite.getX() < e.getX()*tileWidth+startX) {
-                sprite.setX(sprite.getX() + playerSpeed);
-            } else if (sprite.getX() > e.getX()*tileWidth+startX) {
-                sprite.setX(sprite.getX() - playerSpeed);
-            }
-            // checks through the Y axis
-            if (sprite.getY() < e.getY()*tileWidth+startY+YCharmModifier) {
-                sprite.setY(sprite.getY() + playerSpeed);
-            } else if (sprite.getY() > e.getY()*tileWidth+startY+YCharmModifier) {
-                sprite.setY(sprite.getY() - playerSpeed);
-            }
-            // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
-            // enemy in the 2D game space
-            if ((sprite.getX() == e.getX()*tileWidth+startX)
-                    && (sprite.getY() == e.getY()*tileWidth+startY+YCharmModifier)) {
-                // something something
+                // checks through the X axis
+                if (sprite.getX() < e.getX() * tileWidth + startX) {
+                    sprite.setX(sprite.getX() + playerSpeed);
+                } else if (sprite.getX() > e.getX() * tileWidth + startX) {
+                    sprite.setX(sprite.getX() - playerSpeed);
+                }
+                // checks through the Y axis
+                if (sprite.getY() < e.getY() * tileWidth + startY + YCharmModifier) {
+                    sprite.setY(sprite.getY() + playerSpeed);
+                } else if (sprite.getY() > e.getY() * tileWidth + startY + YCharmModifier) {
+                    sprite.setY(sprite.getY() - playerSpeed);
+                }
+                // checks if both X and Y coordinates of the player sprite is equal to the supposed tile placement of the
+                // enemy in the 2D game space
+                if ((sprite.getX() == e.getX() * tileWidth + startX)
+                        && (sprite.getY() == e.getY() * tileWidth + startY + YCharmModifier)) {
+                    // something something
+                }
             }
         }
 
@@ -479,12 +483,22 @@ public class MainGame extends GameState {
         // damage
         graphicsContext.fillText("Damage: " + player.getDamage()
                 ,hudx + 10,hudy + 60);
-        // attack
-        graphicsContext.fillText("Attack: " + player.getAttack()
+//        // attack
+//        graphicsContext.fillText("Attack: " + player.getAttack()
+//                ,hudx + 130, hudy + 60);
+//        // defense
+//        graphicsContext.fillText("Defense: "+ (int) player.getDefense()
+//                ,hudx + 230, hudy + 60);
+
+        // bleed turns
+        graphicsContext.fillText("Bleed: " + player.getBleed()
                 ,hudx + 130, hudy + 60);
-        // defense
-        graphicsContext.fillText("Defense: "+ (int) player.getDefense()
+        // disarm turns
+        graphicsContext.fillText("Disarm: "+ player.getDisarm()
                 ,hudx + 230, hudy + 60);
+        // stun turns
+        graphicsContext.fillText("Stun: "+ player.getStun()
+                ,hudx + 330, hudy + 60);
 
         // display proficient technique
         graphicsContext.fillText("Proficiency: " + player.getProficientTechnique().getId(),hudx + 400, hudy + 20);
