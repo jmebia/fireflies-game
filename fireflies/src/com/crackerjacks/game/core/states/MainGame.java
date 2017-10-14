@@ -669,7 +669,7 @@ public class MainGame extends GameState {
             player = new Player();
             player.setName("Jean Gadot");
             player.setDamage(2);
-            player.setMaxHealth(55);
+            player.setMaxHealth(65);
             player.setCurrentHealth(player.getMaxHealth());
             player.setLevel(1);
         }
@@ -733,7 +733,7 @@ public class MainGame extends GameState {
             enemy.setSprite(sprite);
 
             // set Damage and Health
-            enemy.setDamage(player.getLevel() + 1);
+            enemy.setDamage(player.getLevel() + 2);
             enemy.setMaxHealth(player.getLevel() * 10);
             enemy.setCurrentHealth(enemy.getMaxHealth());
         }

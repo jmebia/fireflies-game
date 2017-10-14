@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/interactions/Interaction.class" afterPath="$PROJECT_DIR$/out/production/fireflies/com/crackerjacks/game/core/interactions/Interaction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,8 +22,8 @@
       <file leaf-file-name="MainGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="683" column="62" lean-forward="false" selection-start-line="683" selection-start-column="62" selection-end-line="683" selection-end-column="62" />
+            <state relative-caret-position="156">
+              <caret line="733" column="0" lean-forward="true" selection-start-line="733" selection-start-column="0" selection-end-line="733" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -34,8 +32,30 @@
       <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="88">
+              <caret line="76" column="48" lean-forward="false" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interaction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="82" column="37" lean-forward="false" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="37" />
+              <folding>
+                <marker date="1507966862346" expanded="true" signature="12247:12253" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Population.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Population.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-221">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -51,51 +71,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainMenu.java">
+      <file leaf-file-name="Generator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+            <state relative-caret-position="139">
+              <caret line="117" column="27" lean-forward="false" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Interaction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1453">
-              <caret line="247" column="65" lean-forward="false" selection-start-line="247" selection-start-column="65" selection-end-line="247" selection-end-column="65" />
-              <folding>
-                <marker date="1507966862346" expanded="true" signature="12247:12253" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Global.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/Global.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding>
-                <element signature="e#2238#2239#0" expanded="true" />
-                <element signature="e#2280#2281#0" expanded="true" />
-                <element signature="e#2333#2334#0" expanded="true" />
-                <element signature="e#2364#2365#0" expanded="true" />
-                <element signature="e#2430#2431#0" expanded="true" />
-                <element signature="e#2472#2473#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -113,13 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>is</find>
-      <find>penalt</find>
-      <find>Behaior</find>
-      <find>visionRadius</find>
-      <find>chance -=</find>
-      <find>tiletype</find>
-      <find>u</find>
       <find>addHistory</find>
       <find>Drawing Text</find>
       <find>player.getMax</find>
@@ -133,7 +107,6 @@
       <find>draw</find>
       <find>Item doesn't exist in player's inventory.</find>
       <find>goal</find>
-      <find>maxFitness</find>
       <find>cut</find>
       <find>key</find>
       <find>cur</find>
@@ -143,6 +116,14 @@
       <find>setEx</find>
       <find>enemies</find>
       <find>setHeal</find>
+      <find>setDamage</find>
+      <find>setHealth</find>
+      <find>setMaxHea</find>
+      <find>player</find>
+      <find>player.setMa</find>
+      <find>maxFitness</find>
+      <find>penalty</find>
+      <find>enemy.set</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -955,13 +936,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java" />
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/Player.java" />
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
@@ -1131,14 +1105,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/objects/WeaponItem.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/InventoryMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3179">
@@ -1185,10 +1151,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/InputHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3271">
+          <caret line="330" column="52" lean-forward="true" selection-start-line="330" selection-start-column="52" selection-end-line="330" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1203,24 +1177,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/dungeonGenerator/Generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1421">
-          <caret line="271" column="59" lean-forward="true" selection-start-line="271" selection-start-column="59" selection-end-line="271" selection-end-column="59" />
+        <state relative-caret-position="139">
+          <caret line="117" column="27" lean-forward="false" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/input/MainGameController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Population.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3271">
-          <caret line="330" column="52" lean-forward="true" selection-start-line="330" selection-start-column="52" selection-end-line="330" selection-end-column="52" />
+        <state relative-caret-position="-221">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/genetic/Algorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="76" column="48" lean-forward="false" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1453">
-          <caret line="247" column="65" lean-forward="false" selection-start-line="247" selection-start-column="65" selection-end-line="247" selection-end-column="65" />
+        <state relative-caret-position="139">
+          <caret line="82" column="37" lean-forward="false" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="37" />
           <folding>
             <marker date="1507966862346" expanded="true" signature="12247:12253" ph="{...}" />
           </folding>
@@ -1229,8 +1211,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="683" column="62" lean-forward="false" selection-start-line="683" selection-start-column="62" selection-end-line="683" selection-end-column="62" />
+        <state relative-caret-position="156">
+          <caret line="733" column="0" lean-forward="true" selection-start-line="733" selection-start-column="0" selection-end-line="733" selection-end-column="0" />
           <folding />
         </state>
       </provider>
