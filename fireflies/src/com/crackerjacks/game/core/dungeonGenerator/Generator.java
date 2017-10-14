@@ -269,7 +269,7 @@ public class Generator implements Serializable {
         // loots and keys if rooms are more than 3
         if (rooms.size() > 3) {
             // place keys if rooms are 4 or more
-            int keyCount = random.nextInt((rooms.size() - 2) + 1 - 2) + 2;
+            int keyCount = random.nextInt((rooms.size() - 2) - 1) + 1;
 
             // place all keys
             for (int i = keyCount; i > 0; i--) {
