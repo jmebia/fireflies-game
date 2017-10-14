@@ -113,9 +113,8 @@ public class MainGame extends GameState {
         System.out.println(isNewGame);
 
         if (isNewGame) {
-            Global.getEnemySpawnStatistics().clear();
-            Global.getProficiency().clear();
-            Global.getKilledEnemies().clear();
+
+            Global.getHistory2().clear();
 
             // create generator for dungeons passing our tilemap as the base
             generator = new Generator(mapSize, grids, roomSize);
@@ -208,7 +207,9 @@ public class MainGame extends GameState {
             if (player.getKeys() == generator.getKeysCoordinates().size()) {
                 if (!inputHandler.isDisabled())
                     player.setKeys(0);
+                    player.setPlane(player.getPlane() + 1);
                     generateNewDungeon();
+
             }
         }
 
@@ -586,6 +587,7 @@ public class MainGame extends GameState {
     private void generateNewDungeon() {
 
         int potionCount = 0;
+        HashMap<String, Integer> killedEnemies = new HashMap<>();
 
         // fill fog map
         for (int i = 0; i < mapSize; i++) {
@@ -608,11 +610,11 @@ public class MainGame extends GameState {
                 else if (e.getTechnique().equals(Technique.stable)) stable++;
                 else if (e.getTechnique().equals(Technique.cut)) cut++;
             }
+            killedEnemies.put("Brute" , brute);
+            killedEnemies.put("Stable" , stable);
+            killedEnemies.put("Cut" , cut);
 
-            HashMap<String, Integer> hashMap = new HashMap<>();
-            hashMap.put("Brute" , brute);
-            hashMap.put("Stable" , stable);
-            hashMap.put("Cut" , cut);
+            // Global.getKilledEnemies().add(killedEnemies);
         }
 
         // clear all items
@@ -646,8 +648,8 @@ public class MainGame extends GameState {
             player = new Player();
             player.setName("Jean Gadot");
             player.setDamage(2);
-            player.setMaxHealth(100);
-            player.setCurrentHealth(100);
+            player.setMaxHealth(70);
+            player.setCurrentHealth(player.getMaxHealth());
             player.setLevel(1);
         }
 
@@ -692,8 +694,8 @@ public class MainGame extends GameState {
         player.setBleedDamage(5);
         player.setDisarm(40);*/
 
-        // set sprites for enemies
         for (Enemy enemy : enemies) {
+            // set sprites for enemies
             Sprite sprite = new Sprite(1, enemy.getX() * tileWidth + startX,
                     enemy.getY() * tileHeight + startY + YCharmModifier, 32, 48, 400);
 
@@ -708,6 +710,11 @@ public class MainGame extends GameState {
             sprite.addPoint(new Point(96, yOffset));
 
             enemy.setSprite(sprite);
+
+            // set Damage and Health
+            enemy.setDamage(player.getLevel() + 1);
+            enemy.setMaxHealth(player.getLevel() * 10);
+            enemy.setCurrentHealth(enemy.getMaxHealth());
         }
 
         // goal point
@@ -721,7 +728,7 @@ public class MainGame extends GameState {
         // display number of generated enemy types
         int[][] enemyStats = generator.getEnemyStats();
 
-        HashMap<String, Integer> hashMap = new HashMap<>();
+//        HashMap<String, Integer> hashMap = new HashMap<>();
 //        hashMap.put("Rock + A Enemies", enemyStats[0][0]);
 //        hashMap.put("Rock + B Enemies", enemyStats[0][1]);
 //        hashMap.put("Rock + C Enemies", enemyStats[0][2]);
@@ -731,17 +738,27 @@ public class MainGame extends GameState {
 //        hashMap.put("Scissors + A Enemies" , enemyStats[2][0]);
 //        hashMap.put("Scissors + B Enemies" , enemyStats[2][1]);
 //        hashMap.put("Scissors + C Enemies" , enemyStats[2][2]);
-        hashMap.put("Brute" , (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
-        hashMap.put("Stable" , (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
-        hashMap.put("Cut" , (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
+//        hashMap.put("Brute" , (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
+//        hashMap.put("Stable" , (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
+//        hashMap.put("Cut" , (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
 //        hashMap.put("TOTAL A Enemies" , (enemyStats[0][0] + enemyStats[1][0] + enemyStats[2][0]));
 //        hashMap.put("TOTAL B Enemies" , (enemyStats[0][1] + enemyStats[1][1] + enemyStats[2][1]));
 //        hashMap.put("TOTAL C Enemies" , (enemyStats[0][2] + enemyStats[1][2] + enemyStats[2][2]));
 
-        Global.getProficiency().add(player.getProficientTechnique().getId());
-        Global.getEnemySpawnStatistics().add(hashMap);
+        System.out.println("<============================ RECORD ================================>");
+        System.out.println("PREVIOUS [LEVEL] = " + (player.getPlane() - 1) + " | CURRENT [LEVEL] = " + player.getPlane());
+        System.out.println("\n|~~~~~~~~~~~~~~ FALLEN ENEMIES FROM THE PREVIOUS LEVEL ~~~~~~~~~~~~~~|");
+        System.out.println("Killed Brute Enemies = " + killedEnemies.get("Brute"));
+        System.out.println("Killed Stable Enemies = " + killedEnemies.get("Stable"));
+        System.out.println("Killed Cut Enemies = " + killedEnemies.get("Cut"));
+        System.out.println("\n|~~~~~~~~~~~~~~~~~~~~ SPAWNED ENEMIES THIS LEVEL ~~~~~~~~~~~~~~~~~~|");
+        System.out.println("Spawned Brute Enemies = " + (enemyStats[0][0] + enemyStats[0][1] + enemyStats[0][2]));
+        System.out.println("Spawned Stable Enemies = " + (enemyStats[1][0] + enemyStats[1][1] + enemyStats[1][2]));
+        System.out.println("Spawned Cut Enemies = " + (enemyStats[2][0] + enemyStats[2][1] + enemyStats[2][2]));
 
         isNewGame = false;
+
+        Global.addHistoryText("You are now at Phantasmal plane - " + player.getPlane());
         // System.out.println("B Enemies: " + generator.getPaperEnemyCount());
         // System.out.println("C Enemies: " + generator.getScissorsEnemyCount());
     }

@@ -15,6 +15,7 @@ public class Global {
 
     // activity history variables
     private static ArrayList<String> history = new ArrayList<>();
+    private static ArrayList<String> history2 = new ArrayList<>();
 
     // count of enemies spawned
     private static LinkedList<HashMap<String, Integer>> enemySpawnStatistics = new LinkedList<>();
@@ -43,6 +44,8 @@ public class Global {
             history.remove(history.get(0));
             history.add(text);
         }
+
+        history2.add(text);
     }
 
     public static void setHistory(ArrayList<String> history) {
@@ -71,5 +74,17 @@ public class Global {
 
     public static void setKilledEnemies(ArrayList<HashMap<String, Integer>> killedEnemies) {
         Global.killedEnemies = killedEnemies;
+    }
+
+    public static void setSaveFile(String saveFile) {
+        Global.saveFile = saveFile;
+    }
+
+    public static ArrayList<String> getHistory2() {
+        return history2;
+    }
+
+    public static void setHistory2(ArrayList<String> history2) {
+        Global.history2 = history2;
     }
 }

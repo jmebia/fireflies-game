@@ -331,7 +331,8 @@ public class MainGameController {
                     // damage enemy health by player
                     new Interaction().attackMove(player, enemy, attackElementID);
                     if (enemy.getCurrentHealth() <= 0) {
-                        deadEnemies.add(enemy);
+                        if (!deadEnemies.contains(enemy))
+                            deadEnemies.add(enemy);
                         enemies.remove(enemy);
                         player.addFireflies(1);
                     }
@@ -350,7 +351,8 @@ public class MainGameController {
                     // damage enemy health by player
                     new Interaction().attackMove(player, enemy, attackElementID);
                     if (enemy.getCurrentHealth() <= 0) {
-                        deadEnemies.add(enemy);
+                        if (!deadEnemies.contains(enemy))
+                            deadEnemies.add(enemy);
                         enemies.remove(enemy);
                         player.addFireflies(1);
                     }
@@ -369,7 +371,8 @@ public class MainGameController {
                     // damage enemy health by player
                     new Interaction().attackMove(player, enemy, attackElementID);
                     if (enemy.getCurrentHealth() <= 0) {
-                        deadEnemies.add(enemy);
+                        if (!deadEnemies.contains(enemy))
+                            deadEnemies.add(enemy);
                         enemies.remove(enemy);
                         player.addFireflies(1);
                     }
@@ -388,7 +391,8 @@ public class MainGameController {
                     // damage enemy health by player
                     new Interaction().attackMove(player, enemy, attackElementID);
                     if (enemy.getCurrentHealth() <= 0) {
-                        deadEnemies.add(enemy);
+                        if (!deadEnemies.contains(enemy))
+                            deadEnemies.add(enemy);
                         enemies.remove(enemy);
                         player.addFireflies(1);
                     }
@@ -401,7 +405,7 @@ public class MainGameController {
         // check if an enemy is dead
         for (Enemy e : enemies) {
             if (e.getCurrentHealth() <= 0) {
-                deadEnemies.add(e);
+                // deadEnemies.add(e);
                 enemies.remove(e);
             }
         }

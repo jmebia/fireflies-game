@@ -13,6 +13,8 @@ public class Player extends GameCharacter {
     private int paperExp = 0;
     private int scissorsExp = 0;
 
+    private int plane = 1;
+
     private Technique proficientTechnique = Technique.brute;
 
     private int techniqueCost = 2;
@@ -239,5 +241,13 @@ public class Player extends GameCharacter {
 
     public void setTechniqueCost(int techniqueCost) {
         this.techniqueCost = techniqueCost;
+    }
+
+    public int getPlane() {
+        return plane;
+    }
+
+    public void setPlane(int plane) {
+        this.plane = plane;
     }
 }

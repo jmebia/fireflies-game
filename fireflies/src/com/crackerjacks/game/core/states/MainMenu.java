@@ -21,7 +21,7 @@ public class MainMenu extends GameState {
     private final GraphicsContext graphicsContext;
     private PerspectiveCamera camera;
 
-    private int currentMarker = 1;
+    private int currentMarker = 2;
     private int minMarker = 1;
     private int maxMarker = 4;
 
@@ -80,13 +80,6 @@ public class MainMenu extends GameState {
             if (event.getCode() == KeyCode.ENTER) {
                 switch (currentMarker) {
                     case 1:
-                        System.out.println("New Game Selected!");
-                        scene.setCamera(null);
-                        scene.setOnKeyPressed(null);
-                        GameStateManager.getStateList().add(new MainGame(scene, graphicsContext, true));
-                        break;
-
-                    case 2:
                         System.out.println("Load Game Selected!");
                         try {
                             Save save = Global.getSave();
@@ -102,6 +95,13 @@ public class MainMenu extends GameState {
                             e.printStackTrace();
                             System.out.println("An active save file doesn't exist!");
                         }
+                        break;
+
+                    case 2:
+                        System.out.println("New Game Selected!");
+                        scene.setCamera(null);
+                        scene.setOnKeyPressed(null);
+                        GameStateManager.getStateList().add(new MainGame(scene, graphicsContext, true));
                         break;
 
                     case 3:
@@ -129,17 +129,17 @@ public class MainMenu extends GameState {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillRect(0,0,800,600);
 
-        graphicsContext.setFill((currentMarker == 1? Color.BLACK
-                : new Color(0,0,0, 0.5)));
-        graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL,
-                (currentMarker == 1? 22 : 16)));
-        graphicsContext.fillText("New Game", 120, 410);
-
         graphicsContext.setFill((currentMarker == 2? Color.BLACK
                 : new Color(0,0,0, 0.5)));
         graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL,
                 (currentMarker == 2? 22 : 16)));
-        graphicsContext.fillText("Load Game", 120, 440);
+        graphicsContext.fillText("New Game", 120, 440);
+
+        graphicsContext.setFill((currentMarker == 1? Color.BLACK
+                : new Color(0,0,0, 0.5)));
+        graphicsContext.setFont(Font.font("Verdana", FontWeight.NORMAL,
+                (currentMarker == 1? 22 : 16)));
+        graphicsContext.fillText("Continue Game", 120, 410);
 
         graphicsContext.setFill((currentMarker == 3? Color.BLACK
                 : new Color(0,0,0, 0.5)));

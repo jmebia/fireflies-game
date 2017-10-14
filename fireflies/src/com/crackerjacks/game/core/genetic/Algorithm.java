@@ -28,7 +28,7 @@ public class Algorithm {
         offsprings = new Population(childPopulation);
         populationSize = childPopulation.size();
         maxFitness = parents.getMaxFitness();
-        maxFitness = (maxFitness<0? 0 : maxFitness);
+        maxFitness = (maxFitness<1? 1 : maxFitness);
     }
 
     public void produce() {
