@@ -672,6 +672,7 @@ public class MainGame extends GameState {
             player.setMaxHealth(50);
             player.setCurrentHealth(player.getMaxHealth());
             player.setLevel(1);
+
         }
 
         Random random = new Random();

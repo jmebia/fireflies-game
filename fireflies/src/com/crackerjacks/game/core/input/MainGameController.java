@@ -157,7 +157,7 @@ public class MainGameController {
                     if (!player.getProficientTechnique().equals(Technique.brute)) {
                         if (player.getFireflies() >= player.getTechniqueCost()) {
                             player.setFireflies(player.getFireflies() - player.getTechniqueCost());
-                            player.setTechniqueCost(player.getTechniqueCost() + 3);
+                            player.setTechniqueCost(player.getTechniqueCost() + 2);
                             player.setProficientTechnique(Technique.brute);
                             Global.addHistoryText("Switched proficiency to BRUTE technique.");
                         } else {
