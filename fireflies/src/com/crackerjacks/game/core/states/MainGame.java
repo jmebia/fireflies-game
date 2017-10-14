@@ -210,11 +210,9 @@ public class MainGame extends GameState {
         if (player.getX() == goal.getX() && player.getY() == goal.getY()) {
 
             if (player.getKeys() == generator.getKeysCoordinates().size()) {
-                if (!inputHandler.isDisabled())
-                    player.setKeys(0);
-                    player.setPlane(player.getPlane() + 1);
-                    generateNewDungeon();
-
+                player.setKeys(0);
+                player.setPlane(player.getPlane() + 1);
+                generateNewDungeon();
             }
         }
 
@@ -503,7 +501,7 @@ public class MainGame extends GameState {
         // display proficient technique
         graphicsContext.fillText("Proficiency: " + player.getProficientTechnique().getId(),hudx + 400, hudy + 20);
 
-        // display proficient technique
+        // display proficient technique cost
         graphicsContext.fillText("Tech. Cost: " + player.getTechniqueCost(),hudx + 400, hudy + 40);
 
 //        // brute lvl and exp
