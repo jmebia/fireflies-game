@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="626a8e1d-1f08-43e2-8a6f-7783f6732a6c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" afterPath="$PROJECT_DIR$/src/com/crackerjacks/game/core/states/MainGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,9 +73,9 @@
         <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="280">
-              <caret line="247" column="64" lean-forward="false" selection-start-line="247" selection-start-column="64" selection-end-line="247" selection-end-column="64" />
+              <caret line="247" column="65" lean-forward="false" selection-start-line="247" selection-start-column="65" selection-end-line="247" selection-end-column="65" />
               <folding>
-                <marker date="1507966336340" expanded="true" signature="12246:12252" ph="{...}" />
+                <marker date="1507966655756" expanded="true" signature="12247:12253" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -1227,9 +1226,9 @@
     <entry file="file://$PROJECT_DIR$/src/com/crackerjacks/game/core/interactions/Interaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
-          <caret line="247" column="64" lean-forward="false" selection-start-line="247" selection-start-column="64" selection-end-line="247" selection-end-column="64" />
+          <caret line="247" column="65" lean-forward="false" selection-start-line="247" selection-start-column="65" selection-end-line="247" selection-end-column="65" />
           <folding>
-            <marker date="1507966336340" expanded="true" signature="12246:12252" ph="{...}" />
+            <marker date="1507966655756" expanded="true" signature="12247:12253" ph="{...}" />
           </folding>
         </state>
       </provider>
