@@ -256,7 +256,20 @@ public class Generator implements Serializable {
                 }
                 // 3 or less rooms
                 else {
+                    // create 2 enemies per room
+                    for (int i = 2; i > 0; i--) {
 
+                        int eX = random.nextInt((room.getWidth() + room.getX()) - room.getX()) + room.getX();
+                        int eY = random.nextInt((room.getHeight() + room.getY()) - room.getY()) + room.getY();
+
+                        Enemy enemy = new Enemy();
+                        enemy.setX(eX);
+                        enemy.setY(eY);
+                        enemy.setName("Enemy " + room.getId() + "-" + i);
+
+                        enemies.add(enemy);
+                        System.out.println("new enemy added...");
+                    }
                 }
             }
             // add goal to the last room
