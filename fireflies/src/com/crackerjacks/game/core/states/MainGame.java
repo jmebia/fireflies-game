@@ -607,13 +607,17 @@ public class MainGame extends GameState {
 
         // add dead enemies from previous level
         if (!isNewGame) {
+            ArrayList<Enemy> checked = new ArrayList<>();
             int brute = 0;
             int stable = 0;
             int cut = 0;
             for (Enemy e : deadEnemies) {
-                if (e.getTechnique().equals(Technique.brute)) brute++;
-                else if (e.getTechnique().equals(Technique.stable)) stable++;
-                else if (e.getTechnique().equals(Technique.cut)) cut++;
+                if (!checked.contains(e)) {
+                    if (e.getTechnique().equals(Technique.brute)) brute++;
+                    else if (e.getTechnique().equals(Technique.stable)) stable++;
+                    else if (e.getTechnique().equals(Technique.cut)) cut++;
+                    checked.add(e);
+                }
             }
             killedEnemies.put("Brute" , brute);
             killedEnemies.put("Stable" , stable);
