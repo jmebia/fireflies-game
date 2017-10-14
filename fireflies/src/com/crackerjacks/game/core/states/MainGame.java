@@ -681,7 +681,7 @@ public class MainGame extends GameState {
             if (potionCount < pc) {
                 PotionItem potionItem = new PotionItem("Health Potion");
                 potionItem.setDurationHealth(new Random().nextInt(6 - 4) + 4);
-                potionItem.setHealth(player.getLevel() * 5);
+                potionItem.setHealth(player.getLevel() * 2 + 5);
                 items.add(new ItemObject2D(potionItem, (int) item.getX(), (int) item.getY(),
                         tileWidth, tileHeight));
                 potionCount++;
