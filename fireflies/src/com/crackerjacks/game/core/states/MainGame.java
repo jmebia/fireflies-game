@@ -671,7 +671,7 @@ public class MainGame extends GameState {
             player = new Player();
             player.setName("Jean Gadot");
             player.setDamage(2);
-            player.setMaxHealth(70);
+            player.setMaxHealth(55);
             player.setCurrentHealth(player.getMaxHealth());
             player.setLevel(1);
         }
