@@ -198,6 +198,11 @@ public class MainGame extends GameState {
                 // File permission problems are caught here.
                 System.err.println(x);
             }
+
+            for (String s : Global.getHistory2()) {
+                System.out.println(s);
+            }
+
             GameStateManager.removeLast();
         }
 
